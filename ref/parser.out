@@ -1,1 +1,53 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    false
+    nand
+    not
+    noteq
+    true
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expression and expression
+Rule 2     expression -> expression eq expression
+Rule 3     expression -> expression eqcomp expression
+Rule 4     expression -> expression ge expression
+Rule 5     expression -> expression gt expression
+Rule 6     expression -> expression le expression
+Rule 7     expression -> expression lt expression
+Rule 8     expression -> expression noteqcomp expression
+Rule 9     expression -> expression or expression
+Rule 10    expression -> expression bool expression
+Rule 11    expression -> expression paren expression
+Rule 12    expression -> expression notbool expression
+Rule 13    expression -> expression neq expression
+
+Terminals, with rules where they appear
+
+and                  : 1
+eq                   : 2
+eqcomp               : 3
+error                : 
+false                : 
+ge                   : 4
+gt                   : 5
+le                   : 6
+lt                   : 7
+nand                 : 
+not                  : 
+noteq                : 
+or                   : 9
+true                 : 
+
+Nonterminals, with rules where they appear
+
+bool                 : 10
+expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 0
+neq                  : 13
+notbool              : 12
+noteqcomp            : 8
+paren                : 11
+

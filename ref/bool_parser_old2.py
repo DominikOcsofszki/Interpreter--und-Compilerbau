@@ -26,28 +26,40 @@ precedence = [
     # ['left', 'times', 'divide']
 ]
 def p_expression_binary_operators(p):
-    '''expression :   expression and expression
-                    | expression eq expression
-                    | expression eqcomp expression
-                    | expression ge expression
-                    | expression gt expression
-                    | expression le expression
-                    | expression lt expression
-                    | expression noteqcomp expression
-                    | expression or expression
+    '''expression :  expression AND expression
+                    | expression EQ expression
+                    | expression EQCOMP expression
+                    | expression GE expression
+                    | expression GT expression
+                    | expression LE expression
+                    | expression LT expression
+                    | expression NOTEQCOMP expression
+                    | expression OR expression
     '''
-    p[0] = gen.checkAndReturnBinaryClass(p)
+    p[0] = gen.checkAndReturnClass(p)
+    # match p[2]:
+    #     case "all" : p[0] = gen.checkAndReturnClass(p)
+        # case "and" : p[0] = gen.AndExpression(p[1],p[3]) 
+        # case "eqcomp" : p[0] = gen.EqCompExpression(p[1],p[3]) 
+        # case "eq" : p[0] = gen.EqExpression(p[1],p[3]) 
+        # case "ge" : p[0] = gen.GeExpression(p[1],p[3]) 
+        # case "gt" : p[0] = gen.GtExpression(p[1],p[3]) 
+        # case "le" : p[0] = gen.LeExpression(p[1],p[3]) 
+        # case "lt" : p[0] = gen.LtExpression(p[1],p[3]) 
+        # case "not" : p[0] = gen.NotEqCompExpression(p[1],p[3]) 
+        # case "or" : p[0] = gen.OrExpression(p[1],p[3]) 
+        #
 
 def p_expression_unary_operators(p):
-    '''expression :   expression bool expression
-                    | expression paren expression
-                    | expression notbool expression
-                    | expression neq expression
+    '''expression : expression BOOL expression
+                    | expression PAREN expression
+                    | expression NOTBOOL expression
+                    | expression NEQ expression
 
 
 '''
     match p[2]:
-        case "bool" : p[0] = gen.BoolValueExpression(p[1]) 
+        case "bool" : p[0] = gen.BoolExpression(p[1]) 
         case "paren" : p[0] = gen.ParenExpression(p[1]) 
         case "" : p[0] = gen.NotBoolExpression(p[1]) 
         case "" : p[0] = gen.NeqExpression(p[1]) 
