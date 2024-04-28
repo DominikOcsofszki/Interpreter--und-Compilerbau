@@ -1,0 +1,110 @@
+# <, >, <=, >=, !=, =
+# not, and, or, eq, xor[/neq, nand, nor, imp]
+# false, true
+
+
+
+import ply.lex as lex
+from ply.lex import TOKEN
+
+reserved = {
+        '<' : '<',
+        '>' : '>',
+        '<=' : '<=',
+        '>=' : '>=',
+        '!=' : '!=',
+        '=' : '=',
+        '' : '',
+        '' : '',
+        }
+tokens = [
+        'NUMBER',
+        'FUNCTION',
+        'VARIABLE',
+        ] + \
+                list(reserved.values())
+
+literals = r"*/{}=;(),\""
+
+def t_FUNCTION(t):
+    r'[a-zA-Z_]+[a-zA-Z_0-9]* [(]+   [a-zA-Z_]*  [)]+'
+    return t
+
+def t_COMMENT(t):
+    r'comment .*'
+    return t
+
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+id = r'[a-zA-Z_][a-zA-Z_0-9]*'
+
+@TOKEN(id)
+def t_ID(t):
+    t.type = reserved.get(t.value,'VARIABLE')    # Check for reserved words
+    return t
+
+# Define a rule so we can track line numbers
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+# A string containing ignored characters (spaces and tabs)
+t_ignore  = ' \t'
+
+# Error handling rule
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
+
+# Build the lexer
+lexer = lex.lex()
+
+
+data = '''
+begin
+asd()
+    comment factorial - algol 60;
+    integer procedure factorial(n); integer n;
+    begin
+        integer i,fact;
+        fact:=1;
+        for i:=2 step 1 until n do
+            fact:=fact*i;
+        factorial:=fact
+    end;
+    integer i;
+    for i:=1 step 1 until 10 do outinteger(1,factorial(i));
+    outstring(1,"\n")
+end
+'''
+# Give the lexer some input
+lexer.input(data)
+
+# Tokenize
+while True:
+    tok = lexer.token()
+    if not tok:
+        break      # No more input
+    print(tok)
+
+# t_ignore_COMMENT = r'\#.*'
+
+def p_expression_plus(p):
+    'expression : expression PLUS expression'
+    p[0] = (p[1], 'plus',p[3])
+
+def p_expression_minus(p):
+    'expression : expression MINUS expression'
+    p[0] = (p[1], 'minus',p[3])
+
+def p_expression_num(p):
+    'expression : NUMBER'
+    p[0] = ('zahl' , p[1])
+
+parser = yacc(start='expression')
+result = parser.parse(input="2+4+5")
+print(result)
+
