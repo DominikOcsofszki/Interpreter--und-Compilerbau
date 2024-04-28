@@ -39,7 +39,7 @@ def p_binary_operators(p):
 def p_expression_bool(p):
     '''expression :     true 
                     |   false'''
-    p[0] = gen.BoolExpression(p[1]) 
+    p[0] = gen.BoolValueExpression(p[1]) 
 
 def p_expression_and(p):
     'expression : expression and expression'

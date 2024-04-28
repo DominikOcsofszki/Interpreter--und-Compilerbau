@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'expressionleftPLUSMINUSleftTIMESDIVIDEDIVIDE LPAREN MINUS NUMBER PLUS RPAREN TIMESexpression : expression PLUS expressionexpression : expression MINUS expressionexpression : NUMBERexpression : expression TIMES expressionexpression : expression DIVIDE expressionexpression : LPAREN expression RPAREN'
+_lr_signature = 'expressionleftorleftandnandlefteqnoteqcompeqcompleftltgtlegeleftnotDIVIDE LPAREN MINUS NUMBER PLUS RPAREN TIMES and eq eqcomp false ge gt le lt nand not noteqcomp or trueexpression : expression PLUS expressionexpression : expression MINUS expressionexpression : NUMBERexpression :   expression and expression\n                    | expression eq expression\n                    | expression eqcomp expression\n                    | expression ge expression\n                    | expression gt expression\n                    | expression le expression\n                    | expression lt expression\n                    | expression noteqcomp expression\n                    | expression or expression\n    expression : expression TIMES expressionexpression : expression DIVIDE expressionexpression : LPAREN expression RPARENexpression :   expression  expression\n    expression :   false \n                    | true\n\n    '
     
-_lr_action_items = {'NUMBER':([0,3,4,5,6,7,],[2,2,2,2,2,2,]),'LPAREN':([0,3,4,5,6,7,],[3,3,3,3,3,3,]),'$end':([1,2,9,10,11,12,13,],[0,-3,-1,-2,-4,-5,-6,]),'PLUS':([1,2,8,9,10,11,12,13,],[4,-3,4,-1,-2,-4,-5,-6,]),'MINUS':([1,2,8,9,10,11,12,13,],[5,-3,5,-1,-2,-4,-5,-6,]),'TIMES':([1,2,8,9,10,11,12,13,],[6,-3,6,6,6,-4,-5,-6,]),'DIVIDE':([1,2,8,9,10,11,12,13,],[7,-3,7,7,7,-4,-5,-6,]),'RPAREN':([2,8,9,10,11,12,13,],[-3,13,-1,-2,-4,-5,-6,]),}
+_lr_action_items = {'NUMBER':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[2,2,-3,2,-17,-18,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,-4,-5,-6,-7,-8,-9,-10,-11,-12,2,2,-15,]),'LPAREN':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[3,3,-3,3,-17,-18,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,-4,-5,-6,-7,-8,-9,-10,-11,-12,3,3,-15,]),'false':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[4,4,-3,4,-17,-18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,-4,-5,-6,-7,-8,-9,-10,-11,-12,4,4,-15,]),'true':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[5,5,-3,5,-17,-18,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,-4,-5,-6,-7,-8,-9,-10,-11,-12,5,5,-15,]),'$end':([1,2,4,5,6,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[0,-3,-17,-18,-16,-1,-2,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,]),'PLUS':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[7,-3,-17,-18,7,7,7,7,-4,-5,-6,-7,-8,-9,-10,-11,-12,7,7,-15,]),'MINUS':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[8,-3,-17,-18,8,8,8,8,-4,-5,-6,-7,-8,-9,-10,-11,-12,8,8,-15,]),'and':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[9,-3,-17,-18,9,9,9,9,-4,-5,-6,-7,-8,-9,-10,-11,9,9,9,-15,]),'eq':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[10,-3,-17,-18,10,10,10,10,10,-5,-6,-7,-8,-9,-10,-11,10,10,10,-15,]),'eqcomp':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[11,-3,-17,-18,11,11,11,11,11,-5,-6,-7,-8,-9,-10,-11,11,11,11,-15,]),'ge':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[12,-3,-17,-18,12,12,12,12,12,12,12,-7,-8,-9,-10,12,12,12,12,-15,]),'gt':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[13,-3,-17,-18,13,13,13,13,13,13,13,-7,-8,-9,-10,13,13,13,13,-15,]),'le':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[14,-3,-17,-18,14,14,14,14,14,14,14,-7,-8,-9,-10,14,14,14,14,-15,]),'lt':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[15,-3,-17,-18,15,15,15,15,15,15,15,-7,-8,-9,-10,15,15,15,15,-15,]),'noteqcomp':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[16,-3,-17,-18,16,16,16,16,16,-5,-6,-7,-8,-9,-10,-11,16,16,16,-15,]),'or':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[17,-3,-17,-18,17,17,17,17,-4,-5,-6,-7,-8,-9,-10,-11,-12,17,17,-15,]),'TIMES':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[18,-3,-17,-18,18,18,18,18,-4,-5,-6,-7,-8,-9,-10,-11,-12,18,18,-15,]),'DIVIDE':([1,2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[19,-3,-17,-18,19,19,19,19,-4,-5,-6,-7,-8,-9,-10,-11,-12,19,19,-15,]),'RPAREN':([2,4,5,6,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,],[-3,-17,-18,-16,34,-1,-2,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,3,4,5,6,7,],[1,8,9,10,11,12,]),}
+_lr_goto_items = {'expression':([0,1,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,],[1,6,20,6,21,22,23,24,25,26,27,28,29,30,31,32,33,6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,10 +27,22 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_plus','f_expression_parser.py',11),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_minus','f_expression_parser.py',15),
-  ('expression -> NUMBER','expression',1,'p_expression_num','f_expression_parser.py',19),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_times','f_expression_parser.py',23),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_div','f_expression_parser.py',27),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_paren','f_expression_parser.py',31),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_plus','arith_parser.py',19),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_minus','arith_parser.py',23),
+  ('expression -> NUMBER','expression',1,'p_expression_num','arith_parser.py',27),
+  ('expression -> expression and expression','expression',3,'p_expression_binary_operators','bool_parser.py',27),
+  ('expression -> expression eq expression','expression',3,'p_expression_binary_operators','bool_parser.py',28),
+  ('expression -> expression eqcomp expression','expression',3,'p_expression_binary_operators','bool_parser.py',29),
+  ('expression -> expression ge expression','expression',3,'p_expression_binary_operators','bool_parser.py',30),
+  ('expression -> expression gt expression','expression',3,'p_expression_binary_operators','bool_parser.py',31),
+  ('expression -> expression le expression','expression',3,'p_expression_binary_operators','bool_parser.py',32),
+  ('expression -> expression lt expression','expression',3,'p_expression_binary_operators','bool_parser.py',33),
+  ('expression -> expression noteqcomp expression','expression',3,'p_expression_binary_operators','bool_parser.py',34),
+  ('expression -> expression or expression','expression',3,'p_expression_binary_operators','bool_parser.py',35),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_times','arith_parser.py',31),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_div','arith_parser.py',35),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_paren','arith_parser.py',39),
+  ('expression -> expression expression','expression',2,'p_expression_unary_operators','bool_parser.py',40),
+  ('expression -> false','expression',1,'p_expression_bool','bool_parser.py',45),
+  ('expression -> true','expression',1,'p_expression_bool','bool_parser.py',46),
 ]

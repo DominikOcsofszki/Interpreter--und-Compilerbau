@@ -59,7 +59,7 @@ def p_expression_unary_operators(p):
 
 '''
     match p[2]:
-        case "bool" : p[0] = gen.BoolExpression(p[1]) 
+        case "bool" : p[0] = gen.BoolValueExpression(p[1]) 
         case "paren" : p[0] = gen.ParenExpression(p[1]) 
         case "" : p[0] = gen.NotBoolExpression(p[1]) 
         case "" : p[0] = gen.NeqExpression(p[1]) 

@@ -5,7 +5,7 @@ reserved_compare = {
         '>' : 'gt',
         '<=' : 'le',
         '>=' : 'ge',
-        '!=' : 'noteq',
+        '!=' : 'noteqcomp',
         '=' : 'eqcomp',
         }
 reserved_bool_op ={
@@ -21,31 +21,32 @@ reserved_bool_id ={
         }
 
 tokens_bool = [
-        # 'IDENTIFIER'
         ] + \
         list(reserved_bool_id.values()) +\
         list(reserved_compare.values()) +\
         list(reserved_bool_op.values())
 
-def t_ID(t):# Check for reserved words
+def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type =    reserved_bool_id.get(t.value)  or\
                 reserved_bool_op.get(t.value)  
-                # "IDENTIFIER"    
-                # reserved_compare.get(t.value)  or\
     return t
 
-def t_RES(t):# Check for reserved words
+def t_RES(t):
     r'[<,<=,>,>=,!=,=]'
     t.type =    reserved_compare.get(t.value)
     return t
 
+
+
+
+
 if __name__ == "__main__":
+    t_ignore  = ' \t\n'
     tokens = tokens_bool
     print(tokens)
 
 
-    t_ignore  = ' \t\n'
 
     def t_error(t):
         print("Illegal character '%s'" % t.value[0])

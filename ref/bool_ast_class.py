@@ -2,9 +2,8 @@ import sys
 import inspect
 
 class InterpretedExpression:
-    pass
-    # def eval(self):
-    #     pass
+    def eval(self):
+        pass
 class LtExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
@@ -114,22 +113,35 @@ used_procedures_and_classes = getAllClasses()
 print(used_procedures_and_classes)
 def checkAndReturnBinaryClass(p):
     lowerp2 = p[2].lower()
-    # match p[2]:
     match lowerp2:
-        case "and" : p[0] = AndExpression(p[1],p[3]) 
-        case "eqcomp" : p[0] = EqCompExpression(p[1],p[3]) 
-        case "eq" : p[0] = EqExpression(p[1],p[3]) 
-        case "ge" : p[0] = GeExpression(p[1],p[3]) 
-        case "gt" : p[0] = GtExpression(p[1],p[3]) 
-        case "le" : p[0] = LeExpression(p[1],p[3]) 
-        case "lt" : p[0] = LtExpression(p[1],p[3]) 
-        case "not" : p[0] = NotEqCompExpression(p[1],p[3]) 
-        case "or" : p[0] = OrExpression(p[1],p[3]) 
+        case "and"      : p[0] = AndExpression(p[1],p[3]) 
+        case "eqcomp"   : p[0] = EqCompExpression(p[1],p[3]) 
+        case "eq"       : p[0] = EqExpression(p[1],p[3]) 
+        case "ge"       : p[0] = GeExpression(p[1],p[3]) 
+        case "gt"       : p[0] = GtExpression(p[1],p[3]) 
+        case "le"       : p[0] = LeExpression(p[1],p[3]) 
+        case "lt"       : p[0] = LtExpression(p[1],p[3]) 
+        case "not"      : p[0] = NotEqCompExpression(p[1],p[3]) 
+        case "or"       : p[0] = OrExpression(p[1],p[3]) 
     return p[0]
-def checkAndReturnUnaryClass(p):
-    match p[2]:
-        case "": p[0] = BoolValueExpression(p[1])
 
+    # match p[2]:
+    #     case "bool" : p[0] = gen.BoolValueExpression(p[1]) 
+    #     case "paren" : p[0] = gen.ParenExpression(p[1]) 
+    #     case "" : p[0] = gen.NotBoolExpression(p[1]) 
+    #     case "" : p[0] = gen.NeqExpression(p[1]) 
+def checkAndReturnUnaryClass(p):
+    lowerp2 = p[2].lower()
+    match lowerp2:
+        case "true" : p[0] = BoolValueExpression(p[1])
+        case "false" : p[0] = BoolValueExpression(p[1])
+
+def checkAndReturnBoolValueClass(p):
+    lowerp2 = p[1].lower()
+    match lowerp2:
+        case "true" : p[0] = BoolValueExpression(p[1])
+        case "false" : p[0] = BoolValueExpression(p[1])
+    return p[0]
 
 # used_procedures_and_classes={
 #         'AndExpression',
