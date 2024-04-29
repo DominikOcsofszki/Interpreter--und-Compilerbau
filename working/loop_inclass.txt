@@ -1,0 +1,34 @@
+
+s= '''
+begin
+x := 5;
+loop 5 : x = x+2;
+end
+'''
+
+s2='''
+loop(loop x: x:=2) : x+2
+'''
+
+variable darf nicht abgeändert werden.
+For schleife hat loop syntax, darf var aber nicht ändern
+
+loop x:=0; x<3; x:= x+1
+
+for i=1 to 20 step 2 begin
+    
+end
+===================================================
+using this!!
+loop expr do expr
+for assign;bool_expr;assign do expr
+for assign;bool_expr;assign do lock var expr << optional
+===================================================
+if bool_expr then expr
+if bool_expr then expr else expr
+c++/java precedence verwenden
+
+===================================================
+reserved {'if', 'else'}
+
+expression
