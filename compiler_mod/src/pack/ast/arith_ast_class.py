@@ -4,45 +4,45 @@ class PlusExpression(InterpretedExpression):
         self.e1=e1
         self.e2=e2
 
-    def eval(self):
-        return self.e1.eval()+self.e2.eval()
+    def eval(self,env):
+        return self.e1.eval(env)+self.e2.eval(env)
 
 class MinusExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
-    def eval(self):
-        return self.e1.eval()-self.e2.eval()
+    def eval(self,env):
+        return self.e1.eval(env)-self.e2.eval(env)
 
 class TimesExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
-    def eval(self):
-        return self.e1.eval()*self.e2.eval()
+    def eval(self,env):
+        return self.e1.eval(env)*self.e2.eval(env)
 
 class DivideExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
-    def eval(self):
-        return self.e1.eval()/self.e2.eval()
+    def eval(self,env):
+        return self.e1.eval(env)/self.e2.eval(env)
 
 class ParenExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
-    def eval(self):
-        return self.e1.eval()
+    def eval(self,env):
+        return self.e1.eval(env)
 
 class NumberExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
-    def eval(self):
+    def eval(self,env):
         return float(self.e1)
 
 # used_procedures_and_classes={

@@ -5,15 +5,15 @@ class WriteIdExpression(InterpretedExpression):
         self.e1=e1
         self.e2=e2
 
-    def eval(self):
-        return self.e1.eval() is  self.e2.eval()
+    def eval(self,env):
+        return env
 
 class ReadIdExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return env[self.e1.eval()]
+        return env[self.e1.eval(env)]
 
 
 def getAllClasses():

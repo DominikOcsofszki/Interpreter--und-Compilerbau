@@ -1,6 +1,4 @@
 
 class InterpretedExpression:
-    def __init__(self, env):
-        self.e1=env
-    def eval(self):
+    def eval(self,env):
         pass
