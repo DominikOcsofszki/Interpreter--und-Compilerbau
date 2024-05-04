@@ -1,4 +1,4 @@
-#!/Users/dominikocsofszki/ss2024/compiler/projekt/refactor/.venv/bin/python3.11
+#!/Users/dominikocsofszki/ss2024/compiler/projekt/compiler_mod/.venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

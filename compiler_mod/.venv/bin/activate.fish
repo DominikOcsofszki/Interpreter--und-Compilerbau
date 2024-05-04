@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/dominikocsofszki/ss2024/compiler/projekt/refactor/.venv"
+set -gx VIRTUAL_ENV "/Users/dominikocsofszki/ss2024/compiler/projekt/compiler_mod/.venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
