@@ -12,8 +12,8 @@ class ReadIdExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
-    def eval(self):
-        return self.e1.eval()
+    def eval(self,env):
+        return env[self.e1.eval()]
 
 
 def getAllClasses():

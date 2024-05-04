@@ -1,5 +1,6 @@
 from pack.parser.arith_parser import *
 from pack.parser.bool_parser import *
+from pack.parser.var_parser import *
 import ply.yacc as yacc
 from top_lexer import tokens, lexer
 
@@ -24,6 +25,11 @@ precedence = [
 
 def p_error(p):
     print("Syntax error in input!")
+
+
+
+env ={}
+# vars={}
 parser = yacc.yacc(start='expression',debug=True)
 
 
