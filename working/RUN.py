@@ -1,9 +1,18 @@
-from parser import parser
+from parser import parser, lexer
 
-if __name__ == "__main__":
-    while True:
-        # i=input("repl > ")
-        i=input("> ")
-        result = parser.parse(input=i)
-        print(i,"=",result.eval())
+while True:
+    # i=input("repl > ")
+    i=input("> ")
+    result = parser.parse(input=i,lexer=lexer)
+    # result = parser.parse(input=input("> "))
+    print(i,"=",result.eval())
 
+
+# if __name__ == "__main__":
+#     while True:
+#         # i=input("repl > ")
+#         i=input("> ")
+#         result = parser.parse(input=i,lexer=lexer)
+#         # result = parser.parse(input=input("> "))
+#         print(i,"=",result.eval())
+#

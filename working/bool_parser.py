@@ -12,22 +12,16 @@ tokens = []
 gen_bool = bool_ast_class if True else None 
 genHelperBool = gen_helper.GeneratorHelper(bool_ast_class.used_procedures_and_classes,gen_bool)
 
-precedence_bool = [
-    ['left', 'or'],
-    ['left', 'and', 'nand'],
-    ['left', 'eq', 'neqs', 'eqs'],
-    ['left', 'lt', 'gt', 'le', 'ge'],
-    ['left', 'not'],
-    # ['right', 'not'],
-     # ['right', 'NOT', 'UMINUS', 'UPLUS']
-]
+                    # | expression eqs expression
+                    # | expression gt expression
+                    # | expression lt expression
 def p_expression_binary_operators(p):
     '''expression :   expression and expression
                     | expression eq expression
-                    | expression eqs expression
+                    | expression '=' expression
+                    | expression '>' expression
+                    | expression '<' expression
                     | expression ge expression
-                    | expression gt expression
-                    | expression lt expression
                     | expression le expression
                     | expression neqs expression
                     | expression or expression
