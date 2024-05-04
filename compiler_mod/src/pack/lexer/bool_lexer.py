@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 reserved_compare = {
         '<=' : 'le',
         '>=' : 'ge',

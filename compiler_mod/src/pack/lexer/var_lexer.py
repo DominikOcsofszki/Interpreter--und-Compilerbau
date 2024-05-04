@@ -1,17 +1,5 @@
-
-
-
-
-
-
-
-
-
-
 tokens_var = ['ID','ASSIGN']
-
-
-t_ASSIGN=f":="
+t_ASSIGN=r":="
 
 
 

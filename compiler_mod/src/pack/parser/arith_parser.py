@@ -11,9 +11,9 @@ import pack.parser.gen_helper as gen_helper
 
 
 #DebugMode: Change bool to True for DebugMode, False to run
-gen_arith = arith_ast_class if True else None 
+generator_arith = arith_ast_class if True else None 
 # gen_arith = None
-genHelperArith = gen_helper.GeneratorHelper(arith_ast_class.used_procedures_and_classes,gen_arith)
+genHelperArith = gen_helper.GeneratorHelper(arith_ast_class.used_procedures_and_classes,generator_arith)
 
 # precedence_arith = [['left', '+', '-'],
 #               ['left', '*', '/']]
@@ -24,22 +24,22 @@ def p_expression_binary_operators_arith(p):
                     | expression '*' expression
                     | expression '/' expression
     '''
-    p[0] = gen_arith.checkAndReturnBinaryClass(p)
+    p[0] = generator_arith.checkAndReturnBinaryClass(p)
 
 def p_expression_num(p):
     'expression : NUMBER'
-    p[0] = gen_arith.NumberExpression(p[1])
+    p[0] = generator_arith.NumberExpression(p[1])
 
 def p_expression_paren(p):
     'expression : "(" expression ")"'
-    p[0] = gen_arith.ParenExpression(p[2])
+    p[0] = generator_arith.ParenExpression(p[2])
 
 # def p_error(p):
 #     print("Syntax error in input!")
 
 ### the REPL
 
-gen_arith = genHelperArith.set_generator_module_and_check(arith_ast_class)
+generator_arith = genHelperArith.set_generator_module_and_check(arith_ast_class)
 
 # if __name__ == "__main__":
 #     tokens = []

@@ -13,5 +13,5 @@ def t_error(t):
     t.lexer.skip(1)
 
 literals=literals_arith+literals_bool
-tokens = tokens + tokens_arith + tokens_bool
+tokens = tokens + tokens_arith + tokens_bool + tokens_var
 lexer = lex(debug=True)

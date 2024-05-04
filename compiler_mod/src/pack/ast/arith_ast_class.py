@@ -43,7 +43,7 @@ class NumberExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self):
-        return int(self.e1)
+        return float(self.e1)
 
 # used_procedures_and_classes={
 #         'PlusExpression',

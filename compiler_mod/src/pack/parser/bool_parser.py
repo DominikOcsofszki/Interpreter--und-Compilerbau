@@ -9,8 +9,8 @@ import pack.parser.gen_helper as gen_helper
 
 tokens = []
 #DebugMode: Change bool to True for DebugMode, False to run
-gen_bool = bool_ast_class if True else None 
-genHelperBool = gen_helper.GeneratorHelper(bool_ast_class.used_procedures_and_classes,gen_bool)
+generator_bool = bool_ast_class if True else None 
+genHelperBool = gen_helper.GeneratorHelper(bool_ast_class.used_procedures_and_classes,generator_bool)
 
 def p_expression_binary_operators_bool(p):
     '''expression :   expression and expression
@@ -24,15 +24,15 @@ def p_expression_binary_operators_bool(p):
                     | expression or expression
                     | expression nand expression
     '''
-    p[0] = gen_bool.checkAndReturnBinaryClass(p)
+    p[0] = generator_bool.checkAndReturnBinaryClass(p)
 
 def p_expression_unary_operators(p):
     '''expression : not expression
     '''
-    p[0] = gen_bool.checkAndReturnUnaryClass(p)
+    p[0] = generator_bool.checkAndReturnUnaryClass(p)
 
 def p_expression_bool(p):
     ''' expression : BOOL'''
-    p[0] = gen_bool.checkAndReturnBoolValueClass(p)
+    p[0] = generator_bool.checkAndReturnBoolValueClass(p)
 
-gen_bool = genHelperBool.set_generator_module_and_check(bool_ast_class)
+generator_bool = genHelperBool.set_generator_module_and_check(bool_ast_class)
