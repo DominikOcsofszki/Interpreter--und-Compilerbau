@@ -1,20 +1,13 @@
+
 from pack.ast.Expression import InterpretedExpression
 
-class WriteIdExpression(InterpretedExpression):
-    def __init__(self, e1, e2):
-        self.e1=e1
-        self.e2=e2
-
-    def eval(self,env):
-        env[self.e1] = self.e2.eval(env)
-        return env
-
-class ReadIdExpression(InterpretedExpression):
+class SequenceExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return env[self.e1]
+        return [expression.eval(env) for expression in self.e1]
+
 
 
 def getAllClasses():
@@ -26,4 +19,3 @@ def getAllClasses():
     return classes_cleaned
 
 used_procedures_and_classes = getAllClasses()
-
