@@ -1,11 +1,18 @@
-tokens_arith = ['NUMBER']
+tokens_arith = ['NUMBER','FLOAT']
 
 literals_arith ='+-*/()'
 
 def t_NUMBER(t):
     # r'\d+'
     r'\d+(\.\d*)?'
-    t.value = float(t.value)
+    if '.' in t.value :
+        t.value = float(t.value)
+        t.type = "FLOAT"
+    else:
+        t.value =int(t.value)
+        t.type = "NUMBER"
+
+
     return t
 
 # tokens_arith = ['NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN']

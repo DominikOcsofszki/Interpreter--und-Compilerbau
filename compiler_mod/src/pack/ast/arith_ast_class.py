@@ -1,11 +1,13 @@
-from pack.ast.Expression import InterpretedExpression
+from pack.ast.Expression import InterpretedExpression, getAllClasses
 class PlusExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)+self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 + e2, env2
 
 class MinusExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -13,7 +15,9 @@ class MinusExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)-self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 - e2, env2
 
 class TimesExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -21,49 +25,46 @@ class TimesExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)*self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 * e2, env2
 
 class DivideExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
+# TODO!!!!
     def eval(self,env):
-        return self.e1.eval(env)/self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 / e2, env2
 
 class ParenExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return self.e1.eval(env)
+        e1, env1 = self.e1.eval(env)
+        return e1, env1
+        # return self.e1.eval(env), env
+
+class FloatExpression(InterpretedExpression):
+    def __init__(self, e1):
+        self.e1=e1
+
+    def eval(self,env):
+        return float(self.e1), env
 
 class NumberExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return float(self.e1)
-
-# used_procedures_and_classes={
-#         'PlusExpression',
-#         'MinusExpression',
-#         'NumberExpression',
-#         'TimesExpression',
-#         'DivideExpression',
-#         'ParenExpression'
-#         }
-#
-def getAllClasses():
-    import inspect, sys
-    classes = [name for name, obj in inspect.getmembers(sys.modules[__name__], inspect.isclass) 
-              if obj.__module__ is __name__]
-    classes_cleaned = [ clazz for clazz in classes if clazz != "InterpretedExpression" ]
-    return classes_cleaned
+        return int(self.e1), env
 
 used_procedures_and_classes = getAllClasses()
 
-# print(used_procedures_and_classes)
 def checkAndReturnBinaryClass(p):
     match p[2]:
         case "+"   : p[0] = PlusExpression(p[1],p[3]) 
@@ -72,17 +73,4 @@ def checkAndReturnBinaryClass(p):
         case "/"   : p[0] = DivideExpression(p[1],p[3]) 
         case _ : print("STH WROMG")
     return p[0]
-
-# def checkParenClass(p):
-#     lowerp2 = p[1].lower()
-#     match lowerp2:
-#         case "not" : p[0] = NotBoolExpression(p[2])
-#         case _ : print("=======errror=====")
-#     return p[0]
-#
-# def checkAndReturnNumberValueClass(p):
-#     lowerp2 = p[1].lower()
-#     match lowerp2:
-#         case "true" | "false"   : p[0] = BoolValueExpression(p[1])
-#     return p[0]
 

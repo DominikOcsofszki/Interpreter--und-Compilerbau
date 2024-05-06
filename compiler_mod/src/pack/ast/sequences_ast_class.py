@@ -1,5 +1,5 @@
 
-from pack.ast.Expression import InterpretedExpression
+from pack.ast.Expression import InterpretedExpression, getAllClasses
 
 class SequenceExpression(InterpretedExpression):
     def __init__(self, e1):
@@ -10,12 +10,5 @@ class SequenceExpression(InterpretedExpression):
 
 
 
-def getAllClasses():
-    import sys
-    import inspect
-    classes = [name for name, obj in inspect.getmembers(sys.modules[__name__], inspect.isclass) 
-              if obj.__module__ is __name__]
-    classes_cleaned = [ clazz for clazz in classes if clazz != "InterpretedExpression" ]
-    return classes_cleaned
 
 used_procedures_and_classes = getAllClasses()

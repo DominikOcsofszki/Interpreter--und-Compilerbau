@@ -1,5 +1,10 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    FLOAT
+    while
+
 Grammar
 
 Rule 0     S' -> expression
@@ -15,49 +20,61 @@ Rule 9     expression -> expression le expression
 Rule 10    expression -> expression neqs expression
 Rule 11    expression -> expression or expression
 Rule 12    expression -> expression nand expression
-Rule 13    expression -> ID ASSIGN expression
+Rule 13    expression -> ID assign expression
 Rule 14    sequence -> sequence ; expression
 Rule 15    sequence -> expression
-Rule 16    expression -> expression + expression
-Rule 17    expression -> expression - expression
-Rule 18    expression -> expression * expression
-Rule 19    expression -> expression / expression
-Rule 20    expression -> NUMBER
-Rule 21    expression -> not expression
-Rule 22    expression -> ( expression )
-Rule 23    expression -> BOOL
+Rule 16    expression -> if expression then expression
+Rule 17    expression -> expression + expression
+Rule 18    expression -> expression - expression
+Rule 19    expression -> expression * expression
+Rule 20    expression -> expression / expression
+Rule 21    expression -> if expression then expression else expression
+Rule 22    expression -> not expression
+Rule 23    expression -> for expression ; expression ; expression do expression
+Rule 24    expression -> NUMBER
+Rule 25    expression -> BOOL
+Rule 26    expression -> loop expression do expression
+Rule 27    expression -> ( expression )
 
 Terminals, with rules where they appear
 
-(                    : 22
-)                    : 22
-*                    : 18
-+                    : 16
--                    : 17
-/                    : 19
-;                    : 14
+(                    : 27
+)                    : 27
+*                    : 19
++                    : 17
+-                    : 18
+/                    : 20
+;                    : 14 23 23
 <                    : 7
 =                    : 5
 >                    : 6
-ASSIGN               : 13
-BOOL                 : 23
+BOOL                 : 25
+FLOAT                : 
 ID                   : 1 13
-NUMBER               : 20
+NUMBER               : 24
 and                  : 3
+assign               : 13
+do                   : 23 26
+else                 : 21
 eq                   : 4
 error                : 
+for                  : 23
 ge                   : 8
+if                   : 16 21
 le                   : 9
+loop                 : 26
 nand                 : 12
 neqs                 : 10
-not                  : 21
+not                  : 22
 or                   : 11
+then                 : 16 21
+while                : 
 {                    : 2
 }                    : 2
 
 Nonterminals, with rules where they appear
 
-expression           : 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 14 15 16 16 17 17 18 18 19 19 21 22 0
+expression           : 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 14 15 16 16 17 17 18 18 19 19 20 20 21 21 21 22 23 23 23 23 26 26 27 0
 sequence             : 2 14
 
 Parsing method: LALR
@@ -77,22 +94,29 @@ state 0
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
     expression                     shift and go to state 1
 
@@ -109,31 +133,31 @@ state 1
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    or              shift and go to state 16
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
 
 state 2
 
     (1) expression -> ID .
-    (13) expression -> ID . ASSIGN expression
+    (13) expression -> ID . assign expression
 
     and             reduce using rule 1 (expression -> ID .)
     eq              reduce using rule 1 (expression -> ID .)
@@ -152,8 +176,11 @@ state 2
     $end            reduce using rule 1 (expression -> ID .)
     }               reduce using rule 1 (expression -> ID .)
     ;               reduce using rule 1 (expression -> ID .)
+    then            reduce using rule 1 (expression -> ID .)
+    do              reduce using rule 1 (expression -> ID .)
     )               reduce using rule 1 (expression -> ID .)
-    ASSIGN          shift and go to state 22
+    else            reduce using rule 1 (expression -> ID .)
+    assign          shift and go to state 25
 
 
 state 3
@@ -173,53 +200,78 @@ state 3
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    sequence                       shift and go to state 23
-    expression                     shift and go to state 24
+    sequence                       shift and go to state 26
+    expression                     shift and go to state 27
 
 state 4
 
-    (20) expression -> NUMBER .
+    (16) expression -> if . expression then expression
+    (21) expression -> if . expression then expression else expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
-    and             reduce using rule 20 (expression -> NUMBER .)
-    eq              reduce using rule 20 (expression -> NUMBER .)
-    =               reduce using rule 20 (expression -> NUMBER .)
-    >               reduce using rule 20 (expression -> NUMBER .)
-    <               reduce using rule 20 (expression -> NUMBER .)
-    ge              reduce using rule 20 (expression -> NUMBER .)
-    le              reduce using rule 20 (expression -> NUMBER .)
-    neqs            reduce using rule 20 (expression -> NUMBER .)
-    or              reduce using rule 20 (expression -> NUMBER .)
-    nand            reduce using rule 20 (expression -> NUMBER .)
-    +               reduce using rule 20 (expression -> NUMBER .)
-    -               reduce using rule 20 (expression -> NUMBER .)
-    *               reduce using rule 20 (expression -> NUMBER .)
-    /               reduce using rule 20 (expression -> NUMBER .)
-    $end            reduce using rule 20 (expression -> NUMBER .)
-    }               reduce using rule 20 (expression -> NUMBER .)
-    ;               reduce using rule 20 (expression -> NUMBER .)
-    )               reduce using rule 20 (expression -> NUMBER .)
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
+    expression                     shift and go to state 28
 
 state 5
 
-    (21) expression -> not . expression
+    (22) expression -> not . expression
     (1) expression -> . ID
     (2) expression -> . { sequence }
     (3) expression -> . expression and expression
@@ -232,28 +284,35 @@ state 5
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 25
+    expression                     shift and go to state 29
 
 state 6
 
-    (22) expression -> ( . expression )
+    (23) expression -> for . expression ; expression ; expression do expression
     (1) expression -> . ID
     (2) expression -> . { sequence }
     (3) expression -> . expression and expression
@@ -266,50 +325,169 @@ state 6
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 26
+    expression                     shift and go to state 30
 
 state 7
 
-    (23) expression -> BOOL .
+    (24) expression -> NUMBER .
 
-    and             reduce using rule 23 (expression -> BOOL .)
-    eq              reduce using rule 23 (expression -> BOOL .)
-    =               reduce using rule 23 (expression -> BOOL .)
-    >               reduce using rule 23 (expression -> BOOL .)
-    <               reduce using rule 23 (expression -> BOOL .)
-    ge              reduce using rule 23 (expression -> BOOL .)
-    le              reduce using rule 23 (expression -> BOOL .)
-    neqs            reduce using rule 23 (expression -> BOOL .)
-    or              reduce using rule 23 (expression -> BOOL .)
-    nand            reduce using rule 23 (expression -> BOOL .)
-    +               reduce using rule 23 (expression -> BOOL .)
-    -               reduce using rule 23 (expression -> BOOL .)
-    *               reduce using rule 23 (expression -> BOOL .)
-    /               reduce using rule 23 (expression -> BOOL .)
-    $end            reduce using rule 23 (expression -> BOOL .)
-    }               reduce using rule 23 (expression -> BOOL .)
-    ;               reduce using rule 23 (expression -> BOOL .)
-    )               reduce using rule 23 (expression -> BOOL .)
+    and             reduce using rule 24 (expression -> NUMBER .)
+    eq              reduce using rule 24 (expression -> NUMBER .)
+    =               reduce using rule 24 (expression -> NUMBER .)
+    >               reduce using rule 24 (expression -> NUMBER .)
+    <               reduce using rule 24 (expression -> NUMBER .)
+    ge              reduce using rule 24 (expression -> NUMBER .)
+    le              reduce using rule 24 (expression -> NUMBER .)
+    neqs            reduce using rule 24 (expression -> NUMBER .)
+    or              reduce using rule 24 (expression -> NUMBER .)
+    nand            reduce using rule 24 (expression -> NUMBER .)
+    +               reduce using rule 24 (expression -> NUMBER .)
+    -               reduce using rule 24 (expression -> NUMBER .)
+    *               reduce using rule 24 (expression -> NUMBER .)
+    /               reduce using rule 24 (expression -> NUMBER .)
+    $end            reduce using rule 24 (expression -> NUMBER .)
+    }               reduce using rule 24 (expression -> NUMBER .)
+    ;               reduce using rule 24 (expression -> NUMBER .)
+    then            reduce using rule 24 (expression -> NUMBER .)
+    do              reduce using rule 24 (expression -> NUMBER .)
+    )               reduce using rule 24 (expression -> NUMBER .)
+    else            reduce using rule 24 (expression -> NUMBER .)
 
 
 state 8
+
+    (25) expression -> BOOL .
+
+    and             reduce using rule 25 (expression -> BOOL .)
+    eq              reduce using rule 25 (expression -> BOOL .)
+    =               reduce using rule 25 (expression -> BOOL .)
+    >               reduce using rule 25 (expression -> BOOL .)
+    <               reduce using rule 25 (expression -> BOOL .)
+    ge              reduce using rule 25 (expression -> BOOL .)
+    le              reduce using rule 25 (expression -> BOOL .)
+    neqs            reduce using rule 25 (expression -> BOOL .)
+    or              reduce using rule 25 (expression -> BOOL .)
+    nand            reduce using rule 25 (expression -> BOOL .)
+    +               reduce using rule 25 (expression -> BOOL .)
+    -               reduce using rule 25 (expression -> BOOL .)
+    *               reduce using rule 25 (expression -> BOOL .)
+    /               reduce using rule 25 (expression -> BOOL .)
+    $end            reduce using rule 25 (expression -> BOOL .)
+    }               reduce using rule 25 (expression -> BOOL .)
+    ;               reduce using rule 25 (expression -> BOOL .)
+    then            reduce using rule 25 (expression -> BOOL .)
+    do              reduce using rule 25 (expression -> BOOL .)
+    )               reduce using rule 25 (expression -> BOOL .)
+    else            reduce using rule 25 (expression -> BOOL .)
+
+
+state 9
+
+    (26) expression -> loop . expression do expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 31
+
+state 10
+
+    (27) expression -> ( . expression )
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 32
+
+state 11
 
     (3) expression -> expression and . expression
     (1) expression -> . ID
@@ -324,26 +502,33 @@ state 8
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 27
+    expression                     shift and go to state 33
 
-state 9
+state 12
 
     (4) expression -> expression eq . expression
     (1) expression -> . ID
@@ -358,26 +543,33 @@ state 9
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 28
+    expression                     shift and go to state 34
 
-state 10
+state 13
 
     (5) expression -> expression = . expression
     (1) expression -> . ID
@@ -392,26 +584,33 @@ state 10
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 29
+    expression                     shift and go to state 35
 
-state 11
+state 14
 
     (6) expression -> expression > . expression
     (1) expression -> . ID
@@ -426,26 +625,33 @@ state 11
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 30
+    expression                     shift and go to state 36
 
-state 12
+state 15
 
     (7) expression -> expression < . expression
     (1) expression -> . ID
@@ -460,26 +666,33 @@ state 12
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 31
+    expression                     shift and go to state 37
 
-state 13
+state 16
 
     (8) expression -> expression ge . expression
     (1) expression -> . ID
@@ -494,26 +707,33 @@ state 13
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 32
+    expression                     shift and go to state 38
 
-state 14
+state 17
 
     (9) expression -> expression le . expression
     (1) expression -> . ID
@@ -528,26 +748,33 @@ state 14
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 33
+    expression                     shift and go to state 39
 
-state 15
+state 18
 
     (10) expression -> expression neqs . expression
     (1) expression -> . ID
@@ -562,26 +789,33 @@ state 15
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 34
+    expression                     shift and go to state 40
 
-state 16
+state 19
 
     (11) expression -> expression or . expression
     (1) expression -> . ID
@@ -596,26 +830,33 @@ state 16
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 35
+    expression                     shift and go to state 41
 
-state 17
+state 20
 
     (12) expression -> expression nand . expression
     (1) expression -> . ID
@@ -630,130 +871,35 @@ state 17
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 36
-
-state 18
-
-    (16) expression -> expression + . expression
-    (1) expression -> . ID
-    (2) expression -> . { sequence }
-    (3) expression -> . expression and expression
-    (4) expression -> . expression eq expression
-    (5) expression -> . expression = expression
-    (6) expression -> . expression > expression
-    (7) expression -> . expression < expression
-    (8) expression -> . expression ge expression
-    (9) expression -> . expression le expression
-    (10) expression -> . expression neqs expression
-    (11) expression -> . expression or expression
-    (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
-
-    ID              shift and go to state 2
-    {               shift and go to state 3
-    NUMBER          shift and go to state 4
-    not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
-
-    expression                     shift and go to state 37
-
-state 19
-
-    (17) expression -> expression - . expression
-    (1) expression -> . ID
-    (2) expression -> . { sequence }
-    (3) expression -> . expression and expression
-    (4) expression -> . expression eq expression
-    (5) expression -> . expression = expression
-    (6) expression -> . expression > expression
-    (7) expression -> . expression < expression
-    (8) expression -> . expression ge expression
-    (9) expression -> . expression le expression
-    (10) expression -> . expression neqs expression
-    (11) expression -> . expression or expression
-    (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
-
-    ID              shift and go to state 2
-    {               shift and go to state 3
-    NUMBER          shift and go to state 4
-    not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
-
-    expression                     shift and go to state 38
-
-state 20
-
-    (18) expression -> expression * . expression
-    (1) expression -> . ID
-    (2) expression -> . { sequence }
-    (3) expression -> . expression and expression
-    (4) expression -> . expression eq expression
-    (5) expression -> . expression = expression
-    (6) expression -> . expression > expression
-    (7) expression -> . expression < expression
-    (8) expression -> . expression ge expression
-    (9) expression -> . expression le expression
-    (10) expression -> . expression neqs expression
-    (11) expression -> . expression or expression
-    (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
-
-    ID              shift and go to state 2
-    {               shift and go to state 3
-    NUMBER          shift and go to state 4
-    not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
-
-    expression                     shift and go to state 39
+    expression                     shift and go to state 42
 
 state 21
 
-    (19) expression -> expression / . expression
+    (17) expression -> expression + . expression
     (1) expression -> . ID
     (2) expression -> . { sequence }
     (3) expression -> . expression and expression
@@ -766,28 +912,35 @@ state 21
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 40
+    expression                     shift and go to state 43
 
 state 22
 
-    (13) expression -> ID ASSIGN . expression
+    (18) expression -> expression - . expression
     (1) expression -> . ID
     (2) expression -> . { sequence }
     (3) expression -> . expression and expression
@@ -800,35 +953,165 @@ state 22
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 41
+    expression                     shift and go to state 44
 
 state 23
+
+    (19) expression -> expression * . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 45
+
+state 24
+
+    (20) expression -> expression / . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 46
+
+state 25
+
+    (13) expression -> ID assign . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 47
+
+state 26
 
     (2) expression -> { sequence . }
     (14) sequence -> sequence . ; expression
 
-    }               shift and go to state 42
-    ;               shift and go to state 43
+    }               shift and go to state 48
+    ;               shift and go to state 49
 
 
-state 24
+state 27
 
     (15) sequence -> expression .
     (3) expression -> expression . and expression
@@ -841,32 +1124,33 @@ state 24
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     }               reduce using rule 15 (sequence -> expression .)
     ;               reduce using rule 15 (sequence -> expression .)
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    or              shift and go to state 16
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
 
-state 25
+state 28
 
-    (21) expression -> not expression .
+    (16) expression -> if expression . then expression
+    (21) expression -> if expression . then expression else expression
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -877,49 +1161,31 @@ state 25
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             reduce using rule 21 (expression -> not expression .)
-    eq              reduce using rule 21 (expression -> not expression .)
-    =               reduce using rule 21 (expression -> not expression .)
-    >               reduce using rule 21 (expression -> not expression .)
-    <               reduce using rule 21 (expression -> not expression .)
-    ge              reduce using rule 21 (expression -> not expression .)
-    le              reduce using rule 21 (expression -> not expression .)
-    neqs            reduce using rule 21 (expression -> not expression .)
-    or              reduce using rule 21 (expression -> not expression .)
-    nand            reduce using rule 21 (expression -> not expression .)
-    +               reduce using rule 21 (expression -> not expression .)
-    -               reduce using rule 21 (expression -> not expression .)
-    *               reduce using rule 21 (expression -> not expression .)
-    /               reduce using rule 21 (expression -> not expression .)
-    $end            reduce using rule 21 (expression -> not expression .)
-    }               reduce using rule 21 (expression -> not expression .)
-    ;               reduce using rule 21 (expression -> not expression .)
-    )               reduce using rule 21 (expression -> not expression .)
-
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
-  ! +               [ shift and go to state 18 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 20 ]
-  ! /               [ shift and go to state 21 ]
+    then            shift and go to state 50
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
 
-state 26
+state 29
 
-    (22) expression -> ( expression . )
+    (22) expression -> not expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -930,29 +1196,155 @@ state 26
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    )               shift and go to state 44
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    or              shift and go to state 16
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             reduce using rule 22 (expression -> not expression .)
+    eq              reduce using rule 22 (expression -> not expression .)
+    =               reduce using rule 22 (expression -> not expression .)
+    >               reduce using rule 22 (expression -> not expression .)
+    <               reduce using rule 22 (expression -> not expression .)
+    ge              reduce using rule 22 (expression -> not expression .)
+    le              reduce using rule 22 (expression -> not expression .)
+    neqs            reduce using rule 22 (expression -> not expression .)
+    or              reduce using rule 22 (expression -> not expression .)
+    nand            reduce using rule 22 (expression -> not expression .)
+    +               reduce using rule 22 (expression -> not expression .)
+    -               reduce using rule 22 (expression -> not expression .)
+    *               reduce using rule 22 (expression -> not expression .)
+    /               reduce using rule 22 (expression -> not expression .)
+    $end            reduce using rule 22 (expression -> not expression .)
+    }               reduce using rule 22 (expression -> not expression .)
+    ;               reduce using rule 22 (expression -> not expression .)
+    then            reduce using rule 22 (expression -> not expression .)
+    do              reduce using rule 22 (expression -> not expression .)
+    )               reduce using rule 22 (expression -> not expression .)
+    else            reduce using rule 22 (expression -> not expression .)
+
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
+  ! *               [ shift and go to state 23 ]
+  ! /               [ shift and go to state 24 ]
 
 
-state 27
+state 30
+
+    (23) expression -> for expression . ; expression ; expression do expression
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    ;               shift and go to state 51
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 31
+
+    (26) expression -> loop expression . do expression
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    do              shift and go to state 52
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 32
+
+    (27) expression -> ( expression . )
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    )               shift and go to state 53
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 33
 
     (3) expression -> expression and expression .
     (3) expression -> expression . and expression
@@ -965,10 +1357,10 @@ state 27
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 3 (expression -> expression and expression .)
     or              reduce using rule 3 (expression -> expression and expression .)
@@ -976,18 +1368,21 @@ state 27
     $end            reduce using rule 3 (expression -> expression and expression .)
     }               reduce using rule 3 (expression -> expression and expression .)
     ;               reduce using rule 3 (expression -> expression and expression .)
+    then            reduce using rule 3 (expression -> expression and expression .)
+    do              reduce using rule 3 (expression -> expression and expression .)
     )               reduce using rule 3 (expression -> expression and expression .)
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 3 (expression -> expression and expression .)
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! eq              [ reduce using rule 3 (expression -> expression and expression .) ]
   ! =               [ reduce using rule 3 (expression -> expression and expression .) ]
@@ -1000,12 +1395,12 @@ state 27
   ! -               [ reduce using rule 3 (expression -> expression and expression .) ]
   ! *               [ reduce using rule 3 (expression -> expression and expression .) ]
   ! /               [ reduce using rule 3 (expression -> expression and expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 28
+state 34
 
     (4) expression -> expression eq expression .
     (3) expression -> expression . and expression
@@ -1018,10 +1413,10 @@ state 28
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 4 (expression -> expression eq expression .)
     eq              reduce using rule 4 (expression -> expression eq expression .)
@@ -1032,15 +1427,18 @@ state 28
     $end            reduce using rule 4 (expression -> expression eq expression .)
     }               reduce using rule 4 (expression -> expression eq expression .)
     ;               reduce using rule 4 (expression -> expression eq expression .)
+    then            reduce using rule 4 (expression -> expression eq expression .)
+    do              reduce using rule 4 (expression -> expression eq expression .)
     )               reduce using rule 4 (expression -> expression eq expression .)
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 4 (expression -> expression eq expression .)
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! >               [ reduce using rule 4 (expression -> expression eq expression .) ]
   ! <               [ reduce using rule 4 (expression -> expression eq expression .) ]
@@ -1050,15 +1448,15 @@ state 28
   ! -               [ reduce using rule 4 (expression -> expression eq expression .) ]
   ! *               [ reduce using rule 4 (expression -> expression eq expression .) ]
   ! /               [ reduce using rule 4 (expression -> expression eq expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 29
+state 35
 
     (5) expression -> expression = expression .
     (3) expression -> expression . and expression
@@ -1071,10 +1469,10 @@ state 29
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 5 (expression -> expression = expression .)
     eq              reduce using rule 5 (expression -> expression = expression .)
@@ -1085,15 +1483,18 @@ state 29
     $end            reduce using rule 5 (expression -> expression = expression .)
     }               reduce using rule 5 (expression -> expression = expression .)
     ;               reduce using rule 5 (expression -> expression = expression .)
+    then            reduce using rule 5 (expression -> expression = expression .)
+    do              reduce using rule 5 (expression -> expression = expression .)
     )               reduce using rule 5 (expression -> expression = expression .)
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 5 (expression -> expression = expression .)
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! >               [ reduce using rule 5 (expression -> expression = expression .) ]
   ! <               [ reduce using rule 5 (expression -> expression = expression .) ]
@@ -1103,15 +1504,15 @@ state 29
   ! -               [ reduce using rule 5 (expression -> expression = expression .) ]
   ! *               [ reduce using rule 5 (expression -> expression = expression .) ]
   ! /               [ reduce using rule 5 (expression -> expression = expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 30
+state 36
 
     (6) expression -> expression > expression .
     (3) expression -> expression . and expression
@@ -1124,10 +1525,10 @@ state 30
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 6 (expression -> expression > expression .)
     eq              reduce using rule 6 (expression -> expression > expression .)
@@ -1142,29 +1543,32 @@ state 30
     $end            reduce using rule 6 (expression -> expression > expression .)
     }               reduce using rule 6 (expression -> expression > expression .)
     ;               reduce using rule 6 (expression -> expression > expression .)
+    then            reduce using rule 6 (expression -> expression > expression .)
+    do              reduce using rule 6 (expression -> expression > expression .)
     )               reduce using rule 6 (expression -> expression > expression .)
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 6 (expression -> expression > expression .)
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! +               [ reduce using rule 6 (expression -> expression > expression .) ]
   ! -               [ reduce using rule 6 (expression -> expression > expression .) ]
   ! *               [ reduce using rule 6 (expression -> expression > expression .) ]
   ! /               [ reduce using rule 6 (expression -> expression > expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 31
+state 37
 
     (7) expression -> expression < expression .
     (3) expression -> expression . and expression
@@ -1177,10 +1581,10 @@ state 31
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 7 (expression -> expression < expression .)
     eq              reduce using rule 7 (expression -> expression < expression .)
@@ -1195,29 +1599,32 @@ state 31
     $end            reduce using rule 7 (expression -> expression < expression .)
     }               reduce using rule 7 (expression -> expression < expression .)
     ;               reduce using rule 7 (expression -> expression < expression .)
+    then            reduce using rule 7 (expression -> expression < expression .)
+    do              reduce using rule 7 (expression -> expression < expression .)
     )               reduce using rule 7 (expression -> expression < expression .)
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 7 (expression -> expression < expression .)
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! +               [ reduce using rule 7 (expression -> expression < expression .) ]
   ! -               [ reduce using rule 7 (expression -> expression < expression .) ]
   ! *               [ reduce using rule 7 (expression -> expression < expression .) ]
   ! /               [ reduce using rule 7 (expression -> expression < expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 32
+state 38
 
     (8) expression -> expression ge expression .
     (3) expression -> expression . and expression
@@ -1230,10 +1637,10 @@ state 32
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 8 (expression -> expression ge expression .)
     eq              reduce using rule 8 (expression -> expression ge expression .)
@@ -1248,29 +1655,32 @@ state 32
     $end            reduce using rule 8 (expression -> expression ge expression .)
     }               reduce using rule 8 (expression -> expression ge expression .)
     ;               reduce using rule 8 (expression -> expression ge expression .)
+    then            reduce using rule 8 (expression -> expression ge expression .)
+    do              reduce using rule 8 (expression -> expression ge expression .)
     )               reduce using rule 8 (expression -> expression ge expression .)
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 8 (expression -> expression ge expression .)
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! +               [ reduce using rule 8 (expression -> expression ge expression .) ]
   ! -               [ reduce using rule 8 (expression -> expression ge expression .) ]
   ! *               [ reduce using rule 8 (expression -> expression ge expression .) ]
   ! /               [ reduce using rule 8 (expression -> expression ge expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 33
+state 39
 
     (9) expression -> expression le expression .
     (3) expression -> expression . and expression
@@ -1283,10 +1693,10 @@ state 33
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 9 (expression -> expression le expression .)
     eq              reduce using rule 9 (expression -> expression le expression .)
@@ -1301,29 +1711,32 @@ state 33
     $end            reduce using rule 9 (expression -> expression le expression .)
     }               reduce using rule 9 (expression -> expression le expression .)
     ;               reduce using rule 9 (expression -> expression le expression .)
+    then            reduce using rule 9 (expression -> expression le expression .)
+    do              reduce using rule 9 (expression -> expression le expression .)
     )               reduce using rule 9 (expression -> expression le expression .)
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 9 (expression -> expression le expression .)
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! +               [ reduce using rule 9 (expression -> expression le expression .) ]
   ! -               [ reduce using rule 9 (expression -> expression le expression .) ]
   ! *               [ reduce using rule 9 (expression -> expression le expression .) ]
   ! /               [ reduce using rule 9 (expression -> expression le expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 34
+state 40
 
     (10) expression -> expression neqs expression .
     (3) expression -> expression . and expression
@@ -1336,10 +1749,10 @@ state 34
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 10 (expression -> expression neqs expression .)
     eq              reduce using rule 10 (expression -> expression neqs expression .)
@@ -1350,15 +1763,18 @@ state 34
     $end            reduce using rule 10 (expression -> expression neqs expression .)
     }               reduce using rule 10 (expression -> expression neqs expression .)
     ;               reduce using rule 10 (expression -> expression neqs expression .)
+    then            reduce using rule 10 (expression -> expression neqs expression .)
+    do              reduce using rule 10 (expression -> expression neqs expression .)
     )               reduce using rule 10 (expression -> expression neqs expression .)
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 10 (expression -> expression neqs expression .)
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! >               [ reduce using rule 10 (expression -> expression neqs expression .) ]
   ! <               [ reduce using rule 10 (expression -> expression neqs expression .) ]
@@ -1368,15 +1784,15 @@ state 34
   ! -               [ reduce using rule 10 (expression -> expression neqs expression .) ]
   ! *               [ reduce using rule 10 (expression -> expression neqs expression .) ]
   ! /               [ reduce using rule 10 (expression -> expression neqs expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 35
+state 41
 
     (11) expression -> expression or expression .
     (3) expression -> expression . and expression
@@ -1389,29 +1805,32 @@ state 35
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     or              reduce using rule 11 (expression -> expression or expression .)
     $end            reduce using rule 11 (expression -> expression or expression .)
     }               reduce using rule 11 (expression -> expression or expression .)
     ;               reduce using rule 11 (expression -> expression or expression .)
+    then            reduce using rule 11 (expression -> expression or expression .)
+    do              reduce using rule 11 (expression -> expression or expression .)
     )               reduce using rule 11 (expression -> expression or expression .)
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 11 (expression -> expression or expression .)
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! and             [ reduce using rule 11 (expression -> expression or expression .) ]
   ! eq              [ reduce using rule 11 (expression -> expression or expression .) ]
@@ -1426,10 +1845,10 @@ state 35
   ! -               [ reduce using rule 11 (expression -> expression or expression .) ]
   ! *               [ reduce using rule 11 (expression -> expression or expression .) ]
   ! /               [ reduce using rule 11 (expression -> expression or expression .) ]
-  ! or              [ shift and go to state 16 ]
+  ! or              [ shift and go to state 19 ]
 
 
-state 36
+state 42
 
     (12) expression -> expression nand expression .
     (3) expression -> expression . and expression
@@ -1442,10 +1861,10 @@ state 36
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     and             reduce using rule 12 (expression -> expression nand expression .)
     or              reduce using rule 12 (expression -> expression nand expression .)
@@ -1453,18 +1872,21 @@ state 36
     $end            reduce using rule 12 (expression -> expression nand expression .)
     }               reduce using rule 12 (expression -> expression nand expression .)
     ;               reduce using rule 12 (expression -> expression nand expression .)
+    then            reduce using rule 12 (expression -> expression nand expression .)
+    do              reduce using rule 12 (expression -> expression nand expression .)
     )               reduce using rule 12 (expression -> expression nand expression .)
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    else            reduce using rule 12 (expression -> expression nand expression .)
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
   ! eq              [ reduce using rule 12 (expression -> expression nand expression .) ]
   ! =               [ reduce using rule 12 (expression -> expression nand expression .) ]
@@ -1477,14 +1899,14 @@ state 36
   ! -               [ reduce using rule 12 (expression -> expression nand expression .) ]
   ! *               [ reduce using rule 12 (expression -> expression nand expression .) ]
   ! /               [ reduce using rule 12 (expression -> expression nand expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
+  ! and             [ shift and go to state 11 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
 
 
-state 37
+state 43
 
-    (16) expression -> expression + expression .
+    (17) expression -> expression + expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -1495,49 +1917,52 @@ state 37
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             reduce using rule 16 (expression -> expression + expression .)
-    eq              reduce using rule 16 (expression -> expression + expression .)
-    =               reduce using rule 16 (expression -> expression + expression .)
-    >               reduce using rule 16 (expression -> expression + expression .)
-    <               reduce using rule 16 (expression -> expression + expression .)
-    ge              reduce using rule 16 (expression -> expression + expression .)
-    le              reduce using rule 16 (expression -> expression + expression .)
-    neqs            reduce using rule 16 (expression -> expression + expression .)
-    or              reduce using rule 16 (expression -> expression + expression .)
-    nand            reduce using rule 16 (expression -> expression + expression .)
-    +               reduce using rule 16 (expression -> expression + expression .)
-    -               reduce using rule 16 (expression -> expression + expression .)
-    $end            reduce using rule 16 (expression -> expression + expression .)
-    }               reduce using rule 16 (expression -> expression + expression .)
-    ;               reduce using rule 16 (expression -> expression + expression .)
-    )               reduce using rule 16 (expression -> expression + expression .)
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             reduce using rule 17 (expression -> expression + expression .)
+    eq              reduce using rule 17 (expression -> expression + expression .)
+    =               reduce using rule 17 (expression -> expression + expression .)
+    >               reduce using rule 17 (expression -> expression + expression .)
+    <               reduce using rule 17 (expression -> expression + expression .)
+    ge              reduce using rule 17 (expression -> expression + expression .)
+    le              reduce using rule 17 (expression -> expression + expression .)
+    neqs            reduce using rule 17 (expression -> expression + expression .)
+    or              reduce using rule 17 (expression -> expression + expression .)
+    nand            reduce using rule 17 (expression -> expression + expression .)
+    +               reduce using rule 17 (expression -> expression + expression .)
+    -               reduce using rule 17 (expression -> expression + expression .)
+    $end            reduce using rule 17 (expression -> expression + expression .)
+    }               reduce using rule 17 (expression -> expression + expression .)
+    ;               reduce using rule 17 (expression -> expression + expression .)
+    then            reduce using rule 17 (expression -> expression + expression .)
+    do              reduce using rule 17 (expression -> expression + expression .)
+    )               reduce using rule 17 (expression -> expression + expression .)
+    else            reduce using rule 17 (expression -> expression + expression .)
+    *               shift and go to state 23
+    /               shift and go to state 24
 
-  ! *               [ reduce using rule 16 (expression -> expression + expression .) ]
-  ! /               [ reduce using rule 16 (expression -> expression + expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
-  ! +               [ shift and go to state 18 ]
-  ! -               [ shift and go to state 19 ]
+  ! *               [ reduce using rule 17 (expression -> expression + expression .) ]
+  ! /               [ reduce using rule 17 (expression -> expression + expression .) ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
 
 
-state 38
+state 44
 
-    (17) expression -> expression - expression .
+    (18) expression -> expression - expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -1548,49 +1973,52 @@ state 38
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             reduce using rule 17 (expression -> expression - expression .)
-    eq              reduce using rule 17 (expression -> expression - expression .)
-    =               reduce using rule 17 (expression -> expression - expression .)
-    >               reduce using rule 17 (expression -> expression - expression .)
-    <               reduce using rule 17 (expression -> expression - expression .)
-    ge              reduce using rule 17 (expression -> expression - expression .)
-    le              reduce using rule 17 (expression -> expression - expression .)
-    neqs            reduce using rule 17 (expression -> expression - expression .)
-    or              reduce using rule 17 (expression -> expression - expression .)
-    nand            reduce using rule 17 (expression -> expression - expression .)
-    +               reduce using rule 17 (expression -> expression - expression .)
-    -               reduce using rule 17 (expression -> expression - expression .)
-    $end            reduce using rule 17 (expression -> expression - expression .)
-    }               reduce using rule 17 (expression -> expression - expression .)
-    ;               reduce using rule 17 (expression -> expression - expression .)
-    )               reduce using rule 17 (expression -> expression - expression .)
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             reduce using rule 18 (expression -> expression - expression .)
+    eq              reduce using rule 18 (expression -> expression - expression .)
+    =               reduce using rule 18 (expression -> expression - expression .)
+    >               reduce using rule 18 (expression -> expression - expression .)
+    <               reduce using rule 18 (expression -> expression - expression .)
+    ge              reduce using rule 18 (expression -> expression - expression .)
+    le              reduce using rule 18 (expression -> expression - expression .)
+    neqs            reduce using rule 18 (expression -> expression - expression .)
+    or              reduce using rule 18 (expression -> expression - expression .)
+    nand            reduce using rule 18 (expression -> expression - expression .)
+    +               reduce using rule 18 (expression -> expression - expression .)
+    -               reduce using rule 18 (expression -> expression - expression .)
+    $end            reduce using rule 18 (expression -> expression - expression .)
+    }               reduce using rule 18 (expression -> expression - expression .)
+    ;               reduce using rule 18 (expression -> expression - expression .)
+    then            reduce using rule 18 (expression -> expression - expression .)
+    do              reduce using rule 18 (expression -> expression - expression .)
+    )               reduce using rule 18 (expression -> expression - expression .)
+    else            reduce using rule 18 (expression -> expression - expression .)
+    *               shift and go to state 23
+    /               shift and go to state 24
 
-  ! *               [ reduce using rule 17 (expression -> expression - expression .) ]
-  ! /               [ reduce using rule 17 (expression -> expression - expression .) ]
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
-  ! +               [ shift and go to state 18 ]
-  ! -               [ shift and go to state 19 ]
+  ! *               [ reduce using rule 18 (expression -> expression - expression .) ]
+  ! /               [ reduce using rule 18 (expression -> expression - expression .) ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
 
 
-state 39
+state 45
 
-    (18) expression -> expression * expression .
+    (19) expression -> expression * expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -1601,49 +2029,52 @@ state 39
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             reduce using rule 18 (expression -> expression * expression .)
-    eq              reduce using rule 18 (expression -> expression * expression .)
-    =               reduce using rule 18 (expression -> expression * expression .)
-    >               reduce using rule 18 (expression -> expression * expression .)
-    <               reduce using rule 18 (expression -> expression * expression .)
-    ge              reduce using rule 18 (expression -> expression * expression .)
-    le              reduce using rule 18 (expression -> expression * expression .)
-    neqs            reduce using rule 18 (expression -> expression * expression .)
-    or              reduce using rule 18 (expression -> expression * expression .)
-    nand            reduce using rule 18 (expression -> expression * expression .)
-    +               reduce using rule 18 (expression -> expression * expression .)
-    -               reduce using rule 18 (expression -> expression * expression .)
-    *               reduce using rule 18 (expression -> expression * expression .)
-    /               reduce using rule 18 (expression -> expression * expression .)
-    $end            reduce using rule 18 (expression -> expression * expression .)
-    }               reduce using rule 18 (expression -> expression * expression .)
-    ;               reduce using rule 18 (expression -> expression * expression .)
-    )               reduce using rule 18 (expression -> expression * expression .)
+    and             reduce using rule 19 (expression -> expression * expression .)
+    eq              reduce using rule 19 (expression -> expression * expression .)
+    =               reduce using rule 19 (expression -> expression * expression .)
+    >               reduce using rule 19 (expression -> expression * expression .)
+    <               reduce using rule 19 (expression -> expression * expression .)
+    ge              reduce using rule 19 (expression -> expression * expression .)
+    le              reduce using rule 19 (expression -> expression * expression .)
+    neqs            reduce using rule 19 (expression -> expression * expression .)
+    or              reduce using rule 19 (expression -> expression * expression .)
+    nand            reduce using rule 19 (expression -> expression * expression .)
+    +               reduce using rule 19 (expression -> expression * expression .)
+    -               reduce using rule 19 (expression -> expression * expression .)
+    *               reduce using rule 19 (expression -> expression * expression .)
+    /               reduce using rule 19 (expression -> expression * expression .)
+    $end            reduce using rule 19 (expression -> expression * expression .)
+    }               reduce using rule 19 (expression -> expression * expression .)
+    ;               reduce using rule 19 (expression -> expression * expression .)
+    then            reduce using rule 19 (expression -> expression * expression .)
+    do              reduce using rule 19 (expression -> expression * expression .)
+    )               reduce using rule 19 (expression -> expression * expression .)
+    else            reduce using rule 19 (expression -> expression * expression .)
 
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
-  ! +               [ shift and go to state 18 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 20 ]
-  ! /               [ shift and go to state 21 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
+  ! *               [ shift and go to state 23 ]
+  ! /               [ shift and go to state 24 ]
 
 
-state 40
+state 46
 
-    (19) expression -> expression / expression .
+    (20) expression -> expression / expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -1654,49 +2085,52 @@ state 40
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-    and             reduce using rule 19 (expression -> expression / expression .)
-    eq              reduce using rule 19 (expression -> expression / expression .)
-    =               reduce using rule 19 (expression -> expression / expression .)
-    >               reduce using rule 19 (expression -> expression / expression .)
-    <               reduce using rule 19 (expression -> expression / expression .)
-    ge              reduce using rule 19 (expression -> expression / expression .)
-    le              reduce using rule 19 (expression -> expression / expression .)
-    neqs            reduce using rule 19 (expression -> expression / expression .)
-    or              reduce using rule 19 (expression -> expression / expression .)
-    nand            reduce using rule 19 (expression -> expression / expression .)
-    +               reduce using rule 19 (expression -> expression / expression .)
-    -               reduce using rule 19 (expression -> expression / expression .)
-    *               reduce using rule 19 (expression -> expression / expression .)
-    /               reduce using rule 19 (expression -> expression / expression .)
-    $end            reduce using rule 19 (expression -> expression / expression .)
-    }               reduce using rule 19 (expression -> expression / expression .)
-    ;               reduce using rule 19 (expression -> expression / expression .)
-    )               reduce using rule 19 (expression -> expression / expression .)
+    and             reduce using rule 20 (expression -> expression / expression .)
+    eq              reduce using rule 20 (expression -> expression / expression .)
+    =               reduce using rule 20 (expression -> expression / expression .)
+    >               reduce using rule 20 (expression -> expression / expression .)
+    <               reduce using rule 20 (expression -> expression / expression .)
+    ge              reduce using rule 20 (expression -> expression / expression .)
+    le              reduce using rule 20 (expression -> expression / expression .)
+    neqs            reduce using rule 20 (expression -> expression / expression .)
+    or              reduce using rule 20 (expression -> expression / expression .)
+    nand            reduce using rule 20 (expression -> expression / expression .)
+    +               reduce using rule 20 (expression -> expression / expression .)
+    -               reduce using rule 20 (expression -> expression / expression .)
+    *               reduce using rule 20 (expression -> expression / expression .)
+    /               reduce using rule 20 (expression -> expression / expression .)
+    $end            reduce using rule 20 (expression -> expression / expression .)
+    }               reduce using rule 20 (expression -> expression / expression .)
+    ;               reduce using rule 20 (expression -> expression / expression .)
+    then            reduce using rule 20 (expression -> expression / expression .)
+    do              reduce using rule 20 (expression -> expression / expression .)
+    )               reduce using rule 20 (expression -> expression / expression .)
+    else            reduce using rule 20 (expression -> expression / expression .)
 
-  ! and             [ shift and go to state 8 ]
-  ! eq              [ shift and go to state 9 ]
-  ! =               [ shift and go to state 10 ]
-  ! >               [ shift and go to state 11 ]
-  ! <               [ shift and go to state 12 ]
-  ! ge              [ shift and go to state 13 ]
-  ! le              [ shift and go to state 14 ]
-  ! neqs            [ shift and go to state 15 ]
-  ! or              [ shift and go to state 16 ]
-  ! nand            [ shift and go to state 17 ]
-  ! +               [ shift and go to state 18 ]
-  ! -               [ shift and go to state 19 ]
-  ! *               [ shift and go to state 20 ]
-  ! /               [ shift and go to state 21 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
+  ! *               [ shift and go to state 23 ]
+  ! /               [ shift and go to state 24 ]
 
 
-state 41
+state 47
 
-    (13) expression -> ID ASSIGN expression .
+    (13) expression -> ID assign expression .
     (3) expression -> expression . and expression
     (4) expression -> expression . eq expression
     (5) expression -> expression . = expression
@@ -1707,61 +2141,50 @@ state 41
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
-  ! shift/reduce conflict for and resolved as shift
-  ! shift/reduce conflict for eq resolved as shift
-  ! shift/reduce conflict for = resolved as shift
-  ! shift/reduce conflict for > resolved as shift
-  ! shift/reduce conflict for < resolved as shift
-  ! shift/reduce conflict for ge resolved as shift
-  ! shift/reduce conflict for le resolved as shift
-  ! shift/reduce conflict for neqs resolved as shift
-  ! shift/reduce conflict for or resolved as shift
-  ! shift/reduce conflict for nand resolved as shift
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-    $end            reduce using rule 13 (expression -> ID ASSIGN expression .)
-    }               reduce using rule 13 (expression -> ID ASSIGN expression .)
-    ;               reduce using rule 13 (expression -> ID ASSIGN expression .)
-    )               reduce using rule 13 (expression -> ID ASSIGN expression .)
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    or              shift and go to state 16
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    $end            reduce using rule 13 (expression -> ID assign expression .)
+    }               reduce using rule 13 (expression -> ID assign expression .)
+    ;               reduce using rule 13 (expression -> ID assign expression .)
+    then            reduce using rule 13 (expression -> ID assign expression .)
+    do              reduce using rule 13 (expression -> ID assign expression .)
+    )               reduce using rule 13 (expression -> ID assign expression .)
+    else            reduce using rule 13 (expression -> ID assign expression .)
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
 
-  ! and             [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! eq              [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! =               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! >               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! <               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! ge              [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! le              [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! neqs            [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! or              [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! nand            [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! +               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! -               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! *               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
-  ! /               [ reduce using rule 13 (expression -> ID ASSIGN expression .) ]
+  ! and             [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! eq              [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! =               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! >               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! <               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! ge              [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! le              [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! neqs            [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! or              [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! nand            [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! +               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! -               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! *               [ reduce using rule 13 (expression -> ID assign expression .) ]
+  ! /               [ reduce using rule 13 (expression -> ID assign expression .) ]
 
 
-state 42
+state 48
 
     (2) expression -> { sequence } .
 
@@ -1782,10 +2205,13 @@ state 42
     $end            reduce using rule 2 (expression -> { sequence } .)
     }               reduce using rule 2 (expression -> { sequence } .)
     ;               reduce using rule 2 (expression -> { sequence } .)
+    then            reduce using rule 2 (expression -> { sequence } .)
+    do              reduce using rule 2 (expression -> { sequence } .)
     )               reduce using rule 2 (expression -> { sequence } .)
+    else            reduce using rule 2 (expression -> { sequence } .)
 
 
-state 43
+state 49
 
     (14) sequence -> sequence ; . expression
     (1) expression -> . ID
@@ -1800,50 +2226,184 @@ state 43
     (10) expression -> . expression neqs expression
     (11) expression -> . expression or expression
     (12) expression -> . expression nand expression
-    (13) expression -> . ID ASSIGN expression
-    (16) expression -> . expression + expression
-    (17) expression -> . expression - expression
-    (18) expression -> . expression * expression
-    (19) expression -> . expression / expression
-    (20) expression -> . NUMBER
-    (21) expression -> . not expression
-    (22) expression -> . ( expression )
-    (23) expression -> . BOOL
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
     ID              shift and go to state 2
     {               shift and go to state 3
-    NUMBER          shift and go to state 4
+    if              shift and go to state 4
     not             shift and go to state 5
-    (               shift and go to state 6
-    BOOL            shift and go to state 7
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
 
-    expression                     shift and go to state 45
+    expression                     shift and go to state 54
 
-state 44
+state 50
 
-    (22) expression -> ( expression ) .
+    (16) expression -> if expression then . expression
+    (21) expression -> if expression then . expression else expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
 
-    and             reduce using rule 22 (expression -> ( expression ) .)
-    eq              reduce using rule 22 (expression -> ( expression ) .)
-    =               reduce using rule 22 (expression -> ( expression ) .)
-    >               reduce using rule 22 (expression -> ( expression ) .)
-    <               reduce using rule 22 (expression -> ( expression ) .)
-    ge              reduce using rule 22 (expression -> ( expression ) .)
-    le              reduce using rule 22 (expression -> ( expression ) .)
-    neqs            reduce using rule 22 (expression -> ( expression ) .)
-    or              reduce using rule 22 (expression -> ( expression ) .)
-    nand            reduce using rule 22 (expression -> ( expression ) .)
-    +               reduce using rule 22 (expression -> ( expression ) .)
-    -               reduce using rule 22 (expression -> ( expression ) .)
-    *               reduce using rule 22 (expression -> ( expression ) .)
-    /               reduce using rule 22 (expression -> ( expression ) .)
-    $end            reduce using rule 22 (expression -> ( expression ) .)
-    }               reduce using rule 22 (expression -> ( expression ) .)
-    ;               reduce using rule 22 (expression -> ( expression ) .)
-    )               reduce using rule 22 (expression -> ( expression ) .)
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 55
+
+state 51
+
+    (23) expression -> for expression ; . expression ; expression do expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 56
+
+state 52
+
+    (26) expression -> loop expression do . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 57
+
+state 53
+
+    (27) expression -> ( expression ) .
+
+    and             reduce using rule 27 (expression -> ( expression ) .)
+    eq              reduce using rule 27 (expression -> ( expression ) .)
+    =               reduce using rule 27 (expression -> ( expression ) .)
+    >               reduce using rule 27 (expression -> ( expression ) .)
+    <               reduce using rule 27 (expression -> ( expression ) .)
+    ge              reduce using rule 27 (expression -> ( expression ) .)
+    le              reduce using rule 27 (expression -> ( expression ) .)
+    neqs            reduce using rule 27 (expression -> ( expression ) .)
+    or              reduce using rule 27 (expression -> ( expression ) .)
+    nand            reduce using rule 27 (expression -> ( expression ) .)
+    +               reduce using rule 27 (expression -> ( expression ) .)
+    -               reduce using rule 27 (expression -> ( expression ) .)
+    *               reduce using rule 27 (expression -> ( expression ) .)
+    /               reduce using rule 27 (expression -> ( expression ) .)
+    $end            reduce using rule 27 (expression -> ( expression ) .)
+    }               reduce using rule 27 (expression -> ( expression ) .)
+    ;               reduce using rule 27 (expression -> ( expression ) .)
+    then            reduce using rule 27 (expression -> ( expression ) .)
+    do              reduce using rule 27 (expression -> ( expression ) .)
+    )               reduce using rule 27 (expression -> ( expression ) .)
+    else            reduce using rule 27 (expression -> ( expression ) .)
 
 
-state 45
+state 54
 
     (14) sequence -> sequence ; expression .
     (3) expression -> expression . and expression
@@ -1856,42 +2416,503 @@ state 45
     (10) expression -> expression . neqs expression
     (11) expression -> expression . or expression
     (12) expression -> expression . nand expression
-    (16) expression -> expression . + expression
-    (17) expression -> expression . - expression
-    (18) expression -> expression . * expression
-    (19) expression -> expression . / expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
 
     }               reduce using rule 14 (sequence -> sequence ; expression .)
     ;               reduce using rule 14 (sequence -> sequence ; expression .)
-    and             shift and go to state 8
-    eq              shift and go to state 9
-    =               shift and go to state 10
-    >               shift and go to state 11
-    <               shift and go to state 12
-    ge              shift and go to state 13
-    le              shift and go to state 14
-    neqs            shift and go to state 15
-    or              shift and go to state 16
-    nand            shift and go to state 17
-    +               shift and go to state 18
-    -               shift and go to state 19
-    *               shift and go to state 20
-    /               shift and go to state 21
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 55
+
+    (16) expression -> if expression then expression .
+    (21) expression -> if expression then expression . else expression
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    and             reduce using rule 16 (expression -> if expression then expression .)
+    eq              reduce using rule 16 (expression -> if expression then expression .)
+    =               reduce using rule 16 (expression -> if expression then expression .)
+    >               reduce using rule 16 (expression -> if expression then expression .)
+    <               reduce using rule 16 (expression -> if expression then expression .)
+    ge              reduce using rule 16 (expression -> if expression then expression .)
+    le              reduce using rule 16 (expression -> if expression then expression .)
+    neqs            reduce using rule 16 (expression -> if expression then expression .)
+    or              reduce using rule 16 (expression -> if expression then expression .)
+    nand            reduce using rule 16 (expression -> if expression then expression .)
+    +               reduce using rule 16 (expression -> if expression then expression .)
+    -               reduce using rule 16 (expression -> if expression then expression .)
+    *               reduce using rule 16 (expression -> if expression then expression .)
+    /               reduce using rule 16 (expression -> if expression then expression .)
+    $end            reduce using rule 16 (expression -> if expression then expression .)
+    }               reduce using rule 16 (expression -> if expression then expression .)
+    ;               reduce using rule 16 (expression -> if expression then expression .)
+    then            reduce using rule 16 (expression -> if expression then expression .)
+    do              reduce using rule 16 (expression -> if expression then expression .)
+    )               reduce using rule 16 (expression -> if expression then expression .)
+    else            reduce using rule 16 (expression -> if expression then expression .)
+
+  ! else            [ shift and go to state 58 ]
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
+  ! *               [ shift and go to state 23 ]
+  ! /               [ shift and go to state 24 ]
+
+
+state 56
+
+    (23) expression -> for expression ; expression . ; expression do expression
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    ;               shift and go to state 59
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 57
+
+    (26) expression -> loop expression do expression .
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for eq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for ge resolved as shift
+  ! shift/reduce conflict for le resolved as shift
+  ! shift/reduce conflict for neqs resolved as shift
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for nand resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+    $end            reduce using rule 26 (expression -> loop expression do expression .)
+    }               reduce using rule 26 (expression -> loop expression do expression .)
+    ;               reduce using rule 26 (expression -> loop expression do expression .)
+    then            reduce using rule 26 (expression -> loop expression do expression .)
+    do              reduce using rule 26 (expression -> loop expression do expression .)
+    )               reduce using rule 26 (expression -> loop expression do expression .)
+    else            reduce using rule 26 (expression -> loop expression do expression .)
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+  ! and             [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! eq              [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! =               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! >               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! <               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! ge              [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! le              [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! neqs            [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! or              [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! nand            [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! +               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! -               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! *               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+  ! /               [ reduce using rule 26 (expression -> loop expression do expression .) ]
+
+
+state 58
+
+    (21) expression -> if expression then expression else . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 60
+
+state 59
+
+    (23) expression -> for expression ; expression ; . expression do expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 61
+
+state 60
+
+    (21) expression -> if expression then expression else expression .
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    and             reduce using rule 21 (expression -> if expression then expression else expression .)
+    eq              reduce using rule 21 (expression -> if expression then expression else expression .)
+    =               reduce using rule 21 (expression -> if expression then expression else expression .)
+    >               reduce using rule 21 (expression -> if expression then expression else expression .)
+    <               reduce using rule 21 (expression -> if expression then expression else expression .)
+    ge              reduce using rule 21 (expression -> if expression then expression else expression .)
+    le              reduce using rule 21 (expression -> if expression then expression else expression .)
+    neqs            reduce using rule 21 (expression -> if expression then expression else expression .)
+    or              reduce using rule 21 (expression -> if expression then expression else expression .)
+    nand            reduce using rule 21 (expression -> if expression then expression else expression .)
+    +               reduce using rule 21 (expression -> if expression then expression else expression .)
+    -               reduce using rule 21 (expression -> if expression then expression else expression .)
+    *               reduce using rule 21 (expression -> if expression then expression else expression .)
+    /               reduce using rule 21 (expression -> if expression then expression else expression .)
+    $end            reduce using rule 21 (expression -> if expression then expression else expression .)
+    }               reduce using rule 21 (expression -> if expression then expression else expression .)
+    ;               reduce using rule 21 (expression -> if expression then expression else expression .)
+    then            reduce using rule 21 (expression -> if expression then expression else expression .)
+    do              reduce using rule 21 (expression -> if expression then expression else expression .)
+    )               reduce using rule 21 (expression -> if expression then expression else expression .)
+    else            reduce using rule 21 (expression -> if expression then expression else expression .)
+
+  ! and             [ shift and go to state 11 ]
+  ! eq              [ shift and go to state 12 ]
+  ! =               [ shift and go to state 13 ]
+  ! >               [ shift and go to state 14 ]
+  ! <               [ shift and go to state 15 ]
+  ! ge              [ shift and go to state 16 ]
+  ! le              [ shift and go to state 17 ]
+  ! neqs            [ shift and go to state 18 ]
+  ! or              [ shift and go to state 19 ]
+  ! nand            [ shift and go to state 20 ]
+  ! +               [ shift and go to state 21 ]
+  ! -               [ shift and go to state 22 ]
+  ! *               [ shift and go to state 23 ]
+  ! /               [ shift and go to state 24 ]
+
+
+state 61
+
+    (23) expression -> for expression ; expression ; expression . do expression
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+    do              shift and go to state 62
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+
+state 62
+
+    (23) expression -> for expression ; expression ; expression do . expression
+    (1) expression -> . ID
+    (2) expression -> . { sequence }
+    (3) expression -> . expression and expression
+    (4) expression -> . expression eq expression
+    (5) expression -> . expression = expression
+    (6) expression -> . expression > expression
+    (7) expression -> . expression < expression
+    (8) expression -> . expression ge expression
+    (9) expression -> . expression le expression
+    (10) expression -> . expression neqs expression
+    (11) expression -> . expression or expression
+    (12) expression -> . expression nand expression
+    (13) expression -> . ID assign expression
+    (16) expression -> . if expression then expression
+    (17) expression -> . expression + expression
+    (18) expression -> . expression - expression
+    (19) expression -> . expression * expression
+    (20) expression -> . expression / expression
+    (21) expression -> . if expression then expression else expression
+    (22) expression -> . not expression
+    (23) expression -> . for expression ; expression ; expression do expression
+    (24) expression -> . NUMBER
+    (25) expression -> . BOOL
+    (26) expression -> . loop expression do expression
+    (27) expression -> . ( expression )
+
+    ID              shift and go to state 2
+    {               shift and go to state 3
+    if              shift and go to state 4
+    not             shift and go to state 5
+    for             shift and go to state 6
+    NUMBER          shift and go to state 7
+    BOOL            shift and go to state 8
+    loop            shift and go to state 9
+    (               shift and go to state 10
+
+    expression                     shift and go to state 63
+
+state 63
+
+    (23) expression -> for expression ; expression ; expression do expression .
+    (3) expression -> expression . and expression
+    (4) expression -> expression . eq expression
+    (5) expression -> expression . = expression
+    (6) expression -> expression . > expression
+    (7) expression -> expression . < expression
+    (8) expression -> expression . ge expression
+    (9) expression -> expression . le expression
+    (10) expression -> expression . neqs expression
+    (11) expression -> expression . or expression
+    (12) expression -> expression . nand expression
+    (17) expression -> expression . + expression
+    (18) expression -> expression . - expression
+    (19) expression -> expression . * expression
+    (20) expression -> expression . / expression
+
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for eq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for ge resolved as shift
+  ! shift/reduce conflict for le resolved as shift
+  ! shift/reduce conflict for neqs resolved as shift
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for nand resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+    $end            reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    }               reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    ;               reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    then            reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    do              reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    )               reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    else            reduce using rule 23 (expression -> for expression ; expression ; expression do expression .)
+    and             shift and go to state 11
+    eq              shift and go to state 12
+    =               shift and go to state 13
+    >               shift and go to state 14
+    <               shift and go to state 15
+    ge              shift and go to state 16
+    le              shift and go to state 17
+    neqs            shift and go to state 18
+    or              shift and go to state 19
+    nand            shift and go to state 20
+    +               shift and go to state 21
+    -               shift and go to state 22
+    *               shift and go to state 23
+    /               shift and go to state 24
+
+  ! and             [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! eq              [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! =               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! >               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! <               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! ge              [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! le              [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! neqs            [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! or              [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! nand            [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! +               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! -               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! *               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
+  ! /               [ reduce using rule 23 (expression -> for expression ; expression ; expression do expression .) ]
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for and in state 41 resolved as shift
-WARNING: shift/reduce conflict for eq in state 41 resolved as shift
-WARNING: shift/reduce conflict for = in state 41 resolved as shift
-WARNING: shift/reduce conflict for > in state 41 resolved as shift
-WARNING: shift/reduce conflict for < in state 41 resolved as shift
-WARNING: shift/reduce conflict for ge in state 41 resolved as shift
-WARNING: shift/reduce conflict for le in state 41 resolved as shift
-WARNING: shift/reduce conflict for neqs in state 41 resolved as shift
-WARNING: shift/reduce conflict for or in state 41 resolved as shift
-WARNING: shift/reduce conflict for nand in state 41 resolved as shift
-WARNING: shift/reduce conflict for + in state 41 resolved as shift
-WARNING: shift/reduce conflict for - in state 41 resolved as shift
-WARNING: shift/reduce conflict for * in state 41 resolved as shift
-WARNING: shift/reduce conflict for / in state 41 resolved as shift
+WARNING: shift/reduce conflict for and in state 57 resolved as shift
+WARNING: shift/reduce conflict for eq in state 57 resolved as shift
+WARNING: shift/reduce conflict for = in state 57 resolved as shift
+WARNING: shift/reduce conflict for > in state 57 resolved as shift
+WARNING: shift/reduce conflict for < in state 57 resolved as shift
+WARNING: shift/reduce conflict for ge in state 57 resolved as shift
+WARNING: shift/reduce conflict for le in state 57 resolved as shift
+WARNING: shift/reduce conflict for neqs in state 57 resolved as shift
+WARNING: shift/reduce conflict for or in state 57 resolved as shift
+WARNING: shift/reduce conflict for nand in state 57 resolved as shift
+WARNING: shift/reduce conflict for + in state 57 resolved as shift
+WARNING: shift/reduce conflict for - in state 57 resolved as shift
+WARNING: shift/reduce conflict for * in state 57 resolved as shift
+WARNING: shift/reduce conflict for / in state 57 resolved as shift
+WARNING: shift/reduce conflict for and in state 63 resolved as shift
+WARNING: shift/reduce conflict for eq in state 63 resolved as shift
+WARNING: shift/reduce conflict for = in state 63 resolved as shift
+WARNING: shift/reduce conflict for > in state 63 resolved as shift
+WARNING: shift/reduce conflict for < in state 63 resolved as shift
+WARNING: shift/reduce conflict for ge in state 63 resolved as shift
+WARNING: shift/reduce conflict for le in state 63 resolved as shift
+WARNING: shift/reduce conflict for neqs in state 63 resolved as shift
+WARNING: shift/reduce conflict for or in state 63 resolved as shift
+WARNING: shift/reduce conflict for nand in state 63 resolved as shift
+WARNING: shift/reduce conflict for + in state 63 resolved as shift
+WARNING: shift/reduce conflict for - in state 63 resolved as shift
+WARNING: shift/reduce conflict for * in state 63 resolved as shift
+WARNING: shift/reduce conflict for / in state 63 resolved as shift

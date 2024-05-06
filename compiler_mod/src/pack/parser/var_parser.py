@@ -14,7 +14,7 @@ def p_expression_read_id(p):
     p[0] = generator_var.ReadIdExpression(p[1])
 
 def p_expression_write_id(p):
-    'expression : ID ASSIGN expression'
+    'expression : ID assign expression'
     # 'expression : expression ASSIGN expression'
     p[0] = generator_var.WriteIdExpression(p[1],p[3])
 

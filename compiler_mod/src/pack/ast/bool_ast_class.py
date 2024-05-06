@@ -1,14 +1,23 @@
 import sys
 import inspect
 
-from pack.ast.Expression import InterpretedExpression
+from pack.ast.Expression import InterpretedExpression, getAllClasses
+
+class BoolValueExpression(InterpretedExpression):
+    def __init__(self, e1):
+        self.e1=e1
+
+    def eval(self,env):
+        return self.e1=="true", env
 class LtExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env) < self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 < e2, env2
 
 class GtExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -16,7 +25,9 @@ class GtExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)>self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 > e2, env2
 
 class LeExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -24,7 +35,9 @@ class LeExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)<=self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 <= e2, env2
 
 class GeExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -32,7 +45,9 @@ class GeExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)>=self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 >= e2, env2
 
 class NotEqCompExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -40,7 +55,9 @@ class NotEqCompExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)!=self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 != e2, env2
 
 class EqCompExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -48,7 +65,9 @@ class EqCompExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env)==self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return e1 == e2, env2
 # ==================================
 class AndExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -56,21 +75,29 @@ class AndExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env) and self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return (e1 and e2), env2
+
 class OrExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env) or self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return (e1 or e2), env2
+
 class EqExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
         self.e2=e2
 
     def eval(self,env):
-        return self.e1.eval(env) is  self.e2.eval(env)
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return (e1 is e2), env2
 
 
 
@@ -79,27 +106,24 @@ class NotBoolExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env):
-        return not self.e1.eval(env)
+        e1, env1 = self.e1.eval(env)
+        return not e1, env1
 
 class ParenExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return self.e1.eval(env)
+        e1,env1 =self.e1.eval(env)
+        return e1,env1
 
-class BoolValueExpression(InterpretedExpression):
-    def __init__(self, e1):
-        self.e1=e1
-
-    def eval(self,env):
-        return self.e1=="true"
 class NeqExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return not self.e1.eval(env)
+        e1,env1 = self.e1.eval(env)
+        return not e1, env1
 
 class NandExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -107,13 +131,9 @@ class NandExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        return not self.e1.eval(env) and self.e2.eval(env)
-
-def getAllClasses():
-    classes = [name for name, obj in inspect.getmembers(sys.modules[__name__], inspect.isclass) 
-              if obj.__module__ is __name__]
-    classes_cleaned = [ clazz for clazz in classes if clazz != "InterpretedExpression" ]
-    return classes_cleaned
+        e1, env1 = self.e1.eval(env)
+        e2, env2 = self.e2.eval(env1)
+        return (not (e1 and e2)), env2
 
 used_procedures_and_classes = getAllClasses()
 

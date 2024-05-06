@@ -1,3 +1,5 @@
+# from ..lexer import arith_lexer
+from ..ast import arith_ast_class
 # import sys;sys.path.append("..")
 #
 # from ply.yacc import yacc
@@ -6,7 +8,7 @@
 import pack.ast.arith_ast_class as arith_ast_class
 from pack.ast.arith_ast_class import *
 
-import pack.lexer.arith_lexer as arith_lexer
+# import pack.lexer.arith_lexer as arith_lexer
 import pack.parser.gen_helper as gen_helper
 
 
@@ -25,6 +27,7 @@ def p_expression_binary_operators_arith(p):
                     | expression '/' expression
     '''
     p[0] = generator_arith.checkAndReturnBinaryClass(p)
+
 
 def p_expression_num(p):
     'expression : NUMBER'

@@ -1,4 +1,4 @@
-from pack.ast.Expression import InterpretedExpression
+from pack.ast.Expression import InterpretedExpression, getAllClasses
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -6,24 +6,18 @@ class WriteIdExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        env[self.e1] = self.e2.eval(env)
-        return env
+        e2,env1 = self.e2.eval(env)
+        env1[self.e1] = e2
+        return e2, env1
 
 class ReadIdExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1=e1
 
     def eval(self,env):
-        return env[self.e1]
+        return env[self.e1], env
 
 
-def getAllClasses():
-    import sys
-    import inspect
-    classes = [name for name, obj in inspect.getmembers(sys.modules[__name__], inspect.isclass) 
-              if obj.__module__ is __name__]
-    classes_cleaned = [ clazz for clazz in classes if clazz != "InterpretedExpression" ]
-    return classes_cleaned
 
 used_procedures_and_classes = getAllClasses()
 
