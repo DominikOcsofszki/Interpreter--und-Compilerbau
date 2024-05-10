@@ -26,10 +26,6 @@ def p_expression_if_then_else(p):
     '''
     p[0] = generator_control.IfThenElseExpression(p[2],p[4],p[6])
 
-def p_expression_for_do_expr(p):
-    '''expression : for expression ";" expression ";" expression do expression
-    '''
-    p[0] = generator_control.ForDoExpression(p[2],p[4],p[6],p[8])
 
 def p_expression_loop_do_expr(p):
     '''expression : loop expression do expression
@@ -42,4 +38,9 @@ def p_expression_loop_do_expr(p):
 #     p[0] = [p[1]] if len(p) == 2 else [*p[1],p[3]]
 #     # p[0] = generator_sequences.ExpressionsExpression(p[1],p[3])
 
+def p_expression_for_do_expr(p):
+    '''expression : for expression ";" expression ";" expression do expression
+    '''
+    p[0] = generator_control.ForDoExpression(p[2],p[4],p[6],p[8])
+    
 generator_control = genHelperSequences.set_generator_module_and_check(control_ast_class)

@@ -1,4 +1,5 @@
-tokens_arith = ['NUMBER','FLOAT']
+# tokens_arith = ['NUMBER','FLOAT']
+tokens_arith = ['NUMBER']
 
 literals_arith ='+-*/()'
 
