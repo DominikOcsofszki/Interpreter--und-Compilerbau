@@ -1,14 +1,14 @@
 
 
 
-from pack.ast import control_ast_class
-from pack.ast.control_ast_class import *
+from pack.ast import control_ast
+from pack.ast.control_ast import *
 
 import pack.parser.gen_helper as gen_helper
 
 
-generator_control = control_ast_class if True else None 
-genHelperSequences = gen_helper.GeneratorHelper(control_ast_class.used_procedures_and_classes,generator_control)
+generator_control = control_ast if True else None 
+genHelperSequences = gen_helper.GeneratorHelper(control_ast.used_procedures_and_classes,generator_control)
 
 # loop expr do expr
 # for assign;bool_expr;assign do expr
@@ -48,4 +48,4 @@ def p_expression_while_do_expr(p):
     '''
     p[0] = generator_control.WhileExpression(p[2],p[4])   
 
-generator_control = genHelperSequences.set_generator_module_and_check(control_ast_class)
+generator_control = genHelperSequences.set_generator_module_and_check(control_ast)

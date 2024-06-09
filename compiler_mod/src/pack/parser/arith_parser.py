@@ -1,21 +1,21 @@
 # from ..lexer import arith_lexer
-from ..ast import arith_ast_class
+from ..ast import arith_ast
 # import sys;sys.path.append("..")
 #
 # from ply.yacc import yacc
 # from ply.lex import lex
 
-import pack.ast.arith_ast_class as arith_ast_class
-from pack.ast.arith_ast_class import *
+import pack.ast.arith_ast as arith_ast
+from pack.ast.arith_ast import *
 
 # import pack.lexer.arith_lexer as arith_lexer
 import pack.parser.gen_helper as gen_helper
 
 
 #DebugMode: Change bool to True for DebugMode, False to run
-generator_arith = arith_ast_class if True else None 
+generator_arith = arith_ast if True else None 
 # gen_arith = None
-genHelperArith = gen_helper.GeneratorHelper(arith_ast_class.used_procedures_and_classes,generator_arith)
+genHelperArith = gen_helper.GeneratorHelper(arith_ast.used_procedures_and_classes,generator_arith)
 
 # precedence_arith = [['left', '+', '-'],
 #               ['left', '*', '/']]
@@ -42,7 +42,7 @@ def p_expression_paren(p):
 
 ### the REPL
 
-generator_arith = genHelperArith.set_generator_module_and_check(arith_ast_class)
+generator_arith = genHelperArith.set_generator_module_and_check(arith_ast)
 
 # if __name__ == "__main__":
 #     tokens = []

@@ -1,3 +1,6 @@
+from icecream import ic
+# ic.configureOutput(includeContext=True)
+# ic.configureOutput()
 
 class InterpretedExpression:
     def eval(self,env):

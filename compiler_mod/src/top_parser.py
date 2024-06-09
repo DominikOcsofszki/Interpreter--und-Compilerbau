@@ -12,10 +12,11 @@ from top_lexer import tokens, lexer
 
 
 precedence = [
-    ['nonassoc', 'lambda'],
+    ['right', 'assign'],
+    ['right', 'lambda'],
     ['nonassoc', 'then'],
     ['nonassoc', 'else', 'do'],
-    ['right', 'assign'],
+    # ['right', 'assign'],
     ['left', 'or'],
     # ['left', 'imp'],
     ['left', 'and', 'nand'],

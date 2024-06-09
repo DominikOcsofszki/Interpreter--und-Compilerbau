@@ -49,5 +49,6 @@ def t_ignore_comments(t):
     pass
 
 
-lexer = lex(debug=True)
+lexer = lex()
+# lexer = lex(debug=True)
 

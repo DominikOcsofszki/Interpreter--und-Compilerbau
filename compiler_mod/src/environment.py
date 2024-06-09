@@ -1,3 +1,6 @@
+from os import error
+
+
 class Env:
 
     def __init__(self,parent=None) -> None:
@@ -19,6 +22,8 @@ class Env:
 
 
     def __getitem__(self,key):
+        # if type(key) is int: #or key.isdigit():
+        #     return int(key)
         if key in self.env_dict:
             return self.env_dict[key]
         elif self.parent:

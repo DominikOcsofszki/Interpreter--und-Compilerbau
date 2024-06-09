@@ -1,14 +1,14 @@
 
 
 # local assignment in expr
-from pack.ast import import_ast_class
-from pack.ast.import_ast_class import *
+from pack.ast import import_ast
+from pack.ast.import_ast import *
 
 import pack.parser.gen_helper as gen_helper
 
 
-generator_local = import_ast_class if True else None 
-genHelperVar = gen_helper.GeneratorHelper(import_ast_class.used_procedures_and_classes,generator_local)
+generator_local = import_ast if True else None 
+genHelperVar = gen_helper.GeneratorHelper(import_ast.used_procedures_and_classes,generator_local)
 
 def p_expression_import_as(p):
     'expression : import ID as ID'
@@ -18,4 +18,4 @@ def p_expression_import(p):
     'expression : import ID'
     p[0] = generator_local.ImportExpression(p[2])
 
-generator_local = genHelperVar.set_generator_module_and_check(import_ast_class)
+generator_local = genHelperVar.set_generator_module_and_check(import_ast)
