@@ -1,0 +1,4 @@
+g:= letrec gauss := lambda(x): 
+        if x==0:0
+        else: x+gauss(x-1)
+        in gauss(10)

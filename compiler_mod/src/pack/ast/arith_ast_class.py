@@ -7,7 +7,7 @@ class PlusExpression(InterpretedExpression):
     def eval(self,env):
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
-        return e1 + e2, env2
+        return (e1 + e2), env2
 
 class MinusExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -17,7 +17,7 @@ class MinusExpression(InterpretedExpression):
     def eval(self,env):
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
-        return e1 - e2, env2
+        return (e1 - e2), env2
 
 class TimesExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -27,7 +27,7 @@ class TimesExpression(InterpretedExpression):
     def eval(self,env):
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
-        return e1 * e2, env2
+        return (e1 * e2), env2
 
 class DivideExpression(InterpretedExpression):
     def __init__(self, e1, e2):
@@ -38,7 +38,7 @@ class DivideExpression(InterpretedExpression):
     def eval(self,env):
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
-        return e1 / e2, env2
+        return (e1 / e2), env2
 
 class ParenExpression(InterpretedExpression):
     def __init__(self, e1):

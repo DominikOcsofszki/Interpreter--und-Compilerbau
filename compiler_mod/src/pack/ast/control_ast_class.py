@@ -45,6 +45,21 @@ class IfThenElseExpression(InterpretedExpression):
         e3 = self.e3.eval(env)
         return e3,env
 
+class WhileExpression(InterpretedExpression):
+    def __init__(self,condition,body):
+        self.condition=condition
+        self.body=body
+
+    def eval(self,env):
+        _,env  = self.condition.eval(env)
+        result = None
+        while True :
+            condition, env = self.condition.eval(env)
+            if not condition:
+                break
+            result, env = self.body.eval(env)
+        return result,env
+
 class ForDoExpression(InterpretedExpression):
     def __init__(self, init_assign,condition,re_assign,body):
         self.init_assign=init_assign

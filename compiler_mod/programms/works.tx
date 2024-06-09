@@ -1,0 +1,15 @@
+{
+import numpy;
+#import numpy as np;
+
+# np.array([1, 2, 3]);
+a:=1;
+x:=999;
+local x:=111 in {
+a:=x*2;
+b:=x*2
+}}
+
+#asd -> asd+ 11;
+#5
+

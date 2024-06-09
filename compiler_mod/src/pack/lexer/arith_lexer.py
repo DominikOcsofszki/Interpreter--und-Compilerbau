@@ -4,8 +4,8 @@ tokens_arith = ['NUMBER']
 literals_arith ='+-*/()'
 
 def t_NUMBER(t):
-    # r'\d+'
-    r'\d+(\.\d*)?'
+    r'\d+'
+    # r'\d+(\.\d*)?'
     if '.' in t.value :
         t.value = float(t.value)
         t.type = "FLOAT"

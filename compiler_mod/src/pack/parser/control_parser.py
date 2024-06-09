@@ -42,5 +42,10 @@ def p_expression_for_do_expr(p):
     '''expression : for expression ";" expression ";" expression do expression
     '''
     p[0] = generator_control.ForDoExpression(p[2],p[4],p[6],p[8])
-    
+
+def p_expression_while_do_expr(p):
+    '''expression : while expression do expression
+    '''
+    p[0] = generator_control.WhileExpression(p[2],p[4])   
+
 generator_control = genHelperSequences.set_generator_module_and_check(control_ast_class)

@@ -6,7 +6,11 @@ class SequenceExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env):
-        return [expression.eval(env) for expression in self.e1]
+        r = None
+        for e in self.e1:
+            r, env = e.eval(env)
+        return r, env
+        # return [expression.eval(env) for expression in self.e1]
 
 
 

@@ -148,6 +148,7 @@ def checkAndReturnBinaryClass(p):
         case ">="       : p[0] = GeExpression(p[1],p[3]) 
         case ">"       : p[0] = GtExpression(p[1],p[3]) 
         case "<="       : p[0] = LeExpression(p[1],p[3]) 
+        case "!="       : p[0] = NotEqCompExpression(p[1],p[3]) 
         case "<"       : p[0] = LtExpression(p[1],p[3]) 
         case "not"      : p[0] = NotEqCompExpression(p[1],p[3]) 
         case "or"       : p[0] = OrExpression(p[1],p[3]) 
