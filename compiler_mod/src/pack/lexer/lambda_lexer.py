@@ -13,8 +13,8 @@
 # c(2) -> 5
 # c(3) -> 8
 
-# tokens_lambda = ['lambda','komma']
 tokens_lambda = ['lambda']
+# tokens_lambda = ['lambda']
 t_lambda = r'->'
-# t_komma=','
+literals_komma=','
 

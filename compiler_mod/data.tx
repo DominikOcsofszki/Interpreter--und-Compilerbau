@@ -1,3 +1,7 @@
 # programms/works.tx
-programms/lambda.tx
-# programms/types.tx
+# programms/lambda.tx
+# programms/lambda_args.tx
+# src/top_lexer.py
+# src/top_parser.py
+programms/types.tx
+# src/

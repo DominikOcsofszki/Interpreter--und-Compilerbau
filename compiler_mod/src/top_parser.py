@@ -25,6 +25,9 @@ precedence = [
     ['left', '+', '-'],
     ['left', '*', '/'],
     ['right', 'not', 'UMINUS'],
+    ['left', ','],
+    # ['right', '[',']'],
+    ['right', '(',')'],
 ]
 
 
@@ -33,7 +36,7 @@ def p_expr_uminus(p):
     p[0] = -p[2]
 
 def p_error(p):
-    print("Syntax error in input!")
+    print("Syntax error in input:",p)
 
 
 

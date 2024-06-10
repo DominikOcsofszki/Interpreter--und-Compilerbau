@@ -2,7 +2,6 @@
 
 from environment import Env
 from pack.ast.Expression import InterpretedExpression, getAllClasses, ic
-from pack.ast.local_ast import LocalExpression
 
 class LambdaExpression(InterpretedExpression):
 
@@ -11,28 +10,9 @@ class LambdaExpression(InterpretedExpression):
         self.body_lambda=body_lambda
 
     def eval(self,env):
-        lambda_id = self.id
-        ic(lambda_id)
-        lambda_body = self.body_lambda
-        ic(lambda_id)
         def lmbd(val):
             env_tmp = Env()
-            ic("=============================")
-            ic(self.id)
-            ic("=============================")
             env_tmp[self.id], env_delme = val.eval(env)
-            ic(env_tmp)
-            # x,env_tmp = self.id.eval(env)
-            # ic(x)
-            ic("=============================")
-            # x,env_tmp = lambda_id.eval(env)
-            ic("=============================")
-            # ic(x)
-            ic("=============================")
-            # exit()
-            # env_tmp[self.id] = val
-            ic(env_tmp[self.id])
-            ic(env_tmp["asd"])
             res, env_tmp = self.body_lambda.eval(env_tmp)
             return res
         return lmbd, env
@@ -46,5 +26,20 @@ class CallExpression(InterpretedExpression):
         # fn, env = self.fn.eval(env)
         # x, env = self.x.eval(env)
         return env[self.fn](self.x), env
+
+class LambdaArgsExpression(InterpretedExpression):
+
+    def __init__(self, ids, body_lambda):
+        self.ids=ids
+        self.body_lambda=body_lambda
+
+    def eval(self,env):
+        def lmbd(vals):
+            env_tmp = Env()
+            for i in range(len(self.ids)):
+                env_tmp[self.ids[i]], env_delme = vals[i].eval(env)
+            res, env_tmp = self.body_lambda.eval(env_tmp)
+            return res
+        return lmbd, env
 
 used_procedures_and_classes = getAllClasses()

@@ -7,6 +7,7 @@ from pack.lexer.local_lexer import *
 from pack.lexer.lambda_lexer import *
 from pack.lexer.import_lexer import *
 from pack.lexer.types_lexer import *
+from pack.lexer.letrec_lexer import *
 from ply.lex import lex
 
 tokens = []
@@ -22,6 +23,8 @@ literals=literals_arith +\
         literals_bool   +\
         literals_var    +\
         literals_sequences +\
+        literals_letrec +\
+        literals_komma +\
         literals_types
 
 tokens = tokens 	    +\
@@ -33,6 +36,7 @@ tokens = tokens 	    +\
          tokens_local+\
          tokens_lambda+\
          tokens_import+\
+         tokens_letrec+\
          tokens_types
 
 def t_ID(t):
