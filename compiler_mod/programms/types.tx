@@ -1,12 +1,13 @@
 {
 # flo:= 1.1;
-# st:="strrrr";
+st:="strrrr";
 # ch:='\n';
 # arr:=[1.,flo,st];
-# arr:=[flo,flo,flo,flo];
+arr:=[flo,flo,flo,flo];
 # arr:=[1.1,1.,2,"a"];
-ls:=(1,2,3,4)
+# arr:=[1,2];
+# ls:=(1,2,3,4)
 
 #
-# return:=ls
+return:=arr
 }

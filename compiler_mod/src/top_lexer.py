@@ -49,7 +49,7 @@ def t_ID(t):
     return t
 def t_ignore_comments(t):
     r'[#].*'
-    print("comment: "+t.value)
+    # print("comment: "+t.value)
     pass
 
 

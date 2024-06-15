@@ -1,10 +1,13 @@
 from icecream import ic
+# ic.disable()
 # ic.configureOutput(includeContext=True)
 # ic.configureOutput()
 
 class InterpretedExpression:
     def eval(self,env):
-        raise Exception('eval not impl')
+        pass
+
+        # raise Exception('eval not impl')
 
 def getAllClasses():
     import inspect, sys

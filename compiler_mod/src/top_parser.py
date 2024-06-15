@@ -10,26 +10,7 @@ from pack.parser.types_parser import *
 import ply.yacc as yacc
 from top_lexer import tokens, lexer
 
-
-precedence = [
-    ['right', 'assign'],
-    ['right', 'lambda'],
-    ['nonassoc', 'then'],
-    ['nonassoc', 'else', 'do'],
-    # ['right', 'assign'],
-    ['left', 'or'],
-    # ['left', 'imp'],
-    ['left', 'and', 'nand'],
-    ['left', '=', 'neqs', 'eq', 'not'],
-    ['left', '<', '>', 'le', 'ge'],
-    ['left', '+', '-'],
-    ['left', '*', '/'],
-    ['right', 'not', 'UMINUS'],
-    ['left', ','],
-    # ['right', '[',']'],
-    ['right', '(',')'],
-]
-
+from top_precedence import precedence
 
 def p_expr_uminus(p):
     'expression : "-" expression %prec UMINUS'
@@ -38,9 +19,6 @@ def p_expr_uminus(p):
 def p_error(p):
     print("Syntax error in input:",p)
 
-
-
-# vars={}
 parser = yacc.yacc(start='expression',debug=True)
 
 

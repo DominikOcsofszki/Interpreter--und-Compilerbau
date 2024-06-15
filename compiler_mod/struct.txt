@@ -1,0 +1,35 @@
+a:=9;
+
+s := struct {
+    x:=7;
+    y:=a
+}
+
+t := extend s {
+    z:=x*x
+    }
+
+
+closure muss für lambda in struct erstellt werden.
+
+
+lambda lexikal scoping, speichert environment und änderungen danach werden auch dort nachgeschaut
+
+referenzielle V2:
+
+t:= { super
+t := extends s{
+x:= 5;
+super.x = 7
+}
+
+extend t{
+    x:=1 identisch zu .x:=5
+    ..x:=1 parent
+}
+    
+t..x (== t.super.x)
+t.x
+struct hat kein parent Env mehr( also nicht exposed nach außen)
+
+

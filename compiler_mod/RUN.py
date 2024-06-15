@@ -23,9 +23,10 @@ def openAllFiles(files):
 files = getFilesFromFile()
 data = openAllFiles(files)
 print(data)
-print("=====output:=======")
+print("====================output:=======================")
 env = Env()
 print(parser.parse(input=data,lexer=lexer).eval(env))
+# print(parser.parse(input=data,lexer=lexer,debug=True).eval(env))
 exit()
 
 # result = parser.parse(input=data)
