@@ -2,6 +2,7 @@
 precedence = [
     ['right', 'assign'],
     ['right', 'lambda'],
+    # ['right', 'dot'],
     ['left', ','],
     ['nonassoc', 'then'],
     ['nonassoc', 'else', 'do'],
@@ -11,8 +12,7 @@ precedence = [
     ['left', '<', '>', 'le', 'ge'],
     ['left', '+', '-'],
     ['left', '*', '/'],
+    ['right', '(','['],
+    ['left', ')',']'],
     ['right', 'not', 'UMINUS'],
-    # ['right', '[',']'],
-    ['right', '('],
-    ['left', ')'],
 ]

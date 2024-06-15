@@ -6,6 +6,10 @@ from icecream import ic
 class InterpretedExpression:
     def eval(self,env):
         pass
+    # def __repr__(self):
+    #     return str(self.__dir__)
+        # return "print -> "+ str(self.__dict__.values())
+        # return "print -> "+ str(self.__dict__.values())
 
         # raise Exception('eval not impl')
 

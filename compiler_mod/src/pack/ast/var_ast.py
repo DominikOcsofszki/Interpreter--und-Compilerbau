@@ -10,8 +10,6 @@ from pack.ast.Expression import InterpretedExpression, getAllClasses,ic
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id, value):
-        # ic(id)
-        # ic(value)
         self.e1=id
         self.e2=value
 
@@ -25,7 +23,6 @@ class ReadIdExpression(InterpretedExpression):
         self.id=id
 
     def eval(self,env):
-        ic(self.id)
         return env[self.id], env
 
 

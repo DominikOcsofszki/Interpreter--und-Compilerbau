@@ -12,36 +12,23 @@ class LambdaExpression(InterpretedExpression):
     #
 
     def __init__(self, id, body_lambda):
-        ic("==============lambda_init===============")
         self.id=id
         self.body_lambda=body_lambda
 
     def eval(self,env):
-        ic("=====================================================================")
-        ic("==============lambda_eval===============")
-        ic(env)
-        ic("1:",self.id)
-        ic("2:",self.id.eval(env))
 
         id, env_tmp = self.id.eval(env)
 
         def lmbd(val):
             # locExp = LocalExpression(self.id, val, self.body_lambda)
             new_env = Env()
-            ic(id)
-            ic("=====================================================================")
             new_env[self.id] = val
-            ic(new_env)
             # ic(new_env.parent)
             # new_env.parent = env
-            ic(">>>>",new_env)
-            ic(val)
-            ic(">>>>")
             res, env_tmp = self.body_lambda.eval(new_env)
             # env_tmp =Env({self.id:val})
             # ic(">>>>>",env_tmp)
             # return locExp.eval(env)
-            ic(">>>>",res)
             return res
         return lmbd, env
 
@@ -61,17 +48,12 @@ class LambdaExpression(InterpretedExpression):
 
 class CallExpression(InterpretedExpression):
     def __init__(self,fn,x):
-        ic("==============cal_init===============")
         self.x=x
         self.fn=fn
 
     def eval(self,env):
-        ic("==============cal_eval===============")
         fn, env = self.fn.eval(env)
         x, env = self.x.eval(env)
-        ic(fn)
-        ic(x)
-        ic(env)
         return fn(self.x), env
 
 used_procedures_and_classes = getAllClasses()

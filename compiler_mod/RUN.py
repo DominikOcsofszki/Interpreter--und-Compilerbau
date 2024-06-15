@@ -1,5 +1,6 @@
 from top_parser import parser, lexer
 from environment import Env
+from top_imports import env_imports
 
 
 def getFilesFromFile():
@@ -22,9 +23,13 @@ def openAllFiles(files):
 
 files = getFilesFromFile()
 data = openAllFiles(files)
+print("====================input:=======================")
 print(data)
 print("====================output:=======================")
-env = Env()
+# env_pre_imports = Env()
+# env_pre_imports["print"]=print
+env = Env(env_imports)
+
 print(parser.parse(input=data,lexer=lexer).eval(env))
 # print(parser.parse(input=data,lexer=lexer,debug=True).eval(env))
 exit()

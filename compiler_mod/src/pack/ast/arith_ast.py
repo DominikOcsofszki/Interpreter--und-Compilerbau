@@ -5,18 +5,10 @@ class PlusExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        ic("============================PlusExpression>=")
-        ic(env)
         #TODO fix here
         # env["asd"] = 0
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
-        ic(env[self.e1])
-        ic(self.e1)
-        ic(self.e2)
-        ic(e1)
-        ic(e2)
-        ic("===END=========================PlusExpression>=")
         return (e1 + e2), env2
 
 class MinusExpression(InterpretedExpression):
@@ -31,8 +23,6 @@ class MinusExpression(InterpretedExpression):
 
 class TimesExpression(InterpretedExpression):
     def __init__(self, e1, e2):
-        ic(self)
-        print("=======")
         self.e1=e1
         self.e2=e2
 

@@ -1,13 +1,17 @@
 {
-# x:=123123;
-# x*2;
 fn:= x -> x*2;
+fn2:= (x,y) -> x*2+y;
 x:=1;
 a:=123;
-fn(1);
-fn(a);
-fn2:= (x,y) -> x*y;
-fn2(x,1)
+print("asd");
+print(1);
+print("fn");
+print(fn(2));
+print(fn2)
+# fn(a);
+# fn2:= (x,y) -> x*y;
+# fn2(x,2)
+#
 # fn;
 # fn(2)
 # fn(2);

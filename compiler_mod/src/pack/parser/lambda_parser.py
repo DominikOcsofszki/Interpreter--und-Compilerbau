@@ -16,14 +16,13 @@ def p_expression_lambda(p):
 
 
 def p_expression_expr_ids2(p):
-    '''id_list : ID "," id_list
+    '''id_list : expression "," id_list
         |           expression
     '''
     if len(p) == 2:
         p[0] = [p[1]]
     else:
         p[0] = [p[1], *p[3]]
-    ic(">>p_expression_expr_ids2: ",p[0])
 
 
 def p_expression_lambda_args(p):
@@ -33,8 +32,7 @@ def p_expression_lambda_args(p):
 
 def p_expression_call_args(p):
     'expression :  ID "(" id_list ")"'
-    p[0] = generator_local.CallExpression(p[1],p[3])
-    ic(">: ",p[0])
+    p[0] = generator_local.CallExpression(p[1],[*p[3]])
 
 generator_local = genHelperVar.set_generator_module_and_check(lambda_ast)
 

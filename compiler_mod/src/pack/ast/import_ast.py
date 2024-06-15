@@ -10,8 +10,8 @@ class ImportAsExpression(InterpretedExpression):
         self.new_name=new_name
 
     def eval(self,env):
-        global new_name  
-        new_name = __import__(self.import_name)
+        print(env)
+        env[self.new_name] =__import__(self.import_name)
         return None, env
 
 class ImportExpression(InterpretedExpression):
@@ -19,7 +19,8 @@ class ImportExpression(InterpretedExpression):
         self.import_name=import_name
 
     def eval(self,env):
-        __import__(self.import_name)
+        print(env)
+        env[self.import_name] =__import__(self.import_name)
         return None, env
 
 

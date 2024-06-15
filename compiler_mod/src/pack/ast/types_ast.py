@@ -13,7 +13,6 @@ class FloatExpression(InterpretedExpression):
 class CharExpression(InterpretedExpression):
     def __init__(self, value):
         self.value=value
-        ic(self.value)
 
     def eval(self,env):
         return self.value, env
@@ -25,22 +24,41 @@ class StringExpression(InterpretedExpression):
     def eval(self,env):
         return str(self.value), env
 
+    # def __str__(self) -> str:
+    #     return super().__str__()
+    # def __repr__(self):
+    #     return "printttt"
+
+
 class ArrayExpression(InterpretedExpression):
     def __init__(self, array_list):
         self.array_list=array_list
 
     def eval(self,env):
-        ic("=============================")
-        ic(self.array_list)
         array_list =[self.array_list[i].eval(env)[0] for i in range(len(self.array_list))]
         arr = np.array(array_list)
         return arr, env
         
+class ArrayCallExpression(InterpretedExpression):
+    def __init__(self, array_name,i):
+        self.array_name=array_name
+        self.i=i
 
-def head(l,env):
+    def eval(self,env):
+        # array_list =[self.array_name[i].eval(env)[0] for i in range(len(self.array_name))]
+        # arr = np.array(array_list)
+        arr= env[self.array_name]
+        ic(self.i)
+        ic(self.array_name)
+        ic(arr)
+        return arr[self.i], env
+
+def head(l):
+    ic(l)
     return l[0]
 
 def tail(l):
+    ic(l)
     return l[1]
 
 def array2list(a):
@@ -55,6 +73,7 @@ class ListExpression(InterpretedExpression):
             return (self.lst[0].eval(env)[0],
                     self.lst[1].eval(env)[0]),env
         return None, env
+
 
 
 used_procedures_and_classes = getAllClasses()
