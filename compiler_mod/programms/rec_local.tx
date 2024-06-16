@@ -8,7 +8,11 @@
 fac:= x -> x+5;
 fac(1);
 
-re:= x ->    if x > 7 then 0;
-re(8)
+# re:= x ->    {if x > 7 then 0};
+# re:= x -> 
+x:=10;
+# re:=x->{if x > 7 then 0 else 999};
+if x > 7 then 0 else 999
+# re(9)
 
 }

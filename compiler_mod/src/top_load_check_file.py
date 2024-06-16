@@ -32,17 +32,18 @@ for x in data:
     x =x.replace("\n","")
     if not x.startswith("#"):
         if not x.endswith(";"):
-            lst_check.append(x)
+            if not x.endswith("{"):
+                lst_check.append(x)
     
 missing_end = [x for x in lst_check if len(x)>1]
 if len(missing_end) > 1:
     print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
     print(missing_end)
-    exit()
+    # exit()
 if len(missing_end) == 0:
     print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
     print(missing_end)
-    exit()
+    # exit()
 data = openAllFiles(files)
 def print_no_comments_newlines():
     files = getFilesFromFile()

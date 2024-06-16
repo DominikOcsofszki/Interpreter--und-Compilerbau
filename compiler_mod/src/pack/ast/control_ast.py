@@ -1,5 +1,5 @@
 
-from pack.ast.Expression import InterpretedExpression, getAllClasses
+from pack.ast.Expression import InterpretedExpression, getAllClasses,ic
 
 # loop expr do expr
 # for assign;bool_expr;assign do expr
@@ -32,29 +32,31 @@ class IfThenExpression(InterpretedExpression):
 
 
 class IfThenElseExpression(InterpretedExpression):
-    def __init__(self, e1,e2,e3):
-        self.e1=e1
-        self.e2=e2
-        self.e3=e3
+    def __init__(self, comparator,expr1,expr2):
+        self.comparator=comparator
+        self.expr1=expr1
+        self.expr2=expr2
+        # ic(comparator,expr1,expr2)
 
     def eval(self,env):
-        e1,env = self.e1.eval(env)
-        if e1:
-            e2,env = self.e2.eval(env)
-            return e2
-        e3 = self.e3.eval(env)
+        ic(self.comparator,self.expr1,self.expr2)
+        comp_eval,env = self.comparator.eval(env)
+        if comp_eval:
+            e2,env = self.expr1.eval(env)
+            return e2,env
+        e3 = self.expr2.eval(env)
         return e3,env
 
 class WhileExpression(InterpretedExpression):
-    def __init__(self,condition,body):
-        self.condition=condition
+    def __init__(self,comparator,body):
+        self.comparator=comparator
         self.body=body
 
     def eval(self,env):
-        _,env  = self.condition.eval(env)
+        _,env  = self.comparator.eval(env)
         result = None
         while True :
-            condition, env = self.condition.eval(env)
+            condition, env = self.comparator.eval(env)
             if not condition:
                 break
             result, env = self.body.eval(env)

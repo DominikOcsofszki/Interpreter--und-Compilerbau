@@ -51,25 +51,25 @@ Rule 40    expression -> ( id_list ) lambda expression
 Rule 41    expression -> BOOL
 Rule 42    expression -> ( expression )
 Rule 43    expression -> ID ( )
-Rule 44    expression -> for expression ; expression ; expression do expression
-Rule 45    expression -> ID ( id_list )
+Rule 44    expression -> ID ( id_list )
+Rule 45    expression -> for expression ; expression ; expression do expression
 Rule 46    expression -> while expression do expression
 
 Terminals, with rules where they appear
 
-(                    : 38 40 42 43 45
-)                    : 38 40 42 43 45
+(                    : 38 40 42 43 44
+)                    : 38 40 42 43 44
 *                    : 29
 +                    : 27
 ,                    : 31
 -                    : 21 28
 /                    : 30
-;                    : 23 44 44
+;                    : 23 45 45
 <                    : 12
 =                    : 10
 >                    : 11
 BOOL                 : 41
-ID                   : 2 3 4 4 5 19 20 22 35 43 45
+ID                   : 2 3 4 4 5 19 20 22 35 43 44
 NUMBER               : 35 39
 [                    : 33 35
 ]                    : 33 35
@@ -78,12 +78,12 @@ array                :
 as                   : 4
 assign               : 2 19 20
 char                 : 25
-do                   : 37 44 46
+do                   : 37 45 46
 else                 : 34
 eq                   : 9
 error                : 
 float                : 1
-for                  : 44
+for                  : 45
 ge                   : 13
 if                   : 26 34
 import               : 4 22
@@ -106,8 +106,8 @@ while                : 46
 
 Nonterminals, with rules where they appear
 
-expression           : 2 2 5 6 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 19 19 20 21 23 24 26 26 27 27 28 28 29 29 30 30 31 32 34 34 34 36 37 37 40 42 44 44 44 44 46 46 0
-id_list              : 31 33 38 40 45
+expression           : 2 2 5 6 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 19 19 20 21 23 24 26 26 27 27 28 28 29 29 30 30 31 32 34 34 34 36 37 37 40 42 45 45 45 45 46 46 0
+id_list              : 31 33 38 40 44
 sequence             : 7 23
 
 Parsing method: LALR
@@ -154,8 +154,8 @@ state 0
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -258,7 +258,7 @@ state 4
     (20) expression -> ID . assign expression
     (35) expression -> ID . [ NUMBER ]
     (43) expression -> ID . ( )
-    (45) expression -> ID . ( id_list )
+    (44) expression -> ID . ( id_list )
 
     and             reduce using rule 3 (expression -> ID .)
     eq              reduce using rule 3 (expression -> ID .)
@@ -340,8 +340,8 @@ state 6
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -410,8 +410,8 @@ state 7
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -516,8 +516,8 @@ state 10
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -615,8 +615,8 @@ state 12
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -685,8 +685,8 @@ state 13
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -784,8 +784,8 @@ state 15
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -852,8 +852,8 @@ state 16
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -924,8 +924,8 @@ state 17
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -983,7 +983,7 @@ state 18
 
 state 19
 
-    (44) expression -> for . expression ; expression ; expression do expression
+    (45) expression -> for . expression ; expression ; expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -1023,8 +1023,8 @@ state 19
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1091,8 +1091,8 @@ state 20
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1159,8 +1159,8 @@ state 21
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1227,8 +1227,8 @@ state 22
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1295,8 +1295,8 @@ state 23
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1363,8 +1363,8 @@ state 24
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1431,8 +1431,8 @@ state 25
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1499,8 +1499,8 @@ state 26
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1567,8 +1567,8 @@ state 27
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1635,8 +1635,8 @@ state 28
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1703,8 +1703,8 @@ state 29
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1771,8 +1771,8 @@ state 30
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1839,8 +1839,8 @@ state 31
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1907,8 +1907,8 @@ state 32
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -1975,8 +1975,8 @@ state 33
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -2043,8 +2043,8 @@ state 34
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -2118,8 +2118,8 @@ state 36
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -2186,8 +2186,8 @@ state 37
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -2222,7 +2222,7 @@ state 38
 state 39
 
     (43) expression -> ID ( . )
-    (45) expression -> ID ( . id_list )
+    (44) expression -> ID ( . id_list )
     (31) id_list -> . expression , id_list
     (32) id_list -> . expression
     (1) expression -> . float
@@ -2264,8 +2264,8 @@ state 39
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     )               shift and go to state 73
@@ -2720,7 +2720,7 @@ state 52
 
 state 53
 
-    (44) expression -> for expression . ; expression ; expression do expression
+    (45) expression -> for expression . ; expression ; expression do expression
     (8) expression -> expression . and expression
     (9) expression -> expression . eq expression
     (10) expression -> expression . = expression
@@ -3656,8 +3656,8 @@ state 69
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -3839,7 +3839,7 @@ state 73
 
 state 74
 
-    (45) expression -> ID ( id_list . )
+    (44) expression -> ID ( id_list . )
 
     )               shift and go to state 89
 
@@ -3923,8 +3923,8 @@ state 77
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -3991,8 +3991,8 @@ state 78
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4060,8 +4060,8 @@ state 79
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4160,8 +4160,8 @@ state 81
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4229,8 +4229,8 @@ state 82
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4319,7 +4319,7 @@ state 84
 
 state 85
 
-    (44) expression -> for expression ; . expression ; expression do expression
+    (45) expression -> for expression ; . expression ; expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4359,8 +4359,8 @@ state 85
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4427,8 +4427,8 @@ state 86
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4520,32 +4520,32 @@ state 88
 
 state 89
 
-    (45) expression -> ID ( id_list ) .
+    (44) expression -> ID ( id_list ) .
 
-    and             reduce using rule 45 (expression -> ID ( id_list ) .)
-    eq              reduce using rule 45 (expression -> ID ( id_list ) .)
-    =               reduce using rule 45 (expression -> ID ( id_list ) .)
-    >               reduce using rule 45 (expression -> ID ( id_list ) .)
-    <               reduce using rule 45 (expression -> ID ( id_list ) .)
-    ge              reduce using rule 45 (expression -> ID ( id_list ) .)
-    le              reduce using rule 45 (expression -> ID ( id_list ) .)
-    neqs            reduce using rule 45 (expression -> ID ( id_list ) .)
-    or              reduce using rule 45 (expression -> ID ( id_list ) .)
-    nand            reduce using rule 45 (expression -> ID ( id_list ) .)
-    +               reduce using rule 45 (expression -> ID ( id_list ) .)
-    -               reduce using rule 45 (expression -> ID ( id_list ) .)
-    *               reduce using rule 45 (expression -> ID ( id_list ) .)
-    /               reduce using rule 45 (expression -> ID ( id_list ) .)
-    $end            reduce using rule 45 (expression -> ID ( id_list ) .)
-    }               reduce using rule 45 (expression -> ID ( id_list ) .)
-    ;               reduce using rule 45 (expression -> ID ( id_list ) .)
-    then            reduce using rule 45 (expression -> ID ( id_list ) .)
-    ,               reduce using rule 45 (expression -> ID ( id_list ) .)
-    ]               reduce using rule 45 (expression -> ID ( id_list ) .)
-    do              reduce using rule 45 (expression -> ID ( id_list ) .)
-    )               reduce using rule 45 (expression -> ID ( id_list ) .)
-    in              reduce using rule 45 (expression -> ID ( id_list ) .)
-    else            reduce using rule 45 (expression -> ID ( id_list ) .)
+    and             reduce using rule 44 (expression -> ID ( id_list ) .)
+    eq              reduce using rule 44 (expression -> ID ( id_list ) .)
+    =               reduce using rule 44 (expression -> ID ( id_list ) .)
+    >               reduce using rule 44 (expression -> ID ( id_list ) .)
+    <               reduce using rule 44 (expression -> ID ( id_list ) .)
+    ge              reduce using rule 44 (expression -> ID ( id_list ) .)
+    le              reduce using rule 44 (expression -> ID ( id_list ) .)
+    neqs            reduce using rule 44 (expression -> ID ( id_list ) .)
+    or              reduce using rule 44 (expression -> ID ( id_list ) .)
+    nand            reduce using rule 44 (expression -> ID ( id_list ) .)
+    +               reduce using rule 44 (expression -> ID ( id_list ) .)
+    -               reduce using rule 44 (expression -> ID ( id_list ) .)
+    *               reduce using rule 44 (expression -> ID ( id_list ) .)
+    /               reduce using rule 44 (expression -> ID ( id_list ) .)
+    $end            reduce using rule 44 (expression -> ID ( id_list ) .)
+    }               reduce using rule 44 (expression -> ID ( id_list ) .)
+    ;               reduce using rule 44 (expression -> ID ( id_list ) .)
+    then            reduce using rule 44 (expression -> ID ( id_list ) .)
+    ,               reduce using rule 44 (expression -> ID ( id_list ) .)
+    ]               reduce using rule 44 (expression -> ID ( id_list ) .)
+    do              reduce using rule 44 (expression -> ID ( id_list ) .)
+    )               reduce using rule 44 (expression -> ID ( id_list ) .)
+    in              reduce using rule 44 (expression -> ID ( id_list ) .)
+    else            reduce using rule 44 (expression -> ID ( id_list ) .)
 
 
 state 90
@@ -4819,8 +4819,8 @@ state 96
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -4847,7 +4847,7 @@ state 96
 
 state 97
 
-    (44) expression -> for expression ; expression . ; expression do expression
+    (45) expression -> for expression ; expression . ; expression do expression
     (8) expression -> expression . and expression
     (9) expression -> expression . eq expression
     (10) expression -> expression . = expression
@@ -4981,8 +4981,8 @@ state 99
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -5049,8 +5049,8 @@ state 100
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -5117,8 +5117,8 @@ state 101
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -5204,7 +5204,7 @@ state 102
 
 state 103
 
-    (44) expression -> for expression ; expression ; . expression do expression
+    (45) expression -> for expression ; expression ; . expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -5244,8 +5244,8 @@ state 103
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -5477,7 +5477,7 @@ state 106
 
 state 107
 
-    (44) expression -> for expression ; expression ; expression . do expression
+    (45) expression -> for expression ; expression ; expression . do expression
     (8) expression -> expression . and expression
     (9) expression -> expression . eq expression
     (10) expression -> expression . = expression
@@ -5512,7 +5512,7 @@ state 107
 
 state 108
 
-    (44) expression -> for expression ; expression ; expression do . expression
+    (45) expression -> for expression ; expression ; expression do . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -5552,8 +5552,8 @@ state 108
     (41) expression -> . BOOL
     (42) expression -> . ( expression )
     (43) expression -> . ID ( )
-    (44) expression -> . for expression ; expression ; expression do expression
-    (45) expression -> . ID ( id_list )
+    (44) expression -> . ID ( id_list )
+    (45) expression -> . for expression ; expression ; expression do expression
     (46) expression -> . while expression do expression
 
     float           shift and go to state 2
@@ -5580,7 +5580,7 @@ state 108
 
 state 109
 
-    (44) expression -> for expression ; expression ; expression do expression .
+    (45) expression -> for expression ; expression ; expression do expression .
     (8) expression -> expression . and expression
     (9) expression -> expression . eq expression
     (10) expression -> expression . = expression
@@ -5596,16 +5596,16 @@ state 109
     (29) expression -> expression . * expression
     (30) expression -> expression . / expression
 
-    $end            reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    }               reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    ;               reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    then            reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    ,               reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    ]               reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    do              reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    )               reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    in              reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
-    else            reduce using rule 44 (expression -> for expression ; expression ; expression do expression .)
+    $end            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    }               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ;               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    then            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ,               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ]               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    do              reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    )               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    in              reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    else            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
     and             shift and go to state 21
     eq              shift and go to state 22
     =               shift and go to state 23
@@ -5621,20 +5621,20 @@ state 109
     *               shift and go to state 33
     /               shift and go to state 34
 
-  ! and             [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! eq              [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! =               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! >               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! <               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! ge              [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! le              [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! neqs            [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! or              [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! nand            [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! +               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! -               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! *               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
-  ! /               [ reduce using rule 44 (expression -> for expression ; expression ; expression do expression .) ]
+  ! and             [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! eq              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! =               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! >               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! <               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! ge              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! le              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! neqs            [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! or              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! nand            [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! +               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! -               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! *               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! /               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
 
 WARNING: 
 WARNING: Conflicts:
