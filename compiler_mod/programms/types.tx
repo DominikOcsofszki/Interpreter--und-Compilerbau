@@ -20,11 +20,7 @@ l1[1];
 
 head:= l -> l[0];
 tail:= l -> l[1];
-getIndexItem:= l -> {
-    # t1:=tail(l)
-    print(tail)
-    # h1:= head(t1)
-};
+getIndexItem:= l -> print(tail);
 t:=tail(ls);
 h1:= head(t);
 t2:= tail(t);

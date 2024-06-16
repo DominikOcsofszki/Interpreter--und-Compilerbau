@@ -4,15 +4,11 @@
 #
 # '''expression : if expression then expression
 {
+y:=1;
+local y:=123 in fac:= x -> x*y;
+y:=1231233;
+print(fac(1));
 
-fac:= x -> x+5;
-fac(1);
-
-# re:= x ->    {if x > 7 then 0};
-# re:= x -> 
-x:=10;
-# re:=x->{if x > 7 then 0 else 999};
-if x > 7 then 0 else 999
-# re(9)
-
+# print(fac(1));
+fac(fac(fac(1)))
 }

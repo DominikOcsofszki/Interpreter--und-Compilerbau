@@ -8,6 +8,7 @@ from pack.lexer.lambda_lexer import *
 from pack.lexer.import_lexer import *
 from pack.lexer.types_lexer import *
 from pack.lexer.letrec_lexer import *
+from pack.lexer.struct_lexer import *
 # from pack.lexer.call_lexer import *
 from ply.lex import lex
 
@@ -38,6 +39,7 @@ tokens = tokens 	    +\
          tokens_lambda+\
          tokens_import+\
          tokens_letrec+\
+         tokens_struct+\
          tokens_types
          # tokens_call+\
 

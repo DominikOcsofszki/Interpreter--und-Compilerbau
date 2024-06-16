@@ -7,12 +7,7 @@ from environment import Env
 class InterpretedExpression:
     def eval(self,env:Env):
         pass
-    # def __repr__(self):
-    #     return str(self.__dir__)
-        # return "print -> "+ str(self.__dict__.values())
-        # return "print -> "+ str(self.__dict__.values())
 
-        # raise Exception('eval not impl')
 
 def getAllClasses():
     import inspect, sys

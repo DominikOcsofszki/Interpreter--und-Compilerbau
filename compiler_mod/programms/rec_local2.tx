@@ -1,35 +1,5 @@
 {
-# g:= letrec gauss := lambda(x): 
-#       if x==0:0
-#       else: x+gauss(x-1)
-#       in gauss(10)
-#g:= letrec gauss := x -> 
-#        if x==0:0
-#        else: x+gauss(x-1)
-#        in gauss(10)
-
-# g:= letrec gauss := x -> 1
-letrec fac:= x->{
-    if x >= 10 then a:=fac(x-1); # else b:= 100
-    if x < 10 then a:=x;
-    a
-    };
-
-    # '''expression : if expression then expression else expression
-c:=1;
-fac(c)
-
-# letrec facrec := x->{
-#     if x >= 10 then a:=fac(x-1); # else b:= 100
-#     if x < 10 then a:=x;
-#     a
-#     };
-#
-    # '''expression : if expression then expression else expression
-# c:=9
-# facrec(c);
-
-
-
-
+x:=123;
+# letrec fac := x -> fac(x) + 1
+letrec fac := {x} -> fac(x)
 }

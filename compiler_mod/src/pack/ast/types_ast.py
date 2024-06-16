@@ -24,10 +24,6 @@ class StringExpression(InterpretedExpression):
     def eval(self,env):
         return str(self.value), env
 
-    # def __str__(self) -> str:
-    #     return super().__str__()
-    # def __repr__(self):
-    #     return "printttt"
 
 
 class ArrayExpression(InterpretedExpression):
@@ -48,17 +44,12 @@ class ArrayCallExpression(InterpretedExpression):
         # array_list =[self.array_name[i].eval(env)[0] for i in range(len(self.array_name))]
         # arr = np.array(array_list)
         arr= env[self.array_name]
-        ic(self.i)
-        ic(self.array_name)
-        ic(arr)
         return arr[self.i], env
 
 def head(l):
-    ic(l)
     return l[0]
 
 def tail(l):
-    ic(l)
     return l[1]
 
 def array2list(a):

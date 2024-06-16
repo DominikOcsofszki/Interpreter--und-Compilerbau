@@ -1,5 +1,6 @@
 
 precedence = [
+    ['left', 'letrec'],
     ['left', ','],
     ['right', 'assign'],
     ['right', 'lambda'],

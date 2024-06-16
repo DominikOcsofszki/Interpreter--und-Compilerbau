@@ -1,4 +1,5 @@
 {
+
 import numpy;
 #import numpy as np;
 
@@ -8,8 +9,10 @@ x:=999;
 local x:=111 in {
 a:=x*2;
 b:=x*2
-}}
+};
+print(b)
 
-#asd -> asd+ 11;
-#5
 
+
+
+}

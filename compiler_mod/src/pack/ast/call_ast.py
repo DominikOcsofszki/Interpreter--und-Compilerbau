@@ -8,10 +8,6 @@ class CallDeepExpression(InterpretedExpression):
         self.ids=ids
 
     def eval(self,env):
-        ic(self.id)
-        ic("=============================")
-        ic(self.ids)
-        ic(env)
 
 
 used_procedures_and_classes = getAllClasses()

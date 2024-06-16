@@ -6,6 +6,7 @@ from top_imports import environment
 from top_load_check_file import data
 
 print(parser.parse(input=data,lexer=lexer).eval(environment))
+# print(parser.parse(input=data,lexer=lexer,debug=True).eval(environment))
 exit()
 
 # env = Env(env_imports)

@@ -36,10 +36,8 @@ class IfThenElseExpression(InterpretedExpression):
         self.comparator=comparator
         self.expr1=expr1
         self.expr2=expr2
-        # ic(comparator,expr1,expr2)
 
     def eval(self,env):
-        ic(self.comparator,self.expr1,self.expr2)
         comp_eval,env = self.comparator.eval(env)
         if comp_eval:
             e2,env = self.expr1.eval(env)

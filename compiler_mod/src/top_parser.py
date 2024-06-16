@@ -7,7 +7,9 @@ from pack.parser.local_parser import *
 from pack.parser.lambda_parser import *
 from pack.parser.import_parser import *
 from pack.parser.types_parser import *
-# from pack.parser.call_parser import *
+from pack.parser.letrec_parser import *
+from pack.parser.struct_parser import *
+
 import ply.yacc as yacc
 from top_lexer import tokens, lexer
 
