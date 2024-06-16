@@ -1,4 +1,5 @@
 from os import error
+import copy
 
 
 class Env:
@@ -13,6 +14,10 @@ class Env:
         elif self.parent:
             return key in self.parent
         return False
+
+    def deep_copy(self):
+        return copy.deepcopy(self)
+
 
 # //TODO!!!
     def __repr__(self) -> str:

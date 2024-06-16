@@ -1,9 +1,16 @@
 # programms/works.tx
-# programms/lambda.tx
 # programms/lambda_args.tx
-# programms/rec_local.tx
+programms/rec_local.tx
 # programms/rec_local2.tx
+# programms/types.tx
+# src/
+
+
+
+# ===> TOP items
 # src/top_lexer.py
 # src/top_parser.py
-programms/types.tx
-# src/
+
+# ===>Working-do-not-change:
+# programms/lambda_no_args.tx
+# programms/lambda.tx

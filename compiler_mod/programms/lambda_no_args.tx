@@ -1,0 +1,10 @@
+# ===>Working-do-not-change:
+
+{
+x:=12323;
+fn:=  -> 2111*x;
+print(fn());
+x:=1;
+print(fn());
+fn()
+}

@@ -7,12 +7,17 @@ from pack.ast.lambda_ast import *
 import pack.parser.gen_helper as gen_helper
 
 
-generator_local = lambda_ast if True else None 
-genHelperVar = gen_helper.GeneratorHelper(lambda_ast.used_procedures_and_classes,generator_local)
+gen = lambda_ast if True else None 
+genFix = gen_helper.GeneratorHelper(lambda_ast.used_procedures_and_classes,gen)
 
 def p_expression_lambda(p):
-    'expression : ID lambda expression'
-    p[0] = generator_local.LambdaExpression(p[1],p[3])
+    '''expression : ID lambda expression
+    |   lambda expression
+    '''
+    if len(p) == 3:
+        p[0] = gen.LambdaNoVarsExpression(p[2])
+    else:
+        p[0] = gen.LambdaExpression(p[1],p[3])
 
 
 def p_expression_expr_ids2(p):
@@ -27,12 +32,15 @@ def p_expression_expr_ids2(p):
 
 def p_expression_lambda_args(p):
     'expression : "(" id_list ")" lambda expression'
-    p[0] = generator_local.LambdaArgsExpression(p[2],p[5])
+    p[0] = gen.LambdaArgsExpression(p[2],p[5])
 
+def p_expression_call_no_vars(p):
+    'expression :  ID "(" ")"'
+    p[0] = gen.CallExpression(p[1],[])
 
 def p_expression_call_args(p):
     'expression :  ID "(" id_list ")"'
-    p[0] = generator_local.CallExpression(p[1],[*p[3]])
+    p[0] = gen.CallExpression(p[1],[*p[3]])
 
-generator_local = genHelperVar.set_generator_module_and_check(lambda_ast)
+gen = genFix.set_generator_module_and_check(lambda_ast)
 

@@ -1,10 +1,11 @@
 from icecream import ic
+from environment import Env
 # ic.disable()
 # ic.configureOutput(includeContext=True)
 # ic.configureOutput()
 
 class InterpretedExpression:
-    def eval(self,env):
+    def eval(self,env:Env):
         pass
     # def __repr__(self):
     #     return str(self.__dir__)

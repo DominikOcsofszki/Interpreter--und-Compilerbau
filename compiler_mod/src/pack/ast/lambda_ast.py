@@ -4,6 +4,17 @@ from environment import Env
 from pack.ast.Expression import InterpretedExpression, getAllClasses, ic
 
 
+class LambdaNoVarsExpression(InterpretedExpression):
+
+    def __init__(self, body_lambda):
+        self.body_lambda=body_lambda
+
+    def eval(self,env):
+        lambda_env = Env(env.deep_copy())
+        def lmbd():
+            return self.body_lambda.eval(lambda_env)[0]
+        return lmbd, env
+
 class LambdaExpression(InterpretedExpression):
 
     def __init__(self, id, body_lambda):
@@ -11,11 +22,13 @@ class LambdaExpression(InterpretedExpression):
         self.body_lambda=body_lambda
 
     def eval(self,env):
+        lambda_env = Env(env.deep_copy())
         def lmbd(val):
-            env_tmp = Env(env)
-            env_tmp[self.id], env_delme = val[0].eval(env)
-            res, env_tmp = self.body_lambda.eval(env_tmp)
-            return res
+            if len(self.id)!=0:
+                lambda_env[self.id], env_delme = val[0].eval(env)
+            # res, env_tmp = self.body_lambda.eval(lambda_env)
+            return self.body_lambda.eval(lambda_env)[0]
+            # return res
         return lmbd, env
 
 class CallExpression(InterpretedExpression):
@@ -24,14 +37,14 @@ class CallExpression(InterpretedExpression):
         self.x=ids_or_values
 
     def eval(self,env):
-        if len(self.x) == 1:
-            return env[self.fn](self.x), env
-        for i in range(len(self.x)):
-            self.x[i] , env = self.x[i].eval(env)
         func = env[self.fn]
-        return func(self.x)
-
-        ic("=============================")
+        if len(self.x) != 0:
+            if len(self.x) == 1:
+                return env[self.fn](self.x), env
+            for i in range(len(self.x)):
+                self.x[i] , env = self.x[i].eval(env)
+            return func(self.x), env
+        return func(), env
         
 class LambdaArgsExpression(InterpretedExpression):
     def __init__(self, ids, body_lambda):
@@ -39,46 +52,47 @@ class LambdaArgsExpression(InterpretedExpression):
         self.body_lambda = body_lambda
 
     def eval(self, env):
+        lambda_env = Env(env.deep_copy())
         def lmbd(vals):
-            env_closure = Env(env)
+            ic(vals)
             for i, id in enumerate(self.ids):
-                env_closure[id] = vals[i]
-            result, env_del = self.body_lambda.eval(env_closure)
+                lambda_env[id] = vals[i]
+            result, env_del = self.body_lambda.eval(lambda_env)
             return result
         return lmbd, env
 
-class LambdaArgsExpression2(InterpretedExpression):
-
-    def __init__(self, ids, body_lambda):
-        self.ids=ids
-        self.body_lambda=body_lambda
-    def eval(self,env):
-        def lmbd(vals):
-            env_closure = Env(env)
-            ic(env_closure)
-            for i in range(len(vals)):
-                ic(self.ids[i].eval(env_closure))
-                env_closure[self.ids[i].eval(env_closure)[0]] = vals[i]
-                ic(env_closure)
-            result, env_del = self.body_lambda.eval(env_closure)
-            return result
-
-        # def lmbd(val):
-        #     env_tmp = Env(env)
-        #     for id in range(self.ids):
-        #         env_tmp[id], env_delme = val[0].eval(env)
-        #     env_tmp[self.id], env_delme = val[0].eval(env)
-        #     res, env_tmp = self.body_lambda.eval(env_tmp)
-        #     return res
-        # def lmbd(vals):
-        #     env_tmp = Env(env)
-        #     ic(vals)
-        #     for id, val in zip(self.ids,vals):
-        #         # env_tmp[self.ids[id]], env_delme = vals[id].eval(env)
-        #         env_tmp[id] = val
-        #     res, env_tmp = self.body_lambda.eval(env_tmp)
-        #     # return res
-        #     return env_tmp[vals[1].eval(env_tmp)[0]]
-        return lmbd, env
+# class LambdaArgsExpression2(InterpretedExpression):
+#
+#     def __init__(self, ids, body_lambda):
+#         self.ids=ids
+#         self.body_lambda=body_lambda
+#     def eval(self,env):
+#         def lmbd(vals):
+#             env_closure = Env(env)
+#             ic(env_closure)
+#             for i in range(len(vals)):
+#                 ic(self.ids[i].eval(env_closure))
+#                 env_closure[self.ids[i].eval(env_closure)[0]] = vals[i]
+#                 ic(env_closure)
+#             result, env_del = self.body_lambda.eval(env_closure)
+#             return result
+#
+#         # def lmbd(val):
+#         #     env_tmp = Env(env)
+#         #     for id in range(self.ids):
+#         #         env_tmp[id], env_delme = val[0].eval(env)
+#         #     env_tmp[self.id], env_delme = val[0].eval(env)
+#         #     res, env_tmp = self.body_lambda.eval(env_tmp)
+#         #     return res
+#         # def lmbd(vals):
+#         #     env_tmp = Env(env)
+#         #     ic(vals)
+#         #     for id, val in zip(self.ids,vals):
+#         #         # env_tmp[self.ids[id]], env_delme = vals[id].eval(env)
+#         #         env_tmp[id] = val
+#         #     res, env_tmp = self.body_lambda.eval(env_tmp)
+#         #     # return res
+#         #     return env_tmp[vals[1].eval(env_tmp)[0]]
+#         return lmbd, env
 
 used_procedures_and_classes = getAllClasses()
