@@ -2,6 +2,7 @@
 
 # local assignment in expr
 from pack.ast import lambda_ast
+from pack.ast import var_ast
 from pack.ast.lambda_ast import *
 
 import pack.parser.gen_helper as gen_helper
@@ -10,14 +11,14 @@ import pack.parser.gen_helper as gen_helper
 gen = lambda_ast if True else None 
 genFix = gen_helper.GeneratorHelper(lambda_ast.used_procedures_and_classes,gen)
 
-def p_expression_lambda(p):
-    '''expression : ID lambda expression
-    |   lambda expression
-    '''
-    if len(p) == 3:
-        p[0] = gen.LambdaNoVarsExpression(p[2])
-    else:
-        p[0] = gen.LambdaExpression(p[1],p[3])
+# def p_expression_lambda(p):
+#     '''expression : ID lambda expression
+#     |   lambda expression
+#     '''
+#     if len(p) == 3:
+#         p[0] = gen.LambdaNoVarsExpression(p[2])
+#     else:
+#         p[0] = gen.LambdaExpression(p[1],p[3])
 
 
 # TODO: RENAME to expression_list
@@ -40,8 +41,20 @@ def p_expression_expr_ids2(p):
 #         p[0] = p[1], p[3]
 #
 def p_expression_lambda_args(p):
-    'expression : "(" id_list ")" lambda expression'
-    p[0] = gen.LambdaArgsExpression(p[2],p[5])
+    # 'expression : "(" id_list ")" lambda expression'
+    '''expression :     lambda expression
+            |           ID lambda expression
+            |           "(" id_list ")" lambda expression
+    '''
+    if len(p) == 3:
+        p[0] = gen.LambdaArgsExpression([], p[2])
+    if len(p) == 4:
+        #TODO: is this really needed!!!?????!??!??!
+        p[0] = gen.LambdaArgsExpression([var_ast.ReadIdExpression(p[1])], p[3])
+    if len(p) == 6:
+        p[0] = gen.LambdaArgsExpression(p[2], p[5])
+
+    # p[0] = gen.LambdaArgsExpression(p[2], p[5])
 
 
 

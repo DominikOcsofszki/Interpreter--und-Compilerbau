@@ -25,7 +25,6 @@ def p_expression_if_then_else(p):
     '''expression : if expression then expression else expression
     '''
     p[0] = generator_control.IfThenElseExpression(p[2],p[4],p[6])
-    # ic(p[0])
 
 
 def p_expression_loop_do_expr(p):

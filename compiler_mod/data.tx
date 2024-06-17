@@ -1,5 +1,4 @@
 
-programms/lambda_args2.tx
 # programms/local_works.tx
 # programms/structs.tx
 # programms/structs2.tx
@@ -15,6 +14,7 @@ programms/lambda_args.tx
 
 # ===>Working-do-not-change:
 
+programms/lambda_args2.tx
 programms/lambda.tx
 
 programms/types2.tx

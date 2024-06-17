@@ -6,7 +6,6 @@ from pack.ast.Expression import InterpretedExpression, getAllClasses, ic
 
 class StructExpression(InterpretedExpression):
     def __init__(self, entries):
-        ic(entries)
         self.entries=entries
 
     def eval(self,env):
