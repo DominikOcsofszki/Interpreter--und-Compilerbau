@@ -14,15 +14,15 @@ def p_expression_sequence(p):
     'expression : "{" sequence "}" '
     p[0] = generator_sequences.SequenceExpression(p[2])
 
+# def p_expression_expressions(p):
+#     '''sequence :    expression ";" sequence 
+#                 |   expression '''
+#
+#     p[0] = [p[1]] if len(p) == 2 else [*p[1],p[3]]
 def p_expression_expressions(p):
     '''sequence :   sequence ";" expression 
                 |   expression '''
 
     p[0] = [p[1]] if len(p) == 2 else [*p[1],p[3]]
-    # p[0] = [p[1]] if len(p) == 2 else [*p[1],p[3]]
-    # if len(p) == 2:
-    #     p[0] = generator_sequences.SequenceExpression([p[1]])
-    # else:
-    #     p[0] = generator_sequences.SequenceExpression([*p[1],p[3]])
 
 generator_sequences = genHelperSequences.set_generator_module_and_check(sequences_ast)

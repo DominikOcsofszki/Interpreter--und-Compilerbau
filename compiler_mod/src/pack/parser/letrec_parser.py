@@ -12,7 +12,7 @@ genHelperVar = gen_helper.GeneratorHelper(letrec_ast.used_procedures_and_classes
 
 def p_expression_letrec(p):
     'expression : letrec ID assign expression lambda expression'
-    ic(p)
+    # ic(p)
     p[0] = generator_local.LetrecExpression(p[2],p[4],p[6])
-    ic(p[0])
+    # ic(p[0])
 generator_local = genHelperVar.set_generator_module_and_check(letrec_ast)

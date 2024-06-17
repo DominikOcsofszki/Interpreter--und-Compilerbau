@@ -10,6 +10,8 @@ ch:='\n';
 arr:=[flo,flo,flo,flo];
 arr:=[0,1,2,3,4];
 arr[3];
+print(arr);
+print(arr[2]);
 # arr:=[1.1,1.,2,"a"];
 # arr:=[1,2];
 ls:=(1,2,3,4);
@@ -26,5 +28,7 @@ h1:= head(t);
 t2:= tail(t);
 # t2:= tail(h1)
 # h1
-getIndexItem(ls)
+getIndexItem(ls);
+narr:= [1,flo+99,3,4];
+print(narr)
 }

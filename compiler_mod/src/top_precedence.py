@@ -1,11 +1,10 @@
 
 precedence = [
+    # ['right', ','],
     ['right', 'assign'],
     ['right', 'lambda'],
-    ['left', 'letrec'],
-    ['left', ','],
+    ['right', 'letrec'],
     ['right', 'local'],
-    # ['right', 'dot'],
     ['nonassoc', 'then',  'do'],
     ['nonassoc' ,'else'],
     ['left', 'or'],
@@ -15,7 +14,7 @@ precedence = [
     ['left', '+', '-'],
     ['left', '*', '/'],
     # ['right', '(','['],
-    ['left', '(','[', ')',']'],
+    # ['left', '(','[', ')',']'],
     # ['left', ')',']'],
     ['right', 'not', 'UMINUS'],
 ]

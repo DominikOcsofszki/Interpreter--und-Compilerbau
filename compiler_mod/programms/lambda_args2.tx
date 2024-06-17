@@ -1,5 +1,10 @@
+#DONT
 {
-x:=123;
-fn:= (x,y) -> x
-
+fnprint:=(x,y) -> {
+    print(x);
+    print(y)
+};
+fnprint(1,2)
+# asd -> {} c
 }
+

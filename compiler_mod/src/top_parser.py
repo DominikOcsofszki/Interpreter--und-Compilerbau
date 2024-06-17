@@ -30,7 +30,10 @@ def p_error(p):
           .format(parser.state,
                   stack_state_str,
                   p))
-    print('==================================================')
+    print('\n==================================================')
+    # print('======firsterror==EXIT()==========================')
+    # raise Exception("info")
+    exit()
     # print('====================Parsing-Error=================\n')
 
 parser = yacc.yacc(start='expression',debug=True)

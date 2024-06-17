@@ -1,10 +1,5 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    array
-    list
-
 Grammar
 
 Rule 0     S' -> expression
@@ -29,74 +24,72 @@ Rule 18    expression -> expression nand expression
 Rule 19    expression -> string
 Rule 20    expression -> ID assign expression
 Rule 21    expression -> import ID
-Rule 22    sequence -> sequence ; expression
-Rule 23    sequence -> expression
-Rule 24    expression -> struct { sequence }
-Rule 25    expression -> - expression
-Rule 26    expression -> char
-Rule 27    expression -> if expression then expression
-Rule 28    expression -> ID . ID
+Rule 22    expression -> struct { sequence }
+Rule 23    expression -> - expression
+Rule 24    expression -> char
+Rule 25    expression -> if expression then expression
+Rule 26    expression -> ID . ID
+Rule 27    sequence -> sequence ; expression
+Rule 28    sequence -> expression
 Rule 29    expression -> expression + expression
 Rule 30    expression -> expression - expression
 Rule 31    expression -> expression * expression
 Rule 32    expression -> expression / expression
-Rule 33    id_list -> expression , id_list
-Rule 34    id_list -> expression
-Rule 35    expression -> [ id_list ]
-Rule 36    expression -> if expression then expression else expression
+Rule 33    expression -> [ id_list ]
+Rule 34    expression -> if expression then expression else expression
+Rule 35    id_list -> expression , id_list
+Rule 36    id_list -> expression
 Rule 37    expression -> extend struct { sequence }
 Rule 38    expression -> ID [ NUMBER ]
 Rule 39    expression -> not expression
 Rule 40    expression -> loop expression do expression
 Rule 41    expression -> ( id_list )
 Rule 42    expression -> NUMBER
-Rule 43    expression -> ( id_list ) lambda expression
-Rule 44    expression -> BOOL
-Rule 45    expression -> ( expression )
-Rule 46    expression -> ID ( )
-Rule 47    expression -> ID ( id_list )
-Rule 48    expression -> for expression ; expression ; expression do expression
-Rule 49    expression -> while expression do expression
+Rule 43    expression -> BOOL
+Rule 44    expression -> ( expression )
+Rule 45    expression -> for expression ; expression ; expression do expression
+Rule 46    expression -> ( id_list ) lambda expression
+Rule 47    expression -> while expression do expression
+Rule 48    expression -> ID ( )
+Rule 49    expression -> ID ( id_list )
 
 Terminals, with rules where they appear
 
-(                    : 41 43 45 46 47
-)                    : 41 43 45 46 47
+(                    : 41 44 46 48 49
+)                    : 41 44 46 48 49
 *                    : 31
 +                    : 29
-,                    : 33
--                    : 25 30
-.                    : 28
+,                    : 35
+-                    : 23 30
+.                    : 26
 /                    : 32
-;                    : 22 48 48
+;                    : 27 45 45
 <                    : 13
 =                    : 11
 >                    : 12
-BOOL                 : 44
-ID                   : 2 3 4 4 5 7 20 21 28 28 38 46 47
+BOOL                 : 43
+ID                   : 2 3 4 4 5 7 20 21 26 26 38 48 49
 NUMBER               : 38 42
-[                    : 35 38
-]                    : 35 38
+[                    : 33 38
+]                    : 33 38
 and                  : 9
-array                : 
 as                   : 4
 assign               : 2 7 20
-char                 : 26
-do                   : 40 48 49
-else                 : 36
+char                 : 24
+do                   : 40 45 47
+else                 : 34
 eq                   : 10
 error                : 
 extend               : 37
 float                : 1
-for                  : 48
+for                  : 45
 ge                   : 14
-if                   : 27 36
+if                   : 25 34
 import               : 4 21
 in                   : 2
-lambda               : 5 6 7 43
+lambda               : 5 6 7 46
 le                   : 15
 letrec               : 7
-list                 : 
 local                : 2
 loop                 : 40
 nand                 : 18
@@ -104,17 +97,17 @@ neqs                 : 16
 not                  : 39
 or                   : 17
 string               : 19
-struct               : 24 37
-then                 : 27 36
-while                : 49
-{                    : 8 24 37
-}                    : 8 24 37
+struct               : 22 37
+then                 : 25 34
+while                : 47
+{                    : 8 22 37
+}                    : 8 22 37
 
 Nonterminals, with rules where they appear
 
-expression           : 2 2 5 6 7 7 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 20 22 23 25 27 27 29 29 30 30 31 31 32 32 33 34 36 36 36 39 40 40 43 45 48 48 48 48 49 49 0
-id_list              : 33 35 41 43 47
-sequence             : 8 22 24 37
+expression           : 2 2 5 6 7 7 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 20 23 25 25 27 28 29 29 30 30 31 31 32 32 34 34 34 35 36 39 40 40 44 45 45 45 45 46 47 47 0
+id_list              : 33 35 41 46 49
+sequence             : 8 22 27 37
 
 Parsing method: LALR
 
@@ -142,30 +135,30 @@ state 0
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -268,10 +261,10 @@ state 4
     (3) expression -> ID .
     (5) expression -> ID . lambda expression
     (20) expression -> ID . assign expression
-    (28) expression -> ID . . ID
+    (26) expression -> ID . . ID
     (38) expression -> ID . [ NUMBER ]
-    (46) expression -> ID . ( )
-    (47) expression -> ID . ( id_list )
+    (48) expression -> ID . ( )
+    (49) expression -> ID . ( id_list )
 
   ! shift/reduce conflict for lambda resolved as shift
     and             reduce using rule 3 (expression -> ID .)
@@ -339,30 +332,30 @@ state 6
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -398,8 +391,8 @@ state 7
 state 8
 
     (8) expression -> { . sequence }
-    (22) sequence -> . sequence ; expression
-    (23) sequence -> . expression
+    (27) sequence -> . sequence ; expression
+    (28) sequence -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -421,30 +414,30 @@ state 8
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -504,14 +497,14 @@ state 9
 
 state 10
 
-    (24) expression -> struct . { sequence }
+    (22) expression -> struct . { sequence }
 
     {               shift and go to state 48
 
 
 state 11
 
-    (25) expression -> - . expression
+    (23) expression -> - . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -533,30 +526,30 @@ state 11
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -584,39 +577,39 @@ state 11
 
 state 12
 
-    (26) expression -> char .
+    (24) expression -> char .
 
-    and             reduce using rule 26 (expression -> char .)
-    eq              reduce using rule 26 (expression -> char .)
-    =               reduce using rule 26 (expression -> char .)
-    >               reduce using rule 26 (expression -> char .)
-    <               reduce using rule 26 (expression -> char .)
-    ge              reduce using rule 26 (expression -> char .)
-    le              reduce using rule 26 (expression -> char .)
-    neqs            reduce using rule 26 (expression -> char .)
-    or              reduce using rule 26 (expression -> char .)
-    nand            reduce using rule 26 (expression -> char .)
-    +               reduce using rule 26 (expression -> char .)
-    -               reduce using rule 26 (expression -> char .)
-    *               reduce using rule 26 (expression -> char .)
-    /               reduce using rule 26 (expression -> char .)
-    $end            reduce using rule 26 (expression -> char .)
-    }               reduce using rule 26 (expression -> char .)
-    ;               reduce using rule 26 (expression -> char .)
-    then            reduce using rule 26 (expression -> char .)
-    ,               reduce using rule 26 (expression -> char .)
-    ]               reduce using rule 26 (expression -> char .)
-    do              reduce using rule 26 (expression -> char .)
-    )               reduce using rule 26 (expression -> char .)
-    in              reduce using rule 26 (expression -> char .)
-    lambda          reduce using rule 26 (expression -> char .)
-    else            reduce using rule 26 (expression -> char .)
+    and             reduce using rule 24 (expression -> char .)
+    eq              reduce using rule 24 (expression -> char .)
+    =               reduce using rule 24 (expression -> char .)
+    >               reduce using rule 24 (expression -> char .)
+    <               reduce using rule 24 (expression -> char .)
+    ge              reduce using rule 24 (expression -> char .)
+    le              reduce using rule 24 (expression -> char .)
+    neqs            reduce using rule 24 (expression -> char .)
+    or              reduce using rule 24 (expression -> char .)
+    nand            reduce using rule 24 (expression -> char .)
+    +               reduce using rule 24 (expression -> char .)
+    -               reduce using rule 24 (expression -> char .)
+    *               reduce using rule 24 (expression -> char .)
+    /               reduce using rule 24 (expression -> char .)
+    $end            reduce using rule 24 (expression -> char .)
+    }               reduce using rule 24 (expression -> char .)
+    ;               reduce using rule 24 (expression -> char .)
+    then            reduce using rule 24 (expression -> char .)
+    ,               reduce using rule 24 (expression -> char .)
+    ]               reduce using rule 24 (expression -> char .)
+    do              reduce using rule 24 (expression -> char .)
+    )               reduce using rule 24 (expression -> char .)
+    in              reduce using rule 24 (expression -> char .)
+    lambda          reduce using rule 24 (expression -> char .)
+    else            reduce using rule 24 (expression -> char .)
 
 
 state 13
 
-    (27) expression -> if . expression then expression
-    (36) expression -> if . expression then expression else expression
+    (25) expression -> if . expression then expression
+    (34) expression -> if . expression then expression else expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -638,30 +631,30 @@ state 13
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -689,9 +682,9 @@ state 13
 
 state 14
 
-    (35) expression -> [ . id_list ]
-    (33) id_list -> . expression , id_list
-    (34) id_list -> . expression
+    (33) expression -> [ . id_list ]
+    (35) id_list -> . expression , id_list
+    (36) id_list -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -713,30 +706,30 @@ state 14
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -825,30 +818,30 @@ state 17
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -898,30 +891,30 @@ state 18
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -950,10 +943,10 @@ state 18
 state 19
 
     (41) expression -> ( . id_list )
-    (43) expression -> ( . id_list ) lambda expression
-    (45) expression -> ( . expression )
-    (33) id_list -> . expression , id_list
-    (34) id_list -> . expression
+    (44) expression -> ( . expression )
+    (46) expression -> ( . id_list ) lambda expression
+    (35) id_list -> . expression , id_list
+    (36) id_list -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -975,30 +968,30 @@ state 19
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1027,38 +1020,38 @@ state 19
 
 state 20
 
-    (44) expression -> BOOL .
+    (43) expression -> BOOL .
 
-    and             reduce using rule 44 (expression -> BOOL .)
-    eq              reduce using rule 44 (expression -> BOOL .)
-    =               reduce using rule 44 (expression -> BOOL .)
-    >               reduce using rule 44 (expression -> BOOL .)
-    <               reduce using rule 44 (expression -> BOOL .)
-    ge              reduce using rule 44 (expression -> BOOL .)
-    le              reduce using rule 44 (expression -> BOOL .)
-    neqs            reduce using rule 44 (expression -> BOOL .)
-    or              reduce using rule 44 (expression -> BOOL .)
-    nand            reduce using rule 44 (expression -> BOOL .)
-    +               reduce using rule 44 (expression -> BOOL .)
-    -               reduce using rule 44 (expression -> BOOL .)
-    *               reduce using rule 44 (expression -> BOOL .)
-    /               reduce using rule 44 (expression -> BOOL .)
-    $end            reduce using rule 44 (expression -> BOOL .)
-    }               reduce using rule 44 (expression -> BOOL .)
-    ;               reduce using rule 44 (expression -> BOOL .)
-    then            reduce using rule 44 (expression -> BOOL .)
-    ,               reduce using rule 44 (expression -> BOOL .)
-    ]               reduce using rule 44 (expression -> BOOL .)
-    do              reduce using rule 44 (expression -> BOOL .)
-    )               reduce using rule 44 (expression -> BOOL .)
-    in              reduce using rule 44 (expression -> BOOL .)
-    lambda          reduce using rule 44 (expression -> BOOL .)
-    else            reduce using rule 44 (expression -> BOOL .)
+    and             reduce using rule 43 (expression -> BOOL .)
+    eq              reduce using rule 43 (expression -> BOOL .)
+    =               reduce using rule 43 (expression -> BOOL .)
+    >               reduce using rule 43 (expression -> BOOL .)
+    <               reduce using rule 43 (expression -> BOOL .)
+    ge              reduce using rule 43 (expression -> BOOL .)
+    le              reduce using rule 43 (expression -> BOOL .)
+    neqs            reduce using rule 43 (expression -> BOOL .)
+    or              reduce using rule 43 (expression -> BOOL .)
+    nand            reduce using rule 43 (expression -> BOOL .)
+    +               reduce using rule 43 (expression -> BOOL .)
+    -               reduce using rule 43 (expression -> BOOL .)
+    *               reduce using rule 43 (expression -> BOOL .)
+    /               reduce using rule 43 (expression -> BOOL .)
+    $end            reduce using rule 43 (expression -> BOOL .)
+    }               reduce using rule 43 (expression -> BOOL .)
+    ;               reduce using rule 43 (expression -> BOOL .)
+    then            reduce using rule 43 (expression -> BOOL .)
+    ,               reduce using rule 43 (expression -> BOOL .)
+    ]               reduce using rule 43 (expression -> BOOL .)
+    do              reduce using rule 43 (expression -> BOOL .)
+    )               reduce using rule 43 (expression -> BOOL .)
+    in              reduce using rule 43 (expression -> BOOL .)
+    lambda          reduce using rule 43 (expression -> BOOL .)
+    else            reduce using rule 43 (expression -> BOOL .)
 
 
 state 21
 
-    (48) expression -> for . expression ; expression ; expression do expression
+    (45) expression -> for . expression ; expression ; expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -1080,30 +1073,30 @@ state 21
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1131,7 +1124,7 @@ state 21
 
 state 22
 
-    (49) expression -> while . expression do expression
+    (47) expression -> while . expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -1153,30 +1146,30 @@ state 22
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1226,30 +1219,30 @@ state 23
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1299,30 +1292,30 @@ state 24
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1372,30 +1365,30 @@ state 25
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1445,30 +1438,30 @@ state 26
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1518,30 +1511,30 @@ state 27
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1591,30 +1584,30 @@ state 28
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1664,30 +1657,30 @@ state 29
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1737,30 +1730,30 @@ state 30
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1810,30 +1803,30 @@ state 31
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1883,30 +1876,30 @@ state 32
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -1956,30 +1949,30 @@ state 33
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2029,30 +2022,30 @@ state 34
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2102,30 +2095,30 @@ state 35
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2175,30 +2168,30 @@ state 36
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2255,30 +2248,30 @@ state 38
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2328,30 +2321,30 @@ state 39
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2379,7 +2372,7 @@ state 39
 
 state 40
 
-    (28) expression -> ID . . ID
+    (26) expression -> ID . . ID
 
     ID              shift and go to state 77
 
@@ -2393,10 +2386,10 @@ state 41
 
 state 42
 
-    (46) expression -> ID ( . )
-    (47) expression -> ID ( . id_list )
-    (33) id_list -> . expression , id_list
-    (34) id_list -> . expression
+    (48) expression -> ID ( . )
+    (49) expression -> ID ( . id_list )
+    (35) id_list -> . expression , id_list
+    (36) id_list -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -2418,30 +2411,30 @@ state 42
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     )               shift and go to state 79
     float           shift and go to state 2
@@ -2572,7 +2565,7 @@ state 45
 state 46
 
     (8) expression -> { sequence . }
-    (22) sequence -> sequence . ; expression
+    (27) sequence -> sequence . ; expression
 
     }               shift and go to state 83
     ;               shift and go to state 84
@@ -2580,7 +2573,7 @@ state 46
 
 state 47
 
-    (23) sequence -> expression .
+    (28) sequence -> expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -2596,8 +2589,8 @@ state 47
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    }               reduce using rule 23 (sequence -> expression .)
-    ;               reduce using rule 23 (sequence -> expression .)
+    }               reduce using rule 28 (sequence -> expression .)
+    ;               reduce using rule 28 (sequence -> expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -2616,9 +2609,9 @@ state 47
 
 state 48
 
-    (24) expression -> struct { . sequence }
-    (22) sequence -> . sequence ; expression
-    (23) sequence -> . expression
+    (22) expression -> struct { . sequence }
+    (27) sequence -> . sequence ; expression
+    (28) sequence -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -2640,30 +2633,30 @@ state 48
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -2692,7 +2685,7 @@ state 48
 
 state 49
 
-    (25) expression -> - expression .
+    (23) expression -> - expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -2708,31 +2701,31 @@ state 49
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    and             reduce using rule 25 (expression -> - expression .)
-    eq              reduce using rule 25 (expression -> - expression .)
-    =               reduce using rule 25 (expression -> - expression .)
-    >               reduce using rule 25 (expression -> - expression .)
-    <               reduce using rule 25 (expression -> - expression .)
-    ge              reduce using rule 25 (expression -> - expression .)
-    le              reduce using rule 25 (expression -> - expression .)
-    neqs            reduce using rule 25 (expression -> - expression .)
-    or              reduce using rule 25 (expression -> - expression .)
-    nand            reduce using rule 25 (expression -> - expression .)
-    +               reduce using rule 25 (expression -> - expression .)
-    -               reduce using rule 25 (expression -> - expression .)
-    *               reduce using rule 25 (expression -> - expression .)
-    /               reduce using rule 25 (expression -> - expression .)
-    $end            reduce using rule 25 (expression -> - expression .)
-    }               reduce using rule 25 (expression -> - expression .)
-    ;               reduce using rule 25 (expression -> - expression .)
-    then            reduce using rule 25 (expression -> - expression .)
-    ,               reduce using rule 25 (expression -> - expression .)
-    ]               reduce using rule 25 (expression -> - expression .)
-    do              reduce using rule 25 (expression -> - expression .)
-    )               reduce using rule 25 (expression -> - expression .)
-    in              reduce using rule 25 (expression -> - expression .)
-    lambda          reduce using rule 25 (expression -> - expression .)
-    else            reduce using rule 25 (expression -> - expression .)
+    and             reduce using rule 23 (expression -> - expression .)
+    eq              reduce using rule 23 (expression -> - expression .)
+    =               reduce using rule 23 (expression -> - expression .)
+    >               reduce using rule 23 (expression -> - expression .)
+    <               reduce using rule 23 (expression -> - expression .)
+    ge              reduce using rule 23 (expression -> - expression .)
+    le              reduce using rule 23 (expression -> - expression .)
+    neqs            reduce using rule 23 (expression -> - expression .)
+    or              reduce using rule 23 (expression -> - expression .)
+    nand            reduce using rule 23 (expression -> - expression .)
+    +               reduce using rule 23 (expression -> - expression .)
+    -               reduce using rule 23 (expression -> - expression .)
+    *               reduce using rule 23 (expression -> - expression .)
+    /               reduce using rule 23 (expression -> - expression .)
+    $end            reduce using rule 23 (expression -> - expression .)
+    }               reduce using rule 23 (expression -> - expression .)
+    ;               reduce using rule 23 (expression -> - expression .)
+    then            reduce using rule 23 (expression -> - expression .)
+    ,               reduce using rule 23 (expression -> - expression .)
+    ]               reduce using rule 23 (expression -> - expression .)
+    do              reduce using rule 23 (expression -> - expression .)
+    )               reduce using rule 23 (expression -> - expression .)
+    in              reduce using rule 23 (expression -> - expression .)
+    lambda          reduce using rule 23 (expression -> - expression .)
+    else            reduce using rule 23 (expression -> - expression .)
 
   ! and             [ shift and go to state 23 ]
   ! eq              [ shift and go to state 24 ]
@@ -2752,8 +2745,8 @@ state 49
 
 state 50
 
-    (27) expression -> if expression . then expression
-    (36) expression -> if expression . then expression else expression
+    (25) expression -> if expression . then expression
+    (34) expression -> if expression . then expression else expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -2788,15 +2781,15 @@ state 50
 
 state 51
 
-    (35) expression -> [ id_list . ]
+    (33) expression -> [ id_list . ]
 
     ]               shift and go to state 87
 
 
 state 52
 
-    (33) id_list -> expression . , id_list
-    (34) id_list -> expression .
+    (35) id_list -> expression . , id_list
+    (36) id_list -> expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -2813,8 +2806,8 @@ state 52
     (32) expression -> expression . / expression
 
     ,               shift and go to state 88
-    ]               reduce using rule 34 (id_list -> expression .)
-    )               reduce using rule 34 (id_list -> expression .)
+    ]               reduce using rule 36 (id_list -> expression .)
+    )               reduce using rule 36 (id_list -> expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -2936,16 +2929,16 @@ state 55
 state 56
 
     (41) expression -> ( id_list . )
-    (43) expression -> ( id_list . ) lambda expression
+    (46) expression -> ( id_list . ) lambda expression
 
     )               shift and go to state 91
 
 
 state 57
 
-    (45) expression -> ( expression . )
-    (33) id_list -> expression . , id_list
-    (34) id_list -> expression .
+    (44) expression -> ( expression . )
+    (35) id_list -> expression . , id_list
+    (36) id_list -> expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -2979,12 +2972,12 @@ state 57
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! )               [ reduce using rule 34 (id_list -> expression .) ]
+  ! )               [ reduce using rule 36 (id_list -> expression .) ]
 
 
 state 58
 
-    (48) expression -> for expression . ; expression ; expression do expression
+    (45) expression -> for expression . ; expression ; expression do expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -3019,7 +3012,7 @@ state 58
 
 state 59
 
-    (49) expression -> while expression . do expression
+    (47) expression -> while expression . do expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -3916,30 +3909,30 @@ state 74
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4087,33 +4080,33 @@ state 76
 
 state 77
 
-    (28) expression -> ID . ID .
+    (26) expression -> ID . ID .
 
-    and             reduce using rule 28 (expression -> ID . ID .)
-    eq              reduce using rule 28 (expression -> ID . ID .)
-    =               reduce using rule 28 (expression -> ID . ID .)
-    >               reduce using rule 28 (expression -> ID . ID .)
-    <               reduce using rule 28 (expression -> ID . ID .)
-    ge              reduce using rule 28 (expression -> ID . ID .)
-    le              reduce using rule 28 (expression -> ID . ID .)
-    neqs            reduce using rule 28 (expression -> ID . ID .)
-    or              reduce using rule 28 (expression -> ID . ID .)
-    nand            reduce using rule 28 (expression -> ID . ID .)
-    +               reduce using rule 28 (expression -> ID . ID .)
-    -               reduce using rule 28 (expression -> ID . ID .)
-    *               reduce using rule 28 (expression -> ID . ID .)
-    /               reduce using rule 28 (expression -> ID . ID .)
-    $end            reduce using rule 28 (expression -> ID . ID .)
-    }               reduce using rule 28 (expression -> ID . ID .)
-    ;               reduce using rule 28 (expression -> ID . ID .)
-    then            reduce using rule 28 (expression -> ID . ID .)
-    ,               reduce using rule 28 (expression -> ID . ID .)
-    ]               reduce using rule 28 (expression -> ID . ID .)
-    do              reduce using rule 28 (expression -> ID . ID .)
-    )               reduce using rule 28 (expression -> ID . ID .)
-    in              reduce using rule 28 (expression -> ID . ID .)
-    lambda          reduce using rule 28 (expression -> ID . ID .)
-    else            reduce using rule 28 (expression -> ID . ID .)
+    and             reduce using rule 26 (expression -> ID . ID .)
+    eq              reduce using rule 26 (expression -> ID . ID .)
+    =               reduce using rule 26 (expression -> ID . ID .)
+    >               reduce using rule 26 (expression -> ID . ID .)
+    <               reduce using rule 26 (expression -> ID . ID .)
+    ge              reduce using rule 26 (expression -> ID . ID .)
+    le              reduce using rule 26 (expression -> ID . ID .)
+    neqs            reduce using rule 26 (expression -> ID . ID .)
+    or              reduce using rule 26 (expression -> ID . ID .)
+    nand            reduce using rule 26 (expression -> ID . ID .)
+    +               reduce using rule 26 (expression -> ID . ID .)
+    -               reduce using rule 26 (expression -> ID . ID .)
+    *               reduce using rule 26 (expression -> ID . ID .)
+    /               reduce using rule 26 (expression -> ID . ID .)
+    $end            reduce using rule 26 (expression -> ID . ID .)
+    }               reduce using rule 26 (expression -> ID . ID .)
+    ;               reduce using rule 26 (expression -> ID . ID .)
+    then            reduce using rule 26 (expression -> ID . ID .)
+    ,               reduce using rule 26 (expression -> ID . ID .)
+    ]               reduce using rule 26 (expression -> ID . ID .)
+    do              reduce using rule 26 (expression -> ID . ID .)
+    )               reduce using rule 26 (expression -> ID . ID .)
+    in              reduce using rule 26 (expression -> ID . ID .)
+    lambda          reduce using rule 26 (expression -> ID . ID .)
+    else            reduce using rule 26 (expression -> ID . ID .)
 
 
 state 78
@@ -4125,38 +4118,38 @@ state 78
 
 state 79
 
-    (46) expression -> ID ( ) .
+    (48) expression -> ID ( ) .
 
-    and             reduce using rule 46 (expression -> ID ( ) .)
-    eq              reduce using rule 46 (expression -> ID ( ) .)
-    =               reduce using rule 46 (expression -> ID ( ) .)
-    >               reduce using rule 46 (expression -> ID ( ) .)
-    <               reduce using rule 46 (expression -> ID ( ) .)
-    ge              reduce using rule 46 (expression -> ID ( ) .)
-    le              reduce using rule 46 (expression -> ID ( ) .)
-    neqs            reduce using rule 46 (expression -> ID ( ) .)
-    or              reduce using rule 46 (expression -> ID ( ) .)
-    nand            reduce using rule 46 (expression -> ID ( ) .)
-    +               reduce using rule 46 (expression -> ID ( ) .)
-    -               reduce using rule 46 (expression -> ID ( ) .)
-    *               reduce using rule 46 (expression -> ID ( ) .)
-    /               reduce using rule 46 (expression -> ID ( ) .)
-    $end            reduce using rule 46 (expression -> ID ( ) .)
-    }               reduce using rule 46 (expression -> ID ( ) .)
-    ;               reduce using rule 46 (expression -> ID ( ) .)
-    then            reduce using rule 46 (expression -> ID ( ) .)
-    ,               reduce using rule 46 (expression -> ID ( ) .)
-    ]               reduce using rule 46 (expression -> ID ( ) .)
-    do              reduce using rule 46 (expression -> ID ( ) .)
-    )               reduce using rule 46 (expression -> ID ( ) .)
-    in              reduce using rule 46 (expression -> ID ( ) .)
-    lambda          reduce using rule 46 (expression -> ID ( ) .)
-    else            reduce using rule 46 (expression -> ID ( ) .)
+    and             reduce using rule 48 (expression -> ID ( ) .)
+    eq              reduce using rule 48 (expression -> ID ( ) .)
+    =               reduce using rule 48 (expression -> ID ( ) .)
+    >               reduce using rule 48 (expression -> ID ( ) .)
+    <               reduce using rule 48 (expression -> ID ( ) .)
+    ge              reduce using rule 48 (expression -> ID ( ) .)
+    le              reduce using rule 48 (expression -> ID ( ) .)
+    neqs            reduce using rule 48 (expression -> ID ( ) .)
+    or              reduce using rule 48 (expression -> ID ( ) .)
+    nand            reduce using rule 48 (expression -> ID ( ) .)
+    +               reduce using rule 48 (expression -> ID ( ) .)
+    -               reduce using rule 48 (expression -> ID ( ) .)
+    *               reduce using rule 48 (expression -> ID ( ) .)
+    /               reduce using rule 48 (expression -> ID ( ) .)
+    $end            reduce using rule 48 (expression -> ID ( ) .)
+    }               reduce using rule 48 (expression -> ID ( ) .)
+    ;               reduce using rule 48 (expression -> ID ( ) .)
+    then            reduce using rule 48 (expression -> ID ( ) .)
+    ,               reduce using rule 48 (expression -> ID ( ) .)
+    ]               reduce using rule 48 (expression -> ID ( ) .)
+    do              reduce using rule 48 (expression -> ID ( ) .)
+    )               reduce using rule 48 (expression -> ID ( ) .)
+    in              reduce using rule 48 (expression -> ID ( ) .)
+    lambda          reduce using rule 48 (expression -> ID ( ) .)
+    else            reduce using rule 48 (expression -> ID ( ) .)
 
 
 state 80
 
-    (47) expression -> ID ( id_list . )
+    (49) expression -> ID ( id_list . )
 
     )               shift and go to state 97
 
@@ -4192,30 +4185,30 @@ state 82
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4274,7 +4267,7 @@ state 83
 
 state 84
 
-    (22) sequence -> sequence ; . expression
+    (27) sequence -> sequence ; . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4296,30 +4289,30 @@ state 84
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4347,8 +4340,8 @@ state 84
 
 state 85
 
-    (24) expression -> struct { sequence . }
-    (22) sequence -> sequence . ; expression
+    (22) expression -> struct { sequence . }
+    (27) sequence -> sequence . ; expression
 
     }               shift and go to state 101
     ;               shift and go to state 84
@@ -4356,8 +4349,8 @@ state 85
 
 state 86
 
-    (27) expression -> if expression then . expression
-    (36) expression -> if expression then . expression else expression
+    (25) expression -> if expression then . expression
+    (34) expression -> if expression then . expression else expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4379,30 +4372,30 @@ state 86
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4430,40 +4423,40 @@ state 86
 
 state 87
 
-    (35) expression -> [ id_list ] .
+    (33) expression -> [ id_list ] .
 
-    and             reduce using rule 35 (expression -> [ id_list ] .)
-    eq              reduce using rule 35 (expression -> [ id_list ] .)
-    =               reduce using rule 35 (expression -> [ id_list ] .)
-    >               reduce using rule 35 (expression -> [ id_list ] .)
-    <               reduce using rule 35 (expression -> [ id_list ] .)
-    ge              reduce using rule 35 (expression -> [ id_list ] .)
-    le              reduce using rule 35 (expression -> [ id_list ] .)
-    neqs            reduce using rule 35 (expression -> [ id_list ] .)
-    or              reduce using rule 35 (expression -> [ id_list ] .)
-    nand            reduce using rule 35 (expression -> [ id_list ] .)
-    +               reduce using rule 35 (expression -> [ id_list ] .)
-    -               reduce using rule 35 (expression -> [ id_list ] .)
-    *               reduce using rule 35 (expression -> [ id_list ] .)
-    /               reduce using rule 35 (expression -> [ id_list ] .)
-    $end            reduce using rule 35 (expression -> [ id_list ] .)
-    }               reduce using rule 35 (expression -> [ id_list ] .)
-    ;               reduce using rule 35 (expression -> [ id_list ] .)
-    then            reduce using rule 35 (expression -> [ id_list ] .)
-    ,               reduce using rule 35 (expression -> [ id_list ] .)
-    ]               reduce using rule 35 (expression -> [ id_list ] .)
-    do              reduce using rule 35 (expression -> [ id_list ] .)
-    )               reduce using rule 35 (expression -> [ id_list ] .)
-    in              reduce using rule 35 (expression -> [ id_list ] .)
-    lambda          reduce using rule 35 (expression -> [ id_list ] .)
-    else            reduce using rule 35 (expression -> [ id_list ] .)
+    and             reduce using rule 33 (expression -> [ id_list ] .)
+    eq              reduce using rule 33 (expression -> [ id_list ] .)
+    =               reduce using rule 33 (expression -> [ id_list ] .)
+    >               reduce using rule 33 (expression -> [ id_list ] .)
+    <               reduce using rule 33 (expression -> [ id_list ] .)
+    ge              reduce using rule 33 (expression -> [ id_list ] .)
+    le              reduce using rule 33 (expression -> [ id_list ] .)
+    neqs            reduce using rule 33 (expression -> [ id_list ] .)
+    or              reduce using rule 33 (expression -> [ id_list ] .)
+    nand            reduce using rule 33 (expression -> [ id_list ] .)
+    +               reduce using rule 33 (expression -> [ id_list ] .)
+    -               reduce using rule 33 (expression -> [ id_list ] .)
+    *               reduce using rule 33 (expression -> [ id_list ] .)
+    /               reduce using rule 33 (expression -> [ id_list ] .)
+    $end            reduce using rule 33 (expression -> [ id_list ] .)
+    }               reduce using rule 33 (expression -> [ id_list ] .)
+    ;               reduce using rule 33 (expression -> [ id_list ] .)
+    then            reduce using rule 33 (expression -> [ id_list ] .)
+    ,               reduce using rule 33 (expression -> [ id_list ] .)
+    ]               reduce using rule 33 (expression -> [ id_list ] .)
+    do              reduce using rule 33 (expression -> [ id_list ] .)
+    )               reduce using rule 33 (expression -> [ id_list ] .)
+    in              reduce using rule 33 (expression -> [ id_list ] .)
+    lambda          reduce using rule 33 (expression -> [ id_list ] .)
+    else            reduce using rule 33 (expression -> [ id_list ] .)
 
 
 state 88
 
-    (33) id_list -> expression , . id_list
-    (33) id_list -> . expression , id_list
-    (34) id_list -> . expression
+    (35) id_list -> expression , . id_list
+    (35) id_list -> . expression , id_list
+    (36) id_list -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4485,30 +4478,30 @@ state 88
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4538,8 +4531,8 @@ state 88
 state 89
 
     (37) expression -> extend struct { . sequence }
-    (22) sequence -> . sequence ; expression
-    (23) sequence -> . expression
+    (27) sequence -> . sequence ; expression
+    (28) sequence -> . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4561,30 +4554,30 @@ state 89
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4635,30 +4628,30 @@ state 90
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4687,8 +4680,9 @@ state 90
 state 91
 
     (41) expression -> ( id_list ) .
-    (43) expression -> ( id_list ) . lambda expression
+    (46) expression -> ( id_list ) . lambda expression
 
+  ! shift/reduce conflict for lambda resolved as shift
     and             reduce using rule 41 (expression -> ( id_list ) .)
     eq              reduce using rule 41 (expression -> ( id_list ) .)
     =               reduce using rule 41 (expression -> ( id_list ) .)
@@ -4712,46 +4706,46 @@ state 91
     do              reduce using rule 41 (expression -> ( id_list ) .)
     )               reduce using rule 41 (expression -> ( id_list ) .)
     in              reduce using rule 41 (expression -> ( id_list ) .)
-    lambda          reduce using rule 41 (expression -> ( id_list ) .)
     else            reduce using rule 41 (expression -> ( id_list ) .)
+    lambda          shift and go to state 106
 
-  ! lambda          [ shift and go to state 106 ]
+  ! lambda          [ reduce using rule 41 (expression -> ( id_list ) .) ]
 
 
 state 92
 
-    (45) expression -> ( expression ) .
+    (44) expression -> ( expression ) .
 
-    and             reduce using rule 45 (expression -> ( expression ) .)
-    eq              reduce using rule 45 (expression -> ( expression ) .)
-    =               reduce using rule 45 (expression -> ( expression ) .)
-    >               reduce using rule 45 (expression -> ( expression ) .)
-    <               reduce using rule 45 (expression -> ( expression ) .)
-    ge              reduce using rule 45 (expression -> ( expression ) .)
-    le              reduce using rule 45 (expression -> ( expression ) .)
-    neqs            reduce using rule 45 (expression -> ( expression ) .)
-    or              reduce using rule 45 (expression -> ( expression ) .)
-    nand            reduce using rule 45 (expression -> ( expression ) .)
-    +               reduce using rule 45 (expression -> ( expression ) .)
-    -               reduce using rule 45 (expression -> ( expression ) .)
-    *               reduce using rule 45 (expression -> ( expression ) .)
-    /               reduce using rule 45 (expression -> ( expression ) .)
-    $end            reduce using rule 45 (expression -> ( expression ) .)
-    }               reduce using rule 45 (expression -> ( expression ) .)
-    ;               reduce using rule 45 (expression -> ( expression ) .)
-    then            reduce using rule 45 (expression -> ( expression ) .)
-    ,               reduce using rule 45 (expression -> ( expression ) .)
-    ]               reduce using rule 45 (expression -> ( expression ) .)
-    do              reduce using rule 45 (expression -> ( expression ) .)
-    )               reduce using rule 45 (expression -> ( expression ) .)
-    in              reduce using rule 45 (expression -> ( expression ) .)
-    lambda          reduce using rule 45 (expression -> ( expression ) .)
-    else            reduce using rule 45 (expression -> ( expression ) .)
+    and             reduce using rule 44 (expression -> ( expression ) .)
+    eq              reduce using rule 44 (expression -> ( expression ) .)
+    =               reduce using rule 44 (expression -> ( expression ) .)
+    >               reduce using rule 44 (expression -> ( expression ) .)
+    <               reduce using rule 44 (expression -> ( expression ) .)
+    ge              reduce using rule 44 (expression -> ( expression ) .)
+    le              reduce using rule 44 (expression -> ( expression ) .)
+    neqs            reduce using rule 44 (expression -> ( expression ) .)
+    or              reduce using rule 44 (expression -> ( expression ) .)
+    nand            reduce using rule 44 (expression -> ( expression ) .)
+    +               reduce using rule 44 (expression -> ( expression ) .)
+    -               reduce using rule 44 (expression -> ( expression ) .)
+    *               reduce using rule 44 (expression -> ( expression ) .)
+    /               reduce using rule 44 (expression -> ( expression ) .)
+    $end            reduce using rule 44 (expression -> ( expression ) .)
+    }               reduce using rule 44 (expression -> ( expression ) .)
+    ;               reduce using rule 44 (expression -> ( expression ) .)
+    then            reduce using rule 44 (expression -> ( expression ) .)
+    ,               reduce using rule 44 (expression -> ( expression ) .)
+    ]               reduce using rule 44 (expression -> ( expression ) .)
+    do              reduce using rule 44 (expression -> ( expression ) .)
+    )               reduce using rule 44 (expression -> ( expression ) .)
+    in              reduce using rule 44 (expression -> ( expression ) .)
+    lambda          reduce using rule 44 (expression -> ( expression ) .)
+    else            reduce using rule 44 (expression -> ( expression ) .)
 
 
 state 93
 
-    (48) expression -> for expression ; . expression ; expression do expression
+    (45) expression -> for expression ; . expression ; expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4773,30 +4767,30 @@ state 93
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4824,7 +4818,7 @@ state 93
 
 state 94
 
-    (49) expression -> while expression do . expression
+    (47) expression -> while expression do . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -4846,30 +4840,30 @@ state 94
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -4963,33 +4957,33 @@ state 96
 
 state 97
 
-    (47) expression -> ID ( id_list ) .
+    (49) expression -> ID ( id_list ) .
 
-    and             reduce using rule 47 (expression -> ID ( id_list ) .)
-    eq              reduce using rule 47 (expression -> ID ( id_list ) .)
-    =               reduce using rule 47 (expression -> ID ( id_list ) .)
-    >               reduce using rule 47 (expression -> ID ( id_list ) .)
-    <               reduce using rule 47 (expression -> ID ( id_list ) .)
-    ge              reduce using rule 47 (expression -> ID ( id_list ) .)
-    le              reduce using rule 47 (expression -> ID ( id_list ) .)
-    neqs            reduce using rule 47 (expression -> ID ( id_list ) .)
-    or              reduce using rule 47 (expression -> ID ( id_list ) .)
-    nand            reduce using rule 47 (expression -> ID ( id_list ) .)
-    +               reduce using rule 47 (expression -> ID ( id_list ) .)
-    -               reduce using rule 47 (expression -> ID ( id_list ) .)
-    *               reduce using rule 47 (expression -> ID ( id_list ) .)
-    /               reduce using rule 47 (expression -> ID ( id_list ) .)
-    $end            reduce using rule 47 (expression -> ID ( id_list ) .)
-    }               reduce using rule 47 (expression -> ID ( id_list ) .)
-    ;               reduce using rule 47 (expression -> ID ( id_list ) .)
-    then            reduce using rule 47 (expression -> ID ( id_list ) .)
-    ,               reduce using rule 47 (expression -> ID ( id_list ) .)
-    ]               reduce using rule 47 (expression -> ID ( id_list ) .)
-    do              reduce using rule 47 (expression -> ID ( id_list ) .)
-    )               reduce using rule 47 (expression -> ID ( id_list ) .)
-    in              reduce using rule 47 (expression -> ID ( id_list ) .)
-    lambda          reduce using rule 47 (expression -> ID ( id_list ) .)
-    else            reduce using rule 47 (expression -> ID ( id_list ) .)
+    and             reduce using rule 49 (expression -> ID ( id_list ) .)
+    eq              reduce using rule 49 (expression -> ID ( id_list ) .)
+    =               reduce using rule 49 (expression -> ID ( id_list ) .)
+    >               reduce using rule 49 (expression -> ID ( id_list ) .)
+    <               reduce using rule 49 (expression -> ID ( id_list ) .)
+    ge              reduce using rule 49 (expression -> ID ( id_list ) .)
+    le              reduce using rule 49 (expression -> ID ( id_list ) .)
+    neqs            reduce using rule 49 (expression -> ID ( id_list ) .)
+    or              reduce using rule 49 (expression -> ID ( id_list ) .)
+    nand            reduce using rule 49 (expression -> ID ( id_list ) .)
+    +               reduce using rule 49 (expression -> ID ( id_list ) .)
+    -               reduce using rule 49 (expression -> ID ( id_list ) .)
+    *               reduce using rule 49 (expression -> ID ( id_list ) .)
+    /               reduce using rule 49 (expression -> ID ( id_list ) .)
+    $end            reduce using rule 49 (expression -> ID ( id_list ) .)
+    }               reduce using rule 49 (expression -> ID ( id_list ) .)
+    ;               reduce using rule 49 (expression -> ID ( id_list ) .)
+    then            reduce using rule 49 (expression -> ID ( id_list ) .)
+    ,               reduce using rule 49 (expression -> ID ( id_list ) .)
+    ]               reduce using rule 49 (expression -> ID ( id_list ) .)
+    do              reduce using rule 49 (expression -> ID ( id_list ) .)
+    )               reduce using rule 49 (expression -> ID ( id_list ) .)
+    in              reduce using rule 49 (expression -> ID ( id_list ) .)
+    lambda          reduce using rule 49 (expression -> ID ( id_list ) .)
+    else            reduce using rule 49 (expression -> ID ( id_list ) .)
 
 
 state 98
@@ -5060,7 +5054,7 @@ state 99
 
 state 100
 
-    (22) sequence -> sequence ; expression .
+    (27) sequence -> sequence ; expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5076,8 +5070,8 @@ state 100
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    }               reduce using rule 22 (sequence -> sequence ; expression .)
-    ;               reduce using rule 22 (sequence -> sequence ; expression .)
+    }               reduce using rule 27 (sequence -> sequence ; expression .)
+    ;               reduce using rule 27 (sequence -> sequence ; expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -5096,39 +5090,39 @@ state 100
 
 state 101
 
-    (24) expression -> struct { sequence } .
+    (22) expression -> struct { sequence } .
 
-    and             reduce using rule 24 (expression -> struct { sequence } .)
-    eq              reduce using rule 24 (expression -> struct { sequence } .)
-    =               reduce using rule 24 (expression -> struct { sequence } .)
-    >               reduce using rule 24 (expression -> struct { sequence } .)
-    <               reduce using rule 24 (expression -> struct { sequence } .)
-    ge              reduce using rule 24 (expression -> struct { sequence } .)
-    le              reduce using rule 24 (expression -> struct { sequence } .)
-    neqs            reduce using rule 24 (expression -> struct { sequence } .)
-    or              reduce using rule 24 (expression -> struct { sequence } .)
-    nand            reduce using rule 24 (expression -> struct { sequence } .)
-    +               reduce using rule 24 (expression -> struct { sequence } .)
-    -               reduce using rule 24 (expression -> struct { sequence } .)
-    *               reduce using rule 24 (expression -> struct { sequence } .)
-    /               reduce using rule 24 (expression -> struct { sequence } .)
-    $end            reduce using rule 24 (expression -> struct { sequence } .)
-    }               reduce using rule 24 (expression -> struct { sequence } .)
-    ;               reduce using rule 24 (expression -> struct { sequence } .)
-    then            reduce using rule 24 (expression -> struct { sequence } .)
-    ,               reduce using rule 24 (expression -> struct { sequence } .)
-    ]               reduce using rule 24 (expression -> struct { sequence } .)
-    do              reduce using rule 24 (expression -> struct { sequence } .)
-    )               reduce using rule 24 (expression -> struct { sequence } .)
-    in              reduce using rule 24 (expression -> struct { sequence } .)
-    lambda          reduce using rule 24 (expression -> struct { sequence } .)
-    else            reduce using rule 24 (expression -> struct { sequence } .)
+    and             reduce using rule 22 (expression -> struct { sequence } .)
+    eq              reduce using rule 22 (expression -> struct { sequence } .)
+    =               reduce using rule 22 (expression -> struct { sequence } .)
+    >               reduce using rule 22 (expression -> struct { sequence } .)
+    <               reduce using rule 22 (expression -> struct { sequence } .)
+    ge              reduce using rule 22 (expression -> struct { sequence } .)
+    le              reduce using rule 22 (expression -> struct { sequence } .)
+    neqs            reduce using rule 22 (expression -> struct { sequence } .)
+    or              reduce using rule 22 (expression -> struct { sequence } .)
+    nand            reduce using rule 22 (expression -> struct { sequence } .)
+    +               reduce using rule 22 (expression -> struct { sequence } .)
+    -               reduce using rule 22 (expression -> struct { sequence } .)
+    *               reduce using rule 22 (expression -> struct { sequence } .)
+    /               reduce using rule 22 (expression -> struct { sequence } .)
+    $end            reduce using rule 22 (expression -> struct { sequence } .)
+    }               reduce using rule 22 (expression -> struct { sequence } .)
+    ;               reduce using rule 22 (expression -> struct { sequence } .)
+    then            reduce using rule 22 (expression -> struct { sequence } .)
+    ,               reduce using rule 22 (expression -> struct { sequence } .)
+    ]               reduce using rule 22 (expression -> struct { sequence } .)
+    do              reduce using rule 22 (expression -> struct { sequence } .)
+    )               reduce using rule 22 (expression -> struct { sequence } .)
+    in              reduce using rule 22 (expression -> struct { sequence } .)
+    lambda          reduce using rule 22 (expression -> struct { sequence } .)
+    else            reduce using rule 22 (expression -> struct { sequence } .)
 
 
 state 102
 
-    (27) expression -> if expression then expression .
-    (36) expression -> if expression then expression . else expression
+    (25) expression -> if expression then expression .
+    (34) expression -> if expression then expression . else expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5144,16 +5138,16 @@ state 102
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    $end            reduce using rule 27 (expression -> if expression then expression .)
-    }               reduce using rule 27 (expression -> if expression then expression .)
-    ;               reduce using rule 27 (expression -> if expression then expression .)
-    then            reduce using rule 27 (expression -> if expression then expression .)
-    ,               reduce using rule 27 (expression -> if expression then expression .)
-    ]               reduce using rule 27 (expression -> if expression then expression .)
-    do              reduce using rule 27 (expression -> if expression then expression .)
-    )               reduce using rule 27 (expression -> if expression then expression .)
-    in              reduce using rule 27 (expression -> if expression then expression .)
-    lambda          reduce using rule 27 (expression -> if expression then expression .)
+    $end            reduce using rule 25 (expression -> if expression then expression .)
+    }               reduce using rule 25 (expression -> if expression then expression .)
+    ;               reduce using rule 25 (expression -> if expression then expression .)
+    then            reduce using rule 25 (expression -> if expression then expression .)
+    ,               reduce using rule 25 (expression -> if expression then expression .)
+    ]               reduce using rule 25 (expression -> if expression then expression .)
+    do              reduce using rule 25 (expression -> if expression then expression .)
+    )               reduce using rule 25 (expression -> if expression then expression .)
+    in              reduce using rule 25 (expression -> if expression then expression .)
+    lambda          reduce using rule 25 (expression -> if expression then expression .)
     else            shift and go to state 111
     and             shift and go to state 23
     eq              shift and go to state 24
@@ -5170,35 +5164,35 @@ state 102
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! and             [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! eq              [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! =               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! >               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! <               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! ge              [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! le              [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! neqs            [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! or              [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! nand            [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! +               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! -               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! *               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! /               [ reduce using rule 27 (expression -> if expression then expression .) ]
-  ! else            [ reduce using rule 27 (expression -> if expression then expression .) ]
+  ! and             [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! eq              [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! =               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! >               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! <               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! ge              [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! le              [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! neqs            [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! or              [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! nand            [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! +               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! -               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! *               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! /               [ reduce using rule 25 (expression -> if expression then expression .) ]
+  ! else            [ reduce using rule 25 (expression -> if expression then expression .) ]
 
 
 state 103
 
-    (33) id_list -> expression , id_list .
+    (35) id_list -> expression , id_list .
 
-    ]               reduce using rule 33 (id_list -> expression , id_list .)
-    )               reduce using rule 33 (id_list -> expression , id_list .)
+    ]               reduce using rule 35 (id_list -> expression , id_list .)
+    )               reduce using rule 35 (id_list -> expression , id_list .)
 
 
 state 104
 
     (37) expression -> extend struct { sequence . }
-    (22) sequence -> sequence . ; expression
+    (27) sequence -> sequence . ; expression
 
     }               shift and go to state 112
     ;               shift and go to state 84
@@ -5266,7 +5260,7 @@ state 105
 
 state 106
 
-    (43) expression -> ( id_list ) lambda . expression
+    (46) expression -> ( id_list ) lambda . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -5288,30 +5282,30 @@ state 106
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -5339,7 +5333,7 @@ state 106
 
 state 107
 
-    (48) expression -> for expression ; expression . ; expression do expression
+    (45) expression -> for expression ; expression . ; expression do expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5374,7 +5368,7 @@ state 107
 
 state 108
 
-    (49) expression -> while expression do expression .
+    (47) expression -> while expression do expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5390,17 +5384,17 @@ state 108
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    $end            reduce using rule 49 (expression -> while expression do expression .)
-    }               reduce using rule 49 (expression -> while expression do expression .)
-    ;               reduce using rule 49 (expression -> while expression do expression .)
-    then            reduce using rule 49 (expression -> while expression do expression .)
-    ,               reduce using rule 49 (expression -> while expression do expression .)
-    ]               reduce using rule 49 (expression -> while expression do expression .)
-    do              reduce using rule 49 (expression -> while expression do expression .)
-    )               reduce using rule 49 (expression -> while expression do expression .)
-    in              reduce using rule 49 (expression -> while expression do expression .)
-    lambda          reduce using rule 49 (expression -> while expression do expression .)
-    else            reduce using rule 49 (expression -> while expression do expression .)
+    $end            reduce using rule 47 (expression -> while expression do expression .)
+    }               reduce using rule 47 (expression -> while expression do expression .)
+    ;               reduce using rule 47 (expression -> while expression do expression .)
+    then            reduce using rule 47 (expression -> while expression do expression .)
+    ,               reduce using rule 47 (expression -> while expression do expression .)
+    ]               reduce using rule 47 (expression -> while expression do expression .)
+    do              reduce using rule 47 (expression -> while expression do expression .)
+    )               reduce using rule 47 (expression -> while expression do expression .)
+    in              reduce using rule 47 (expression -> while expression do expression .)
+    lambda          reduce using rule 47 (expression -> while expression do expression .)
+    else            reduce using rule 47 (expression -> while expression do expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -5416,20 +5410,20 @@ state 108
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! and             [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! eq              [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! =               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! >               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! <               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! ge              [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! le              [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! neqs            [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! or              [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! nand            [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! +               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! -               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! *               [ reduce using rule 49 (expression -> while expression do expression .) ]
-  ! /               [ reduce using rule 49 (expression -> while expression do expression .) ]
+  ! and             [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! eq              [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! =               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! >               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! <               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! ge              [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! le              [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! neqs            [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! or              [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! nand            [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! +               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! -               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! *               [ reduce using rule 47 (expression -> while expression do expression .) ]
+  ! /               [ reduce using rule 47 (expression -> while expression do expression .) ]
 
 
 state 109
@@ -5456,30 +5450,30 @@ state 109
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -5529,30 +5523,30 @@ state 110
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -5580,7 +5574,7 @@ state 110
 
 state 111
 
-    (36) expression -> if expression then expression else . expression
+    (34) expression -> if expression then expression else . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -5602,30 +5596,30 @@ state 111
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -5684,7 +5678,7 @@ state 112
 
 state 113
 
-    (43) expression -> ( id_list ) lambda expression .
+    (46) expression -> ( id_list ) lambda expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5700,17 +5694,17 @@ state 113
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    $end            reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    }               reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    ;               reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    then            reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    ,               reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    ]               reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    do              reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    )               reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    in              reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    lambda          reduce using rule 43 (expression -> ( id_list ) lambda expression .)
-    else            reduce using rule 43 (expression -> ( id_list ) lambda expression .)
+    $end            reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    }               reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    ;               reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    then            reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    ,               reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    ]               reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    do              reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    )               reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    in              reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    lambda          reduce using rule 46 (expression -> ( id_list ) lambda expression .)
+    else            reduce using rule 46 (expression -> ( id_list ) lambda expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -5726,25 +5720,25 @@ state 113
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! and             [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! eq              [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! =               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! >               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! <               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! ge              [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! le              [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! neqs            [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! or              [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! nand            [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! +               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! -               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! *               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
-  ! /               [ reduce using rule 43 (expression -> ( id_list ) lambda expression .) ]
+  ! and             [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! eq              [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! =               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! >               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! <               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! ge              [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! le              [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! neqs            [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! or              [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! nand            [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! +               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! -               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! *               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
+  ! /               [ reduce using rule 46 (expression -> ( id_list ) lambda expression .) ]
 
 
 state 114
 
-    (48) expression -> for expression ; expression ; . expression do expression
+    (45) expression -> for expression ; expression ; . expression do expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -5766,30 +5760,30 @@ state 114
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -5951,7 +5945,7 @@ state 116
 
 state 117
 
-    (36) expression -> if expression then expression else expression .
+    (34) expression -> if expression then expression else expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -5967,17 +5961,17 @@ state 117
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    $end            reduce using rule 36 (expression -> if expression then expression else expression .)
-    }               reduce using rule 36 (expression -> if expression then expression else expression .)
-    ;               reduce using rule 36 (expression -> if expression then expression else expression .)
-    then            reduce using rule 36 (expression -> if expression then expression else expression .)
-    ,               reduce using rule 36 (expression -> if expression then expression else expression .)
-    ]               reduce using rule 36 (expression -> if expression then expression else expression .)
-    do              reduce using rule 36 (expression -> if expression then expression else expression .)
-    )               reduce using rule 36 (expression -> if expression then expression else expression .)
-    in              reduce using rule 36 (expression -> if expression then expression else expression .)
-    lambda          reduce using rule 36 (expression -> if expression then expression else expression .)
-    else            reduce using rule 36 (expression -> if expression then expression else expression .)
+    $end            reduce using rule 34 (expression -> if expression then expression else expression .)
+    }               reduce using rule 34 (expression -> if expression then expression else expression .)
+    ;               reduce using rule 34 (expression -> if expression then expression else expression .)
+    then            reduce using rule 34 (expression -> if expression then expression else expression .)
+    ,               reduce using rule 34 (expression -> if expression then expression else expression .)
+    ]               reduce using rule 34 (expression -> if expression then expression else expression .)
+    do              reduce using rule 34 (expression -> if expression then expression else expression .)
+    )               reduce using rule 34 (expression -> if expression then expression else expression .)
+    in              reduce using rule 34 (expression -> if expression then expression else expression .)
+    lambda          reduce using rule 34 (expression -> if expression then expression else expression .)
+    else            reduce using rule 34 (expression -> if expression then expression else expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -5993,25 +5987,25 @@ state 117
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! and             [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! eq              [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! =               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! >               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! <               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! ge              [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! le              [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! neqs            [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! or              [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! nand            [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! +               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! -               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! *               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
-  ! /               [ reduce using rule 36 (expression -> if expression then expression else expression .) ]
+  ! and             [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! eq              [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! =               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! >               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! <               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! ge              [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! le              [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! neqs            [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! or              [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! nand            [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! +               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! -               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! *               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
+  ! /               [ reduce using rule 34 (expression -> if expression then expression else expression .) ]
 
 
 state 118
 
-    (48) expression -> for expression ; expression ; expression . do expression
+    (45) expression -> for expression ; expression ; expression . do expression
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -6046,7 +6040,7 @@ state 118
 
 state 119
 
-    (48) expression -> for expression ; expression ; expression do . expression
+    (45) expression -> for expression ; expression ; expression do . expression
     (1) expression -> . float
     (2) expression -> . local ID assign expression in expression
     (3) expression -> . ID
@@ -6068,30 +6062,30 @@ state 119
     (19) expression -> . string
     (20) expression -> . ID assign expression
     (21) expression -> . import ID
-    (24) expression -> . struct { sequence }
-    (25) expression -> . - expression
-    (26) expression -> . char
-    (27) expression -> . if expression then expression
-    (28) expression -> . ID . ID
+    (22) expression -> . struct { sequence }
+    (23) expression -> . - expression
+    (24) expression -> . char
+    (25) expression -> . if expression then expression
+    (26) expression -> . ID . ID
     (29) expression -> . expression + expression
     (30) expression -> . expression - expression
     (31) expression -> . expression * expression
     (32) expression -> . expression / expression
-    (35) expression -> . [ id_list ]
-    (36) expression -> . if expression then expression else expression
+    (33) expression -> . [ id_list ]
+    (34) expression -> . if expression then expression else expression
     (37) expression -> . extend struct { sequence }
     (38) expression -> . ID [ NUMBER ]
     (39) expression -> . not expression
     (40) expression -> . loop expression do expression
     (41) expression -> . ( id_list )
     (42) expression -> . NUMBER
-    (43) expression -> . ( id_list ) lambda expression
-    (44) expression -> . BOOL
-    (45) expression -> . ( expression )
-    (46) expression -> . ID ( )
-    (47) expression -> . ID ( id_list )
-    (48) expression -> . for expression ; expression ; expression do expression
-    (49) expression -> . while expression do expression
+    (43) expression -> . BOOL
+    (44) expression -> . ( expression )
+    (45) expression -> . for expression ; expression ; expression do expression
+    (46) expression -> . ( id_list ) lambda expression
+    (47) expression -> . while expression do expression
+    (48) expression -> . ID ( )
+    (49) expression -> . ID ( id_list )
 
     float           shift and go to state 2
     local           shift and go to state 3
@@ -6119,7 +6113,7 @@ state 119
 
 state 120
 
-    (48) expression -> for expression ; expression ; expression do expression .
+    (45) expression -> for expression ; expression ; expression do expression .
     (9) expression -> expression . and expression
     (10) expression -> expression . eq expression
     (11) expression -> expression . = expression
@@ -6135,17 +6129,17 @@ state 120
     (31) expression -> expression . * expression
     (32) expression -> expression . / expression
 
-    $end            reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    }               reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    ;               reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    then            reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    ,               reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    ]               reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    do              reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    )               reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    in              reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    lambda          reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
-    else            reduce using rule 48 (expression -> for expression ; expression ; expression do expression .)
+    $end            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    }               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ;               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    then            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ,               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    ]               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    do              reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    )               reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    in              reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    lambda          reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
+    else            reduce using rule 45 (expression -> for expression ; expression ; expression do expression .)
     and             shift and go to state 23
     eq              shift and go to state 24
     =               shift and go to state 25
@@ -6161,26 +6155,27 @@ state 120
     *               shift and go to state 35
     /               shift and go to state 36
 
-  ! and             [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! eq              [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! =               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! >               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! <               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! ge              [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! le              [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! neqs            [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! or              [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! nand            [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! +               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! -               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! *               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
-  ! /               [ reduce using rule 48 (expression -> for expression ; expression ; expression do expression .) ]
+  ! and             [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! eq              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! =               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! >               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! <               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! ge              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! le              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! neqs            [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! or              [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! nand            [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! +               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! -               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! *               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
+  ! /               [ reduce using rule 45 (expression -> for expression ; expression ; expression do expression .) ]
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for lambda in state 4 resolved as shift
 WARNING: shift/reduce conflict for ) in state 57 resolved as shift
+WARNING: shift/reduce conflict for lambda in state 91 resolved as shift
 WARNING: shift/reduce conflict for and in state 115 resolved as shift
 WARNING: shift/reduce conflict for eq in state 115 resolved as shift
 WARNING: shift/reduce conflict for = in state 115 resolved as shift

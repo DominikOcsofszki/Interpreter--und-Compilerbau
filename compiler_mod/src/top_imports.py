@@ -6,9 +6,10 @@ from pack.ast.Expression import InterpretedExpression, ic
 
 environment=Env()
 def print_py(entries:InterpretedExpression):
-    ic(entries)
+    # ic(entries)
     for entry in entries:
-        print(">>>",entry.eval(environment)[0])
+        print(">>>",entry)
+        # print(">>>",entry.eval(environment)[0])
         # x.eval(env)
     # if entry is InterpretedExpression:
     #     print("entry if: ")

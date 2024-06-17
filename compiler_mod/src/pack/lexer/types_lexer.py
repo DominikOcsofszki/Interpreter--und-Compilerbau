@@ -1,5 +1,6 @@
 import numpy as np
-tokens_types = ['string','char','float','list','array']
+tokens_types = ['string','char','float']
+# tokens_types = ['string','char','float','list','array']
 literals_types = '[].\''
 
 # def t_float(t):

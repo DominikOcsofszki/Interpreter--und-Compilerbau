@@ -1,5 +1,6 @@
 {
 x:=123;
 # letrec fac := x -> fac(x) + 1
-letrec fac := {x} -> fac(x)
+fac := x -> print(fac(x));
+fac(1)
 }

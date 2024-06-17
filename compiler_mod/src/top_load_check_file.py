@@ -19,6 +19,7 @@ def openAllFiles(files):
 def openAllFilesChecker(files):
     for file in files.splitlines():
         if checkFile(file) :
+            print(file)
             with open(file, 'r') as file:
                 data = file.readlines()
                 return data
@@ -30,24 +31,28 @@ def checkAndOpenFile():
     print_no_comments_newlines()
     # print(data)
     lst_check =[]
+    check_exit = True
     for x in data:
         x =x.replace("\n","")
+        if x.__contains__("#DONT"):
+            check_exit = False
         if not x.startswith("#"):
             if not x.endswith(";"):
                 if not x.endswith("{"):
                     lst_check.append(x)
         
-    missing_end = [x for x in lst_check if len(x)>1]
-    if len(missing_end) > 1:
-        print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-        print(missing_end)
-        # exit()
-    if len(missing_end) == 0:
-        print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-        print(missing_end)
-        # exit()
+    if check_exit:
+        missing_end = [x for x in lst_check if len(x)>1]
+        if len(missing_end) > 1:
+            print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+            print(missing_end)
+            # exit()
+        if len(missing_end) == 0:
+            print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+            print(missing_end)
+            # exit()
     data = openAllFiles(files)
-    print("====================output:=======================")
+    print("====================output:=======================\n")
     return data
 
 def print_no_comments_newlines():

@@ -1,9 +1,15 @@
 {
+out:=100;
 stru := struct {
 a:=1213;
 b:=109;
+c:=out;
 fn:= x -> x*111};
 stru.a;
-stru.b
-# stru.fn(1)
+stru.b;
+stru.c;
+out:=123123;
+stru.c;
+stru.a;
+stru.fn(1)
 }

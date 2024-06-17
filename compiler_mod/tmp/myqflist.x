@@ -1,34 +1,22 @@
-p_expr_uminus(p):
-p_expression_binary_operators_arith(p):
-p_expression_binary_operators_bool(p):
-p_expression_bool(p):
-p_expression_call_args(p):
-p_expression_call_no_vars(p):
-p_expression_expr_ids2(p):
-p_expression_expressions(p):
-p_expression_for_do_expr(p):
-p_expression_if_then(p):
-p_expression_if_then_else(p):
-p_expression_import(p):
-p_expression_import_as(p):
-p_expression_lambda(p):
-p_expression_lambda_args(p):
-p_expression_letrec(p):
-p_expression_local(p):
-p_expression_loop_do_expr(p):
-p_expression_num(p):
-p_expression_paren(p):
-p_expression_read_id(p):
-p_expression_sequence(p):
-p_expression_struct(p):
-p_expression_struct_extend(p):
-p_expression_struct_use(p):
-p_expression_types_array(p):
-p_expression_types_array_call(p):
-p_expression_types_char(p):
-p_expression_types_float(p):
-p_expression_types_list(p):
-p_expression_types_string(p):
-p_expression_unary_operators(p):
-p_expression_while_do_expr(p):
-p_expression_write_id(p):
+src/pack/ast/letrec_ast.py:31:#         ic(self, assign_name, ids, body)
+src/pack/ast/local_ast.py:8:        ic(self, assign_to_id, value, body)
+src/pack/ast/struct_ast.py:9:        ic(entries)
+src/pack/ast/lambda_ast.py:37:        # ic(self,fn,ids_or_values)
+src/pack/ast/lambda_ast.py:44:            ic(entry)
+src/pack/ast/lambda_ast.py:46:            ic(_v)
+src/pack/ast/lambda_ast.py:58:        ic(self, ids, body_lambda)
+src/pack/ast/lambda_ast.py:68:                ic(i, id.id)
+src/pack/ast/lambda_ast.py:69:                ic(val)
+src/pack/ast/lambda_ast.py:71:            ic(lambda_env)
+src/pack/ast/lambda_ast.py:76:    #     ic(env)
+src/pack/ast/lambda_ast.py:81:    #         ic(vals)
+src/pack/ast/lambda_ast.py:83:    #             ic(i,id)
+src/pack/ast/lambda_ast.py:85:    #             ic(id_eval)
+src/top_imports.py:9:    # ic(entries)
+src/top_imports.py:18:    # ic(entry[0].eval(env)[0])
+tmp/myqflist.x:1:src/pack/ast/letrec_ast.py:31:#         ic(self, assign_name, ids, body)
+tmp/myqflist.x:2:src/pack/ast/local_ast.py:8:        ic(self, assign_to_id, value, body)
+tmp/myqflist.x:3:src/pack/ast/struct_ast.py:9:        ic(entries)
+src/pack/parser/control_parser.py:28:    # ic(p[0])
+src/pack/parser/letrec_parser.py:15:    # ic(p)
+src/pack/parser/letrec_parser.py:17:    # ic(p[0])

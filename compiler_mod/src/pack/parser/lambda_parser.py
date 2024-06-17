@@ -20,19 +20,30 @@ def p_expression_lambda(p):
         p[0] = gen.LambdaExpression(p[1],p[3])
 
 
+# TODO: RENAME to expression_list
 def p_expression_expr_ids2(p):
     '''id_list : expression "," id_list
-        |           expression
+        |        expression
     '''
     if len(p) == 2:
         p[0] = [p[1]]
     else:
         p[0] = [p[1], *p[3]]
-
-
+#
+# def p_expression_lambda_ids(p):
+#     '''lambda_ids : lambda_ids ","  id_list
+#     |           ID
+#     '''
+#     if len(p) == 2:
+#         p[0] = [p[1]]
+#     else:
+#         p[0] = p[1], p[3]
+#
 def p_expression_lambda_args(p):
     'expression : "(" id_list ")" lambda expression'
-    p[0] = gen.LambdaArgsExpression([p[2]],p[5])
+    p[0] = gen.LambdaArgsExpression(p[2],p[5])
+
+
 
 def p_expression_call_no_vars(p):
     'expression :  ID "(" ")"'
