@@ -1,7 +1,8 @@
-# programms/lambda_args.tx
+# programms/lambda_args2.tx
+programms/lambda_args.tx
 # programms/rec_local2.tx
-programms/structs.tx
 
+# programms/structs_extends.tx
 
 
 # ===> TOP items
@@ -9,8 +10,9 @@ programms/structs.tx
 # src/top_parser.py
 
 # ===>Working-do-not-change:
-programms/lambda_no_args.tx
 programms/lambda.tx
+programms/structs.tx
+programms/lambda_no_args.tx
 programms/rec_local.tx
 programms/types.tx
 programms/local_works.tx

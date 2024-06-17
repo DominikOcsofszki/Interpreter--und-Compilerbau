@@ -32,7 +32,7 @@ def p_expression_expr_ids2(p):
 
 def p_expression_lambda_args(p):
     'expression : "(" id_list ")" lambda expression'
-    p[0] = gen.LambdaArgsExpression(p[2],p[5])
+    p[0] = gen.LambdaArgsExpression([p[2]],p[5])
 
 def p_expression_call_no_vars(p):
     'expression :  ID "(" ")"'

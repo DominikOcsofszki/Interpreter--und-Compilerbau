@@ -1,9 +1,9 @@
 
 precedence = [
-    ['left', 'letrec'],
-    ['left', ','],
     ['right', 'assign'],
     ['right', 'lambda'],
+    ['left', 'letrec'],
+    ['left', ','],
     ['right', 'local'],
     # ['right', 'dot'],
     ['nonassoc', 'then',  'do'],

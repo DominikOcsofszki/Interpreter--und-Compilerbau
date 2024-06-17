@@ -12,13 +12,11 @@ class StructExpression(InterpretedExpression):
         lambda_env = Env(env.deep_copy())
         ic(self.entries)
         for entry in self.entries:
-            ic(entry)
             tmp, lambda_env = entry.eval(lambda_env)
-        def lmbd(vals):
-            for val in vals:
-                res,envv = val.eval(env)
+        def get(val):
+            res,envv = val.eval(lambda_env)
             return res
-        return lmbd, env
+        return get, env
 
 class StructCallExpression(InterpretedExpression):
     def __init__(self, id, entry):
@@ -27,7 +25,24 @@ class StructCallExpression(InterpretedExpression):
         self.id=id
 
     def eval(self,env):
-        name, _env = self.id.eval(env)
+        struct, env = self.id.eval(env)
+        ic(struct(self.entry))
+        return struct(self.entry), env
+
+class StructExtendExpression(InterpretedExpression):
+    def __init__(self,parent, entries):
+        self.entries=entries
+        self.parent=parent
+
+    def eval(self,env):
+        lambda_env = Env(env.deep_copy())
+        ic(self.entries)
+        for entry in self.entries:
+            tmp, lambda_env = entry.eval(lambda_env)
+        def get(val):
+            res,envv = val.eval(lambda_env)
+            return res
+        return get, env
 
 used_procedures_and_classes = getAllClasses()
 

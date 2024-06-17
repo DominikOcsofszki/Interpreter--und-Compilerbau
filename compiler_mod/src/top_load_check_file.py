@@ -23,40 +23,58 @@ def openAllFilesChecker(files):
                 data = file.readlines()
                 return data
 
-files = getFilesFromFile()
-data = openAllFilesChecker(files)
-print("====================input:=======================")
-# print(data)
-lst_check =[]
-for x in data:
-    x =x.replace("\n","")
-    if not x.startswith("#"):
-        if not x.endswith(";"):
-            if not x.endswith("{"):
-                lst_check.append(x)
-    
-missing_end = [x for x in lst_check if len(x)>1]
-if len(missing_end) > 1:
-    print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-    print(missing_end)
-    # exit()
-if len(missing_end) == 0:
-    print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-    print(missing_end)
-    # exit()
-data = openAllFiles(files)
+def checkAndOpenFile():
+    files = getFilesFromFile()
+    data = openAllFilesChecker(files)
+    print("====================input:=======================")
+    print_no_comments_newlines()
+    # print(data)
+    lst_check =[]
+    for x in data:
+        x =x.replace("\n","")
+        if not x.startswith("#"):
+            if not x.endswith(";"):
+                if not x.endswith("{"):
+                    lst_check.append(x)
+        
+    missing_end = [x for x in lst_check if len(x)>1]
+    if len(missing_end) > 1:
+        print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+        print(missing_end)
+        # exit()
+    if len(missing_end) == 0:
+        print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+        print(missing_end)
+        # exit()
+    data = openAllFiles(files)
+    print("====================output:=======================")
+    return data
+
 def print_no_comments_newlines():
     files = getFilesFromFile()
     for file in files.splitlines():
         if checkFile(file) :
             with open(file, 'r') as file:
+                linenr=1
                 # data = file.read()
                 for line in file:
                     if not line.startswith("\n"):
                         line = line.partition('#')[0]
                         line = line.rstrip()
                         if len(line) > 0:
-                            print(line)
-                return data
-print_no_comments_newlines()
-print("====================output:=======================")
+                            print(linenr,line)
+                    linenr +=1
+                return 
+def print_line_nr(lineno):
+    files = getFilesFromFile()
+    for file in files.splitlines():
+        if checkFile(file) :
+            with open(file, 'r') as file:
+                linenr=1
+                # data = file.read()
+                for line in file:
+                    if lineno == linenr:
+                        print(linenr, line)
+                        return 
+                    linenr +=1
+

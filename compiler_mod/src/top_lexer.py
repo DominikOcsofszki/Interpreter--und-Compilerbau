@@ -15,11 +15,17 @@ from ply.lex import lex
 tokens = []
 literals = []
 
-t_ignore  = ' \t\n'
+# t_ignore  = ' \t\n'
+t_ignore  = ' \t'
 
 def t_error(t):
     print("Illegal character '%s': FIX-IT" % t.value[0])
     t.lexer.skip(1)
+
+# Define a rule so we can track line numbers
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
 
 literals=literals_arith +\
         literals_bool   +\

@@ -4,6 +4,6 @@ a:=1213;
 b:=109;
 fn:= x -> x*111};
 stru.a;
-stru.b
-# stru.fn(1)
+stru.b;
+extend stru{};
 }
