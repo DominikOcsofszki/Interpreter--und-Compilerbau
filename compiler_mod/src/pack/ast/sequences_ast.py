@@ -13,7 +13,6 @@ class SequenceExpression(InterpretedExpression):
 
 
 
-
 used_procedures_and_classes = getAllClasses()
 
 

@@ -11,5 +11,5 @@ stru.c;
 out:=123123;
 stru.c;
 stru.a;
-stru.fn(1)
+stru.fn(3)
 }

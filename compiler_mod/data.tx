@@ -1,7 +1,8 @@
 
 # programms/local_works.tx
-# programms/structs.tx
+programms/structs.tx
 # programms/structs2.tx
+programms/add.tx
 programms/lambda_args.tx
 # programms/rec_local2.tx
 

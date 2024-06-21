@@ -20,8 +20,13 @@ def p_expression_struct(p):
 
 def p_expression_struct_use(p):
     'expression : ID "." ID '
+    # p[0] = generator_sequences.StructCallExpression(p[1],p[3])
     p[0] = generator_sequences.StructCallExpression(generator_vars.ReadIdExpression(p[1]),generator_vars.ReadIdExpression(p[3]))
-    # p[0] = generator_sequences.StructCallExpression(generator_vars.ReadIdExpression(p[1]),generator_vars.ReadIdExpression(p[3]))
+
+def p_expression_struct_use_fn(p):
+    'expression : ID "." ID "(" expression ")"'
+    p[0] = generator_sequences.StructCallFunExpression(generator_vars.ReadIdExpression(p[1]),generator_vars.ReadIdExpression(p[3]),[p[5]])
+    # p[0] = generator_sequences.StructCallFunExpression(generator_vars.ReadIdExpression(p[1]),p[3])
 
 def p_expression_struct_extend(p):
     'expression : extend struct "{" sequence "}" '

@@ -26,6 +26,18 @@ class StructCallExpression(InterpretedExpression):
         struct, env = self.id.eval(env)
         return struct(self.entry), env
 
+class StructCallFunExpression(InterpretedExpression):
+    def __init__(self, id, entry,args):
+        self.entry=entry
+        self.id=id
+        self.args=args
+
+    def eval(self,env):
+        struct, env = self.id.eval(env)
+        args = [arg.eval(env)[0] for arg in self.args]
+        ic(args)
+        return struct(self.entry)(args), env
+
 class StructExtendExpression(InterpretedExpression):
     def __init__(self,parent, entries):
         self.entries=entries
