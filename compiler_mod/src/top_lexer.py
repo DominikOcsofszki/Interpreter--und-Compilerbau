@@ -17,7 +17,6 @@ literals = []
 
 # t_ignore  = ' \t\n'
 t_ignore  = ' \t'
-
 def t_error(t):
     print("Illegal character '%s': FIX-IT" % t.value[0])
     t.lexer.skip(1)
@@ -26,6 +25,7 @@ def t_error(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+    x = len(t.value)
 
 literals=literals_arith +\
         literals_bool   +\
@@ -65,4 +65,3 @@ def t_ignore_comments(t):
 
 lexer = lex()
 # lexer = lex(debug=True)
-

@@ -1,12 +1,8 @@
 
-# programms/local_works.tx
-programms/structs.tx
-# programms/structs2.tx
-programms/add.tx
-programms/lambda_args.tx
+programms/local_letrec.tx
+programms/structs_fn.tx
 # programms/rec_local2.tx
 
-# programms/structs_extends.tx
 
 
 # ===> TOP items
@@ -15,6 +11,11 @@ programms/lambda_args.tx
 
 # ===>Working-do-not-change:
 
+programms/local_works.tx
+programms/lambda_args.tx
+programms/add.tx
+programms/structs.tx
+programms/structs_extends.tx
 programms/lambda_args2.tx
 programms/lambda.tx
 

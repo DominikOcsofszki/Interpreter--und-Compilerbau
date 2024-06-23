@@ -1,3 +1,5 @@
+
+from pack.ast import var_ast
 class GeneratorHelper:
     def __init__(self, used_procedures_and_classes,gen):
         self.used_procedures_and_classes = used_procedures_and_classes

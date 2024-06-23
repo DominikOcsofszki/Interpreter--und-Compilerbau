@@ -1,0 +1,14 @@
+#DONT
+{
+# x:=1;
+# local fac:= x -> if x=0 then 1 else x * fac(x-1) in fac;
+
+# local sqrt:= x->x*x in sqrt(5);
+# sqrt(500);
+# local ok:= x->x*x in ok(1000);
+
+fun_from_local:=local fac := x -> if x=0 then 1 else x*fac(x-1) in fac;
+# local fac := x -> if x=0 then 1 else x*fac(x-1) in fac(3)
+fun_from_local(10)
+
+}

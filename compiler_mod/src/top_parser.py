@@ -21,18 +21,24 @@ def p_expr_uminus(p):
 
 from top_load_check_file import print_line_nr
 def p_error(p):
-    stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
-    print('====================Parsing-Error=================')
-    print_line_nr(p.lineno)
-    print('Syntax error in input line', p.lineno,": \"", p.value,"\"")
-    # print("lineNr: \"",p.lineno,"entry: \"",p.value,"\"")
-    print('Parser State {}: \n{} . {}'
-          .format(parser.state,
-                  stack_state_str,
-                  p))
-    print('\n==================================================')
-    # print('======firsterror==EXIT()==========================')
-    # raise Exception("info")
+    if parser.state == 85:
+        print('\n==================================================')
+        print("STATE 85 => SEMICOLON MISSING") 
+        print('\n==================================================')
+    else:
+        stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
+        print('====================Parsing-Error=================')
+        print_line_nr(p.lineno)
+        print('Syntax error in input line', p.lineno,": \"", p.value,"\"")
+        # print("lineNr: \"",p.lineno,"entry: \"",p.value,"\"")
+        print('Parser State {}: \n{} . {}'
+              .format(parser.state,
+                      stack_state_str,
+                      p))
+        print('\n==================================================')
+        # print('======firsterror==EXIT()==========================')
+        # raise Exception("info")
+
     exit()
     # print('====================Parsing-Error=================\n')
 

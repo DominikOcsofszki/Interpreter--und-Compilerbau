@@ -4,9 +4,27 @@ from environment import Env
 # ic.configureOutput(includeContext=True)
 # ic.configureOutput()
 
+import top_configs as top_config
 class InterpretedExpression:
     def eval(self,env:Env):
-        pass
+        return None, env
+
+
+    def __repr__(self) -> str:
+        class_name = type(self).__name__
+        if top_config.PRINT_1_ONLY_ATTRIBUTES:
+            attributes = [attr for attr in dir(self) 
+                          if not attr.startswith('__') and not attr.startswith("eval")]
+            return str(attributes)
+        if top_config.PRINT_2_DEBUD_MODE:
+            # attrs = vars(self)
+            # eachh = [item for item in attrs.items()]
+            # return str(eachh)
+
+            return "<"+class_name+">\n" + str(vars(self)) + "\n"
+        return "<"+class_name+">\n"
+        return  str(self.__class__)
+
 
 
 def getAllClasses():

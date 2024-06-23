@@ -2,8 +2,23 @@
 stru := struct {
 a:=1213;
 b:=109;
-fn:= x -> x*111};
+x:=0
+};
 stru.a;
-stru.b;
-extend stru{};
+
+s:= extend stru {
+x:=1
+};
+print(s.x);
+print(s..a);
+
+s2:= extend s {
+x:=2
+};
+print(s2...a);
+print(s2.a);
+print(s2.x);
+print(s2..x);
+print(s2...x)
+
 }

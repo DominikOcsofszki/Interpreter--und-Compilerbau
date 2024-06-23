@@ -10,12 +10,12 @@ from pack.ast.Expression import InterpretedExpression, getAllClasses,ic
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id, value):
-        self.e1=id
-        self.e2=value
+        self.id=id
+        self.value=value
 
     def eval(self,env):
-        e2,env1 = self.e2.eval(env)
-        env1[self.e1] = e2
+        e2,env1 = self.value.eval(env)
+        env1[self.id] = e2
         return e2, env1
 
 class ReadIdExpression(InterpretedExpression):

@@ -1,6 +1,7 @@
 from os import error
 import copy
-
+from top_configs import SHOW_ENV_IMPORTS
+# from pack.ast.var_ast import ReadIdExpression,WriteIdExpression
 
 class Env:
 
@@ -22,7 +23,13 @@ class Env:
 # //TODO!!!
     def __repr__(self) -> str:
         if self.parent:
-            return str(self.env_dict) + str(self.parent )
+            if self.parent.parent:
+                return str(self.env_dict)+"\n" + str(self.parent )
+            else:
+                if SHOW_ENV_IMPORTS:
+                    return str(self.env_dict)+ "\n\nIMPORTS: " + str(self.parent)
+                return str(self.env_dict)
+
         return str(self.env_dict)
 
 

@@ -2,6 +2,7 @@
 precedence = [
     # ['right', ','],
     ['right', 'assign'],
+    # ['right', 'extend'],
     ['right', 'lambda'],
     ['right', 'letrec'],
     ['right', 'local'],

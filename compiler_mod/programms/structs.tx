@@ -1,15 +1,21 @@
+#DONT
 {
 out:=100;
 stru := struct {
 a:=1213;
 b:=109;
-c:=out;
-fn:= x -> x*111};
+c:=out
+};
 stru.a;
 stru.b;
 stru.c;
 out:=123123;
 stru.c;
-stru.a;
-stru.fn(3)
+stru.a
+# stru.fn(3)
+# print(stru.fn(3))
+# print(stru.f());
+# stru.f();
+# stru.fn2(1,3)
+# stru.f()
 }
