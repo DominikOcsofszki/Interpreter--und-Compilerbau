@@ -26,6 +26,27 @@ class ReadIdExpression(InterpretedExpression):
         return env[self.id], env
 
 
+class ReadParentIdExpression(InterpretedExpression):
+    def __init__(self, id,dots):
+        self.id=id
+        self.n_parents=dots-1
+
+    def eval(self,env):
+        if self.n_parents == 0:
+            return env[self.id], env
+        else:
+            for _ in range(self.n_parents):
+                parent_struct =env["parent_in_struct"]
+                ic(env["parent_in_struct"])
+                ic(env["parent"])
+                parent = env["parent"]
+                if parent_struct:
+                    return parent_struct(ReadIdExpression(self.id)), env
+                    return parent.env[self.id], env
+        return None, env
+
+
+
 
 used_procedures_and_classes = getAllClasses()
 

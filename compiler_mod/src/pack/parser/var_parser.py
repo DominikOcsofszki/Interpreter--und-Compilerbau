@@ -13,6 +13,12 @@ def p_expression_read_id(p):
     'expression : ID'
     p[0] = generator_var.ReadIdExpression(p[1])
 
+def p_expression_read_parent_id(p):
+    'expression :  dots ID'
+    ic(p[1])
+    p[0] = generator_var.ReadParentIdExpression(p[2],p[1])
+
+
 def p_expression_write_id(p):
     'expression : ID assign expression'
     # 'expression : expression ASSIGN expression'

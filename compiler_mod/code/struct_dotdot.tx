@@ -1,5 +1,15 @@
 {
-
+a:="string";
 s0:= struct{
     a:=0
+};
+s1:= extend s0{
+    a:=1;
+    shouldbe0:=..a
+};
+s0.a;
+print(.a);
+print(..a);
+print(s1.a);
+print(s1.shouldbe0)
 }
