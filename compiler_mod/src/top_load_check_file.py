@@ -31,7 +31,7 @@ def checkAndOpenFile():
     print_no_comments_newlines()
     # print(data)
     lst_check =[]
-    check_exit = True
+    check_exit = False # <<change to True for check
     for x in data:
         x =x.replace("\n","")
         if x.__contains__("#DONT"):

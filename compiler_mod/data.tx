@@ -1,5 +1,4 @@
 
-programms/local_letrec.tx
 programms/structs_fn.tx
 # programms/rec_local2.tx
 
@@ -11,6 +10,7 @@ programms/structs_fn.tx
 
 # ===>Working-do-not-change:
 
+programms/local_letrec.tx
 programms/local_works.tx
 programms/lambda_args.tx
 programms/add.tx

@@ -8,9 +8,7 @@ class SequenceExpression(InterpretedExpression):
     def eval(self,env):
         r = None
         for e in self.seq:
-            ic(e)
             r, env = e.eval(env)
-        ic("=============================")
         return r, env
 
 

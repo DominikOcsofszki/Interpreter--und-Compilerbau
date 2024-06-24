@@ -39,10 +39,8 @@ class IfThenElseExpression(InterpretedExpression):
 
     def eval(self,env):
         comp_eval,env = self.comparator.eval(env)
-        ic(comp_eval)
         if comp_eval:
             e2,env = self.expr1.eval(env)
-            ic(e2)
             return e2,env
         #TODO: THIis!!!!
         # e3 = self.expr2.eval(env)

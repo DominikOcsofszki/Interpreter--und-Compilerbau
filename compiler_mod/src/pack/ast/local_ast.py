@@ -29,7 +29,6 @@ from pack.ast.Expression import InterpretedExpression, getAllClasses, ic
 #
 class LocalNewExpression(InterpretedExpression):
     def __init__(self, assign_ID, assign_right_expr, expression_in):
-        ic(self, assign_ID, assign_right_expr, expression_in)
         self.assign_ID=assign_ID
         self.assign_right_expr=assign_right_expr
         self.expression_in=expression_in
@@ -38,13 +37,10 @@ class LocalNewExpression(InterpretedExpression):
         env[self.assign_ID] = self.assign_right_expr
         res, env = self.expression_in.eval(env)
         res, env = res.eval(env)
-        ic(res)
-        ic(env)
         return res, env
 
 class LocalExpression(InterpretedExpression):
     def __init__(self, var, value, body):
-        ic(self, var, value, body)
         self.var=var
         self.value=value
         self.body=body
