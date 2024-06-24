@@ -1,0 +1,21 @@
+let
+
+env2.set_parent ==> copy of env1
+
+environment setzten.
+dict muss nach oben gehen und gefunden werden
+
+
+environemt muss auch oberhalb möglich zu sein
+
+unterenvironments muss extra env haben, das aber noch verbunden mit 
+
+
+let/scope/local assignment [in] [{] expr [}]
+
+===================================================
+local assignment in expr <<<<<<< using
+===================================================
+
+
+dict zu Environment umwandeln
