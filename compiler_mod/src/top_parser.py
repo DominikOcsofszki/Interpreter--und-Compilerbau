@@ -19,7 +19,7 @@ def p_expr_uminus(p):
     'expression : "-" expression %prec UMINUS'
     p[0] = -p[2]
 
-from top_load_check_file import print_line_nr
+from top_file_load_check import print_line_nr
 def p_error(p):
     if parser.state == 85:
         print('\n==================================================')

@@ -58,7 +58,6 @@ def p_expression_struct_use_parent_WORKING(p):
                 |   dot_expression "(" id_list ")"
 
     '''
-    ic(p[1])
     if len(p) == 2:
         p[0] = gen.StructCallNParentWithFunExpression(p[1],None)
         # p[0] = gen.StructCallNParentExpression(*p[1])

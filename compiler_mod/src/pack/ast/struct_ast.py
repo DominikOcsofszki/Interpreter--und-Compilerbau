@@ -56,41 +56,8 @@ class StructExtendExpression(InterpretedExpression):
             return res
         return get, env
 
-# class StructCallParentExpression(InterpretedExpression):
-#     def __init__(self, id, entry,n_parent):
-#         ic(self, id, entry,n_parent)
-#         self.entry=entry
-#         self.id=id
-#         self.n_parent=n_parent
-#
-#     def eval(self,env):
-#         struct, env = self.id.eval(env)
-#         entry, env = self.entry.eval(env)
-#         parent = var_ast.ReadIdExpression("parent")
-#         return struct(parent)(self.entry), env
-
-# class StructCallNParentExpression(InterpretedExpression):
-#     def __init__(self, id, entry,n_parent):
-#         ic(self, id, entry,n_parent)
-#         self.entry=entry
-#         self.id=id
-#         self.n_parent=n_parent
-#         self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
-#
-#     def eval(self,env):
-#         struct, env = self.id.eval(env)
-#         if self.n_parent > 0:
-#             parent_struct = struct(self.parentString_as_readExpression)
-#             for i in range(self.n_parent-1):
-#                 ic(parent_struct(self.entry))
-#                 parent_struct = parent_struct(self.parentString_as_readExpression)
-#             return parent_struct(self.entry), env
-#         return struct(self.entry), env
-#         # return struct(self.parentString_as_readExpression)(self.entry), env
-
 class StructCallNParentExpressionWORKING(InterpretedExpression):
     def __init__(self, id, entry,n_parent):
-        # ic(self, id, entry,n_parent)
         self.entry=entry
         self.id=id
         self.n_parent=n_parent
@@ -115,12 +82,10 @@ class StructCallNParentExpressionWORKING(InterpretedExpression):
         return value_ret, env
 class StructCallNParentExpression(InterpretedExpression):
     def __init__(self, id, entry,n_dots):
-        ic(self, id, entry,n_dots)
         self.id=var_ast.ReadIdExpression(id)
         self.attribute=var_ast.ReadIdExpression(entry)
         self.n_parent=n_dots - 1
         self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
-        ic(self.n_parent)
 
     def eval(self,env):
         parent_struct = None

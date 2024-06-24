@@ -3,8 +3,8 @@
 x:=1;
 # local fac:= x -> if x=0 then 1 else x * fac(x-1) in fac;
 
-local sqrt:= x->x*x in sqrt(5);
-sqrt(500)
+s:=local sqrt:= x->x*x in sqrt;
+s(500)
 
 
 

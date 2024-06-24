@@ -1,8 +1,0 @@
-{
-
-
-c:= v -> struct{
-    x:=123;
-    add := x -> val := val + x};
-xx := v
-}

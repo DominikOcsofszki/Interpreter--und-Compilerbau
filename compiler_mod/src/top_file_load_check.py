@@ -1,6 +1,6 @@
 
 def getFilesFromFile():
-    with open('/Users/dominikocsofszki/ss2024/compiler/projekt/compiler_mod/data.tx', 'r') as file:
+    with open('/Users/dominikocsofszki/ss2024/compiler/projekt/compiler_mod/code.tx', 'r') as file:
         files = file.read()
         return files
 
