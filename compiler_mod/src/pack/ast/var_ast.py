@@ -37,8 +37,6 @@ class ReadParentIdExpression(InterpretedExpression):
         else:
             for _ in range(self.n_parents):
                 parent_struct =env["parent_in_struct"]
-                ic(env["parent_in_struct"])
-                ic(env["parent"])
                 parent = env["parent"]
                 if parent_struct:
                     return parent_struct(ReadIdExpression(self.id)), env

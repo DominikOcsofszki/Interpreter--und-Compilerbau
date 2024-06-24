@@ -11,5 +11,9 @@ s0.a;
 print(.a);
 print(..a);
 print(s1.a);
-print(s1.shouldbe0)
+print(s1.shouldbe0);
+a;
+.a;
+..a;
+s1.shouldbe0
 }

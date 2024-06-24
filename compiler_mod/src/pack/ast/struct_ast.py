@@ -43,33 +43,19 @@ class StructCallFunExpression(InterpretedExpression):
 
 class StructExtendExpression(InterpretedExpression):
     def __init__(self,parent, entries):
-        ic(self,parent, entries)
         self.entries=entries
         self.parent=var_ast.ReadIdExpression(parent)
 
     def eval(self,env):
         lambda_env = Env(env.deep_copy())
-        ic("=============================")
         # TODO:!!!HERERHHREHRHEHRHERH!!!!!!!!!!!!!!!!
-        # ic(lambda_env["parent"]) #= self.parent.eval(lambda_env)[0]
-        # lambda_env["parent"] = self.parent.eval(env)[0]
-        # ic(env["parent"]) #= self.parent.eval(lambda_env)[0]
-        ic(lambda_env)
         new_parent_struct = self.parent.eval(env)[0]
-        ic(new_parent_struct)
         # lambda_env[
-        ic(lambda_env["parent_in_struct"])
         lambda_env["parent_in_struct"] = new_parent_struct
-        ic(lambda_env["parent_in_struct"])
-        ic(lambda_env["parent_in_struct"])
-        ic("=============================")
         for entry in self.entries:
             tmp, lambda_env = entry.eval(lambda_env)
-            ic(tmp)
-            ic(lambda_env)
         # ic(lambda_env["parent"]) #= self.parent.eval(lambda_env)[0]
         lambda_env["parent"] = self.parent.eval(lambda_env)[0]
-        ic(lambda_env)
         # ic(lambda_env["parent"]) #= self.parent.eval(lambda_env)[0]
         def get(val):
             res,envv = val.eval(lambda_env)
