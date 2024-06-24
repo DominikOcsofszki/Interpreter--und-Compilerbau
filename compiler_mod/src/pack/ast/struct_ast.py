@@ -11,6 +11,7 @@ class StructExpression(InterpretedExpression):
 
     def eval(self,env):
         lambda_env = Env(env.deep_copy())
+        ic(self.entries)
         for entry in self.entries:
             tmp, lambda_env = entry.eval(lambda_env)
         def get(val):
@@ -18,14 +19,14 @@ class StructExpression(InterpretedExpression):
             return res
         return get, env
 
-class StructCallExpression(InterpretedExpression):
-    def __init__(self, id, entry):
-        self.entry=entry
-        self.id=id
-
-    def eval(self,env):
-        struct, env = self.id.eval(env)
-        return struct(self.entry), env
+# class StructCallExpression(InterpretedExpression):
+#     def __init__(self, id, entry):
+#         self.entry=entry
+#         self.id=id
+#
+#     def eval(self,env):
+#         struct, env = self.id.eval(env)
+#         return struct(self.entry), env
 
 class StructCallFunExpression(InterpretedExpression):
     def __init__(self, struct_self, attribute,args):
@@ -56,57 +57,57 @@ class StructExtendExpression(InterpretedExpression):
             return res
         return get, env
 
-class StructCallNParentExpressionWORKING(InterpretedExpression):
-    def __init__(self, id, entry,n_parent):
-        self.entry=entry
-        self.id=id
-        self.n_parent=n_parent
-        self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
-
-    def eval(self,env):
-        struct, env = self.id.eval(env)
-        value_ret =  struct(self.entry)
-        parent_struct = struct(self.parentString_as_readExpression)
-        if self.n_parent > 0:
-            # parent_struct = struct(self.parentString_as_readExpression)
-            for i in range(self.n_parent-1):
-                parent_struct = parent_struct(self.parentString_as_readExpression)
-            value_ret =  parent_struct(self.entry)
-
-        if value_ret == None:
-            while parent_struct:
-                last_struct = parent_struct
-                parent_struct = parent_struct(self.parentString_as_readExpression)
-            value_ret =  last_struct(self.entry)
-
-        return value_ret, env
-class StructCallNParentExpression(InterpretedExpression):
-    def __init__(self, id, entry,n_dots):
-        self.id=var_ast.ReadIdExpression(id)
-        self.attribute=var_ast.ReadIdExpression(entry)
-        self.n_parent=n_dots - 1
-        self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
-
-    def eval(self,env):
-        parent_struct = None
-        value_ret =  None
-        struct,env = self.id.eval(env)
-        if self.n_parent > 0:
-            parent_struct = struct(self.parentString_as_readExpression)
-            for _ in range(self.n_parent-1):
-                parent_struct = parent_struct(self.parentString_as_readExpression)
-            value_ret =  parent_struct(var_ast.ReadIdExpression(self.attribute))
-        else:
-            return struct(self.attribute),env
-
-        if not value_ret:
-            if not parent_struct:
-                    parent_struct = struct(self.parentString_as_readExpression)
-            while parent_struct and not value_ret:
-                value_ret = parent_struct(self.attribute)
-                parent_struct = parent_struct(self.parentString_as_readExpression)
-
-        return value_ret, env
+# class StructCallNParentExpressionWORKING(InterpretedExpression):
+#     def __init__(self, id, entry,n_parent):
+#         self.entry=entry
+#         self.id=id
+#         self.n_parent=n_parent
+#         self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
+#
+#     def eval(self,env):
+#         struct, env = self.id.eval(env)
+#         value_ret =  struct(self.entry)
+#         parent_struct = struct(self.parentString_as_readExpression)
+#         if self.n_parent > 0:
+#             # parent_struct = struct(self.parentString_as_readExpression)
+#             for i in range(self.n_parent-1):
+#                 parent_struct = parent_struct(self.parentString_as_readExpression)
+#             value_ret =  parent_struct(self.entry)
+#
+#         if value_ret == None:
+#             while parent_struct:
+#                 last_struct = parent_struct
+#                 parent_struct = parent_struct(self.parentString_as_readExpression)
+#             value_ret =  last_struct(self.entry)
+#
+#         return value_ret, env
+# class StructCallNParentExpression(InterpretedExpression):
+#     def __init__(self, id, entry,n_dots):
+#         self.id=var_ast.ReadIdExpression(id)
+#         self.attribute=var_ast.ReadIdExpression(entry)
+#         self.n_parent=n_dots - 1
+#         self.parentString_as_readExpression = var_ast.ReadIdExpression("parent")
+#
+#     def eval(self,env):
+#         parent_struct = None
+#         value_ret =  None
+#         struct,env = self.id.eval(env)
+#         if self.n_parent > 0:
+#             parent_struct = struct(self.parentString_as_readExpression)
+#             for _ in range(self.n_parent-1):
+#                 parent_struct = parent_struct(self.parentString_as_readExpression)
+#             value_ret =  parent_struct(var_ast.ReadIdExpression(self.attribute))
+#         else:
+#             return struct(self.attribute),env
+#
+#         if not value_ret:
+#             if not parent_struct:
+#                     parent_struct = struct(self.parentString_as_readExpression)
+#             while parent_struct and not value_ret:
+#                 value_ret = parent_struct(self.attribute)
+#                 parent_struct = parent_struct(self.parentString_as_readExpression)
+#
+#         return value_ret, env
 
 
 class StructCallNParentWithFunExpression(InterpretedExpression):
@@ -128,7 +129,12 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
                 parent_struct = parent_struct(self.parentString_as_readExpression)
             value_ret =  parent_struct(var_ast.ReadIdExpression(self.attribute))
         else:
-            return struct(self.attribute),env
+            value_ret =struct(self.attribute) 
+            if not self.fun_args == None:
+                fun_args = [x.eval(env)[0] for x in self.fun_args]
+                return value_ret(fun_args),env
+
+            return value_ret,env
 
         if not value_ret:
             if not parent_struct:

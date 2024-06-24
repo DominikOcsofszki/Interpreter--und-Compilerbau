@@ -1,0 +1,5 @@
+    # '''expression : for expression ";" expression ";" expression do expression
+
+{
+    for x:=123;
+}

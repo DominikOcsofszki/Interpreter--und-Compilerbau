@@ -16,6 +16,8 @@ precedence = [
     ['left', '*', '/'],
     # ['right', '(','['],
     # ['left', '(','[', ')',']'],
-    # ['left', ')',']'],
+    # ['right', '('],
+    # ['left', 'for'],
     ['right', 'not', 'UMINUS'],
+    # ['left', ';'],
 ]

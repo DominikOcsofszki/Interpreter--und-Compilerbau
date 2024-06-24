@@ -13,8 +13,9 @@
 # c(2) -> 5
 # c(3) -> 8
 
-tokens_lambda = ['lambda']
+tokens_lambda = ['lambda','lambda_start']
 # tokens_lambda = ['lambda']
 t_lambda = r'->'
+t_lambda_start = r'\\'
 literals_komma=','
 

@@ -21,7 +21,7 @@ def p_expression_types_char(p):
     p[0] = generator_local.CharExpression(p[1])
 
 def p_expression_types_array(p):
-    'expression : "[" id_list "]"'
+    'expression : "[" expression_list "]"'
     p[0]=generator_local.ArrayExpression(p[2])
 
 def p_expression_types_array_call(p):
@@ -29,7 +29,7 @@ def p_expression_types_array_call(p):
     p[0]=generator_local.ArrayCallExpression(p[1],p[3])
 
 def p_expression_types_list(p):
-    'expression : "(" id_list ")"'
+    'expression : "(" expression_list ")"'
     p[0]=generator_local.ListExpression(p[2])
 
 generator_local = genHelperVar.set_generator_module_and_check(types_ast)

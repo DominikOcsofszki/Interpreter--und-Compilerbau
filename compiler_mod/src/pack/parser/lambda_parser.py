@@ -11,60 +11,66 @@ import pack.parser.gen_helper as gen_helper
 gen = lambda_ast if True else None 
 genFix = gen_helper.GeneratorHelper(lambda_ast.used_procedures_and_classes,gen)
 
-# def p_expression_lambda(p):
-#     '''expression : ID lambda expression
-#     |   lambda expression
-#     '''
-#     if len(p) == 3:
-#         p[0] = gen.LambdaNoVarsExpression(p[2])
-#     else:
-#         p[0] = gen.LambdaExpression(p[1],p[3])
-
-
-# TODO: RENAME to expression_list
-def p_expression_expr_ids2(p):
-    '''id_list : expression "," id_list
+def p_expression_expr_list(p):
+    '''expression_list : expression "," expression_list
         |        expression
     '''
-    if len(p) == 2:
-        p[0] = [p[1]]
-    else:
-        p[0] = [p[1], *p[3]]
+    p[0] = [p[1]] if len(p) ==2 else [p[1], *p[3]]
+    # if len(p) == 2:
+    #     p[0] = [p[1]]
+    # else:
+    #     p[0] = [p[1], *p[3]]
 #
-# def p_expression_lambda_ids(p):
-#     '''lambda_ids : lambda_ids ","  id_list
-#     |           ID
-#     '''
-#     if len(p) == 2:
-#         p[0] = [p[1]]
-#     else:
-#         p[0] = p[1], p[3]
 #
-def p_expression_lambda_args(p):
-    # 'expression : "(" id_list ")" lambda expression'
-    '''expression :     lambda expression
-            |           ID lambda expression
-            |           "(" id_list ")" lambda expression
+
+def p_expression_lambda_args_WORKING(p):
+    '''expression :     lambda_start lambda expression
+            |           lambda_start expression_list  lambda expression
     '''
-    if len(p) == 3:
-        p[0] = gen.LambdaArgsExpression([], p[2])
     if len(p) == 4:
-        #TODO: is this really needed!!!?????!??!??!
-        p[0] = gen.LambdaArgsExpression([var_ast.ReadIdExpression(p[1])], p[3])
-    if len(p) == 6:
-        p[0] = gen.LambdaArgsExpression(p[2], p[5])
+        p[0] = gen.LambdaArgsExpression([], p[3])
+    if len(p) == 5:
+        p[0] = gen.LambdaArgsExpression(p[2], p[4])
 
-    # p[0] = gen.LambdaArgsExpression(p[2], p[5])
-
-
-
-def p_expression_call_no_vars(p):
-    'expression :  ID "(" ")"'
-    p[0] = gen.CallExpression(p[1],[])
+# def p_expression_call_no_vars(p):
+#     'expression :  ID "(" ")"'
+#     p[0] = gen.CallExpression(p[1],[])
+#
+# def p_expression_call_args(p):
+#     'expression :  ID "(" expression_list ")"'
+#     p[0] = gen.CallExpression(p[1],[*p[3]])
 
 def p_expression_call_args(p):
-    'expression :  ID "(" id_list ")"'
-    p[0] = gen.CallExpression(p[1],[*p[3]])
-
+    '''expression : ID "(" ")"     
+        |           ID "(" expression_list ")"
+    '''
+    if len(p) == 4:
+        p[0] = gen.CallExpression(p[1],[])
+    else:
+        p[0] = gen.CallExpression(p[1],[*p[3]])
 gen = genFix.set_generator_module_and_check(lambda_ast)
+
+
+
+
+
+# def p_expression_lambda_args_WORKING(p):
+#     '''expression :     lambda expression
+#             |           expression_list  lambda expression
+#             |           ID lambda expression
+#             |           "(" expression_list ")" lambda expression
+#     '''
+#             # |           ID lambda expression
+#     if len(p) == 3:
+#         p[0] = gen.LambdaArgsExpression([], p[2])
+#     if len(p) == 4:
+#         #TODO: is this really needed!!!?????!??!??!
+#         p[0] = gen.LambdaArgsExpression([var_ast.ReadIdExpression(p[1])], p[3])
+#     if len(p) == 6:
+#         p[0] = gen.LambdaArgsExpression(p[2], p[5])
+#
+#     # p[0] = gen.LambdaArgsExpression(p[2], p[5])
+
+
+
 

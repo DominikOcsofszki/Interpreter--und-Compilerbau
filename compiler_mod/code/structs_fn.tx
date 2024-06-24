@@ -1,19 +1,22 @@
 {
+out:=988889;
 s:= struct {
-f:= -> 11;
-f1:= x -> x*11;
-f2:= (x,y) -> x*11*y;
-x:=1
+    inside:=out;
+    f:= \ -> 11;
+    f1:= \x -> x*1;
+    f2:= \x,y -> x*1*y;
+    x:=1
 };
 s2:= extend s{
-x:=2
+    x:=2
 };
 s3:= extend s2{
-x:=3
+    x:=3
 };
-
-s3.x;
-s3...f();
-s3...f1(3);
-s3...f2(3,2)
+print(s3.x);
+print(s3...f());
+print(s3...f1(3));
+print(s3...f2(3,2));
+print(s3...inside);
+print(s3...b)
 }

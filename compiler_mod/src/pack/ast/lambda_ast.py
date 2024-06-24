@@ -20,7 +20,6 @@ class LambdaArgsExpression(InterpretedExpression):
 
 # BRAINFUCK!
     def eval(self,env):
-        # lambda_env = Env(env.deep_copy())
         lambda_env = Env(env)
         def lmbd(vals):
             for i ,id_entry in enumerate(self.ids):

@@ -1,11 +1,9 @@
 {
 y:=99;
-f:= -> 100;
+f:= \-> 100;
 print(f());
-print("=====");
-fn:= x -> x ;
+fn:= \x -> x ;
 print(fn(5));
-print("=====");
-fn2:= (x,y,z) -> x + y * z;
+fn2:= \x,y,z -> x + y * z;
 print(fn2(123,100,100))
 }

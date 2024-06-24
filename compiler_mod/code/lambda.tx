@@ -3,12 +3,12 @@
 {
 x:=11;
 a:=22;
-lam:= x -> 5*x;
+lam:= \x -> 5*x;
 print(lam(123));
 x:=1;
 lam(a);
 y:=6;
-fn:= x -> x + y;
+fn:= \x -> x + y;
 # fn2:= (x,y) -> x*y;
 a:=123;
 print(fn(9));

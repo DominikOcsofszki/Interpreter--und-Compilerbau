@@ -1,6 +1,6 @@
 #DONT
 {
-fnprint:=(x,y) -> {
+fnprint:=\x,y -> {
     print(x);
     print(y)
 };
