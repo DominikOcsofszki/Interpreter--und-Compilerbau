@@ -27,7 +27,6 @@ def p_expression_binary_operators_bool(p):
                     | expression OR expression
                     | expression NAND expression
     '''
-    # print(p[2])
     lowerp2 = p[2].lower()
     match lowerp2:
         case "and"      : p[0] = gen.AndExpression(p[1],p[3]) 
@@ -40,10 +39,6 @@ def p_expression_binary_operators_bool(p):
         case "<"        : p[0] = gen.LtExpression(p[1],p[3]) 
         case "or"       : p[0] = gen.OrExpression(p[1],p[3]) 
         case "nand"     : p[0] = gen.NandExpression(p[1],p[3]) 
-        # case "not"      : p[0] = gen.NotEqCompExpression(p[1],p[3]) 
-
-
-    # p[0] = gen.checkAndReturnBinaryClass(p)
 
 def p_expression_unary_operators_not(p):
     '''expression : NOT expression

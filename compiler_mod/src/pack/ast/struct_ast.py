@@ -1,5 +1,4 @@
 
-# local assignment in expr
 
 from environment import Env
 from pack.ast.Expression import InterpretedExpression, getAllClasses, ic
@@ -18,14 +17,6 @@ class StructExpression(InterpretedExpression):
             return res
         return get, env
 
-# class StructCallExpression(InterpretedExpression):
-#     def __init__(self, id, entry):
-#         self.entry=entry
-#         self.id=id
-#
-#     def eval(self,env):
-#         struct, env = self.id.eval(env)
-#         return struct(self.entry), env
 
 class StructCallFunExpression(InterpretedExpression):
     def __init__(self, struct_self, attribute,args):
@@ -48,15 +39,11 @@ class StructExtendExpression(InterpretedExpression):
 
     def eval(self,env):
         lambda_env = Env(env.deep_copy())
-        # TODO:!!!HERERHHREHRHEHRHERH!!!!!!!!!!!!!!!!
         new_parent_struct = self.parent.eval(env)[0]
-        # lambda_env[
         lambda_env["parent_in_struct"] = new_parent_struct
         for entry in self.entries:
             tmp, lambda_env = entry.eval(lambda_env)
-        # ic(lambda_env["parent"]) #= self.parent.eval(lambda_env)[0]
         lambda_env["parent"] = self.parent.eval(lambda_env)[0]
-        # ic(lambda_env["parent"]) #= self.parent.eval(lambda_env)[0]
         def get(val):
             res,envv = val.eval(lambda_env)
             return res

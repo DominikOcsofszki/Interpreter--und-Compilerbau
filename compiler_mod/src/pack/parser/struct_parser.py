@@ -1,6 +1,4 @@
 
-
-
 from pack.ast import struct_ast
 from pack.ast import var_ast
 from pack.ast.struct_ast import *
@@ -13,13 +11,18 @@ gen = struct_ast if True else None
 generator_vars = var_ast if True else None 
 genHelperSequences = gen_helper.GeneratorHelper(struct_ast.used_procedures_and_classes,gen)
 
+def p_expression_expressions_struct(p):
+    '''sequence_struct :   sequence_struct ";" ID ASSIGN expression 
+                        |  ID ASSIGN expression 
+                        '''
+    p[0] = [generator_vars.WriteIdExpression(p[1],p[3])] if len(p) == 4 else [*p[1],generator_vars.WriteIdExpression(p[3],p[5])]
 
 def p_expression__new_struct(p):
-    'expression : STRUCT "{" sequence "}" '
+    'expression : STRUCT "{" sequence_struct "}" '
     p[0] = gen.StructExpression(p[3])
 
 def p_expression_struct_extend(p):
-    'expression : EXTEND ID "{" sequence "}" '
+    'expression : EXTEND ID "{" sequence_struct "}" '
     p[0] = gen.StructExtendExpression(p[2],p[4])
 
 def p_expression_dots(p):
