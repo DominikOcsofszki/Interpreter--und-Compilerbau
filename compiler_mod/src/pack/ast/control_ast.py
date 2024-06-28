@@ -1,22 +1,6 @@
 
 from pack.ast.Expression import InterpretedExpression, getAllClasses,ic
 
-# loop expr do expr
-# for assign;bool_expr;assign do expr
-# for assign;bool_expr;assign do lock var expr << optional
-# ===================================================
-# if bool_expr then expr
-# if bool_expr then expr else expr
-
-
-# class LoopExpression(InterpretedExpression):
-#     def __init__(self, e1):
-#         self.e1=e1
-#
-#     def eval(self,env):
-#         e1
-#         return [expression.eval(env) for expression in self.e1]
-#
 
 class IfThenExpression(InterpretedExpression):
     def __init__(self, e1,e2):
@@ -94,13 +78,6 @@ class LoopDoExpression(InterpretedExpression):
         for _ in range(int(count)):
             body, env1 = self.body.eval(env1)
         return body, env1
-
-
-
-
-        # for _ in range(self.count.eval(env)):
-        #     self.body.eval(env)
-
 
 
 used_procedures_and_classes = getAllClasses()

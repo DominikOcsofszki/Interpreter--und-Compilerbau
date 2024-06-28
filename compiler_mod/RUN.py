@@ -1,5 +1,5 @@
 from icecream import ic
-from pack.parser.struct_parser import P_line
+# from pack.parser.struct_parser import P_line
 from top_parser import parser, lexer
 # from environment import Env
 # from top_imports import env_imports

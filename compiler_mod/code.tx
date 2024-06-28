@@ -1,10 +1,11 @@
+code/arith_bool.tx
 code/struct_dotdot.tx
 code/new_lambda.tx
 code/types.tx
 code/structs.tx
 code/structs_fn.tx
 code/structs_test_class.tx
-## ===>Working-do-not-change:
+# ===>Working-do-not-change:
 code/add.tx
 code/arr_multi.tx
 code/lambda.tx

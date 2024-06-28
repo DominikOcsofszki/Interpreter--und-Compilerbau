@@ -45,29 +45,3 @@ class Env:
     def __setitem__(self,key,value):
         self.env_dict[key]=value
 
-    #
-    # def define_local(self, name, value):
-    #     self.dict_env[name] = value
-    #
-    # def push(self):
-    #     return Environment(self)
-    # 
-    # def pop(self):
-    #     return self.parent
-
-# a = "asd"
-# b = "as"
-# env = Env()
-# env["asd"] = 5
-# print(env["asd"])
-# if a in env:
-#     print("WORKS")
-#
-# if b in env:
-#     print("WS")
-#
-# env["asd"] = 6
-#
-#
-# print((1, env["asd"]))
-# print((1,env))

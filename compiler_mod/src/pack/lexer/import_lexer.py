@@ -1,5 +1,3 @@
+tokens_import = ['IMPORT','AS']
 
-tokens_import = ['import','as']
-
-t_import = r'import'
-# t_as = r'as'
+t_IMPORT = r'IMPORT'

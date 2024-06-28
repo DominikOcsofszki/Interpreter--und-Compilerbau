@@ -1,36 +1,16 @@
-reserved_compare = {
-        '<=' : 'le',
-        '>=' : 'ge',
-        '!=' : 'neqs',
-        }
-reserved_bool_op ={
-        'not':'not',
-        'and':'and',
-        'or':'or',
-        'eq':'eq',
-        'nand':'nand',
-        }
-reserved_bool_values ={
-        "true":"true",
-        "false":"false",
-        }
-
 literals_bool ='><='
 
-tokens_bool = ['BOOL'] + \
-        list(reserved_compare.values()) +\
-        list(reserved_bool_op.values())
-
+tokens_bool_new = ['BOOL','LE', 'GE', 'NEQS','NOT', 'AND', 'OR', 'EQ', 'NAND']
+t_LE=r'<='
+t_GE=r'>='
+t_NEQS=r'!='
+t_NOT=	r'not'
+t_AND=	r'and'
+t_OR=	r'or'
+t_EQ=	r'eq'
+t_NAND=	r'nand'
 def t_BOOL(t):
     r'true | false'
     t.type  ="BOOL"
     return t
 
-def t_ID(t):
-    r'not | and | or | eq | nand'
-    t.type =    reserved_bool_op.get(t.value)
-    return t
-
-t_le=r'<='
-t_ge=r'>='
-t_neqs=r'!='

@@ -1,22 +1,10 @@
-import numpy as np
-tokens_types = ['string','char','float']
-# tokens_types = ['string','char','float','list','array']
+tokens_types = ['STRING','CHAR','FLOAT']
 literals_types = '[].\''
-
-# def t_float(t):
-#     # r'\d+(\.\d*)?'
-#     r'\d+[.]+(\d*)?'
-#     # r'\d+\.'
-#     print("in float")
-#     t.value =float(t.value)
-#     t.type = "float"
-#     return t
-
 
 def t_string(t):
     r'\".*\"'
     t.value =t.value[1:-1]
-    t.type = "string"
+    t.type = "STRING"
     return t
 
 def t_char(t):
@@ -26,7 +14,7 @@ def t_char(t):
     \'\\n\'
     '''
     t.value =t.value[1:-1] 
-    t.type = "char"
+    t.type = "CHAR"
     return t
 
 

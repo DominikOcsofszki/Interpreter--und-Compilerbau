@@ -1,7 +1,4 @@
+tokens_struct=['STRUCT','EXTEND']
 
-# TODO: add extends
-tokens_struct=['struct','extend']
-
-
-t_struct='struct'
-t_extend='extend'
+t_STRUCT='struct'
+t_EXTEND='extend'

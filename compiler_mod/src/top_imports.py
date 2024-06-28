@@ -1,6 +1,5 @@
 from environment import Env
 
-# my functions:
 from pack.ast.types_ast import head,tail
 from pack.ast.Expression import InterpretedExpression, ic
 

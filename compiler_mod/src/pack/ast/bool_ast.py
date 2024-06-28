@@ -1,5 +1,5 @@
-import sys
-import inspect
+# import sys
+# import inspect
 
 from pack.ast.Expression import InterpretedExpression, getAllClasses
 
@@ -136,36 +136,4 @@ class NandExpression(InterpretedExpression):
         return (not (e1 and e2)), env2
 
 used_procedures_and_classes = getAllClasses()
-
-# print(used_procedures_and_classes)
-def checkAndReturnBinaryClass(p):
-    print(p[2])
-    lowerp2 = p[2].lower()
-    match lowerp2:
-        case "and"      : p[0] = AndExpression(p[1],p[3]) 
-        case "eqcomp"   : p[0] = EqCompExpression(p[1],p[3]) 
-        case "="       : p[0] = EqExpression(p[1],p[3]) 
-        case ">="       : p[0] = GeExpression(p[1],p[3]) 
-        case ">"       : p[0] = GtExpression(p[1],p[3]) 
-        case "<="       : p[0] = LeExpression(p[1],p[3]) 
-        case "!="       : p[0] = NotEqCompExpression(p[1],p[3]) 
-        case "<"       : p[0] = LtExpression(p[1],p[3]) 
-        case "not"      : p[0] = NotEqCompExpression(p[1],p[3]) 
-        case "or"       : p[0] = OrExpression(p[1],p[3]) 
-        case "nand"     : p[0] = NandExpression(p[1],p[3]) 
-        case _ : print("STH WROMG")
-    return p[0]
-
-def checkAndReturnUnaryClass(p):
-    lowerp2 = p[1].lower()
-    match lowerp2:
-        case "not" : p[0] = NotBoolExpression(p[2])
-        case _ : print("=======errror=====")
-    return p[0]
-
-def checkAndReturnBoolValueClass(p):
-    lowerp2 = p[1].lower()
-    match lowerp2:
-        case "true" | "false"   : p[0] = BoolValueExpression(p[1])
-    return p[0]
 

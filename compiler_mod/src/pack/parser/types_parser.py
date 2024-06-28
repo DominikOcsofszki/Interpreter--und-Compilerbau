@@ -9,15 +9,15 @@ generator_local = types_ast if True else None
 genHelperVar = gen_helper.GeneratorHelper(types_ast.used_procedures_and_classes,generator_local)
 
 def p_expression_types_float(p):
-    'expression : float'
+    'expression : FLOAT'
     p[0] = generator_local.FloatExpression(p[1])
 
 def p_expression_types_string(p):
-    'expression : string '
+    'expression : STRING '
     p[0] = generator_local.StringExpression(p[1])
 
 def p_expression_types_char(p):
-    'expression : char '
+    'expression : CHAR '
     p[0] = generator_local.CharExpression(p[1])
 
 def p_expression_types_array(p):

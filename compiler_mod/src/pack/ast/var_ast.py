@@ -1,12 +1,5 @@
 from pack.ast.Expression import InterpretedExpression, getAllClasses,ic
 
-# def p_expression_read_id(p):
-#     'expression : ID'
-#     p[0] = generator_var.ReadIdExpression(p[1])
-#
-# def p_expression_write_id(p):
-#     'expression : ID assign expression'
-#     p[0] = generator_var.WriteIdExpression(p[1],p[3])
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id, value):

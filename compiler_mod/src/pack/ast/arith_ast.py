@@ -5,8 +5,6 @@ class PlusExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env):
-        #TODO fix here
-        # env["asd"] = 0
         e1, env1 = self.e1.eval(env)
         e2, env2 = self.e2.eval(env1)
         return (e1 + e2), env2

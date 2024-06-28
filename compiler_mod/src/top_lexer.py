@@ -7,9 +7,7 @@ from pack.lexer.local_lexer import *
 from pack.lexer.lambda_lexer import *
 from pack.lexer.import_lexer import *
 from pack.lexer.types_lexer import *
-from pack.lexer.letrec_lexer import *
 from pack.lexer.struct_lexer import *
-# from pack.lexer.call_lexer import *
 from ply.lex import lex
 
 tokens = []
@@ -33,33 +31,27 @@ literals=literals_arith +\
         literals_sequences +\
         literals_komma +\
         literals_types
-        # literals_call +\
 
 tokens = tokens 	    +\
 		 tokens_arith 	+\
-		 tokens_bool 	+\
+		 tokens_bool_new 	+\
 		 tokens_var 	+\
-		 tokens_sequences +\
          tokens_control+\
          tokens_local+\
          tokens_lambda+\
          tokens_import+\
-         tokens_letrec+\
          tokens_struct+\
          tokens_types
-         # tokens_call+\
-
+from icecream import ic
+print(tokens)
+print(literals)
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = 'ID'
-    if t.value in tokens:
-        t.type = t.value
-        t.value = t.value
-    # print(t)
+    if str.upper(t.value) in tokens:
+        t.type = str.upper(t.value)
     return t
 def t_ignore_comments(t):
     r'[#].*'
-    # print("comment: "+t.value)
     pass
 
 

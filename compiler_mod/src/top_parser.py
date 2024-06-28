@@ -7,7 +7,6 @@ from pack.parser.local_parser import *
 from pack.parser.lambda_parser import *
 from pack.parser.import_parser import *
 from pack.parser.types_parser import *
-from pack.parser.letrec_parser import *
 from pack.parser.struct_parser import *
 
 import ply.yacc as yacc
@@ -30,17 +29,13 @@ def p_error(p):
         print('====================Parsing-Error=================')
         print_line_nr(p.lineno)
         print('Syntax error in input line', p.lineno,": \"", p.value,"\"")
-        # print("lineNr: \"",p.lineno,"entry: \"",p.value,"\"")
         print('Parser State {}: \n{} . {}'
               .format(parser.state,
                       stack_state_str,
                       p))
         print('\n==================================================')
-        # print('======firsterror==EXIT()==========================')
-        # raise Exception("info")
 
     exit()
-    # print('====================Parsing-Error=================\n')
 
 parser = yacc.yacc(start='expression',debug=True)
 

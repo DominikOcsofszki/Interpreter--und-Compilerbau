@@ -1,8 +1,5 @@
 from icecream import ic
 from environment import Env
-# ic.disable()
-# ic.configureOutput(includeContext=True)
-# ic.configureOutput()
 
 import top_configs as top_config
 class InterpretedExpression:
