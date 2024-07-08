@@ -1,0 +1,25 @@
+ohne punkt lexikal scope
+im scope links muss ein punkt sein
+im lambda keine Regelung
+
+
+setter 
+r_values mehrerer punkte
+l_value  ein/kein punkt
+
+
+ENV erweitern mit:
+eval(expr,env,containing_struct)
+
+# y wird nach oben gesucht und dann überschrieben. Einizige ausnahme local und struct
+{
+f:= \x -> y:=5
+
+
+}
+
+
+.ID sind items die nur in structs.
+ID gelten nur in Env.
+
+optional(this und self für self reference...)

@@ -1,0 +1,19 @@
+# {
+# a:=123;
+#
+# s0:= struct {
+#     x:=a
+# };
+#
+# s1:= extend s0{
+#     x1:=a
+# };
+# s0.x;
+# s1.x1
+# }
+{
+    a := 4;
+    s := struct { b := a };
+    t := extend s { c := a };
+    t.c
+}

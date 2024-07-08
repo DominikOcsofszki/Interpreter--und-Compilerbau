@@ -1,3 +1,15 @@
+code/struct_parts.tx
+code/struct_semincc24.tx
+
+code/lambda_closure.tx
+code/lambda_env.tx
+code/struct_dot.tx
+code/minus.tx
+code/vl_01_06_2024.tx
+code/vl_1_6.tx
+code/test_lsp.tx
+code/struct_stru_in_stru.tx
+code/struct_dot_out.tx
 code/struct_dotdot.tx
 code/arith_bool.tx
 code/new_lambda.tx

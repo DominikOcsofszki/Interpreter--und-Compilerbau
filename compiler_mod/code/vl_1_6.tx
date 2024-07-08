@@ -1,0 +1,43 @@
+{
+x:= 111;
+
+s:=struct {
+    x:=1;
+    y:=x;
+    set_x:=\z->x:=z
+};
+print(s.y);
+print(s.x);
+print(s.x);
+s.set_x(999);
+print(s.x);
+print(x);
+
+# a:= local x {
+#     struct {
+#     x:=7;
+#     set_x := setx\-> x:=setx;
+#     get_x := x
+# } 
+# }in x;
+#
+#
+# a
+
+f:= \x -> \y -> x*y;
+
+bind:=f(1);
+bind(10);
+
+x:=7;
+f:= \y -> x*y;
+x:=100000;
+a:=f(5);
+
+f:= local x:=7 in {
+\y->x*y
+};
+x:=3;
+a:=f(5)
+
+}

@@ -19,7 +19,16 @@ class LambdaArgsExpression(InterpretedExpression):
         lambda_env = Env(env)
         def lmbd(vals):
             for i ,id_entry in enumerate(self.ids):
+                ic(vals[i])
                 lambda_env[id_entry.id] = vals[i]
+                # ic("============================>>>====================",vals[i])
+                # if issubclass(type(vals[i]), InterpretedExpression):
+                #     value, _env = vals[i].eval(env)
+                # else:
+                #     value = vals[i]
+                # lambda_env[id_entry.id] = None
+                # WriteIdExpression(id_entry.id,vals[i]).eval(lambda_env)
+                # WriteIdExpression(id_entry.id,value).eval(lambda_env)
             return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 
@@ -27,7 +36,6 @@ class LambdaArgsExpression(InterpretedExpression):
 
 class CallExpression(InterpretedExpression):
     def __init__(self,fn,ids_or_values):
-        ic(self,fn,ids_or_values)
         self.fn=fn
         self.x=ids_or_values
 

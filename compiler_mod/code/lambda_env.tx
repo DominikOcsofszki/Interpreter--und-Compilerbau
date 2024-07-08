@@ -1,0 +1,17 @@
+{
+x:= 7;
+set_x := \xx -> x:=xx;
+print(x);
+set_x(100);
+x; # =>100
+
+x:= 7;
+do_sth:= \xx-> {
+    x:=100;
+    y:=2323/xx;
+    print(y)
+};
+do_sth(10)
+}
+
+

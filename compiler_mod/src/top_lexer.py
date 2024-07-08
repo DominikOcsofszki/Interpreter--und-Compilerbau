@@ -1,6 +1,6 @@
 from pack.lexer.arith_lexer import *
 from pack.lexer.bool_lexer import *
-from pack.lexer.var_lexer import *
+from pack.lexer.write_read_lexer import *
 from pack.lexer.sequences_lexer import *
 from pack.lexer.control_lexer import *
 from pack.lexer.local_lexer import *
@@ -9,6 +9,7 @@ from pack.lexer.import_lexer import *
 from pack.lexer.types_lexer import *
 from pack.lexer.struct_lexer import *
 from ply.lex import lex
+from top_configs import SHOW_TOKENS
 
 tokens = []
 literals = []
@@ -43,8 +44,9 @@ tokens = tokens 	    +\
          tokens_struct+\
          tokens_types
 from icecream import ic
-print(tokens)
-print(literals)
+if SHOW_TOKENS:
+    print(tokens)
+    print(literals)
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     if str.upper(t.value) in tokens:

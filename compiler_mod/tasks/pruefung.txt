@@ -1,0 +1,9 @@
+
+theorie:
+parsing lernen!!!
+Wie funktionieren die parser?
+-> LR, LALR, LL parsing
+
+
+code kennen genügt für die pruefung
+

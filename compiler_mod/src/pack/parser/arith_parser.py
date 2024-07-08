@@ -17,14 +17,18 @@ def p_expression_binary_operators_arith(p):
     '''
     p[0] = generator_arith.checkAndReturnBinaryClass(p)
 
+def p_expr_uminus(p):
+    'expression : "-" expression %prec UMINUS'
+    p[0] = -p[2]
 
 def p_expression_num(p):
     'expression : NUMBER'
     p[0] = generator_arith.NumberExpression(p[1])
 
-def p_expression_paren(p):
-    'expression : "(" expression ")"'
-    p[0] = generator_arith.ParenExpression(p[2])
+
+# def p_expression_paren(p):
+#     'expression : "(" expression ")"'
+#     p[0] = generator_arith.ParenExpression(p[2])
 
 
 generator_arith = genHelperArith.set_generator_module_and_check(arith_ast)

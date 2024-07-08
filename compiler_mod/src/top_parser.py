@@ -1,6 +1,6 @@
 from pack.parser.arith_parser import *
 from pack.parser.bool_parser import *
-from pack.parser.var_parser import *
+from pack.parser.write_read_parser import *
 from pack.parser.sequences_parser import *
 from pack.parser.control_parser import *
 from pack.parser.local_parser import *
@@ -14,9 +14,9 @@ from top_lexer import tokens, lexer
 
 from top_precedence import precedence
 
-def p_expr_uminus(p):
-    'expression : "-" expression %prec UMINUS'
-    p[0] = -p[2]
+# def p_expr_uminus(p):
+#     'expression : "-" expression %prec UMINUS'
+#     p[0] = -p[2]
 
 from top_file_load_check import print_line_nr
 def p_error(p):

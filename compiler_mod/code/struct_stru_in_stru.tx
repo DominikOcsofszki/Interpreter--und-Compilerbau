@@ -1,0 +1,27 @@
+{
+
+extra:= struct{
+    a:=0
+};
+a:="string";
+s0:= struct{
+    a:=0
+};
+s1:= extend s0{
+    a:=1;
+    shouldbe0:=..a
+};
+s2:= extend s1{
+    a:=2;
+    str:=extra;
+    strins := struct {
+    b:=123
+    }
+};
+sss := s2.extra;
+sss.a;
+sinside:=s2.strins;
+sinside.b
+
+}
+

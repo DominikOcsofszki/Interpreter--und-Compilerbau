@@ -1,0 +1,18 @@
+{
+y:=1;
+# f:=\x->y:=x;
+# print(y);
+# f(99);
+# print(y);
+# f2(0);
+# print(y)
+s := struct {
+    x:=99;
+    a:=y;
+    f:= \xx-> {print(a);a:=99;print(a)};
+    cy:= \yy-> {print(y);y:=yy;print(y)}
+};
+y:=123123123;
+s.cy(55);
+print(y)
+}

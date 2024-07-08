@@ -8,9 +8,20 @@ def print_py(entries:InterpretedExpression):
     for entry in entries:
         print(">>>",entry)
 
-env_imports = Env()
-env_imports["print"]=print_py
-env_imports["head"]=head
-env_imports["tail"]=tail
+def show_top_env(_):
+    print("TOP_ENV",environment)
 
-environment.parent = env_imports
+def show_import_env(_):
+    print("IMPORT_ENV",ENV_IMPORTS)
+
+ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
+ENV_IMPORTS["print"]=print_py
+ENV_IMPORTS["_ENV"]=show_top_env
+ENV_IMPORTS["_ENV_import"]=show_import_env
+ENV_IMPORTS["head"]=head
+ENV_IMPORTS["tail"]=tail
+
+environment.parent = ENV_IMPORTS
+
+# import_names = [x for x in env_imports.env_dict]
+# print(import_names)

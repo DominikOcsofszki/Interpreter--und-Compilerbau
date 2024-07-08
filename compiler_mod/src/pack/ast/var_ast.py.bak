@@ -7,9 +7,23 @@ class WriteIdExpression(InterpretedExpression):
         self.value=value
 
     def eval(self,env):
+        found_env = findEnvWithIdWrite(self.id,env)
         e2,env1 = self.value.eval(env)
-        env1[self.id] = e2
+        found_env[self.id] = e2
         return e2, env1
+
+def findEnvWithIdWrite(id,env):
+    parent_env = env
+    item = parent_env[id]
+    last_parent = parent_env
+    while parent_env and not item:
+        last_parent = parent_env
+        item = parent_env[id]
+        if item:
+            return last_parent
+        parent_env = parent_env.parent
+    return env
+
 
 class ReadIdExpression(InterpretedExpression):
     def __init__(self, id):

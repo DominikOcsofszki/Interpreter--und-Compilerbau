@@ -5,9 +5,10 @@ from top_configs import SHOW_ENV_IMPORTS
 
 class Env:
 
-    def __init__(self,parent=None) -> None:
+    def __init__(self,parent=None,env_name=None) -> None:
         self.parent = parent
         self.env_dict={}
+        self.env_name=env_name
 
     def __contains__(self,key):
         if key in self.env_dict:

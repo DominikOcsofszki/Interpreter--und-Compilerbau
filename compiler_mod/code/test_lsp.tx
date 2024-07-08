@@ -1,0 +1,27 @@
+{
+out:=123;
+s:= struct {
+a:=10;
+b:=1
+};
+s1:= extend s{
+a:=123;
+b:=123
+};
+
+s2:= struct {
+    a:=\->out;
+    f:=\x -> out := x
+};
+s2.f(99999);
+s2.a();
+# out:=1231111;
+
+s2.a();
+
+g:= \x -> struct {h:=x};
+a:=3;
+s:=g(3);
+# closure for struct erstellen, die nicht von env abhängen
+arr:=[s.a,s,s.h]
+}

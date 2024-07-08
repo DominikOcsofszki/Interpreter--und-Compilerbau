@@ -1,0 +1,12 @@
+{
+
+out := 999999999;
+
+f := \-> {_ENV();out:=0;_ENV()};
+# f := \-> out:=0;
+
+# print(out);
+f()
+# print(out);
+# out
+}
