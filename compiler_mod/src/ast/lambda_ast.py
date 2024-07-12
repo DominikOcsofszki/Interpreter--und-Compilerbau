@@ -1,7 +1,7 @@
 
 
 
-from src.ast.write_read_ast import WriteIdExpression
+# from src.ast.write_read_ast import WriteIdExpression
 
 from ..environment import Env
 from ..Expression import InterpretedExpression, getAllClasses, ic

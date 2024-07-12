@@ -2,7 +2,7 @@
 
 from ..environment import Env
 from ..Expression import InterpretedExpression, getAllClasses, ic
-import src.ast.write_read_ast as write_read_ast
+from .tools_write_read import ReadIdExpression, WriteIdExpression
 
 class StructExpression(InterpretedExpression):
     def __init__(self, entries):
@@ -35,7 +35,7 @@ class StructCallFunExpression(InterpretedExpression):
 class StructExtendExpression(InterpretedExpression):
     def __init__(self,parent, entries):
         self.entries=entries
-        self.parent=write_read_ast.ReadIdExpression(parent)
+        self.parent=ReadIdExpression(parent)
 
     def eval(self,env):
         lambda_env = Env(env.deep_copy())
@@ -62,11 +62,11 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
             # exit()
 
         self.id_test, self.entry_test,self.n_dots_test = arr
-        self.id=write_read_ast.ReadIdExpression(id)
+        self.id=ReadIdExpression(id)
         ic(self.id)
-        self.attribute=write_read_ast.ReadIdExpression(entry)
+        self.attribute=ReadIdExpression(entry)
         self.n_parent=n_dots - 1
-        self.parentString_as_readExpression = write_read_ast.ReadIdExpression("parent")
+        self.parentString_as_readExpression = ReadIdExpression("parent")
         self.fun_args = fun_args
         # self.id_test, self.entry_test,self.n_dots_test, = id, entry,n_dots
 
@@ -86,7 +86,7 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
             parent_struct = struct(self.parentString_as_readExpression)
             for _ in range(self.n_parent-1):
                 parent_struct = parent_struct(self.parentString_as_readExpression)
-            value_ret =  parent_struct(write_read_ast.ReadIdExpression(self.attribute))
+            value_ret =  parent_struct(ReadIdExpression(self.attribute))
         else:
             value_ret =struct(self.attribute) 
             if not self.fun_args == None:

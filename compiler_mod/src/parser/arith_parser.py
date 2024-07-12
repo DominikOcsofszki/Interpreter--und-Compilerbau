@@ -14,7 +14,14 @@ def p_expression_binary_operators_arith(p):
                     | expression '*' expression
                     | expression '/' expression
     '''
-    p[0] = generator_arith.checkAndReturnBinaryClass(p)
+    match p[2]:
+        case "+"   : p[0] = PlusExpression(p[1],p[3]) 
+        case "-"   : p[0] = MinusExpression(p[1],p[3]) 
+        case "*"   : p[0] = TimesExpression(p[1],p[3]) 
+        case "/"   : p[0] = DivideExpression(p[1],p[3]) 
+        case _ : print("STH WROMG")
+
+    # p[0] = generator_arith.checkAndReturnBinaryClass(p)
 
 def p_expr_uminus(p):
     'expression : "-" expression %prec UMINUS'

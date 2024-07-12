@@ -1,4 +1,4 @@
-from ..Expression import InterpretedExpression, getAllClasses,ic
+from ..Expression import InterpretedExpression, getAllClasses
 class PlusExpression(InterpretedExpression):
     def __init__(self, e1, e2):
         self.e1=e1
@@ -65,12 +65,4 @@ class NumberExpression(InterpretedExpression):
 
 used_procedures_and_classes = getAllClasses()
 
-def checkAndReturnBinaryClass(p):
-    match p[2]:
-        case "+"   : p[0] = PlusExpression(p[1],p[3]) 
-        case "-"   : p[0] = MinusExpression(p[1],p[3]) 
-        case "*"   : p[0] = TimesExpression(p[1],p[3]) 
-        case "/"   : p[0] = DivideExpression(p[1],p[3]) 
-        case _ : print("STH WROMG")
-    return p[0]
 

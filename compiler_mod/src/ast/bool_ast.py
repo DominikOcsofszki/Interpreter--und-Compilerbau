@@ -1,6 +1,3 @@
-# import sys
-# import inspect
-
 from ..Expression import InterpretedExpression, getAllClasses
 
 class BoolValueExpression(InterpretedExpression):
