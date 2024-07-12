@@ -1,15 +1,15 @@
-from pack.lexer.arith_lexer import *
-from pack.lexer.bool_lexer import *
-from pack.lexer.write_read_lexer import *
-from pack.lexer.sequences_lexer import *
-from pack.lexer.control_lexer import *
-from pack.lexer.local_lexer import *
-from pack.lexer.lambda_lexer import *
-from pack.lexer.import_lexer import *
-from pack.lexer.types_lexer import *
-from pack.lexer.struct_lexer import *
+from .lexer.arith_lexer import *
+from .lexer.bool_lexer import *
+from .lexer.write_read_lexer import *
+from .lexer.sequences_lexer import *
+from .lexer.control_lexer import *
+from .lexer.local_lexer import *
+from .lexer.lambda_lexer import *
+from .lexer.import_lexer import *
+from .lexer.types_lexer import *
+from .lexer.struct_lexer import *
 from ply.lex import lex
-from top_configs import SHOW_TOKENS
+from .top_configs import SHOW_TOKENS
 
 tokens = []
 literals = []

@@ -1,10 +1,10 @@
 from icecream import ic
-# from pack.parser.struct_parser import P_line
-from top_parser import parser, lexer
+# from src.parser.struct_parser import P_line
+from src.top_parser import parser, lexer
 # from environment import Env
 # from top_imports import env_imports
-from top_imports import environment
-from top_file_load_check import checkAndOpenFile
+from src.top_imports import environment
+from src.top_file_load_check import checkAndOpenFile
 
 # NEW
 import traceback

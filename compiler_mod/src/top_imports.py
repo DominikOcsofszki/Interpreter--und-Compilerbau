@@ -1,7 +1,7 @@
-from environment import Env
+from .environment import Env
 
-from pack.ast.types_ast import head,tail
-from pack.ast.Expression import InterpretedExpression, ic
+from .ast.types_ast import head,tail
+from .Expression import InterpretedExpression, ic
 
 environment=Env()
 def print_py(entries:InterpretedExpression):

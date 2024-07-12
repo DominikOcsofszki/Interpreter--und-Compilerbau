@@ -1,7 +1,7 @@
 from os import error
 import copy
-from top_configs import SHOW_ENV_IMPORTS
-# from pack.ast.var_ast import ReadIdExpression,WriteIdExpression
+from .top_configs import SHOW_ENV_IMPORTS
+# from src.ast.var_ast import ReadIdExpression,WriteIdExpression
 
 class Env:
 
