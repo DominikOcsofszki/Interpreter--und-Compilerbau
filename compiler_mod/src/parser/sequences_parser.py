@@ -19,13 +19,15 @@ def p_expression_expressions(p):
         p[0] = p[1]
     else:
         if type(p[1]) != Node:
-            # ic("=============================")
-            # ic(*p[1])
-            # ic(type(p[1]))
-            # ic(len(p[1]))
-            p[0] = *p[1],p[3]
+            ic("=============================")
+            ic(*p[1])
+            ic(type(p[1]))
+            ic(len(p[1]))
+            p[0] = [*p[1],p[3]]
 
         else:
-            p[0] = p[1],p[3]
+            p[0] = [p[1],p[3]]
+#
+            # p[0] = p[1],p[3]
 
 

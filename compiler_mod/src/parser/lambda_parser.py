@@ -10,11 +10,7 @@ def p_expression_expr_list(p):
     if len(p) ==2:
         p[0] = p[1] 
     else:
-        if isinstance(p[3], Expr):
-            p[0] = p[1],*p[3]
-        else:
-            p[0] = p[1],p[3]
-    ic (p[0])
+        p[0] = [p[1],*p[3]]
 
         # p[0] = p[1], p[3]
         # p[0] = p[1], *p[3]
@@ -35,7 +31,8 @@ def p_expression_call_args(p):
     if len(p) == 4:
         p[0] = Node(Expr.CallExpression,[p[1],[]])
     else:
-        p[0] = Node(Expr.CallExpression,[p[1],[p[3]]])
+        p[0] = Node(Expr.CallExpression,[p[1],p[3]])
+        ic(p[3])
 
 
 # from pack.ast import lambda_ast

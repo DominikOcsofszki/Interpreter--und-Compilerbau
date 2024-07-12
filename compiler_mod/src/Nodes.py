@@ -27,21 +27,24 @@ class _Node:
     def __repr__(self) -> str:
         # return str(self.type_Expr.name)
         # return print_ast(self)
-        return str(self.type_Expr)
+        return "<" +str(self.__class__.__name__) +":"+ str(self.type_Expr) +">"
 
-    def __iter__(self) -> '_Node':
-        return self
+    # def __iter__(self) -> '_Node':
+    #     return self
 
     def print_tree(self,node):
         str(print_ast(node))
-
+from icecream import ic
 class Literals(_Node):
     def __init__(self,type_Expr,leaf):
         super().__init__(type_Expr)
         self.leaf=leaf
     def __iter__(self) -> '_Node':
-        return self.leaf
+        ic(self.leaf)
+        return self.leaf 
+        yield self.leaf 
     def __next__(self) -> '_Node':
+        raise StopIteration()
         return self.leaf
     def eval(self,env:Env):
         Expr_To_Eval = self.type_Expr.value(self.leaf)
@@ -58,6 +61,8 @@ class Node(_Node):
         super().__init__(type_Expr)
         self.children = children
         self.current_index = 0
+    def __iter__(self) -> '_Node':
+        return self
 
     def __next__(self) -> 'Node':
         if self.current_index < len(self.children):

@@ -28,8 +28,7 @@ def p_expression_types_char(p):
 
 def p_expression_read_id(p):
     'expression : ID'
-    p[0] = Literals(Expr.ReadIdExpression,p[1])
-    print(p[0])
+    p[0] = Node(Expr.ReadIdExpression,[p[1]])
 
 
 

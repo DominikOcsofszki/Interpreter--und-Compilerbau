@@ -12,20 +12,21 @@ from ..top_imports import ENV_IMPORTS
         
 class LambdaArgsExpression(InterpretedExpression):
     def __init__(self, ids, body_lambda):
-        self.ids = ids
+        ic("========X==lamargs===================")
+        ic(self, ids, body_lambda)
+        self.lambda_args_ids = ids
         self.body_lambda = body_lambda
 
     def eval(self,env):
         lambda_env = Env(env)
         def lmbd(vals):
-            ic(self.ids)
+            ic("=============================")
+            ic(self.lambda_args_ids)
+            ic(vals)
             # self.ids = [self.ids]
-            for i ,id_entry in enumerate(self.ids):
-                # ic(vals[i])
-                # ic(id_entry.getEntries())
-                # ic(id_entry.eval(env))
-                # lambda_env[id_entry.id] = vals[i]
-                lambda_env[id_entry.getLiteral()] = vals[i]
+            for i ,id_entry in enumerate(self.lambda_args_ids):
+                lambda_env[id_entry] = vals[i]
+            ic("=============================")
             return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 
