@@ -2,7 +2,7 @@
 from src.ast import types_ast
 from src.ast.types_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import  gen_helper
 
 
 generator_local = types_ast if True else None 

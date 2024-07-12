@@ -4,7 +4,7 @@ from src.ast import write_read_ast
 from src.ast.struct_ast import *
 from src.ast.write_read_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 gen = struct_ast if True else None 

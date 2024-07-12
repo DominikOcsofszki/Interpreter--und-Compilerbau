@@ -3,8 +3,7 @@ from ..ast import arith_ast
 from ..ast import arith_ast
 from ..ast.arith_ast import *
 
-import src.parser.gen_helper as gen_helper
-
+from .. import gen_helper
 
 generator_arith = arith_ast if True else None 
 genHelperArith = gen_helper.GeneratorHelper(arith_ast.used_procedures_and_classes,generator_arith)

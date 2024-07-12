@@ -2,7 +2,7 @@
 from ..ast import write_read_ast
 from ..ast.write_read_ast import *
 
-from . import gen_helper as gen_helper
+from .. import gen_helper 
 
 
 generator_var = write_read_ast if True else None 

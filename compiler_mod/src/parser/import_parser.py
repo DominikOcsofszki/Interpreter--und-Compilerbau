@@ -4,7 +4,7 @@
 from src.ast import import_ast
 from src.ast.import_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 generator_local = import_ast if True else None 

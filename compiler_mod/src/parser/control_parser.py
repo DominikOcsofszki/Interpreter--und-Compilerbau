@@ -4,7 +4,7 @@
 from src.ast import control_ast
 from src.ast.control_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 generator_control = control_ast if True else None 

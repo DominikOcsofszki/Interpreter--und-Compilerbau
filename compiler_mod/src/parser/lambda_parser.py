@@ -3,7 +3,7 @@
 from src.ast import lambda_ast
 from src.ast.lambda_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 gen = lambda_ast if True else None 

@@ -4,7 +4,7 @@
 
 import src.ast.bool_ast as bool_ast
 from src.lexer.bool_lexer import *
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 tokens = []

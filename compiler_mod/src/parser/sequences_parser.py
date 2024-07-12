@@ -3,7 +3,7 @@
 from src.ast import sequences_ast
 from src.ast.sequences_ast import *
 
-import src.parser.gen_helper as gen_helper
+from .. import gen_helper
 
 
 generator_sequences = sequences_ast if True else None 
