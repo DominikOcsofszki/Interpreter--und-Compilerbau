@@ -1,25 +1,21 @@
-from .parser.arith_parser import *
-from .parser.bool_parser import *
-from .parser.write_read_parser import *
 from .parser.sequences_parser import *
 from .parser.control_parser import *
 from .parser.local_parser import *
 from .parser.lambda_parser import *
 from .parser.import_parser import *
-from .parser.types_parser import *
 from .parser.struct_parser import *
+
+from .parser.literals_parser import *
+from .parser.binop_parser import *
 
 import ply.yacc as yacc
 from .top_lexer import tokens, lexer
 
 from .top_precedence import precedence
 
-# def p_expr_uminus(p):
-#     'expression : "-" expression %prec UMINUS'
-#     p[0] = -p[2]
-
 from .top_file_load_check import print_line_nr
 def p_error(p):
+    print(p.__dict__)
     if parser.state == 85:
         print('\n==================================================')
         print("STATE 85 => SEMICOLON MISSING") 
@@ -39,4 +35,12 @@ def p_error(p):
 
 parser = yacc.yacc(start='expression',debug=True)
 
+# res = parser.parse('''
+#                    {
+#                        x:=1;
+#                        }
+#
+#              ''')
+# print(res)
+# exit()
 

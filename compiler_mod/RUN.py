@@ -1,4 +1,5 @@
 from icecream import ic
+from ply.lex import Token
 # from src.parser.struct_parser import P_line
 from src.top_parser import parser, lexer
 # from environment import Env
@@ -26,5 +27,26 @@ def runFromFile_code():
 # runREPL()
 runFromFile_code()
 
+def find_column(input, token):
+    line_start = input.rfind('\n', 0, token.lexpos) + 1
+    print(Token)
+    return (token.lexpos - line_start) + 1
 
-
+# def sth():
+#     data = '''
+# 3 + 4 * 10
+# x
+#       '''
+#         # Give the lexer some input
+#     lexer.input(data)
+#
+#     # Tokenize
+#     while True:
+#         tok = lexer.token()
+#         if not tok: 
+#             break      # No more input
+#         print(find_column(data, tok))
+#         print(tok)
+#
+# sth()
+#
