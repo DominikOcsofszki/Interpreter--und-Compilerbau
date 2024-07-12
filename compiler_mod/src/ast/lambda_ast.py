@@ -18,8 +18,14 @@ class LambdaArgsExpression(InterpretedExpression):
     def eval(self,env):
         lambda_env = Env(env)
         def lmbd(vals):
+            ic(self.ids)
+            # self.ids = [self.ids]
             for i ,id_entry in enumerate(self.ids):
-                lambda_env[id_entry.id] = vals[i]
+                # ic(vals[i])
+                # ic(id_entry.getEntries())
+                # ic(id_entry.eval(env))
+                # lambda_env[id_entry.id] = vals[i]
+                lambda_env[id_entry.getLiteral()] = vals[i]
             return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 

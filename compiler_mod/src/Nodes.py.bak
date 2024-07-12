@@ -4,9 +4,8 @@ from typing import List, Optional, Union
 from .environment import Env
 from .Expr_Enum import Expr
 
-class _Node:
-    # def __init__(self, type_Expr: Expr, children: Optional[Union[List['Node'],List]] = None, leaf: Optional[Union[str, int]] = None):
-    def __init__(self, type_Expr: Expr):
+class Node:
+    def __init__(self, type_Expr: Expr, children: Optional[Union[List['Node'],List]] = None, leaf: Optional[Union[str, int]] = None):
     # def __init__(self,type,children,leaf):
         self.type_Expr = type_Expr
         if type(self.type_Expr) != Expr:
@@ -15,69 +14,49 @@ class _Node:
             raise TypeError("Only type_Expr are allowed")
 
             exit()
-        # if children:
-        #     self.children = children
-        # else:
-        #     # self.children = []
-        #     self.children = []
-        # self.leaf = leaf
-        # self.current_index = 0
-        # self.root = False
+        if children:
+            self.children = children
+        else:
+            # self.children = []
+            self.children = ""
+        self.leaf = leaf
+        self.current_index = 0
+        self.root = False
 
     def __repr__(self) -> str:
         # return str(self.type_Expr.name)
         # return print_ast(self)
-        return str(self.type_Expr)
+        return str(self.children)
 
-    def __iter__(self) -> '_Node':
+    def __iter__(self) -> 'Node':
         return self
 
-    def print_tree(self,node):
-        str(print_ast(node))
-
-class Literals(_Node):
-    def __init__(self,type_Expr,leaf):
-        super().__init__(type_Expr)
-        self.leaf=leaf
-    def __iter__(self) -> '_Node':
-        return self.leaf
-    def __next__(self) -> '_Node':
-        return self.leaf
-    def eval(self,env:Env):
-        Expr_To_Eval = self.type_Expr.value(self.leaf)
-        # print(Expr_To_Eval.sequences)
-        # self.print_tree(self)
-        return Expr_To_Eval.eval(env)
-    def getLiteral(self):
-        return self.leaf
-
-
-
-class Node(_Node):
-    def __init__(self,type_Expr:Expr,children):
-        super().__init__(type_Expr)
-        self.children = children
-        self.current_index = 0
-
     def __next__(self) -> 'Node':
-        if self.current_index < len(self.children):
-            child = self.children[self.current_index]
-            self.current_index += 1
-            return child
-        else:
-            self.current_index = 0
-            raise StopIteration()
-
-    def eval(self,env:Env):
+        if self.children:
+            if self.current_index < len(self.children):
+                child = self.children[self.current_index]
+                self.current_index += 1
+                return child
+            else:
+                self.current_index = 0
+        raise StopIteration()
+    def setRoot(self):
+        self.root = True
+    def eval(self,env):
         Expr_To_Eval = self.type_Expr.value(*self.children)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
-        return Expr_To_Eval.eval(env)
+        return Expr_To_Eval.eval(Env())
         # return str(self)
         # 
         # if self.root: 
         #     return str(self)
+    def print_tree(self,node):
+        str(print_ast(node))
 
+class Literals(Node):
+    def __init__(self,type,leaf):
+        super().__init__(type,None,leaf)
 
 
 def print_ast(node: Node, indent: int = 0) -> str:
