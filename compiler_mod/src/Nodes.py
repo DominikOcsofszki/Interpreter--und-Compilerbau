@@ -43,19 +43,41 @@ class Literals(Node):
 
 def print_ast(node: Node, indent: int = 0) -> str:
     result = ""
+    # prefix = "|" + (" " * (indent - 1)) + "--"*indent if indent > 0 else ""
+    prefix = "|" +   "--"*indent if indent > 0 else ""
+    if type(node) == str:
+        #TODO: Remove later when fixed all to Nodes
+        result += "->"+node
+    else:
+        result = "\n"
+        result += f"{prefix} ( {node.type}"
+        if node.leaf is not None:
+            result += f" {node.leaf} \n"
+        else:
+            # result += "\n"
+            for child in node.children:
+                result += print_ast(child, indent + 1) + ")"
+    # return result
+    return result.rstrip()
+
+
+
+
+def print_ast0(node: Node, indent: int = 0) -> str:
+    result = ""
     prefix = "|" + (" " * (indent - 1)) + "--" if indent > 0 else ""
     if type(node) == str:
         #TODO: Remove later when fixed all to Nodes
-        result +=node
+        result += "->"+node
     else:
+        result = "\n"
         result += f"{prefix} {node.type}"
         if node.leaf is not None:
             result += f" {node.leaf}\n"
         else:
-            result += "\n"
+            # result += "\n"
             for child in node.children:
-                # print(child)
-                result += print_ast(child, indent + 1)
+                result += print_ast0(child, indent + 1)
     return result
     # return result.rstrip()
 
