@@ -24,6 +24,8 @@ class _Node:
         # self.current_index = 0
         # self.root = False
 
+    def __iter__(self):
+        pass
     def __repr__(self) -> str:
         # return str(self.type_Expr.name)
         # return print_ast(self)
@@ -40,7 +42,6 @@ class Literals(_Node):
         super().__init__(type_Expr)
         self.leaf=leaf
     def __iter__(self) -> '_Node':
-        ic(self.leaf)
         return self.leaf 
         yield self.leaf 
     def __next__(self) -> '_Node':
@@ -53,6 +54,9 @@ class Literals(_Node):
         return Expr_To_Eval.eval(env)
     def getLiteral(self):
         return self.leaf
+    def __len__(self):
+        return 1
+
 
 
 
@@ -61,6 +65,9 @@ class Node(_Node):
         super().__init__(type_Expr)
         self.children = children
         self.current_index = 0
+
+    def __len__(self):
+        return len(self.children)
     def __iter__(self) -> '_Node':
         return self
 
@@ -72,6 +79,12 @@ class Node(_Node):
         else:
             self.current_index = 0
             raise StopIteration()
+    def getWriteID(self):
+        if len(self.children) != 1:
+            raise KeyError("Children for getWriteID should be 1")
+
+        return self.children[0]
+
 
     def eval(self,env:Env):
         Expr_To_Eval = self.type_Expr.value(*self.children)

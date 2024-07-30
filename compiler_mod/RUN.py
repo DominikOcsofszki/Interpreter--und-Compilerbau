@@ -14,6 +14,7 @@ def runREPL():
         i=input("> ")
         result = parser.parse(input=i,lexer=lexer)
         print("=",*result.eval(environment))
+
 def runFromFile_code():
     data = checkAndOpenFile()
     try:

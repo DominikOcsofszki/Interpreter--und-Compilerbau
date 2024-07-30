@@ -9,7 +9,6 @@ class WriteIdExpression(InterpretedExpression):
         self.value=value
 
     def eval(self,env):
-        # ic(env)
         find_env = findEnvWithIdWrite(self.id_as_string,env)
         find_env[self.id_as_string] = self.value.eval(env)[0]
         return self.value.eval(env)[0], env

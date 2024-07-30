@@ -13,7 +13,7 @@ def p_expression_binary_operators_arith(p):
         case "-"   : p[0] = Node(Expr.MinusExpression,[p[1],p[3]]) 
         case "*"   : p[0] = Node(Expr.TimesExpression,[p[1],p[3]]) 
         case "/"   : p[0] = Node(Expr.DivideExpression,[p[1],p[3]]) 
-        case _ : print("STH WROMG")
+        case _ : print("STH WRONG")
 
 
 def p_expression_binary_operators_bool(p):

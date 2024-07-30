@@ -33,7 +33,8 @@ def p_error(p):
 
     exit()
 
-parser = yacc.yacc(start='expression',debug=True)
+# parser = yacc.yacc(start='expression',debug=True)
+parser = yacc.yacc(start='expression')
 
 # res = parser.parse('''
 #                    {

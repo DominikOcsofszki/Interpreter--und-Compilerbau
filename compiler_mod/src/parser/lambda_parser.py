@@ -8,12 +8,13 @@ def p_expression_expr_list(p):
                     |       expression
     '''
     if len(p) ==2:
-        p[0] = p[1] 
+        p[0] = [p[1]]
     else:
         p[0] = [p[1],*p[3]]
 
-        # p[0] = p[1], p[3]
-        # p[0] = p[1], *p[3]
+    #     p[0] = p[1], p[3]
+    #     p[0] = p[1], *p[3]
+    #     if len(p[3]) == 3:
 
 def p_expression_lambda_args_WORKING(p):
     '''expression :     LAMBDA_START LAMBDA expression
@@ -32,7 +33,7 @@ def p_expression_call_args(p):
         p[0] = Node(Expr.CallExpression,[p[1],[]])
     else:
         p[0] = Node(Expr.CallExpression,[p[1],p[3]])
-        ic(p[3])
+
 
 
 # from pack.ast import lambda_ast

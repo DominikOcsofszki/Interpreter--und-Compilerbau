@@ -52,9 +52,7 @@ class StructExtendExpression(InterpretedExpression):
 # TODO HEREHREHREHRH
 class StructCallNParentWithFunExpression(InterpretedExpression):
     def __init__(self,arr, fun_args):
-        ic("==========================================================================",self,arr, fun_args)
         id, entry,n_dots, = arr
-        ic(id)
         if len(id) == 0:
             if n_dots ==2:
                 ic(id,entry,n_dots)
@@ -63,7 +61,7 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
 
         self.id_test, self.entry_test,self.n_dots_test = arr
         self.id=ReadIdExpression(id)
-        ic(self.id)
+        # ic(self.id)
         self.attribute=ReadIdExpression(entry)
         self.n_parent=n_dots - 1
         self.parentString_as_readExpression = ReadIdExpression("parent")
@@ -72,7 +70,7 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
 
     def eval(self,env):
         
-        ic(id)
+        # ic(id)
         if len(self.id_test) == 0:
             if self.n_dots_test ==2:
                 ic(self.id_test,self.entry_test,self.n_dots_test)

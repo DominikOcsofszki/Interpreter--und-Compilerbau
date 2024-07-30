@@ -1,14 +1,10 @@
-code/node.tx
-code/struct_parts.tx
-# code/struct_semincc24.tx
+code/new_struct.tx
+# code/node.tx
 
-code/lambda_closure.tx
-code/lambda_env.tx
-code/struct_dot.tx
-code/minus.tx
-code/vl_01_06_2024.tx
-code/vl_1_6.tx
-code/test_lsp.tx
+# code/lambda_closure.tx
+# code/lambda_env.tx
+# code/struct_dot.tx
+# code/minus.tx
 code/struct_stru_in_stru.tx
 code/struct_dot_out.tx
 code/struct_dotdot.tx
@@ -29,3 +25,10 @@ code/local_letrec.tx
 code/local_works.tx
 code/structs_extends.tx
 code/types2.tx
+# Not working
+code/struct_parts.tx
+# code/struct_semincc24.tx
+
+code/vl_01_06_2024.tx
+code/vl_1_6.tx
+code/test_lsp.tx

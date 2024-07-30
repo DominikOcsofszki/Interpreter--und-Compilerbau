@@ -76,7 +76,7 @@ def t_ignore_comments(t):
     pass
 
 
-# lexer = lex()
-lexer = lex(debug=True)
+lexer = lex()
+# lexer = lex(debug=True)
 
 lexer.my_helper = tok_helper.my_helper
