@@ -74,7 +74,7 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
         if len(self.id_test) == 0:
             if self.n_dots_test ==2:
                 ic(self.id_test,self.entry_test,self.n_dots_test)
-                ic(env.parent[self.parentString_as_readExpression.eval(env)[0]])
+                ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
             exit()
 
         parent_struct = None

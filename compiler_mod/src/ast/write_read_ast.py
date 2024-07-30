@@ -3,15 +3,20 @@ from ..Expression import InterpretedExpression, getAllClasses,ic
 from ..top_configs import EVAL_EXPR_BEFORE_SAVE_TO_TMP
 
 
+
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id_always_as_string, value):
-        self.id_as_string=id_always_as_string
+        self.id_string=id_always_as_string
         self.value=value
 
     def eval(self,env):
-        find_env = findEnvWithIdWrite(self.id_as_string,env)
-        find_env[self.id_as_string] = self.value.eval(env)[0]
-        return self.value.eval(env)[0], env
+        find_env = findEnvWithIdWrite(self.id_string,env)
+        if isinstance(self.value, str) or isinstance(self.value, int):
+            find_env[self.id_string] = self.value
+            return self.value, env
+        else:
+            find_env[self.id_string] = self.value.eval(env)[0]
+            return self.value.eval(env)[0], env
 
 def findEnvWithIdWrite(id,env):
     if env.parent.env_name == "ENV_IMPORTS":

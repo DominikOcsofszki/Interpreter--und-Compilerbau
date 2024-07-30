@@ -1,4 +1,5 @@
-code/new_struct.tx
+code/struct_semincc24.tx
+# code/new_struct.tx
 # code/node.tx
 
 # code/lambda_closure.tx
@@ -27,7 +28,6 @@ code/structs_extends.tx
 code/types2.tx
 # Not working
 code/struct_parts.tx
-# code/struct_semincc24.tx
 
 code/vl_01_06_2024.tx
 code/vl_1_6.tx
