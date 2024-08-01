@@ -19,8 +19,9 @@ def runFromFile_code():
     data = checkAndOpenFile()
     try:
         parsed_expr = parser.parse(input=data,lexer=lexer)
-        ic(parsed_expr)
-        interpreter.eval(parsed_expr,environment)
+        # ic(parsed_expr)
+        print_last_and_env = interpreter.eval(parsed_expr,environment)
+        ic(print_last_and_env)
         # print(parsed_expr.eval(environment))
         # print(parser.parse(input=data,lexer=lexer).eval(environment))
     except Exception as error:

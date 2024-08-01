@@ -9,36 +9,36 @@ class WriteIdExpression(InterpretedExpression):
         self.id_string=id_always_as_string
         self.value=value
 
-    def eval(self,env):
-        find_env = findEnvWithIdWrite(self.id_string,env)
-        if isinstance(self.value, str) or isinstance(self.value, int):
-            find_env[self.id_string] = self.value
-            return self.value, env
-        else:
-            find_env[self.id_string] = self.value.eval(env)[0]
-            return self.value.eval(env)[0], env
+    # def eval(self,env):
+    #     find_env = findEnvWithIdWrite(self.id_string,env)
+    #     if isinstance(self.value, str) or isinstance(self.value, int):
+    #         find_env[self.id_string] = self.value
+    #         return self.value, env
+    #     else:
+    #         find_env[self.id_string] = self.value.eval(env)[0]
+    #         return self.value.eval(env)[0], env
 
-def findEnvWithIdWrite(id,env):
-    if env.parent.env_name == "ENV_IMPORTS":
-            return env
-    parent_env = env
-    item = parent_env.env_dict.get(id)
-    last_parent = parent_env
-    while parent_env and not item:
-        last_parent = parent_env
-        item = parent_env.env_dict.get(id)
-        if item:
-            return last_parent
-        parent_env = parent_env.parent
-    return env
+# def findEnvWithIdWrite(id,env):
+#     if env.parent.env_name == "ENV_IMPORTS":
+#             return env
+#     parent_env = env
+#     item = parent_env.env_dict.get(id)
+#     last_parent = parent_env
+#     while parent_env and not item:
+#         last_parent = parent_env
+#         item = parent_env.env_dict.get(id)
+#         if item:
+#             return last_parent
+#         parent_env = parent_env.parent
+#     return env
 
 
 class ReadIdExpression(InterpretedExpression):
     def __init__(self, id):
         self.id=id
 
-    def eval(self,env):
-        return env[self.id], env
+    # def eval(self,env):
+    #     return env[self.id], env
 
 
 # class ReadParentIdExpression(InterpretedExpression):

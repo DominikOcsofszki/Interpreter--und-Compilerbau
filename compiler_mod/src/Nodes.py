@@ -6,7 +6,7 @@ from .Expr_Enum import Expr
 
 class _Node:
     # def __init__(self, type_Expr: Expr, children: Optional[Union[List['Node'],List]] = None, leaf: Optional[Union[str, int]] = None):
-    def __init__(self, type_Expr: Expr):
+    def __init__(self, type_Expr: Expr|str):
     # def __init__(self,type,children,leaf):
         self.type_Expr = type_Expr
         if type(self.type_Expr) != Expr:
@@ -62,7 +62,7 @@ class Literals(_Node):
 
 
 class Node(_Node):
-    def __init__(self,type_Expr:Expr,children):
+    def __init__(self,type_Expr:Expr|str,children):
         super().__init__(type_Expr)
         self.children = children
         self.current_index = 0
