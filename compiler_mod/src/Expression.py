@@ -4,6 +4,7 @@ from .environment import Env
 from . import top_configs as top_config
 class InterpretedExpression:
     def eval(self,env:Env,is_struct=False):
+        ic("EVAL noT RU!!!!!!!!!!!!!!!!!!!!!n")
         # return is_struct
         return None, env
 

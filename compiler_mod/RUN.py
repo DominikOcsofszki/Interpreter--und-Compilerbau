@@ -6,7 +6,7 @@ from src.top_parser import parser, lexer
 # from top_imports import env_imports
 from src.top_imports import environment
 from src.top_file_load_check import checkAndOpenFile
-
+import src.interpreter as interpreter
 # NEW
 import traceback
 def runREPL():
@@ -18,7 +18,11 @@ def runREPL():
 def runFromFile_code():
     data = checkAndOpenFile()
     try:
-        print(parser.parse(input=data,lexer=lexer).eval(environment))
+        parsed_expr = parser.parse(input=data,lexer=lexer)
+        ic(parsed_expr)
+        interpreter.eval(parsed_expr,environment)
+        # print(parsed_expr.eval(environment))
+        # print(parser.parse(input=data,lexer=lexer).eval(environment))
     except Exception as error:
         traceback.print_tb(error.__traceback__)
         ic(">>>",error,">>>")

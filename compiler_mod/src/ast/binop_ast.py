@@ -5,10 +5,10 @@ class PlusExpression(InterpretedExpression):
         self.e1=e1
         self.e2=e2
 
-    def eval(self,env):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
-        return (e1 + e2), env2
+    # def eval(self,env):
+    #     e1, env1 = self.e1.eval(env)
+    #     e2, env2 = self.e2.eval(env1)
+    #     return (e1 + e2), env2
 
 class MinusExpression(InterpretedExpression):
     def __init__(self, e1, e2):

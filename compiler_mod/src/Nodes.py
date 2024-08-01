@@ -48,6 +48,7 @@ class Literals(_Node):
         raise StopIteration()
         return self.leaf
     def eval(self,env:Env):
+        ic("=============h45==================")
         Expr_To_Eval = self.type_Expr.value(self.leaf)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
@@ -87,6 +88,8 @@ class Node(_Node):
 
 
     def eval(self,env:Env):
+        ic("=============h44==================")
+        ic(self,env)
         Expr_To_Eval = self.type_Expr.value(*self.children)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
