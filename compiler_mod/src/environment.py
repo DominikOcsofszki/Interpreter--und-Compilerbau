@@ -1,7 +1,7 @@
 from os import error
 import copy
 from .top_configs import SHOW_ENV_IMPORTS
-
+from icecream import ic
 class Env:
 
     def __init__(self,parent=None,env_name=None) -> None:
@@ -34,6 +34,8 @@ class Env:
 
 
     def __getitem__(self,key):
+        if self.env_name is not None and "struct" in self.env_name:
+            ic("STRUCT")
         # if type(key) is int: #or key.isdigit():
         #     return int(key)
         if key in self.env_dict:

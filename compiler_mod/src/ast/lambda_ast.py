@@ -17,12 +17,24 @@ class LambdaArgsExpression(InterpretedExpression):
         self.body_lambda = body_lambda
 
     def eval(self,env):
+        # ic("=============h31==================")
         lambda_env = Env(env)
         def lmbd(vals):
+            ic("=============h41==================")
+            ic(lambda_env)
+            if vals == "self":
+                ic("=============h37==================")
+                ic(lambda_env)
+                return lambda_env
             for i ,id_entry in enumerate(self.lambda_args_ids):
                 # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
                 WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env)
-            return self.body_lambda.eval(lambda_env)[0]
+            res = self.body_lambda.eval(lambda_env)[0]
+            ic(lambda_env)
+            ic(env)
+            ic(res)
+            return res
+            # return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 
 
@@ -30,22 +42,21 @@ class LambdaArgsExpression(InterpretedExpression):
 class CallExpression(InterpretedExpression):
     def __init__(self,fn,ids_or_values):
         self.fn=fn
-        self.x=ids_or_values
+        self.function_args=ids_or_values
 
     def eval(self,env):
-        func = env[self.fn]
-        if self.fn in ENV_IMPORTS:
-            return_ids=[entry.eval(env)[0] for entry in self.x]
-            return func(return_ids), env
-
-        if not EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-            return_ids=[entry.eval(env)[0] for entry in self.x]
-            return func(return_ids), env
-
-        # if EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-        return func(self.x), env
+        ic("=============h40==================")
+        ic(env)
+        lmbd = env[self.fn]
+        function_args = self.function_args
+        if check_if_function_in_Imports(self.fn):         
+            function_args=[entry.eval(env)[0] for entry in self.function_args]
+        return lmbd(function_args), env
 
 
+def check_if_function_in_Imports(fn):
+    '''Checks for function call in Imports, iy yes unpack args first'''
+    return fn in ENV_IMPORTS
 
 
 
