@@ -1,16 +1,26 @@
 {
+    out:=123;
   s := struct {
     .x := 7;
     .set_x := \x -> .x := x
   };
   t := extend s {
     .x := 5;
-#   ..x := 2; #! disallowed
-#   .set_px := \x -> ..x := x; #! disallowed
+  # ..x := 2; #! disallowed
+  # .set_px := \x -> ..x := x; #! disallowed
     .set_px := \x -> ..set_x(x);
     .set_x := \x -> .x := x
   };
-  t.set_x(2);
+  print(t.out);
+  # exit();
+  print(out);
+  print(s.out);
+  print(t.out);
+  print("check ..x");
+  print(t.x);
+  t.set_x(99);
+  print(s.x);
+  # t.set_px(2);
   print(t.x); #2
   print(t..x); #7
   t..set_x(1);
@@ -33,8 +43,11 @@
   };
   v := extend u {
     .set_x := \x -> .x := x
-  }
-# v.set_x(5); #!disallowed
+  };
+  print("herer");
+  print(u.x);
+v.set_x(5); #!disallowed
+  print(u.x); # This is not setting it, but it should give an error message?! 
 
   # optional:
 #   {
@@ -49,4 +62,6 @@
 #     print(a.y) #2, allowed
 #   }
 
+  print(t..x); #1
+  print(t.x)#2
 }

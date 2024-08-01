@@ -38,22 +38,22 @@ def p_expression_read_id(p):
 # Move other place?
 
 
-def p_expression_unary_operators_not(p):
-    '''expression : NOT expression
-    '''
-    p[0] = Node(Expr.NotBoolExpression,[p[2]])
-
-def p_expression_read_parent_id(p):
-    'expression :  dots ID'
-    p[0] = Node(Expr.ReadParentIdExpression,[p[2],p[1]])
-
-def p_expression_write_id(p):
-    'expression : ID ASSIGN expression'
-    p[0] = Node(Expr.WriteIdExpression,[p[1],p[3]])
-
-def p_expression_write_id_dots(p):
-    'expression : dots ID ASSIGN expression'
-    p[0] = Node(Expr.WriteIdExpression,[p[2],p[4]])
+# def p_expression_unary_operators_not(p):
+#     '''expression : NOT expression
+#     '''
+#     p[0] = Node(Expr.NotBoolExpression,[p[2]])
+#
+# def p_expression_read_parent_id(p):
+#     'expression :  dots ID '
+#     p[0] = Node(Expr.ReadParentIdExpression,[p[2],p[1]])
+#
+# def p_expression_write_id(p):
+#     'expression : ID ASSIGN expression'
+#     p[0] = Node(Expr.WriteIdExpression,[p[1],p[3]])
+#
+# def p_expression_write_id_dots(p):
+#     'expression : dots ID ASSIGN expression'
+#     p[0] = Node(Expr.WriteIdExpression,[p[2],p[4]])
 
 
 

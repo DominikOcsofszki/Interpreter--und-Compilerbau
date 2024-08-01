@@ -16,6 +16,7 @@ def show_import_env(_):
 
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
 ENV_IMPORTS["print"]=print_py
+ENV_IMPORTS["exit"]=exit
 ENV_IMPORTS["_ENV"]=show_top_env
 ENV_IMPORTS["_ENV_import"]=show_import_env
 ENV_IMPORTS["head"]=head
