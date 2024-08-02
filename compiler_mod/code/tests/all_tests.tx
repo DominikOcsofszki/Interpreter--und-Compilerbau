@@ -1,3 +1,5 @@
+code/tests/lambda_tests.tx
 code/tests/test_bool.tx
 code/tests/tests.tx
+
 code/tests/print_test_results.tx

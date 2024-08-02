@@ -24,7 +24,8 @@ def print_all_test_results():
 def test_assert(arr_bool_and_msg, my_helper):
     # ic(my_helper['tok'])
     msg = *arr_bool_and_msg, my_helper['tok']
-    if not arr_bool_and_msg[0]: 
+    test_bool = arr_bool_and_msg[0] == arr_bool_and_msg[1]
+    if not test_bool: 
         failed_tests.append(msg)
         # ic(passed_tests)
         # raise AssertionError(msg)
@@ -44,7 +45,7 @@ ENV_IMPORTS["_ENV"]=show_top_env
 ENV_IMPORTS["_ENV_import"]=show_import_env
 ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
-ENV_IMPORTS["assert"]=test_assert
+ENV_IMPORTS["test"]=test_assert
 ENV_IMPORTS["print_all_test_results"]=print_all_test_results
 
 environment.parent = ENV_IMPORTS

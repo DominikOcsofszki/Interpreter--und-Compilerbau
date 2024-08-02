@@ -1,4 +1,4 @@
 {
 x:=true;
-assert(x, "")
+test(x, false,"TESTBOOL")
 }

@@ -1,0 +1,12 @@
+
+{
+y:=99;
+f:= \-> 100;
+fn:= \x -> x ;
+fn2:= \x,y,z -> x * y * z;
+res := fn2(100,100,100);
+print(res);
+test(res,100*100*100,"TEST_NAME")
+# assert(res = 1000000, "100*100*100);
+# print(res < 1000000)
+}
