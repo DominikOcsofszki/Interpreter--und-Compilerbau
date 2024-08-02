@@ -1,5 +1,4 @@
 from icecream import ic
-from ply.lex import Token
 from src.top_parser import parser, lexer,LOAD_FILES
 from src.top_imports import environment
 from src.top_file_load_check import checkAndOpenFile, test_files
@@ -30,7 +29,7 @@ def runAllTest_code():
         print("=======================")
     all_test_files = test_files(LOAD_FILES)
     for file in all_test_files:
-        print(">testfile: ",file)
+        # print(">testfile: ",file)
         with open(file, 'r') as file:
             data = file.read()
         try:
@@ -47,10 +46,10 @@ def run():
         runFromFile_code()
 
 
-def find_column(input, token):
-    line_start = input.rfind('\n', 0, token.lexpos) + 1
-    print(Token)
-    return (token.lexpos - line_start) + 1
+# def find_column(input, token):
+#     line_start = input.rfind('\n', 0, token.lexpos) + 1
+#     print(token)
+#     return (token.lexpos - line_start) + 1
 
 if __name__ == "__main__":
     run()

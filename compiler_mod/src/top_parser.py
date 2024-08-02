@@ -34,6 +34,7 @@ def p_error(p):
 
 # parser = yacc.yacc(start='expression',debug=True)
 parser = yacc.yacc(start='expression')
+ic(yacc.__dict__)
 
 # res = parser.parse('''
 #                    {
