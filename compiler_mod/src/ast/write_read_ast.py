@@ -63,12 +63,12 @@ class ReadParentIdExpression(InterpretedExpression):
 
 class WriteIdStructExpression(InterpretedExpression):
     def __init__(self, id_always_as_string, value):
-        ic("=============h20==================")
+        # ic("=============h20==================")
         self.id_string=id_always_as_string
         self.value=value
 
     def eval(self,env):
-        ic("=============h21==================")
+        # ic("=============h21==================")
         find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value

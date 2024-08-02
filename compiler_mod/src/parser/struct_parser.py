@@ -66,7 +66,7 @@ def p_expression_write_id_dots(p):
 def p_expression_assign(p):
     '''seq_assign_expression : dots ID ASSIGN expression 
                         '''
-    ic(p[0])
+    # ic(p[0])
     # p[0] = Node(Expr.WriteIdExpression,[p[2],p[4]])
     p[0] = Node(Expr.WriteIdExpression,[p[2],p[4]])
 
@@ -74,7 +74,7 @@ def p_expression_expressions_struct(p):
     '''sequence_struct :    seq_assign_expression 
                       |     sequence_struct ";"  seq_assign_expression 
                       '''
-    ic('>>',p[1])
+    # ic('>>',p[1])
     if len(p) == 2:
         p[0] = [p[1]]
         # p[0] = [Node(Expr.WriteIdExpression,[p[2],p[4]])]  

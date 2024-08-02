@@ -2,6 +2,7 @@
 
 from ..environment import Env
 from ..Expression import InterpretedExpression, getAllClasses
+import importlib
 
 class ImportAsExpression(InterpretedExpression):
     def __init__(self, import_name, new_name):
@@ -10,7 +11,8 @@ class ImportAsExpression(InterpretedExpression):
 
     def eval(self,env):
         # print(env)
-        env[self.new_name] =__import__(self.import_name)
+        # env[self.new_name] =__import__(self.import_name)
+        env[self.new_name] =importlib.__import__(self.import_name)
         return None, env
 
 class ImportExpression(InterpretedExpression):

@@ -11,7 +11,7 @@ t := extend s {
        .set_px := \x -> ..set_x(x);
        .set_x := \x -> .x := x
 };
-t.set_px(9);
+# t.set_px(9);
 print(t.x);
 print(t..x);
 print(s.out);

@@ -41,18 +41,20 @@ tokens_types = ['STRING','CHAR','FLOAT']
 literals_types = '[].\''
 
 def t_string(t):
-    r'\".*\"'
+    r'"([^\n"]|\")*"'
+    # r'\".*\"'
     t.value =t.value[1:-1]
     t.type = "STRING"
     return tok_helper.tok_add_pos(t)
     # return t
 
 def t_char(t):
-    r'''
-    \'.\'   | 
-    \'\\t\' |
-    \'\\n\'
-    '''
+    r"'([^\n']|\')'"
+    # r'''
+    # \'.\'   | 
+    # \'\\t\' |
+    # \'\\n\'
+    # '''
     t.value =t.value[1:-1] 
     t.type = "CHAR"
     return tok_helper.tok_add_pos(t)
@@ -60,6 +62,9 @@ def t_char(t):
 
 #def t_ID in top_parser
 tokens_var = ['ID','ASSIGN']
-t_ASSIGN=r":="
+# t_ASSIGN=r":="
+def t_ASSIGN(t):
+    r":="
+    return tok_helper.tok_add_pos(t)
 
 literals_var =""

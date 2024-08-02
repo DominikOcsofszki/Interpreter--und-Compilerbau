@@ -8,7 +8,7 @@ from .tools_write_read import ReadIdExpression, WriteIdExpression
 
 class StructExpression(InterpretedExpression):
     def __init__(self, entries):
-        ic(self, entries)
+        # ic(self, entries)
         self.entries=entries
 
     def eval(self,env,is_struct=True):
@@ -40,8 +40,8 @@ class StructExtendExpression(InterpretedExpression):
 # TODO HEREHREHREHRH
 class StructCallNParentWithFunExpression(InterpretedExpression):
     def __init__(self,dot_expr, fun_args):
-        ic("=============h19==================")
-        ic(self,dot_expr, fun_args)
+        # ic("=============h19==================")
+        # ic(self,dot_expr, fun_args)
         self.id_struct,self.dots_count, self.entry = dot_expr
         self.args_function = fun_args
 
@@ -58,16 +58,16 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
         parent_struct = None
         value_ret =  None
         struct_from_env = env[self.id_struct]
-        ic(struct_from_env)
+        # ic(struct_from_env)
         if self.dots_count > 0:
-            ic(self.dots_count)
+            # ic(self.dots_count)
             # parent_struct = struct_from_env("parent_in_struct")
             parent_struct = struct_from_env
             for _ in range(self.dots_count-1):
                 parent_struct = parent_struct("parent_in_struct")
-            ic(self.entry)
+            # ic(self.entry)
             value_ret =  parent_struct(self.entry)
-            ic(value_ret)
+            # ic(value_ret)
             return value_ret, env
         # else:
         #     value_ret =struct_from_env(self.attribute) 
