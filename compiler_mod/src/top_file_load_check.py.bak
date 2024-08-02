@@ -1,6 +1,6 @@
 
-def getFilesFromFile(file_name):
-    with open(file_name, 'r') as file:
+def getFilesFromFile():
+    with open('code.tx', 'r') as file:
         files = file.read()
         return files
 
@@ -12,33 +12,23 @@ def checkFile(file:str):
 def openAllFiles(files):
     for file in files.splitlines():
         if checkFile(file) :
-            print(file)
             with open(file, 'r') as file:
                 data = file.read()
                 return data
 
-# def openAllFilesChecker(files):
-#     for file in files.splitlines():
-#         if checkFile(file) :
-#             print(file)
-#             with open(file, 'r') as file:
-#                 data = file.readlines()
-#                 return data
+def openAllFilesChecker(files):
+    for file in files.splitlines():
+        if checkFile(file) :
+            print(file)
+            with open(file, 'r') as file:
+                data = file.readlines()
+                return data
 
-def test_files(file_name):
-    files = getFilesFromFile(file_name)
-    print("TESTS Running:")
-    for x in files.splitlines():
-        print(x)
-    return files.splitlines()
-
-def checkAndOpenFile(file_name='code.tx'):
-    files = getFilesFromFile(file_name)
-    # data = openAllFilesChecker(files)
-    data = openAllFiles(files)
-    print(data)
+def checkAndOpenFile():
+    files = getFilesFromFile()
+    data = openAllFilesChecker(files)
     print("====================input:=======================")
-    print_no_comments_newlines(file_name)
+    print_no_comments_newlines()
     # print(data)
     lst_check =[]
     check_exit = False # <<change to True for check
@@ -51,22 +41,22 @@ def checkAndOpenFile(file_name='code.tx'):
                 if not x.endswith("{"):
                     lst_check.append(x)
         
-    # if check_exit:
-    #     missing_end = [x for x in lst_check if len(x)>1]
-    #     if len(missing_end) > 1:
-    #         print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-    #         print(missing_end)
-    #         # exit()
-    #     if len(missing_end) == 0:
-    #         print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-    #         print(missing_end)
-    #         # exit()
+    if check_exit:
+        missing_end = [x for x in lst_check if len(x)>1]
+        if len(missing_end) > 1:
+            print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+            print(missing_end)
+            # exit()
+        if len(missing_end) == 0:
+            print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+            print(missing_end)
+            # exit()
     data = openAllFiles(files)
     print("====================output:=======================\n")
     return data
 
-def print_no_comments_newlines(file_name):
-    files = getFilesFromFile(file_name)
+def print_no_comments_newlines():
+    files = getFilesFromFile()
     for file in files.splitlines():
         if checkFile(file) :
             with open(file, 'r') as file:
@@ -80,4 +70,16 @@ def print_no_comments_newlines(file_name):
                             print(linenr,line)
                     linenr +=1
                 return 
+def print_line_nr(lineno):
+    files = getFilesFromFile()
+    for file in files.splitlines():
+        if checkFile(file) :
+            with open(file, 'r') as file:
+                linenr=1
+                # data = file.read()
+                for line in file:
+                    if lineno == linenr:
+                        print(linenr, line)
+                        return 
+                    linenr +=1
 

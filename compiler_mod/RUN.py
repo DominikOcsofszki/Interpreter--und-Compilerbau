@@ -1,11 +1,8 @@
 from icecream import ic
 from ply.lex import Token
-# from src.parser.struct_parser import P_line
-from src.top_parser import parser, lexer
-# from environment import Env
-# from top_imports import env_imports
+from src.top_parser import parser, lexer,LOAD_FILES
 from src.top_imports import environment
-from src.top_file_load_check import checkAndOpenFile
+from src.top_file_load_check import checkAndOpenFile, test_files
 
 # NEW
 import traceback
@@ -16,7 +13,11 @@ def runREPL():
         print("=",*result.eval(environment))
 
 def runFromFile_code():
-    data = checkAndOpenFile()
+    if 'code/tests/' in LOAD_FILES:
+        runAllTest_code()
+        return
+    data = checkAndOpenFile(file_name=LOAD_FILES)
+    ic(data)
     try:
         print(parser.parse(input=data,lexer=lexer).eval(environment))
     except Exception as error:
@@ -24,7 +25,29 @@ def runFromFile_code():
         ic(">>>",error,">>>")
         # traceback.format_exc()
         
+def runAllTest_code():
+    if 'code/tests/' in LOAD_FILES:
+        print("=======================")
+        print("===> RUN TEST FILES <==")
+        print("=======================")
+        print(LOAD_FILES)
+        print("=======================")
+    # data = checkAndOpenFile(file_name=LOAD_FILES)
+    all_test_files = test_files(LOAD_FILES)
+    for file in all_test_files:
+        print(">testfile: ",file)
+        with open(file, 'r') as file:
+            data = file.read()
+            # return data
 
+        try:
+            # print(parser.parse(input=data,lexer=lexer).eval(environment))
+            parser.parse(input=data,lexer=lexer).eval(environment)
+        except Exception as error:
+            traceback.print_tb(error.__traceback__)
+            ic(">>>",error,">>>")
+            # traceback.format_exc()
+# runAllTest_code()
 # runREPL()
 runFromFile_code()
 

@@ -13,7 +13,6 @@ from .top_lexer import tokens, lexer
 
 from .top_precedence import precedence
 
-from .top_file_load_check import print_line_nr
 def p_error(p):
     print(p.__dict__)
     if parser.state == 85:
@@ -44,4 +43,17 @@ parser = yacc.yacc(start='expression')
 #              ''')
 # print(res)
 # exit()
-
+from src.top_configs import LOAD_FILES
+from .top_file_load_check import getFilesFromFile,checkFile
+def print_line_nr(lineno):
+    files = getFilesFromFile(LOAD_FILES)
+    for file in files.splitlines():
+        if checkFile(file) :
+            with open(file, 'r') as file:
+                linenr=1
+                # data = file.read()
+                for line in file:
+                    if lineno == linenr:
+                        print(linenr, line)
+                        return 
+                    linenr +=1
