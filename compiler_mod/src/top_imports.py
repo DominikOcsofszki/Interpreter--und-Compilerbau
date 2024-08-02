@@ -14,11 +14,26 @@ def show_top_env(_):
 def show_import_env(_):
     print("IMPORT_ENV",ENV_IMPORTS)
 
-def test_assert(arr_bool_and_msg):
+passed_tests = []
+failed_tests = []
+def print_all_test_results():
+        ic("TODO: get info from Node, atm only latest")
+        ic(passed_tests)
+        ic(failed_tests)
+
+def test_assert(arr_bool_and_msg, my_helper):
+    # ic(my_helper['tok'])
+    msg = *arr_bool_and_msg, my_helper['tok']
     if not arr_bool_and_msg[0]: 
-        raise AssertionError(*arr_bool_and_msg)
+        failed_tests.append(msg)
+        # ic(passed_tests)
+        # raise AssertionError(msg)
+        # raise AssertionError(*arr_bool_and_msg, my_helper['tok'])
     else:
-        print(f"Asserted {arr_bool_and_msg}")
+        passed_tests.append(msg)
+        # ic(failed_tests)
+        # ic(f"Asserted {arr_bool_and_msg}")
+        # ic(f"Asserted {msg}")
     # if not arr_bool_and_msg[0]: raise AssertionError(*arr_bool_and_msg[1],arr_bool_and_msg[2])
     
 
@@ -30,6 +45,7 @@ ENV_IMPORTS["_ENV_import"]=show_import_env
 ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
 ENV_IMPORTS["assert"]=test_assert
+ENV_IMPORTS["print_all_test_results"]=print_all_test_results
 
 environment.parent = ENV_IMPORTS
 

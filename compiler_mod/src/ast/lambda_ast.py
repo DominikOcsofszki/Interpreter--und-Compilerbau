@@ -35,7 +35,14 @@ class CallExpression(InterpretedExpression):
     def eval(self,env):
         func = env[self.fn]
         if self.fn in ENV_IMPORTS:
+            if "assert" == self.fn :
+                ic(self.fn)
+                from ..top_lexer import lexer
+                return_ids=[entry.eval(env)[0] for entry in self.x]
+                return func(return_ids,lexer.my_helper), env
             return_ids=[entry.eval(env)[0] for entry in self.x]
+            if len(return_ids) == 0:
+                return func(),env
             return func(return_ids), env
 
         if not EVAL_EXPR_BEFORE_SAVE_TO_TMP:
