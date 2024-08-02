@@ -36,7 +36,6 @@ class CallExpression(InterpretedExpression):
         func = env[self.fn]
         if self.fn in ENV_IMPORTS:
             if "test" == self.fn :
-                ic(self.fn)
                 from ..top_lexer import lexer
                 return_ids=[entry.eval(env)[0] for entry in self.x]
                 return func(return_ids,lexer.my_helper), env

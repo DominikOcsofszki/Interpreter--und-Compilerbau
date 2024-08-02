@@ -16,26 +16,30 @@ def show_import_env(_):
 
 passed_tests = []
 failed_tests = []
+
+def padding(txt):
+    padding = 15 - len(txt)
+    return "_" * padding
+
+
 def print_all_test_results():
-        ic("TODO: get info from Node, atm only latest")
-        ic(passed_tests)
-        ic(failed_tests)
+    ic("TODO: get info from Node, atm only latest")
+    ic(passed_tests)
+    ic(failed_tests)
+    print("Passed Tests:")
+    for test in passed_tests:
+        print(f"- {test[2]!r}{padding(test[2])} {test}")
+    print("Failed Tests:")
+    for test in failed_tests:
+        print(f"- {test[2]!r}{padding(test[2])} {test}")
 
 def test_assert(arr_bool_and_msg, my_helper):
-    # ic(my_helper['tok'])
     msg = *arr_bool_and_msg, my_helper['tok']
     test_bool = arr_bool_and_msg[0] == arr_bool_and_msg[1]
     if not test_bool: 
         failed_tests.append(msg)
-        # ic(passed_tests)
-        # raise AssertionError(msg)
-        # raise AssertionError(*arr_bool_and_msg, my_helper['tok'])
     else:
         passed_tests.append(msg)
-        # ic(failed_tests)
-        # ic(f"Asserted {arr_bool_and_msg}")
-        # ic(f"Asserted {msg}")
-    # if not arr_bool_and_msg[0]: raise AssertionError(*arr_bool_and_msg[1],arr_bool_and_msg[2])
     
 
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
