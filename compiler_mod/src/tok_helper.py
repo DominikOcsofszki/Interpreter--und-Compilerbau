@@ -59,21 +59,20 @@ def load_dict_no_function_t_(current_file_should_be_top_lexer):
     regex_t_not_functions = \
             {key: value for key, value in cur_dict.items() if key in all_t and not callable(value)}
 
-    new = {fun_for_t(value,key) for key, value in regex_t_not_functions.items()}
+    new = [fun_for_t(value,key) for key, value in regex_t_not_functions.items()]
     return new
+def sort_tokens_by_length_of_doc_string(e:str):
+    return len(e.splitlines()[2])
 
-# Create the directory if it doesn't exist
 def changes_to_file(new):
-
     import os
     directory = os.path.dirname("src/top_tok_to_t_function.py")
     if not os.path.exists(directory):
         os.makedirs(directory)
-
-    # Write the function to the file
+    
     with open("src/top_tok_to_t_function.py", "w") as file:
         file.write("from .tok_helper import tok_add_pos")
-        ic(new)
+        new.sort(key=sort_tokens_by_length_of_doc_string)
         for x in new:
             for a in x:
                 file.write(a)
