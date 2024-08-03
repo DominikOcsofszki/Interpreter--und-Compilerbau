@@ -52,7 +52,7 @@ def run():
     else:
         runFromFile_code()
 
-
+ic(lexer.my_helper)
 
 def get_caller_module_dict(levels):
     import sys

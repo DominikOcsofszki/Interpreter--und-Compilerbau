@@ -1,0 +1,44 @@
+{
+out :=-1;
+s0:= struct{
+    .a:=0;
+    .f:=\x->x
+};
+s1:= struct{
+    .a:=1;
+    .f:=\x->x;
+    .o:=out
+};
+t:= extend s0{
+    .a:= \-> 10
+};
+
+t1:= extend s1{
+    .a:= \-> 110
+};
+p := s1.o;
+p := t1.o;
+print(p);
+test(s1.o,-1,".out from outside");
+# test(s1.out,-1,".out from outside");
+# test_not_eq(t.out,-1,"t.out should not be accessible");
+# s1:= extend s0{
+#     .a:=1
+# };
+# p := s0.out;
+# p := s0.a;
+# p := s1.a;
+# test(out,-1,"check outside of struct");
+# s0.f;
+#
+#
+#
+# test(s0.a,0,"[STRUCT] s.a");
+# print(s0.f());
+# test(s0.f(0),0,"[STRUCT] s0.f(0) call outside of struct");
+#
+#
+# _ENV_IMPORT();
+print_all_test_results()
+# p
+}

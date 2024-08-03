@@ -1,12 +1,14 @@
 from os import error
 import copy
 from .top_configs import SHOW_ENV_IMPORTS
+from icecream import ic
 
 class Env:
 
     def __init__(self,parent=None,env_name=None) -> None:
         self.parent = parent
         self.env_dict={}
+        self.struct_dict={}
         self.env_name=env_name
 
     def __contains__(self,key):
@@ -18,6 +20,12 @@ class Env:
 
     def deep_copy(self):
         return copy.deepcopy(self)
+
+    def deep_copy__only_env(self):
+        return copy.deepcopy(self.env_dict)
+
+    def deep_copy_struct_dict(self):
+        return copy.deepcopy(self.struct_dict)
 
 
 # //TODO!!!
@@ -45,3 +53,15 @@ class Env:
     def __setitem__(self,key,value):
         self.env_dict[key]=value
 
+    def get_struct_dict_entry(self,key):
+        ic(self,key)
+        ic("=====get_struct_dict_entry========h20==================")
+        if key in self.struct_dict:
+            return self.struct_dict[key]
+        elif self.parent and len(self.parent.struct_env_dict) == 0:
+            return self.parent[key]
+        return None
+    def set_struct_dict_entry(self,key,entry):
+        ic(self,key,entry)
+        ic("=============h21==set_struct_dict_entry================")
+        self.struct_dict[key] = entry

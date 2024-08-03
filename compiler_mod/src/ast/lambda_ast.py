@@ -35,10 +35,11 @@ class CallExpression(InterpretedExpression):
     def eval(self,env):
         func = env[self.fn]
         if self.fn in ENV_IMPORTS:
-            if "test" == self.fn :
+            if "test" == self.fn or "test_not_eq" == self.fn :
                 from ..top_lexer import lexer
                 return_ids=[entry.eval(env)[0] for entry in self.x]
-                return func(return_ids,lexer.my_helper), env
+                return func(return_ids,env), env
+                # return func(return_ids,lexer.my_helper,env), env
             return_ids=[entry.eval(env)[0] for entry in self.x]
             if len(return_ids) == 0:
                 return func(),env

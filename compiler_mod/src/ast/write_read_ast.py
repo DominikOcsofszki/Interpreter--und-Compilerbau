@@ -6,21 +6,30 @@ from ..top_configs import EVAL_EXPR_BEFORE_SAVE_TO_TMP
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id_always_as_string, value):
+        # ic(self, id_always_as_string, value)
         self.id_string=id_always_as_string
         self.value=value
 
     def eval(self,env):
+        ic("=============h23==================")
+        ic(env)
+        ic(self.id_string,env)
         find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value
             return self.value, env
         else:
+            ic("=============h24==================")
+            ic(self.value)
+            ic(self.value.eval(env))
             find_env[self.id_string] = self.value.eval(env)[0]
             return self.value.eval(env)[0], env
 
 def findEnvWithIdWrite(id,env):
+    ic(env.env_name)
     if env.parent.env_name == "ENV_IMPORTS":
             return env
+    ic(env)
     parent_env = env
     item = parent_env.env_dict.get(id)
     last_parent = parent_env
