@@ -9,10 +9,10 @@ def print_py(entries:InterpretedExpression):
     for entry in entries:
         print(">>>",entry)
 
-def show_top_env(_):
+def _ENV():
     print("TOP_ENV",environment)
 
-def show_import_env(_):
+def _ENV_import():
     print("IMPORT_ENV",ENV_IMPORTS)
 
 current_filename = ""
@@ -20,8 +20,8 @@ current_filename = ""
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
 ENV_IMPORTS["print"]=print_py
 ENV_IMPORTS["exit"]=exit
-ENV_IMPORTS["_ENV"]=show_top_env
-ENV_IMPORTS["_ENV_import"]=show_import_env
+ENV_IMPORTS["_ENV"]=_ENV
+ENV_IMPORTS["_ENV_import"]=_ENV_import
 ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
 ENV_IMPORTS["test"]=test_assert

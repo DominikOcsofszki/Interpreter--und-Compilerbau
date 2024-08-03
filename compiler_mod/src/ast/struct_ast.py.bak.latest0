@@ -2,7 +2,9 @@
 
 from ..environment import Env
 from ..Expression import InterpretedExpression , ic
-# from .tools_write_read import ReadIdExpression, WriteIdExpression
+from .tools_write_read import ReadIdExpression, WriteIdExpression
+# from ..Expr_Enum import Expr
+# from ..Nodes import Node
 
 class StructExpression(InterpretedExpression):
     def __init__(self, entries):
