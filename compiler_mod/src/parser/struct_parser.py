@@ -37,6 +37,7 @@ def p_expression_dot_outside(p):
 
 def p_expression_dot_struct(p):
     '''dot_expression : dots ID
+                    |   ID dots ID
     '''
     p[0] = [ [],p[1],p[2] ]
 

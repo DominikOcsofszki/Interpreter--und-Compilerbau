@@ -29,6 +29,8 @@ def p_expression_call_args(p):
     '''expression : ID "(" ")"     
         |           ID "(" expression_list ")"
     '''
+    # ic(type(p))
+    # exit()
     if len(p) == 4:
         p[0] = Node(Expr.CallExpression,[p[1],[]])
     else:

@@ -1,3 +1,4 @@
+
 {
 out:=123;
 s := struct {
@@ -19,8 +20,8 @@ print(s.out);
 print(s.out);
 print(out);
 print("One test fails the other not");
-test(t.out,None,"t.out should be None >struct");
-test(s.out,None,"s.out should be None >struct");
+test(t.out,None,"t.out should be None >IMPORTANT");
+test(s.out,None,"s.out should be None >IMPORTANT");
 test(out,123,"STRUCT");
 print_all_test_results();
 None

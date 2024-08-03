@@ -12,7 +12,7 @@ import ply.yacc as yacc
 from .top_lexer import tokens, lexer
 
 from .top_precedence import precedence
-
+from CONFIGS import RUN_TESTS_ONLY
 def p_error(p):
     print(p.__dict__)
     if parser.state == 85:
@@ -22,7 +22,12 @@ def p_error(p):
     else:
         stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
         print('====================Parsing-Error=================')
-        print_line_nr(p.lineno)
+        if not RUN_TESTS_ONLY: 
+            print_line_nr(p.lineno)
+        else:
+            ic("TODO: implement error handling for tests, save current filename")
+            ic(p.__dict__)
+            ic(p.lexer.lineno)
         print('Syntax error in input line', p.lineno,": \"", p.value,"\"")
         print('Parser State {}: \n{} . {}'
               .format(parser.state,

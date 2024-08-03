@@ -18,7 +18,7 @@ passed_tests = []
 failed_tests = []
 
 def padding(txt):
-    padding = 15 - len(txt)
+    padding = 20 - len(txt)
     return "_" * padding
 
 
@@ -26,12 +26,22 @@ def print_all_test_results():
     ic("TODO: get info from Node, atm only latest")
     ic(passed_tests)
     ic(failed_tests)
-    print("Passed Tests:")
+    print("\033[92mPassed Tests:\033[0m")  # Green
+
     for test in passed_tests:
-        print(f"- {test[2]!r}{padding(test[2])} {test}")
-    print("Failed Tests:")
+        if "IMPORTANT" in test[2]:
+            print(f"\033[92m- {test[2]!r}{padding(test[2])} {test[:-1]}\033[0m")
+
+        else:
+            print(f"- {test[2]!r}{padding(test[2])} {test[:-1]}")
+    print("\033[91mFailed Tests:\033[0m")  # Red
     for test in failed_tests:
-        print(f"- {test[2]!r}{padding(test[2])} {test}")
+        if "IMPORTANT" in test[2]:
+            print(f"\033[91m- {test[2]!r}{padding(test[2])} {test[:-1]}\033[0m")
+        else:
+            print(f"- {test[2]!r}{padding(test[2])} {test[:-1]}")
+
+    print("================END-TESTS===================")
 
 def test_assert(arr_bool_and_msg, my_helper):
     msg = *arr_bool_and_msg, my_helper['tok']
@@ -41,7 +51,7 @@ def test_assert(arr_bool_and_msg, my_helper):
     else:
         passed_tests.append(msg)
     
-
+current_filename = ""
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
 ENV_IMPORTS["print"]=print_py
 ENV_IMPORTS["exit"]=exit
@@ -51,6 +61,7 @@ ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
 ENV_IMPORTS["test"]=test_assert
 ENV_IMPORTS["print_all_test_results"]=print_all_test_results
+ENV_IMPORTS["current_filename"]=current_filename
 
 environment.parent = ENV_IMPORTS
 

@@ -34,12 +34,21 @@ def my_print_t(t):
         print(f"{t.value}({t.type},l:{t.line},w:{t.nr})")
         # ic(print_later_arr)
 
+#TODO switch to dynamic arr
+pos_dict = [-1]*1000
 def tok_add_pos(t):
     t.line = my_helper['tok']['line']
     t.nr = my_helper['tok']['nr']
+    # pos_dict[t.lexpos] = [t.line,t.nr]
+    pos_dict[t.lexpos] = t
     # ic(t.nr)
     my_helper['tok']['nr'] +=1
-    my_print_t(t)
+    #TODO rework
+    # my_print_t(t)
+    # global current_filename
+    # if pos_dict[82] != -1:
+    #     ic(pos_dict[82].__dict__)
+    #     ic(pos_dict[82].nr)
     return t
 
 

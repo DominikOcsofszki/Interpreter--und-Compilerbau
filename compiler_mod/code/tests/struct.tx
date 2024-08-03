@@ -1,4 +1,5 @@
 {
+out:=-1;
   s := struct {
     .x := 7;
     .set_x := \x -> .x := x
@@ -10,11 +11,18 @@
     .set_px := \x -> ..set_x(x);
     .set_x := \x -> .x := x
   };
+  test(s.x,7,"STRUCT: s.x is 7");
+  test(t.x,5,"STRUCT: t.x is 5");
+  test(t..x,5,"STRUCT: t..x is 7");
+  test(t.out,None,"STRUCT: t.out should not work");
   t.set_x(2);
-  print(t.x); #2
-  print(t..x); #7
+  # print(t.x); #2
+  test(t.x,2,"STRUCT: t.x is 2");
+  # print(t..x); #7
+  test(t..x,7,"STRUCT: t..x is 7 - after t.set_x");
   t..set_x(1);
-  print(t..x); #1
+  # print(t..x); #1
+  test(t..x,1,"STRUCT: t..x is 1");
 # t.x := 1; #! disallowed
   print(t.x); #2
 
@@ -48,4 +56,7 @@
 #     print(a.x); #5, allowed
 #     print(a.y) #2, allowed
 #   }
+
+  # print"(t.out);
+  # None
 }

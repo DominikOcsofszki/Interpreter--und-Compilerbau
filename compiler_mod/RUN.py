@@ -29,6 +29,7 @@ def runAllTest_code():
         print("=======================")
     all_test_files = test_files(LOAD_FILES)
     for file in all_test_files:
+        current_filename = file
         # print(">testfile: ",file)
         with open(file, 'r') as file:
             data = file.read()
