@@ -10,12 +10,11 @@ def checkFile(file:str):
     return file
 
 def openAllFiles(files):
-    for file in files.splitlines():
-        if checkFile(file) :
-            print(file)
-            with open(file, 'r') as file:
+    for found_filename in files.splitlines():
+        if checkFile(found_filename) :
+            with open(found_filename, 'r') as file:
                 data = file.read()
-                return data
+                return data, found_filename
 
 # def openAllFilesChecker(files):
 #     for file in files.splitlines():
@@ -37,8 +36,8 @@ def test_files(file_name):
 def checkAndOpenFile(file_name='code.tx'):
     files = getFilesFromFile(file_name)
     # data = openAllFilesChecker(files)
-    data = openAllFiles(files)
-    print(data)
+    data, found_filename = openAllFiles(files)
+    print(">>>>",found_filename)
     print("====================input:=======================")
     print_no_comments_newlines(file_name)
     # print(data)
@@ -63,9 +62,9 @@ def checkAndOpenFile(file_name='code.tx'):
     #         print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
     #         print(missing_end)
     #         # exit()
-    data = openAllFiles(files)
+    data,found_filename = openAllFiles(files)
     print("====================output:=======================\n")
-    return data
+    return data, found_filename
 
 def print_no_comments_newlines(file_name):
     files = getFilesFromFile(file_name)

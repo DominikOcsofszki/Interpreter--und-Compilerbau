@@ -7,16 +7,16 @@ import CONFIGS
 # NEW
 import traceback
 def runREPL():
-    environment = setup_env_for_new_file()
+    environment = setup_env_for_new_file(current_filename="")
     while True:
         i=input("> ")
         result = parser.parse(input=i,lexer=lexer)
         print("=",*result.eval(environment))
 
 def runFromFile_code():
-    data = checkAndOpenFile(file_name=LOAD_FILES)
+    data,file_name = checkAndOpenFile(file_name=LOAD_FILES)
     try:
-        environment = setup_env_for_new_file()
+        environment = setup_env_for_new_file(current_filename=file_name)
         print(parser.parse(input=data,lexer=lexer).eval(environment))
     except Exception as error:
         traceback.print_tb(error.__traceback__)
@@ -31,11 +31,10 @@ def runAllTest_code():
         print(LOAD_FILES)
         print("=======================")
     all_test_files = test_files(LOAD_FILES)
-    for file in all_test_files:
-        current_filename = file
-        print("> RUN testfile: ",file)
-        with open(file, 'r') as file:
-            environment = setup_env_for_new_file()
+    for test_file in all_test_files:
+        print("> RUN testfile: ",test_file)
+        with open(test_file, 'r') as file:
+            environment = setup_env_for_new_file(current_filename=test_file)
             data = file.read()
         try:
             parser.parse(input=data,lexer=lexer).eval(environment)
