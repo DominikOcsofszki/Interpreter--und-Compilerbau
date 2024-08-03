@@ -23,7 +23,7 @@ test(t.out,None,"t.out should be None >struct");
 test(s.out,None,"s.out should be None >struct");
 test(out,123,"STRUCT");
 print_all_test_results();
-_ENV_import();
-_ENV();
+# _ENV_import();
+# _ENV();
 None
 }

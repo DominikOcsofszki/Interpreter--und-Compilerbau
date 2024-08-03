@@ -7,8 +7,9 @@ from .top_functions import print_all_test_results,test_assert
 from icecream import ic
 
 def print_py(entries:InterpretedExpression):
-    for entry in entries:
-        print(">>>",entry)
+    if not CONFIGS.DEACTIVATE_PRINT:
+        for entry in entries:
+            print(">>>",entry)
 
 def _ENV():
     ic(environment.env_name,environment.env_dict)

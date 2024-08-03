@@ -18,6 +18,8 @@ def col_r():
         return "\033[91m"
 
 def col_off():
+    if not CONFIGS.COLORIZE:
+        return ""
     return "\033[0m"
 
     
@@ -26,7 +28,7 @@ def print_all_test_results():
     print("|- =====================TESTS============================")
     print("|- ======================================================")
     print("|- TODO: get info from Node, atm only latest")
-    print(f"{col_g()}mPassed Tests:{col_off()}")  # Green
+    print(f"{col_g()}Passed Tests:{col_off()}")  # Green
 
     for test in passed_tests:
         if "[IMP]" in test[2]:
