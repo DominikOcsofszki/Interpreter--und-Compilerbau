@@ -30,8 +30,8 @@ def test_files(file_name):
     print("TESTS Running:")
     filtered_files = [file.strip() for file in files.splitlines() if not file.startswith('#') and file.strip()]
     # for x in files.splitlines():
-    for filename in filtered_files:
-        print("test_file:\t",filename)
+    # for filename in filtered_files:
+    #     print("test_file:\t",filename)
     return filtered_files
 
 def checkAndOpenFile(file_name='code.tx'):

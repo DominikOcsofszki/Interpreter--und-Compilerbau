@@ -7,6 +7,7 @@ import CONFIGS
 # NEW
 import traceback
 def runREPL():
+    environment = setup_env_for_new_file()
     while True:
         i=input("> ")
         result = parser.parse(input=i,lexer=lexer)
@@ -32,7 +33,7 @@ def runAllTest_code():
     all_test_files = test_files(LOAD_FILES)
     for file in all_test_files:
         current_filename = file
-        print(">testfile: ",file)
+        print("> RUN testfile: ",file)
         with open(file, 'r') as file:
             environment = setup_env_for_new_file()
             data = file.read()
@@ -53,10 +54,6 @@ def run():
         runFromFile_code()
 
 
-# def find_column(input, token):
-#     line_start = input.rfind('\n', 0, token.lexpos) + 1
-#     print(token)
-#     return (token.lexpos - line_start) + 1
 
 def get_caller_module_dict(levels):
     import sys
@@ -66,12 +63,6 @@ def get_caller_module_dict(levels):
         ldict.update(f.f_locals)
     return ldict
 if __name__ == "__main__":
-    # ic(get_caller_module_dict(0)['environment'])
     run()
-    # ic(get_caller_module_dict(0)['environment'])
-    # env_final = get_caller_module_dict(0)['environment']
-    # ic(env_final['y'])
-    # # for x in env_final.keys():
-    # #     ic(x)
-    # ic("done")
+    # runREPL()
 

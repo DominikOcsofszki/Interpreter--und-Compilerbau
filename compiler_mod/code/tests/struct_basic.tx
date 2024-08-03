@@ -20,9 +20,9 @@ print(s.out);
 print(s.out);
 print(out);
 print("One test fails the other not");
-test(t.out,None,"t.out should be None >IMPORTANT");
-test(s.out,None,"s.out should be None >IMPORTANT");
+test(t.out,None,">[IMP] t.out should be None ");
+test(s.out,None,">[IMP] s.out should be None ");
 test(out,123,"STRUCT");
-print_all_test_results();
+# print_all_test_results();
 None
 }
