@@ -31,33 +31,31 @@ class LambdaArgsExpression(InterpretedExpression):
 class CallExpression(InterpretedExpression):
     def __init__(self,fn,ids_or_values):
         self.fn=fn
-        self.x=ids_or_values
+        self.ids_or_values=ids_or_values
 
     def eval(self,env):
         func = env[self.fn]
         if func is None:
             raise RuntimeError(f"[CallExpression] Function: {self.fn} not found")
         if self.fn in ENV_IMPORTS:
+            ic("=============h10==================")
+            ic(self.fn)
+            ic(self.ids_or_values)
             if Test_enum.test.value == self.fn or Test_enum.test_not_eq.value  == self.fn :
-                # ic("=============h7==================")
-                # ic(self.x)
-                # ic(len(self.x))
-                return_ids=[entry.eval(env)[0] for entry in self.x]
-                # ic(return_ids)
-                # ic("=============h7e==================")
+                return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
                 return func(return_ids,env), env
-                # return func(return_ids,lexer.my_helper,env), env
-            return_ids=[entry.eval(env)[0] for entry in self.x]
+            return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
             if len(return_ids) == 0:
                 return func(),env
             return func(return_ids), env
 
-        if not EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-            return_ids=[entry.eval(env)[0] for entry in self.x]
-            return func(return_ids), env
+        # if not EVAL_EXPR_BEFORE_SAVE_TO_TMP:
+        #     return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
+        #     return func(return_ids), env
 
         # if EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-        return func(self.x), env
+        ic("=============h9==================")
+        return func(self.ids_or_values), env
 
 
 

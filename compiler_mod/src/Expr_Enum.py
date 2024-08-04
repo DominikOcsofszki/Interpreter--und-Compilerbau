@@ -4,7 +4,8 @@ from .ast.control_ast import ForDoExpression, IfThenElseExpression, IfThenExpres
 from .ast.import_ast import ImportAsExpression, ImportExpression
 from .ast.lambda_ast import CallExpression, LambdaArgsExpression
 from .ast.local_ast import LocalExpression, LocalNewExpression
-from .ast.struct_ast import StructCallNParentWithFunExpression, StructExpression, StructExtendExpression, StructInsideArgsExpression,StructCallFunctionFromOutside, StructVariableFromOutside
+# from .ast.struct_ast import StructCallNParentWithFunExpression, StructExpression, StructExtendExpression, StructInsideArgsExpression,StructCallFunctionFromOutside, StructVariableFromOutside
+from .ast.struct_ast import StructExpression, StructExtendExpression,StructCallFunctionFromOutside, StructVariableFromOutside
 # from .ast.struct_ast import StructCallFunExpression, StructCallNParentWithFunExpression, StructExpression, StructExtendExpression
 from .ast.types_ast import ArrayCallExpression, ArrayExpression, CharExpression, FloatExpression, ListExpression, StringExpression
 from .ast.write_read_ast import ReadIdExpression, ReadParentIdExpression, WriteIdExpression,WriteIdStructExpression
@@ -32,10 +33,9 @@ class Expr(enum.Enum):
     StructExpression = StructExpression
     # StructCallFunExpression = StructCallFunExpression
     StructExtendExpression = StructExtendExpression
-    StructInsideArgsExpression = StructInsideArgsExpression
     StructCallFunctionFromOutside = StructCallFunctionFromOutside
     StructVariableFromOutside = StructVariableFromOutside
-    StructCallNParentWithFunExpression = StructCallNParentWithFunExpression
+    # StructCallNParentWithFunExpression = StructCallNParentWithFunExpression
     LambdaArgsExpression = LambdaArgsExpression
     CallExpression = CallExpression
     ImportAsExpression = ImportAsExpression

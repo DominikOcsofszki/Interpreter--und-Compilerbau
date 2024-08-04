@@ -32,27 +32,26 @@ def p_expression_dot_outside_call(p):
                 |   ID dots ID "(" expression_list ")"
     '''
     if len(p)==6:
-        x = [ p[1],p[2],p[3],[] ] 
-    if len(p)==7:
-        x = [ p[1],p[2],p[3], ] 
-    if x is None:
-        raise AssertionError("def p_expression_dot_outside(p):")
-    p[0] = Node(Expr.StructCallFunctionFromOutside,[x,None])
+        p[0] = Node(Expr.StructCallFunctionFromOutside,[p[1],p[2],p[3],[]])
+    else:
+        p[0] = Node(Expr.StructCallFunctionFromOutside,[p[1],p[2],p[3],p[5]])
+    # p[0] = Node(Expr.StructCallFunctionFromOutside,[x,None])
+    # p[0] = Node(Expr.StructCallFunctionFromOutside,[p[1],p[2],p[3]])
 
 def p_expression_dot_struct(p):
     '''dots_in_struct_expression : dots ID
     '''
     p[0] = [ [],p[1],p[2] ]
 
-def p_expression_struct_use_parent_WORKING(p):
-    '''expression : dots_in_struct_expression "(" ")"
-                |   dots_in_struct_expression "(" expression_list ")"
-
-    '''
-    if len(p) == 4:
-        p[0] = Node(Expr.StructInsideArgsExpression,[p[1],[]])
-    if len(p) == 5:
-        p[0] = Node(Expr.StructInsideArgsExpression,[p[1],p[3]])
+# def p_expression_struct_use_parent_WORKING(p):
+#     '''expression : dots_in_struct_expression "(" ")"
+#                 |   dots_in_struct_expression "(" expression_list ")"
+#
+#     '''
+#     if len(p) == 4:
+#         p[0] = Node(Expr.StructInsideArgsExpression,[p[1],[]])
+#     if len(p) == 5:
+#         p[0] = Node(Expr.StructInsideArgsExpression,[p[1],p[3]])
 
 def p_expression_unary_operators_not(p):
     '''expression : NOT expression 
