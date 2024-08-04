@@ -1,0 +1,26 @@
+{
+print("1");
+_ENV();
+out:=-1;
+_ENV();
+s:=struct {
+    .a:=1;
+    .o:=out;
+    .f:=\x->x;
+    .c:=\->777;
+    .f2:=\x,y->x*y
+};
+_ENV();
+test(out,-1,"test(out,-1");
+test(s.a,1,"test(s.a,1");
+test(s.o,-1,"test(s.o,-1");
+test(s.c(),777,"test(s.c(),777");
+test(s.f(99),99,"test(s.f(99),99");
+test(s.f(100),100,"test(s.f(100),100");
+test(s.f2(1,2),2,"test(s.f2(1,2),2,");
+test(s.f2(5,5),25,"test(s.f2(5,5),25");
+
+
+print_all_tests()
+}
+

@@ -1,28 +1,50 @@
+import enum
 from .environment import Env
 
 from .ast.types_ast import head,tail
 from .Expression import InterpretedExpression, ic
+import CONFIGS
+from .top_tests_fun import print_all_test_results,test_assert,test_false
+from icecream import ic
 
-environment=Env()
 def print_py(entries:InterpretedExpression):
-    for entry in entries:
-        print(">>>",entry)
+    if not CONFIGS.DEACTIVATE_PRINT:
+        for entry in entries:
+            print(">>>",entry)
 
-def show_top_env(_):
-    print("TOP_ENV",environment)
+def _ENV():
+    ic(environment.env_name,environment.env_dict)
 
-def show_import_env(_):
-    print("IMPORT_ENV",ENV_IMPORTS)
+def _ENV_import():
+    ic(ENV_IMPORTS.env_name,ENV_IMPORTS.env_dict)
+
+class Test_enum(enum.Enum):
+    test = "test"
+    test_not_eq = "test_false"
+    print_all_tests = "print_all_tests"
+
+
 
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
 ENV_IMPORTS["print"]=print_py
 ENV_IMPORTS["exit"]=exit
-ENV_IMPORTS["_ENV"]=show_top_env
-ENV_IMPORTS["_ENV_import"]=show_import_env
+ENV_IMPORTS["_ENV"]=_ENV
+ENV_IMPORTS["_ENV_IMPORT"]=_ENV_import
 ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
+ENV_IMPORTS["test"]=test_assert
+ENV_IMPORTS[Test_enum.test.value]=test_assert
+ENV_IMPORTS[Test_enum.test_not_eq.value]=test_false
+ENV_IMPORTS[Test_enum.print_all_tests.value]=print_all_test_results
+# ENV_IMPORTS["current_filename"]=current_filename
 
-environment.parent = ENV_IMPORTS
+def setup_env_for_new_file(current_filename=''):
+    global environment
+    environment=Env()
+    environment.env_name = "ENV_GLOBAL"
+    ENV_IMPORTS["current_filename"]=current_filename
+    ENV_IMPORTS["log_fun_env"]=True
 
-# import_names = [x for x in env_imports.env_dict]
-# print(import_names)
+    environment.parent = ENV_IMPORTS
+    return environment
+    

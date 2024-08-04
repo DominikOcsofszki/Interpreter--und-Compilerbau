@@ -1,0 +1,30 @@
+
+{
+out:=-1;
+text:="asd";
+s0 := struct{
+    .a:=123;
+    .o:=out
+};
+
+e := extend s0{
+    .new := "ex"
+};
+
+test(s0.o,-1,       "test(s0.o,-1       ");
+test(s0.out,None,   "test(s0.out,None   ");
+test(s0.a,123,      "test(s1.a,123,     ");
+
+
+test(e.o,-1,       "test(e.o,-1,         ");
+test(e.out,None,   "test(e.out,None,     ");
+test(e.a,123,      "test(e.a,123,        ");
+test(text, "asd",   "[FAIL]Issue with text in tests");
+test(e.new, "ex",   "[FAIL]combining two field! Issue with text in tests");
+
+
+test(e.o,-1,       "test(e.o,-1,         ");
+test(e.out,None,   "test(e.out,None,     ");
+test(e.a,123,      "test(e.a,123,        ");
+print_all_tests()
+}

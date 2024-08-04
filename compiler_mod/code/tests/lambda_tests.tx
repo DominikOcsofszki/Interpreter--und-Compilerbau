@@ -1,0 +1,10 @@
+
+{
+y:=99;
+f:= \-> 100;
+fn:= \x -> x ;
+fn2:= \x,y,z -> x * y * z;
+test(fn2(100,100,100),100*100*100,"TEST_NAME");
+test(f(),100,"non args lambda");
+test(fn(100),100," args lambda")
+}

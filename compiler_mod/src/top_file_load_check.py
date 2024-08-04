@@ -1,6 +1,6 @@
 
-def getFilesFromFile():
-    with open('code.tx', 'r') as file:
+def getFilesFromFile(file_name):
+    with open(file_name, 'r') as file:
         files = file.read()
         return files
 
@@ -10,25 +10,36 @@ def checkFile(file:str):
     return file
 
 def openAllFiles(files):
-    for file in files.splitlines():
-        if checkFile(file) :
-            with open(file, 'r') as file:
+    for found_filename in files.splitlines():
+        if checkFile(found_filename) :
+            with open(found_filename, 'r') as file:
                 data = file.read()
-                return data
+                return data, found_filename
 
-def openAllFilesChecker(files):
-    for file in files.splitlines():
-        if checkFile(file) :
-            print(file)
-            with open(file, 'r') as file:
-                data = file.readlines()
-                return data
+# def openAllFilesChecker(files):
+#     for file in files.splitlines():
+#         if checkFile(file) :
+#             print(file)
+#             with open(file, 'r') as file:
+#                 data = file.readlines()
+#                 return data
 
-def checkAndOpenFile():
-    files = getFilesFromFile()
-    data = openAllFilesChecker(files)
+def test_files(file_name):
+    files = getFilesFromFile(file_name)
+    print("TESTS Running:")
+    filtered_files = [file.strip() for file in files.splitlines() if not file.startswith('#') and file.strip()]
+    # for x in files.splitlines():
+    # for filename in filtered_files:
+    #     print("test_file:\t",filename)
+    return filtered_files
+
+def checkAndOpenFile(file_name='code.tx'):
+    files = getFilesFromFile(file_name)
+    # data = openAllFilesChecker(files)
+    data, found_filename = openAllFiles(files)
+    print(">>>>",found_filename)
     print("====================input:=======================")
-    print_no_comments_newlines()
+    print_no_comments_newlines(file_name)
     # print(data)
     lst_check =[]
     check_exit = False # <<change to True for check
@@ -41,22 +52,22 @@ def checkAndOpenFile():
                 if not x.endswith("{"):
                     lst_check.append(x)
         
-    if check_exit:
-        missing_end = [x for x in lst_check if len(x)>1]
-        if len(missing_end) > 1:
-            print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-            print(missing_end)
-            # exit()
-        if len(missing_end) == 0:
-            print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
-            print(missing_end)
-            # exit()
-    data = openAllFiles(files)
+    # if check_exit:
+    #     missing_end = [x for x in lst_check if len(x)>1]
+    #     if len(missing_end) > 1:
+    #         print("PROBLEM WITH ; TO MANY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+    #         print(missing_end)
+    #         # exit()
+    #     if len(missing_end) == 0:
+    #         print("PROBLEM WITH ; MISSING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exit()")
+    #         print(missing_end)
+    #         # exit()
+    data,found_filename = openAllFiles(files)
     print("====================output:=======================\n")
-    return data
+    return data, found_filename
 
-def print_no_comments_newlines():
-    files = getFilesFromFile()
+def print_no_comments_newlines(file_name):
+    files = getFilesFromFile(file_name)
     for file in files.splitlines():
         if checkFile(file) :
             with open(file, 'r') as file:
@@ -70,16 +81,4 @@ def print_no_comments_newlines():
                             print(linenr,line)
                     linenr +=1
                 return 
-def print_line_nr(lineno):
-    files = getFilesFromFile()
-    for file in files.splitlines():
-        if checkFile(file) :
-            with open(file, 'r') as file:
-                linenr=1
-                # data = file.read()
-                for line in file:
-                    if lineno == linenr:
-                        print(linenr, line)
-                        return 
-                    linenr +=1
 

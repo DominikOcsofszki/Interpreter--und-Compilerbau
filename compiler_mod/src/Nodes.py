@@ -51,6 +51,7 @@ class Literals(_Node):
         Expr_To_Eval = self.type_Expr.value(self.leaf)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
+        #TODO can add Node info here!!!
         return Expr_To_Eval.eval(env)
     def getLiteral(self):
         return self.leaf

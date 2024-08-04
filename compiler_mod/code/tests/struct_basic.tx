@@ -1,3 +1,4 @@
+
 {
 out:=123;
 s := struct {
@@ -19,11 +20,9 @@ print(s.out);
 print(s.out);
 print(out);
 print("One test fails the other not");
-test(t.out,None,"[STRUCT]t.out should be None");
-test(s.out,None,"[STRUCT]s.out should be None");
-test(out,123,"[STRUCT]");
-print_all_tests();
-# _ENV_import();
-# _ENV();
+test(t.out,None,">[IMP] t.out should be None ");
+test(s.out,None,">[IMP] s.out should be None ");
+test(out,123,"STRUCT");
+# print_all_tests();
 None
 }

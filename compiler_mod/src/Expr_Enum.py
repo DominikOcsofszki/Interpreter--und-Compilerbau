@@ -4,14 +4,16 @@ from .ast.control_ast import ForDoExpression, IfThenElseExpression, IfThenExpres
 from .ast.import_ast import ImportAsExpression, ImportExpression
 from .ast.lambda_ast import CallExpression, LambdaArgsExpression
 from .ast.local_ast import LocalExpression, LocalNewExpression
-from .ast.struct_ast import StructCallNParentWithFunExpression, StructExpression, StructExtendExpression
+# from .ast.struct_ast import StructCallNParentWithFunExpression, StructExpression, StructExtendExpression, StructInsideArgsExpression,StructCallFunctionFromOutside, StructVariableFromOutside
+from .ast.struct_ast import StructExpression, StructExtendExpression,StructCallFunctionFromOutside, StructVariableFromOutside,WriteIdStructExpression,AssignInStructExpression
 # from .ast.struct_ast import StructCallFunExpression, StructCallNParentWithFunExpression, StructExpression, StructExtendExpression
 from .ast.types_ast import ArrayCallExpression, ArrayExpression, CharExpression, FloatExpression, ListExpression, StringExpression
-from .ast.write_read_ast import ReadIdExpression, ReadParentIdExpression, WriteIdExpression,WriteIdStructExpression
+from .ast.write_read_ast import ReadIdExpression, WriteIdExpression
 from .ast.sequences_ast import SequenceExpression
 
 import enum
 class Expr(enum.Enum):
+    AssignInStructExpression = AssignInStructExpression
     IfThenExpression = IfThenExpression
     IfThenElseExpression = IfThenElseExpression
     WhileExpression = WhileExpression
@@ -28,11 +30,12 @@ class Expr(enum.Enum):
     WriteIdExpression = WriteIdExpression
     WriteIdStructExpression = WriteIdStructExpression
     ReadIdExpression = ReadIdExpression
-    ReadParentIdExpression = ReadParentIdExpression
     StructExpression = StructExpression
     # StructCallFunExpression = StructCallFunExpression
     StructExtendExpression = StructExtendExpression
-    StructCallNParentWithFunExpression = StructCallNParentWithFunExpression
+    StructCallFunctionFromOutside = StructCallFunctionFromOutside
+    StructVariableFromOutside = StructVariableFromOutside
+    # StructCallNParentWithFunExpression = StructCallNParentWithFunExpression
     LambdaArgsExpression = LambdaArgsExpression
     CallExpression = CallExpression
     ImportAsExpression = ImportAsExpression

@@ -55,7 +55,7 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
         id, entry,n_dots, = arr
         if len(id) == 0:
             if n_dots ==2:
-                ic(id,entry,n_dots)
+                # ic(id,entry,n_dots)
                 # ic(env.parent[id])
             # exit()
 
@@ -73,8 +73,8 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
         # ic(id)
         if len(self.id_test) == 0:
             if self.n_dots_test ==2:
-                ic(self.id_test,self.entry_test,self.n_dots_test)
-                ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
+                # ic(self.id_test,self.entry_test,self.n_dots_test)
+                # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
             #TODO>>>>???
             # exit()
 

@@ -1,0 +1,6 @@
+{
+x:=true;
+test(x, true,"TESTBOOL");
+x:= 1>2;
+test(x,false,"1>2")
+}

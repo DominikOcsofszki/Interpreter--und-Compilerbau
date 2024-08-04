@@ -12,8 +12,8 @@ import ply.yacc as yacc
 from .top_lexer import tokens, lexer
 
 from .top_precedence import precedence
-
-from .top_file_load_check import print_line_nr
+from CONFIGS import RUN_TESTS_ONLY
+from .print_helper import print_helpful
 def p_error(p):
     print(p.__dict__)
     if parser.state == 85:
@@ -23,7 +23,13 @@ def p_error(p):
     else:
         stack_state_str = ' '.join([symbol.type for symbol in parser.symstack][1:])
         print('====================Parsing-Error=================')
-        print_line_nr(p.lineno)
+        print_helpful("parser error, check struct should have var def per .x")
+        if not RUN_TESTS_ONLY: 
+            print_line_nr(p.lineno)
+        else:
+            ic("TODO: implement error handling for tests, save current filename")
+            ic(p.__dict__)
+            ic(p.lexer.lineno)
         print('Syntax error in input line', p.lineno,": \"", p.value,"\"")
         print('Parser State {}: \n{} . {}'
               .format(parser.state,
@@ -44,4 +50,17 @@ parser = yacc.yacc(start='expression')
 #              ''')
 # print(res)
 # exit()
-
+from src.top_configs import LOAD_FILES
+from .top_file_load_check import getFilesFromFile,checkFile
+def print_line_nr(lineno):
+    files = getFilesFromFile(LOAD_FILES)
+    for file in files.splitlines():
+        if checkFile(file) :
+            with open(file, 'r') as file:
+                linenr=1
+                # data = file.read()
+                for line in file:
+                    if lineno == linenr:
+                        print(linenr, line)
+                        return 
+                    linenr +=1

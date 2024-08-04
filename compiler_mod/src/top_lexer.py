@@ -1,15 +1,13 @@
-# from .lexer.arith_lexer import *
-# from .lexer.bool_lexer import *
-# from .lexer.write_read_lexer import *
+from .top_tok_to_t_function import *
 from .lexer.sequences_lexer import *
 from .lexer.control_lexer import *
 from .lexer.local_lexer import *
 from .lexer.lambda_lexer import *
 from .lexer.import_lexer import *
-# from .lexer.types_lexer import *
 from .lexer.struct_lexer import *
 from ply.lex import lex
-from .top_configs import SHOW_TOKENS
+# from edit_lex import lex
+from .top_configs import PRINT_ALL_TOEKNS_LITERALS_AT_START
 
 from .lexer.literals_lexer import *
 
@@ -43,7 +41,7 @@ tokens = tokens 	    +\
          tokens_struct+\
          tokens_types
 from icecream import ic
-if SHOW_TOKENS:
+if PRINT_ALL_TOEKNS_LITERALS_AT_START:
     print(tokens)
     print(literals)
 
@@ -51,7 +49,7 @@ if SHOW_TOKENS:
 
 # Define a rule so we can track line numbers
 def t_newline(t):
-    r'\n'
+    r"\n"
     t.lexer.lineno += len(t.value)
     lexer.my_helper['tok']['nr'] = 0
     lexer.my_helper['tok']['line'] = t.lexer.lineno
@@ -75,8 +73,19 @@ def t_ignore_comments(t):
     r'[#].*'
     pass
 
+def start_lexer():
 
-lexer = lex()
-# lexer = lex(debug=True)
+    if False:
+        import sys
+        from .tok_helper import load_dict_no_function_t_,changes_to_file
+        new = load_dict_no_function_t_(sys.modules[__name__].__dict__)
+        changes_to_file(new)
+        exit()
 
+    lexer = lex()
+    # lexer = lex(debug=True)
+    return lexer
+
+lexer=start_lexer()
 lexer.my_helper = tok_helper.my_helper
+
