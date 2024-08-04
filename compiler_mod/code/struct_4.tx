@@ -7,7 +7,6 @@ s:= struct {
     .a:=1;
     .set_a:=\x->.a:=x
 };
-#
 test(s.o,-1,"test(s.o,-1");
 test(s.a,1,"test(s.a,1");
 test(s.out,None,"test(s.a,1");

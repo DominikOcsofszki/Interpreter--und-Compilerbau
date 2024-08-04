@@ -13,6 +13,7 @@ from ..top_imports import ENV_IMPORTS, Test_enum
         
 class LambdaArgsExpression(InterpretedExpression):
     def __init__(self, ids, body_lambda):
+        ic("=============h25==================")
         self.lambda_args_ids = ids
         self.body_lambda = body_lambda
 

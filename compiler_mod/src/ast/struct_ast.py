@@ -57,6 +57,7 @@ def get_struct_x_parent_or_self_struct(id_struct,dots_count,env):
 class StructExpression(InterpretedExpression):
     entries: List
     def eval(self,env:Env):
+        ic("=============h23==================")
         struct_env = Env(env)
         for entry in self.entries:
             tmp, struct_env = entry.eval(struct_env)

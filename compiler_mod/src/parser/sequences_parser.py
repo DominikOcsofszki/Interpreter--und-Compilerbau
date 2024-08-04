@@ -10,6 +10,9 @@ def p_expression_sequence(p):
     'expression : "{" sequence "}" '
     # p[0] = Node(Expr.SequenceExpression,p[2])
     p[0] = Node(Expr.SequenceExpression,[p[2]])
+    ic("=============h26==================")
+    ic(p[0])
+    ic(p[2])
 
 def p_expression_seq_expr(p):
     '''sequence :   expression 
