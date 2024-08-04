@@ -1,4 +1,5 @@
 #
+from copy import Error
 from ..Expression import InterpretedExpression, getAllClasses,ic
 from ..top_configs import EVAL_EXPR_BEFORE_SAVE_TO_TMP
 
@@ -9,13 +10,31 @@ class WriteIdExpression(InterpretedExpression):
         self.id_string=id_always_as_string
         self.value=value
 
-    def eval(self,env):
-        find_env = findEnvWithIdWrite(self.id_string,env)
+    def eval(self,env,is_struct=False):
+        ic("=============h40==================")
+        if is_struct:
+            ic("================>is inside struct<<<<<<<<<<<<<<<<<<")
+            ic("=============h45==================")
+            ic(env)
+            ic(self.value.eval(env,is_struct=True)[0])
+            ic(self.value.children)
+            # env.struct_dict[self.id_string] = self.value.eval(env)[0]
+            # ic(env.struct_dict[self.id_string])
+            # ic("=============h41==================")
+            find_env = env
+            # find_env = env.struct_dict
+            # ic(find_env)
+            ic("=============h42==================")
+            # exit()
+        else:
+            find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value
+            ic(find_env)
             return self.value, env
         else:
             find_env[self.id_string] = self.value.eval(env)[0]
+            ic(find_env)
             return self.value.eval(env)[0], env
 
 def findEnvWithIdWrite(id,env):
@@ -39,42 +58,6 @@ class ReadIdExpression(InterpretedExpression):
 
     def eval(self,env):
         return env[self.id], env
-
-
-# class ReadParentIdExpression(InterpretedExpression):
-#     def __init__(self, id,dots):
-#         ic(self, id,dots)
-#         exit()
-#         self.id=id
-#         self.n_parents=dots-1
-#
-#     def eval(self,env):
-#         if self.n_parents == 0:
-#             return env[self.id], env
-#         else:
-#             for _ in range(self.n_parents):
-#                 parent_struct =env["parent_in_struct"]
-#                 # parent = env["parent"]
-#                 if parent_struct:
-#                     return parent_struct(ReadIdExpression(self.id)), env
-#                     return parent.env[self.id], env
-#         return None, env
-
-
-# class WriteIdStructExpression(InterpretedExpression):
-#     def __init__(self, id_always_as_string, value):
-#         self.id_string=id_always_as_string
-#         self.value=value
-#
-#     def eval(self,env):
-#         find_env = findEnvWithIdWrite(self.id_string,env)
-#         if isinstance(self.value, str) or isinstance(self.value, int):
-#             find_env[self.id_string] = self.value
-#             return self.value, env
-#         else:
-#             find_env[self.id_string] = self.value.eval(env)[0]
-#             return self.value.eval(env)[0], env
-
 
 used_procedures_and_classes = getAllClasses()
 

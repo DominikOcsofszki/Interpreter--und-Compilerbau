@@ -7,7 +7,7 @@ class InterpretedExpression:
     # def eval(self,env:Env,node_info=None):
     #     if node_info:
     #         ic(node_info)
-    def eval(self,env:Env):
+    def eval(self,env:Env,is_struct=False):
         # raise NotImplementedError("Child of InterpretedExpression not impl")
         # return is_struct
         return None, env

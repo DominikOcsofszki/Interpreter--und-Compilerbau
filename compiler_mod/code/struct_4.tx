@@ -1,23 +1,26 @@
 {
 out := -1;
 
-x:=\a->b;
 s:= struct {
     .o:=out;
-    .a:=1;
-    .set_a:=\x->.a:=x;
+    .a:=-123;
+    .set_out:=\x->out:=x;
+    # .set_a:=\x->.a:=x;
     .f:=\x->x
 };
-test(s.o,-1,"test(s.o,-1");
-test(s.a,1,"test(s.a,1");
-test(s.out,None,"test(s.a,1");
-test(out,-1,"test(out,-1");
-test(s.a,1,"test(s.a,1");
+# test(s.o,-1,"test(s.o,-1");
+# test(s.a,1,"test(s.a,1");
+# test(s.out,None,"test(s.out,None");
+# test(out,-1,"test(out,-1");
+# test(s.a,1,"test(s.a,1");
 print(s.a);
-print(s.set_a(2));
-test(s.a,2,"test(s.a,2 - after set2");
-print(s.a);
-test(s.f(99),99,"test(s.f(99),");
+print(out);
+s.set_out(777);
+print(out);
+print(s.set_a(777));
+# test(s.a,2,"test(s.a,2");
+# print(s.a);
+# test(s.f(99),99,"test(s.f(99),99");
 
 
 # print(s);

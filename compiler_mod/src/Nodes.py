@@ -1,4 +1,5 @@
 
+from copy import Error
 from typing import List, Optional, Union
 
 from .environment import Env
@@ -47,7 +48,7 @@ class Literals(_Node):
     def __next__(self) -> '_Node':
         raise StopIteration()
         return self.leaf
-    def eval(self,env:Env):
+    def eval(self,env:Env,is_struct=False):
         Expr_To_Eval = self.type_Expr.value(self.leaf)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
@@ -87,10 +88,15 @@ class Node(_Node):
         return self.children[0]
 
 
-    def eval(self,env:Env):
+    def eval(self,env:Env,is_struct=False):
         Expr_To_Eval = self.type_Expr.value(*self.children)
         # print(Expr_To_Eval.sequences)
         # self.print_tree(self)
+        if self.type_Expr == Expr.WriteIdExpression:
+            # raise Error("BREAK PLS")
+            ic("=============h36==================")
+            return Expr_To_Eval.eval(env,is_struct)
+            ic(Expr_To_Eval)
         return Expr_To_Eval.eval(env)
         # return str(self)
         # 

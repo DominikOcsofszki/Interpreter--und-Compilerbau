@@ -55,7 +55,6 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
         id, entry,n_dots, = arr
         if len(id) == 0:
             if n_dots ==2:
-                # ic(id,entry,n_dots)
                 # ic(env.parent[id])
             # exit()
 

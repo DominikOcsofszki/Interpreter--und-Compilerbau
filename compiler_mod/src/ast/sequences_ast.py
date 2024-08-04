@@ -8,7 +8,6 @@ class SequenceExpression(InterpretedExpression):
     def eval(self,env):
         last_result = None
         for sequence in self.sequences:
-            ic(sequence)
             last_result, env = sequence.eval(env)
         return last_result, env
 
