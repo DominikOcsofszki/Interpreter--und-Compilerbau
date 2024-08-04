@@ -17,14 +17,11 @@ def _helper_get_struct_x_parent_or_self_struct(struct_get,dots_count):
             raise RuntimeError(f" dots: {dots_count} to deep")
 
         struct = _struct
-        ic(">>>>>>>>>",struct)
-    ic(">>>>>>>>>",struct)
     return struct
         
 
 def helper_get_struct_parent(struct_get):
     parent_struct_get = struct_get("struct_parent")
-    ic(parent_struct_get)
     return parent_struct_get
 
 def helper_get_struct_helper(id_struct,env):
@@ -34,7 +31,10 @@ def helper_get_struct_helper(id_struct,env):
     return struct_get
 
 def helper_get_item_from_struct(struct_get,id_entry):
+    # ic("=============h15==================")
     value = struct_get("struct_env").get(id_entry)
+    parent_struct_get = struct_get("struct_env").get("struct_parent")
+    # ic(struct_get("struct_env"))
     if value is None:
         parent_struct_get = struct_get("struct_env").get("struct_parent")
         while parent_struct_get is not None:
@@ -60,11 +60,14 @@ class StructExpression(InterpretedExpression):
         struct_env = Env(env)
         for entry in self.entries:
             tmp, struct_env = entry.eval(struct_env)
-        struct_env.struct_dict = struct_env.deep_copy__only_env()
+        # struct_env.struct_dict = struct_env.deep_copy__only_env()
         struct_env.struct_dict["struct_parent"] = None 
         struct_env.struct_dict["struct_env"] = struct_env.struct_dict
         def struct_get(val):
+            # ic(val)
+            # ic(struct_env)
             res = struct_env.struct_dict.get(val,None)
+            # ic(res)
             return res
         return struct_get, env
 
@@ -103,10 +106,59 @@ class StructCallFunctionFromOutside(InterpretedExpression):
     id_entry:str
     args_function:List
     def eval(self, env: Env):
+        ic(self.args_function)
         id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(self.id_struct,self.dots_count,env)
         struct_entry_func = helper_get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
-        ic(self.args_function)
-        # ic(self.args_function)
-        res = struct_entry_func(self.args_function)
+
+        args_function = [args_function.eval(env)[0] for args_function in self.args_function]
+        ic(args_function)
+        # res = struct_entry_func(self.args_function)
+        res = struct_entry_func(args_function)
         return res, env
 
+@dataclass
+class WriteIdStructExpression(InterpretedExpression):
+    id_string: str
+    value: InterpretedExpression
+
+    def eval(self,env:Env):
+        # ic(env)
+        # ic(self.id_string)
+        # ic(self.value)
+        struct_env = env.struct_dict
+        # ic(struct_env)
+        val = self.value.eval(env)[0]
+        struct_env[self.id_string] = val
+        ic(env.struct_dict)
+        return struct_env,env
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # ic("=============h14==================")
+        # # ic("=============h12==================")
+        # # ic(self.id_string)
+        # # ic(self.value)
+        # # ic(self.value.eval(env)[1])
+        # # find_env = findEnvWithIdWrite(self.id_string,env)
+        # struct_dict = env.struct_dict
+        # if isinstance(self.value, str) or isinstance(self.value, int):
+        #     struct_dict[self.id_string] = self.value
+        #     return self.value, env
+        # else:
+        #     struct_dict[self.id_string] = self.value.eval(env)[0]
+        #     ic(struct_dict)
+        #     ic(env.struct_dict)
+        #     return self.value.eval(env)[0], env
+        #

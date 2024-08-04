@@ -1,8 +1,9 @@
-from os import error
 import copy
+
+from numpy import append
 from .top_configs import SHOW_ENV_IMPORTS
 from icecream import ic
-
+all_envs=[]
 class Env:
 
     def __init__(self,parent=None,env_name=None) -> None:
@@ -10,6 +11,8 @@ class Env:
         self.env_dict={}
         self.struct_dict={}
         self.env_name=env_name
+        global all_envs
+        all_envs.append(self)
 
     def __contains__(self,key):
         if key in self.env_dict:
@@ -41,6 +44,8 @@ class Env:
         return str(self.env_dict)
 
 
+
+
     def __getitem__(self,key):
         # if type(key) is int: #or key.isdigit():
         #     return int(key)
@@ -53,15 +58,21 @@ class Env:
     def __setitem__(self,key,value):
         self.env_dict[key]=value
 
-    # def get_struct_dict_entry(self,key):
-    #     # ic(self,key)
-    #     ic("=====get_struct_dict_entry========h20==================")
-    #     if key in self.struct_dict:
-    #         return self.struct_dict[key]
-    #     elif self.parent and len(self.parent.struct_env_dict) == 0:
-    #         return self.parent[key]
-    #     return None
-    # def set_struct_dict_entry(self,key,entry):
-    #     # ic(self,key,entry)
-    #     ic("=============h21==set_struct_dict_entry================")
-    #     self.struct_dict[key] = entry
+    def get_struct_dict_entry(self,key):
+        # ic(self,key)
+        ic("=====get_struct_dict_entry========h20==================")
+        if key in self.struct_dict:
+            return self.struct_dict[key]
+        elif self.parent and len(self.parent.struct_env_dict) == 0:
+            return self.parent[key]
+        return None
+    def set_struct_dict_entry(self,key,entry):
+        # ic(self,key,entry)
+        ic("=============h21==set_struct_dict_entry================")
+        self.struct_dict[key] = entry
+    # def print_all_envs(self):
+    #     ic("==>print all print_all_envs====================")
+    #     for new_env in all_envs:
+    #         ic("=============h==================")
+    #         ic(new_env.env_name, new_env, new_env.struct_dict)
+    #     ic("print all print_all_envs<======================")

@@ -67,9 +67,6 @@ def print_all_test_results():
     # print("======================================================")
 
 def test_assert(arr_bool_and_msg, env):
-    ic(arr_bool_and_msg)
-    # ic("=============h12==================")
-    # print(">>>",env.parent['current_filename'])
     file_name = env.parent['current_filename']
     msg = *arr_bool_and_msg, file_name
     # msg = *arr_bool_and_msg, env['tok']

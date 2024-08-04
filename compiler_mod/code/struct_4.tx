@@ -1,0 +1,28 @@
+{
+out := -1;
+
+x:=\a->b;
+s:= struct {
+    .o:=out;
+    .a:=1;
+    .set_a:=\x->.a:=x
+};
+#
+test(s.o,-1,"test(s.o,-1");
+test(s.a,1,"test(s.a,1");
+test(s.out,None,"test(s.a,1");
+test(out,-1,"test(out,-1");
+test(s.a,1,"test(s.a,1");
+print(s.a);
+print(s.set_a(2));
+test(s.a,2,"test(s.a,2 - after set2");
+print(s.a);
+
+# print(s);
+# test(s.set_a(123),123,"test(s.set_a(123),None");
+# test(s.a,123,"test(s.a,123");
+# print(s.a);
+
+
+print_all_tests()
+}

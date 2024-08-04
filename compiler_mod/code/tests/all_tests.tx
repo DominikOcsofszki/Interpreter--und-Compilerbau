@@ -5,5 +5,6 @@ code/tests/struct_basic.tx
 code/tests/struct.tx
 code/tests/fail_test.tx
 code/tests/struct_string.tx
+code/tests/struct_3.tx
 
 code/tests/PRINT_ALL_TESTS.tx

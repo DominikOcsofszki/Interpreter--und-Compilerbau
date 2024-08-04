@@ -43,6 +43,7 @@ def setup_env_for_new_file(current_filename=''):
     environment=Env()
     environment.env_name = "ENV_GLOBAL"
     ENV_IMPORTS["current_filename"]=current_filename
+    ENV_IMPORTS["log_fun_env"]=True
 
     environment.parent = ENV_IMPORTS
     return environment

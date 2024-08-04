@@ -3,8 +3,12 @@ from .environment import Env
 
 from . import top_configs as top_config
 class InterpretedExpression:
+
+    # def eval(self,env:Env,node_info=None):
+    #     if node_info:
+    #         ic(node_info)
     def eval(self,env:Env):
-        raise NotImplementedError("Child of InterpretedExpression not impl")
+        # raise NotImplementedError("Child of InterpretedExpression not impl")
         # return is_struct
         return None, env
 
