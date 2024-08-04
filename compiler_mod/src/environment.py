@@ -44,7 +44,15 @@ class Env:
         return str(self.env_dict)
 
 
-
+    def __repr__(self) -> str:
+        if self.parent:
+            if self.parent.parent:
+                return f"env {self.env_dict}\t\t\tStruct:{self.struct_dict}\n{self.parent}"
+            else:
+                if SHOW_ENV_IMPORTS:
+                    return f"{self.env_dict}\t\t{self.struct_dict}\n\nIMPORTS: {self.parent}"
+                return f"env {self.env_dict}\t\tStruct{self.struct_dict}"
+        return f"env: {self.env_dict}\tstruct: {self.struct_dict}"
 
     def __getitem__(self,key):
         # if type(key) is int: #or key.isdigit():

@@ -60,6 +60,7 @@ class StructExpression(InterpretedExpression):
         ic("=============h23==================")
         struct_env = Env(env)
         for entry in self.entries:
+            ic(entry)
             tmp, struct_env = entry.eval(struct_env)
         # struct_env.struct_dict = struct_env.deep_copy__only_env()
         struct_env.struct_dict["struct_parent"] = None 
@@ -89,6 +90,17 @@ class StructExtendExpression(InterpretedExpression):
         return struct_get, env
 
 
+#H_Struct
+@dataclass
+class AssignInStructExpression(InterpretedExpression):
+    id_in_struct:str
+    id_expression:InterpretedExpression
+    def eval(self, env: Env):
+        res = self.id_expression.eval(env)[0]
+        env.struct_dict[self.id_in_struct] = res
+        # id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(self.id_struct,self.dots_count,env)
+        # struct_entry = helper_get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
+        return res, env
 #H_Struct
 @dataclass
 class StructVariableFromOutside(InterpretedExpression):
