@@ -79,13 +79,19 @@ class StructInsideArgsExpression(InterpretedExpression):
 def get_struct_x_parent_or_self_struct(struct_get,dots_count):
     struct = struct_get
     parent_up = dots_count - 1
-    for i in range(parent_up):
-        ic(i)
+    for _ in range(parent_up):
+        _struct = get_struct_parent(struct)
+        if _struct is None:
+            raise RuntimeError(f" dots: {dots_count} to deep")
+
+        struct = _struct
+    ic(">>>>>>>>>",struct)
     return struct
         
 
 def get_struct_parent(struct_get):
     parent_struct_get = struct_get("struct_parent")
+    ic(parent_struct_get)
     return parent_struct_get
 
 def get_struct_helper(id_struct,env):
@@ -112,12 +118,11 @@ class StructVariableFromOutside(InterpretedExpression):
     dots_count:int
     id_entry:str
     def eval(self, env: Env):
-        # ic("=============h3==================")
-        # ic(self.id_struct,self.dots_count,self.id_entry)
         id_struct_get = get_struct_helper(self.id_struct,env)
         id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(id_struct_get,self.dots_count)
+        if id_struct_or_parent_struct_get is None:
+            raise RuntimeError(f"{self.dots_count}")
         x = get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
-        ic(x)
         return x, env
 
 class StructCallFunctionFromOutside(InterpretedExpression):

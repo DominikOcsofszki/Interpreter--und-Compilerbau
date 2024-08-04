@@ -1,27 +1,40 @@
 {
 out:=-1;
-text:="asd";
 s0 := struct{
-    .a:=123;
+    .a:=0;
     .o:=out
 };
 
 e := extend s0{
-    .new := "ex"
+    .new := 1
 };
 
+e2 := extend e{
+    .new :=2
+    };
 test(s0.o,-1,       "test(s0.o,-1       ");
 test(s0.out,None,   "test(s0.out,None   ");
-test(s0.a,123,      "test(s1.a,123,     ");
+test(s0.a,0,      "test(s1.a,0,     ");
 
 
 test(e.o,-1,       "test(e.o,-1,         ");
 test(e.out,None,   "test(e.out,None,     ");
-test(e.a,123,      "test(e.a,123,        ");
+test(e.a,0,      "test(e.a,0,        ");
 
 
 test(e.o,-1,       "test(e.o,-1,         ");
 test(e.out,None,   "test(e.out,None,     ");
-test(e.a,123,      "test(e.a,123,        ");
+test(e.a,0,      "test(e.a,0,        ");
+
+test(e2.new,2,"test(e2.new,");
+
+test(e2...new,None,"test(e2...new,None");
+test(e2..new,1,"test(e2..new,1");
+test(e2.new,2,"test(e2.new,1");
+
+
+
+test(e.new,1,"test(e.new,1,");
+
 print_all_tests()
 }
