@@ -8,7 +8,7 @@ from ..environment import Env
 from ..Expression import InterpretedExpression, getAllClasses, ic
 
 from ..top_configs import EVAL_EXPR_BEFORE_SAVE_TO_TMP 
-from ..top_imports import ENV_IMPORTS 
+from ..top_imports import ENV_IMPORTS, Test_enum
 
         
 class LambdaArgsExpression(InterpretedExpression):
@@ -35,7 +35,7 @@ class CallExpression(InterpretedExpression):
     def eval(self,env):
         func = env[self.fn]
         if self.fn in ENV_IMPORTS:
-            if "test" == self.fn or "test_not_eq" == self.fn :
+            if Test_enum.test.value == self.fn or Test_enum.test_not_eq.value  == self.fn :
                 from ..top_lexer import lexer
                 return_ids=[entry.eval(env)[0] for entry in self.x]
                 return func(return_ids,env), env

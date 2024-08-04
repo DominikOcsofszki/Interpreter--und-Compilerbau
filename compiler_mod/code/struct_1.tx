@@ -16,12 +16,18 @@ t:= extend s0{
 t1:= extend s1{
     .a:= \-> 110
 };
-p := s1.o;
-p := t1.o;
+t2:= extend t1{
+    .a:= \-> 110
+};
+t3:= extend t2{
+    .a:= \-> 110
+};
 print(p);
-test(s1.o,-1,".out from outside");
-# test(s1.out,-1,".out from outside");
-# test_not_eq(t.out,-1,"t.out should not be accessible");
+test(s1.o,-1,"test(s1.o,-1,".out from outside");");
+test(t1.o,-1,"t1.o,-1");
+test(t2.o,-1,"t2.o,-1");
+test(t2.out,None,"t2.o,-1");
+test_false(s1.out,-1,".out from outside");
 # s1:= extend s0{
 #     .a:=1
 # };

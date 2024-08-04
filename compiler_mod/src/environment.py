@@ -53,15 +53,15 @@ class Env:
     def __setitem__(self,key,value):
         self.env_dict[key]=value
 
-    def get_struct_dict_entry(self,key):
-        ic(self,key)
-        ic("=====get_struct_dict_entry========h20==================")
-        if key in self.struct_dict:
-            return self.struct_dict[key]
-        elif self.parent and len(self.parent.struct_env_dict) == 0:
-            return self.parent[key]
-        return None
-    def set_struct_dict_entry(self,key,entry):
-        ic(self,key,entry)
-        ic("=============h21==set_struct_dict_entry================")
-        self.struct_dict[key] = entry
+    # def get_struct_dict_entry(self,key):
+    #     # ic(self,key)
+    #     ic("=====get_struct_dict_entry========h20==================")
+    #     if key in self.struct_dict:
+    #         return self.struct_dict[key]
+    #     elif self.parent and len(self.parent.struct_env_dict) == 0:
+    #         return self.parent[key]
+    #     return None
+    # def set_struct_dict_entry(self,key,entry):
+    #     # ic(self,key,entry)
+    #     ic("=============h21==set_struct_dict_entry================")
+    #     self.struct_dict[key] = entry

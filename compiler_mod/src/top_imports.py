@@ -1,3 +1,4 @@
+import enum
 from .environment import Env
 
 from .ast.types_ast import head,tail
@@ -17,6 +18,11 @@ def _ENV():
 def _ENV_import():
     ic(ENV_IMPORTS.env_name,ENV_IMPORTS.env_dict)
 
+class Test_enum(enum.Enum):
+    test = "test"
+    test_not_eq = "test_false"
+
+
 
 ENV_IMPORTS = Env(parent=None,env_name="ENV_IMPORTS")
 ENV_IMPORTS["print"]=print_py
@@ -26,7 +32,8 @@ ENV_IMPORTS["_ENV_IMPORT"]=_ENV_import
 ENV_IMPORTS["head"]=head
 ENV_IMPORTS["tail"]=tail
 ENV_IMPORTS["test"]=test_assert
-ENV_IMPORTS["test_not_eq"]=test_false
+ENV_IMPORTS[Test_enum.test.value]=test_assert
+ENV_IMPORTS[Test_enum.test_not_eq.value]=test_false
 ENV_IMPORTS["print_all_test_results"]=print_all_test_results
 # ENV_IMPORTS["current_filename"]=current_filename
 

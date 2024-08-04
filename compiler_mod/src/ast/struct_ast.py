@@ -27,10 +27,11 @@ class StructExpression(InterpretedExpression):
         for entry in self.entries:
             tmp, struct_env = entry.eval(struct_env)
         struct_env.struct_dict = struct_env.deep_copy__only_env()
-        struct_env.struct_dict["struct_parent"] = False 
-        struct_env.struct_dict["struct_dict"] = struct_env.struct_dict
+        struct_env.struct_dict["struct_parent"] = None 
+        struct_env.struct_dict["struct_env"] = struct_env.struct_dict
         def struct_get(val):
-            res = struct_env.struct_dict[val]
+            # res = struct_env.struct_dict[val]
+            res = struct_env.struct_dict.get(val,None)
             return res
             # lambda_env.parent = lambda_env.parent.parent
         return struct_get, env
@@ -42,14 +43,15 @@ class StructExtendExpression(InterpretedExpression):
     def eval(self,env:Env):
         struct_env = Env(env)
         for entry in self.entries:
-            ic(entry)
+            # ic(entry)
             tmp, struct_env = entry.eval(struct_env)
             # _, _ = entry.eval(struct_env)
         struct_env.struct_dict = struct_env.deep_copy__only_env()
         struct_env.struct_dict["struct_parent"] = env[self.parent]
-        struct_env.struct_dict["struct_dict"] = struct_env.struct_dict
+        struct_env.struct_dict["struct_env"] = struct_env.struct_dict
         def struct_get(val):
-            res = struct_env.struct_dict[val]
+            # res = struct_env.struct_dict[val]
+            res = struct_env.struct_dict.get(val,None)
             return res
         return struct_get, env
 
@@ -71,49 +73,61 @@ class StructExtendExpression(InterpretedExpression):
 
 class StructInsideArgsExpression(InterpretedExpression):
     def __init__(self,dot_expr, fun_args):
-        ic("=============h15==================")
-        ic("=============h15==================")
-        ic("=============h15==================")
-        ic(self,dot_expr, fun_args)
+        # ic("=============h15==================")
+        # ic("=============h15==================")
+        # ic("=============h15==================")
+        # ic(self,dot_expr, fun_args)
         # ic("=============h19==================")
         # ic(self,dot_expr, fun_args)
         self.id_struct,self.dots_count, self.entry = dot_expr
         self.args_function = fun_args
-        ic("=============h13==================")
+        # ic("=============h13==================")
         exit()
+
+def get_struct_x_parent_or_self_struct(struct_get,dots_count):
+    struct = struct_get
+    parent_up = dots_count - 1
+    for i in range(parent_up):
+        ic(i)
+    return struct
+        
+
+def get_struct_parent(struct_get):
+    parent_struct_get = struct_get("struct_parent")
+    return parent_struct_get
+
+def get_struct_helper(id_struct,env):
+    struct_get = env[id_struct]
+    if struct_get is None:
+        raise RuntimeError(f"Struct with name {id_struct} does not exists")
+    return struct_get
+
+def get_item_from_struct(struct_get,id_entry):
+    value = struct_get("struct_env").get(id_entry)
+    if value is None:
+        parent_struct_get = struct_get("struct_env").get("struct_parent")
+        while parent_struct_get is not None:
+            value = parent_struct_get("struct_env").get(id_entry)
+            _parent_struct_get = get_struct_parent(parent_struct_get)
+            parent_struct_get = _parent_struct_get
+    return value
+
+
 
 @dataclass
 class StructVariableFromOutside(InterpretedExpression):
     id_struct:str
     dots_count:int
     id_entry:str
-    def eval(self, env: Env, is_struct=True):
-        struct_get = env[self.id_struct]
-        parent_struct_get = struct_get("struct_parent")
-        ic(struct_get)
-        ic(struct_get("struct_dict"))
-        ic(parent_struct_get)
-        ic("=============h28==================")
-        if self.dots_count == 1:
-            value_or_false = struct_get("struct_dict").get(self.id_entry, False)
-            if not value_or_false:
-                value_or_false = parent_struct_get("struct_dict").get(self.id_entry, False)
-            if not value_or_false:
-                parent_struct_get = parent_struct_get("struct_parent")
-                value_or_false = parent_struct_get("struct_dict").get(self.id_entry, False)
-            if not value_or_false:
-                return None
-        ic(value_or_false)
-        return value_or_false
+    def eval(self, env: Env):
+        ic("=============h3==================")
+        ic(self.id_struct,self.dots_count,self.id_entry)
+        id_struct_get = get_struct_helper(self.id_struct,env)
+        id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(id_struct_get,self.dots_count)
+        x = get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
+        ic(x)
+        return x, env
 
-            # return env[self.id_struct](self.id_entry),env
-        ic("=============h29==================")
-
-        if self.dots_count == 2:
-            ic( env[self.id_struct](self.id_entry))
-            quit()
-
-        return env[self.id_struct],env
 class StructCallFunctionFromOutside(InterpretedExpression):
     def __init__(self,) -> None:
         ic("=============h17==================")
@@ -125,7 +139,7 @@ class StructCallFunctionFromOutside(InterpretedExpression):
 # TODO HEREHREHREHRH
 class StructCallNParentWithFunExpression(InterpretedExpression):
     def __init__(self,dot_expr, fun_args):
-        ic(self,dot_expr, fun_args)
+        # ic(self,dot_expr, fun_args)
         # ic("=============h19==================")
         # ic(self,dot_expr, fun_args)
         self.id_struct,self.dots_count, self.entry = dot_expr
@@ -143,8 +157,8 @@ class StructCallNParentWithFunExpression(InterpretedExpression):
 
         parent_struct = None
         value_ret =  None
-        ic(self.id_struct)
-        ic(env[self.id_struct])
+        # ic(self.id_struct)
+        # ic(env[self.id_struct])
         struct_from_env = env[self.id_struct]
         # ic(struct_from_env)
         if self.dots_count > 0:
