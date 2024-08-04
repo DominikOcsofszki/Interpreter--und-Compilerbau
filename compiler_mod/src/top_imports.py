@@ -4,7 +4,7 @@ from .environment import Env
 from .ast.types_ast import head,tail
 from .Expression import InterpretedExpression, ic
 import CONFIGS
-from .top_functions import print_all_test_results,test_assert,test_false
+from .top_tests_fun import print_all_test_results,test_assert,test_false
 from icecream import ic
 
 def print_py(entries:InterpretedExpression):
@@ -21,6 +21,7 @@ def _ENV_import():
 class Test_enum(enum.Enum):
     test = "test"
     test_not_eq = "test_false"
+    print_all_tests = "print_all_tests"
 
 
 
@@ -34,7 +35,7 @@ ENV_IMPORTS["tail"]=tail
 ENV_IMPORTS["test"]=test_assert
 ENV_IMPORTS[Test_enum.test.value]=test_assert
 ENV_IMPORTS[Test_enum.test_not_eq.value]=test_false
-ENV_IMPORTS["print_all_test_results"]=print_all_test_results
+ENV_IMPORTS[Test_enum.print_all_tests.value]=print_all_test_results
 # ENV_IMPORTS["current_filename"]=current_filename
 
 def setup_env_for_new_file(current_filename=''):

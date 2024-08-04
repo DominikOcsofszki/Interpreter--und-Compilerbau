@@ -27,6 +27,7 @@ class LambdaArgsExpression(InterpretedExpression):
 
 
 
+#H_Call
 class CallExpression(InterpretedExpression):
     def __init__(self,fn,ids_or_values):
         self.fn=fn
@@ -34,10 +35,16 @@ class CallExpression(InterpretedExpression):
 
     def eval(self,env):
         func = env[self.fn]
+        if func is None:
+            raise RuntimeError(f"[CallExpression] Function: {self.fn} not found")
         if self.fn in ENV_IMPORTS:
             if Test_enum.test.value == self.fn or Test_enum.test_not_eq.value  == self.fn :
-                from ..top_lexer import lexer
+                # ic("=============h7==================")
+                # ic(self.x)
+                # ic(len(self.x))
                 return_ids=[entry.eval(env)[0] for entry in self.x]
+                # ic(return_ids)
+                # ic("=============h7e==================")
                 return func(return_ids,env), env
                 # return func(return_ids,lexer.my_helper,env), env
             return_ids=[entry.eval(env)[0] for entry in self.x]

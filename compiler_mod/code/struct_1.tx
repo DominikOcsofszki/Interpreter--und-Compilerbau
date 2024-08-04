@@ -45,6 +45,6 @@ test_false(s1.out,-1,".out from outside");
 #
 #
 # _ENV_IMPORT();
-print_all_test_results()
+print_all_tests()
 # p
 }

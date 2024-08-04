@@ -33,6 +33,7 @@ def col_off():
     return "\033[0m"
 
     
+    #H_TEST
 def print_all_test_results():
     # print("|- ======================================================")
     print(f"{col_g()}| =====================TESTS============================{col_off()}")
@@ -43,7 +44,9 @@ def print_all_test_results():
 
     #TODO: ADD Check for all params added
     for test in passed_tests:
-        # if "[IMP]" in test[2]:
+        test = (list(test))
+        if len(test) == 3:
+            test.append("TEST-TEXT missing")
         if "[IMP]" in test[2]:
             print(f"{col_g()}|- {test[2]!r}{padding(test[2])} {test[:-2]}{padding_f_name(test[:-3])}{test[3]}{col_off()}")
             print(f"{col_g()}|- {test[2]!r}{padding(test[2])} {test[:-2]}{padding_f_name(test[:-3])}{test[3]}{col_off()}")
@@ -51,6 +54,9 @@ def print_all_test_results():
                  print(f"{col_g()}|-{col_off()} {test[2]!r}{padding(test[2])}{test[:-2]}{padding_f_name(test[:-3])}{test[3]}")
     print(f"{col_r()}|{col_off()}{col_r()}Failed Tests:{col_off()}")  # Red
     for test in failed_tests:
+        test = (list(test))
+        if len(test) == 3:
+            test.append("TEST-TEXT missing")
         if "[IMP]" in test[2]:
             print(f"{col_r()}|- {test[2]!r}{padding(test[2])} {test[:-2]}{padding_f_name(test[:-3])}{test[3]}{col_off()}")
         else:
@@ -61,6 +67,7 @@ def print_all_test_results():
     # print("======================================================")
 
 def test_assert(arr_bool_and_msg, env):
+    ic(arr_bool_and_msg)
     # ic("=============h12==================")
     # print(">>>",env.parent['current_filename'])
     file_name = env.parent['current_filename']

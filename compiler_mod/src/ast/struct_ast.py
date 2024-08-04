@@ -43,7 +43,6 @@ class StructExtendExpression(InterpretedExpression):
     def eval(self,env:Env):
         struct_env = Env(env)
         for entry in self.entries:
-            # ic(entry)
             tmp, struct_env = entry.eval(struct_env)
             # _, _ = entry.eval(struct_env)
         struct_env.struct_dict = struct_env.deep_copy__only_env()
@@ -73,15 +72,8 @@ class StructExtendExpression(InterpretedExpression):
 
 class StructInsideArgsExpression(InterpretedExpression):
     def __init__(self,dot_expr, fun_args):
-        # ic("=============h15==================")
-        # ic("=============h15==================")
-        # ic("=============h15==================")
-        # ic(self,dot_expr, fun_args)
-        # ic("=============h19==================")
-        # ic(self,dot_expr, fun_args)
         self.id_struct,self.dots_count, self.entry = dot_expr
         self.args_function = fun_args
-        # ic("=============h13==================")
         exit()
 
 def get_struct_x_parent_or_self_struct(struct_get,dots_count):
@@ -120,8 +112,8 @@ class StructVariableFromOutside(InterpretedExpression):
     dots_count:int
     id_entry:str
     def eval(self, env: Env):
-        ic("=============h3==================")
-        ic(self.id_struct,self.dots_count,self.id_entry)
+        # ic("=============h3==================")
+        # ic(self.id_struct,self.dots_count,self.id_entry)
         id_struct_get = get_struct_helper(self.id_struct,env)
         id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(id_struct_get,self.dots_count)
         x = get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
@@ -139,22 +131,10 @@ class StructCallFunctionFromOutside(InterpretedExpression):
 # TODO HEREHREHREHRH
 class StructCallNParentWithFunExpression(InterpretedExpression):
     def __init__(self,dot_expr, fun_args):
-        # ic(self,dot_expr, fun_args)
-        # ic("=============h19==================")
-        # ic(self,dot_expr, fun_args)
         self.id_struct,self.dots_count, self.entry = dot_expr
         self.args_function = fun_args
 
     def eval(self,env,is_struct=True):
-        # ic("=============h23==================")
-        # if len(self.id_struct) == 0:
-        #     if self.dots_count ==2:
-        #         ic(self.id_struct,self.entry,self.dots_count)
-        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-        #     #TODO>>>>???
-        #     exit()
-
         parent_struct = None
         value_ret =  None
         # ic(self.id_struct)
