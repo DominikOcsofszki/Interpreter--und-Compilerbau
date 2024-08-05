@@ -6,22 +6,41 @@ from ..top_configs import EVAL_EXPR_BEFORE_SAVE_TO_TMP
 
 class WriteIdExpression(InterpretedExpression):
     def __init__(self, id_always_as_string, value):
-        # ic(self, id_always_as_string, value)
         self.id_string=id_always_as_string
         self.value=value
 
     # def eval(self,env,is_struct=False):
     def eval(self,env,is_struct=False):
-        # if is_struct:
-            # ic("=============h47==================")
-            # exit()
-        find_env = findEnvWithIdWrite(self.id_string,env)
+        if is_struct:
+            if isinstance(self.value, str) or isinstance(self.value, int):
+                env.set_struct_dict_entry(self.id_string,  self.value)
+                return self.value, env
+            else:
+                val = env.set_struct_dict_entry(self.id_string,  self.value.eval(env)[0])
+                # val = self.value.eval(env,is_struct)[0]
+                # find_env[self.id_string] = val
+                ic("=============h6==================")
+                ic("=============h6==================")
+                ic(env)
+                # exit()
+                return val, env
+
+            
+        else:
+            find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value
+            ic("=============h6==================")
+            ic("=============h6==================")
+            ic(find_env)
             return self.value, env
         else:
-            find_env[self.id_string] = self.value.eval(env,is_struct)[0]
-            return self.value.eval(env,is_struct)[0], env
+            val = self.value.eval(env,is_struct)[0]
+            find_env[self.id_string] = val
+            ic("=============h6==================")
+            ic("=============h6==================")
+            ic(find_env)
+            return val, env
 
 def findEnvWithIdWrite(id,env):
     if env.parent.env_name == "ENV_IMPORTS":
@@ -48,6 +67,7 @@ class ReadIdExpression(InterpretedExpression):
 
 class ReadParentIdExpression(InterpretedExpression):
     def __init__(self, id,dots):
+        ic("=============h5==================")
         ic(self, id,dots)
         exit()
         self.id=id

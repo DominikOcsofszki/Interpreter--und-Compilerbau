@@ -50,9 +50,31 @@ class Env:
                 return f"env {self.env_dict}\t\tStruct{self.struct_dict}"
         return f"env: {self.env_dict}\tstruct: {self.struct_dict}"
 
+    def set_struct_dict_entry(self,key,entry):
+        # ic(self,key,entry)
+        ic("=============h21==set_struct_dict_entry================")
+        self.struct_dict[key] = entry
 
+    def getitem_if_struct_from_struct(self,key,is_struct=False):
+        if is_struct:
+            if key in self.struct_dict:
+                return self.struct_dict[key]
+            elif self.parent and self.parent.env_name != "ENV_IMPORTS":
+                ic(self.parent.env_name)
+                ic(self.parent)
+                return self.getitem_if_struct_from_struct(key,is_struct)
+            else:
+                raise RuntimeError(f"key: '{key}' not found")
 
-    def __getitem__(self,key):
+                # return self.parent[key]
+        raise RuntimeError("asd")
+        if key in self.env_dict:
+            return self.env_dict[key]
+        elif self.parent:
+            return self.parent[key]
+        return None
+
+    def __getitem__(self,key,is_struct=False):
         # if type(key) is int: #or key.isdigit():
         #     return int(key)
         if key in self.env_dict:
@@ -64,15 +86,14 @@ class Env:
     def __setitem__(self,key,value):
         self.env_dict[key]=value
 
-    # def get_struct_dict_entry(self,key):
-    #     # ic(self,key)
-    #     ic("=====get_struct_dict_entry========h20==================")
-    #     if key in self.struct_dict:
-    #         return self.struct_dict[key]
-    #     elif self.parent and len(self.parent.struct_env_dict) == 0:
-    #         return self.parent[key]
-    #     return None
-    # def set_struct_dict_entry(self,key,entry):
-    #     # ic(self,key,entry)
-    #     ic("=============h21==set_struct_dict_entry================")
-    #     self.struct_dict[key] = entry
+    def get_struct_dict_entry(self,key,default=None):
+        # ic(self,key)
+        ic(">>>>=====get_struct_dict_entry========h20==================")
+        ic(self)
+        if key in self.struct_dict:
+            return self.struct_dict[key]
+        elif self.parent and not len(self.parent.struct_dict) == 0:
+            return self.get_struct_dict_entry(key)
+            # return self.parent[key]
+        raise RuntimeError(f"key: {key} not found in {self.struct_dict}")
+        return default

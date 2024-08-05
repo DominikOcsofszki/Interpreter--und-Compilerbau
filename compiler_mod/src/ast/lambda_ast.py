@@ -17,10 +17,14 @@ class LambdaArgsExpression(InterpretedExpression):
         self.body_lambda = body_lambda
 
     def eval(self,env,is_struct=False):
-        ic(env)
-        ic(len(env.struct_dict))
-        ls = len(env.struct_dict)
-        if ls > 0:
+        # ic(env)
+        # ic(len(env.struct_dict))
+        # ls = len(env.struct_dict)
+        # if ls > 0:
+        #     exit()
+        if is_struct:
+            ic("=============h7==================")
+            ic(env)
             exit()
 
         lambda_env = Env(env)
@@ -28,7 +32,7 @@ class LambdaArgsExpression(InterpretedExpression):
             for i ,id_entry in enumerate(self.lambda_args_ids):
                 # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
                 WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env,is_struct)
-            return self.body_lambda.eval(lambda_env)[0]
+            return self.body_lambda.eval(lambda_env,is_struct)[0]
         return lmbd, env
 
 

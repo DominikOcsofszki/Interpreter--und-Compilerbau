@@ -1,0 +1,18 @@
+{
+
+
+out:= 99;
+
+s:= struct{
+    .a:=123;
+    .set_a:=\->.a:=777
+};
+s.a;
+
+test(s.a,123,"test(s.a,123");
+s.set_a();
+test_false(s.a,123,"test_false(s.a,123");
+
+print_all_tests()
+}
+
