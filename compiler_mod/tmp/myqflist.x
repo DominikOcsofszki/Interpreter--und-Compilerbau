@@ -1,135 +1,131 @@
-src/ast/write_read_ast.py:9:        # ic(self, id_always_as_string, value)
-src/ast/write_read_ast.py:14:        # ic("=============h23==================")
-src/ast/write_read_ast.py:15:        # ic(env)
-src/ast/write_read_ast.py:16:        # ic(self.id_string,env)
-src/ast/write_read_ast.py:22:            # ic("=============h24==================")
-src/ast/write_read_ast.py:23:            # ic(self.value)
-src/ast/write_read_ast.py:24:            # ic(self.value.eval(env))
-src/ast/write_read_ast.py:29:    # ic(env.env_name)
-src/ast/write_read_ast.py:32:    # ic(env)
-src/ast/write_read_ast.py:55:        ic(self, id,dots)
-src/ast/write_read_ast.py:75:        # ic("=============h20==================")
-src/ast/write_read_ast.py:80:        # ic("=============h21==================")
-src/ast/struct_ast.py:46:            # ic(entry)
-src/ast/struct_ast.py:76:        # ic("=============h15==================")
-src/ast/struct_ast.py:77:        # ic("=============h15==================")
-src/ast/struct_ast.py:78:        # ic("=============h15==================")
-src/ast/struct_ast.py:79:        # ic(self,dot_expr, fun_args)
-src/ast/struct_ast.py:80:        # ic("=============h19==================")
-src/ast/struct_ast.py:81:        # ic(self,dot_expr, fun_args)
-src/ast/struct_ast.py:84:        # ic("=============h13==================")
-src/ast/struct_ast.py:91:        ic(i)
-src/ast/struct_ast.py:123:        ic("=============h3==================")
-src/ast/struct_ast.py:124:        ic(self.id_struct,self.dots_count,self.id_entry)
-src/ast/struct_ast.py:128:        ic(x)
-src/ast/struct_ast.py:133:        ic("=============h17==================")
-src/ast/struct_ast.py:134:        ic("=============h17==================")
-src/ast/struct_ast.py:135:        ic("=============h17==================")
-src/ast/struct_ast.py:142:        # ic(self,dot_expr, fun_args)
-src/ast/struct_ast.py:143:        # ic("=============h19==================")
-src/ast/struct_ast.py:144:        # ic(self,dot_expr, fun_args)
-src/ast/struct_ast.py:149:        # ic("=============h23==================")
-src/ast/struct_ast.py:152:        #         ic(self.id_struct,self.entry,self.dots_count)
-src/ast/struct_ast.py:153:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-src/ast/struct_ast.py:154:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-src/ast/struct_ast.py:160:        # ic(self.id_struct)
-src/ast/struct_ast.py:161:        # ic(env[self.id_struct])
-src/ast/struct_ast.py:163:        # ic(struct_from_env)
-src/ast/struct_ast.py:165:            # ic(self.dots_count)
-src/ast/struct_ast.py:170:            # ic(self.entry)
-src/ast/struct_ast.py:172:            # ic(value_ret)
-src/ast/lambda_ast.py:23:                # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
-src/ast/lambda_ast.py:42:                ic("=============h7==================")
-src/ast/lambda_ast.py:43:                ic(self.x)
-src/ast/lambda_ast.py:44:                ic(len(self.x))
-src/ast/lambda_ast.py:46:                ic(return_ids)
-src/ast/lambda_ast.py:47:                ic("=============h7e==================")
-src/tok_helper.py:15:        # ic(arr)
-src/tok_helper.py:35:        # ic(print_later_arr)
-src/tok_helper.py:44:    # ic(t.nr)
-src/tok_helper.py:50:    #     ic(pos_dict[82].__dict__)
-src/tok_helper.py:51:    #     ic(pos_dict[82].nr)
-src/ast/struct_ast.py.bak:58:                # ic(id,entry,n_dots)
-src/ast/struct_ast.py.bak:59:                # ic(env.parent[id])
-src/ast/struct_ast.py.bak:64:        # ic(self.id)
-src/ast/struct_ast.py.bak:73:        # ic(id)
-src/ast/struct_ast.py.bak:76:                # ic(self.id_test,self.entry_test,self.n_dots_test)
-src/ast/struct_ast.py.bak:77:                # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-src/top_parser.py:30:            ic("TODO: implement error handling for tests, save current filename")
-src/top_parser.py:31:            ic(p.__dict__)
-src/top_parser.py:32:            ic(p.lexer.lineno)
-src/ast/struct_ast.py.bak.latest0:11:        # ic(self, entries)
-src/ast/struct_ast.py.bak.latest0:43:        # ic("=============h19==================")
-src/ast/struct_ast.py.bak.latest0:44:        # ic(self,dot_expr, fun_args)
-src/ast/struct_ast.py.bak.latest0:49:        # ic("=============h23==================")
-src/ast/struct_ast.py.bak.latest0:52:        #         ic(self.id_struct,self.entry,self.dots_count)
-src/ast/struct_ast.py.bak.latest0:53:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-src/ast/struct_ast.py.bak.latest0:54:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-src/ast/struct_ast.py.bak.latest0:61:        # ic(struct_from_env)
-src/ast/struct_ast.py.bak.latest0:63:            # ic(self.dots_count)
-src/ast/struct_ast.py.bak.latest0:68:            # ic(self.entry)
-src/ast/struct_ast.py.bak.latest0:70:            # ic(value_ret)
-tmp/myqflist.x:1:src/ast/write_read_ast.py:9:        # ic(self, id_always_as_string, value)
-tmp/myqflist.x:2:src/ast/write_read_ast.py:14:        # ic("=============h23==================")
-tmp/myqflist.x:3:src/ast/write_read_ast.py:15:        # ic(env)
-tmp/myqflist.x:4:src/ast/write_read_ast.py:16:        # ic(self.id_string,env)
-tmp/myqflist.x:5:src/ast/write_read_ast.py:22:            # ic("=============h24==================")
-tmp/myqflist.x:6:src/ast/write_read_ast.py:23:            # ic(self.value)
-tmp/myqflist.x:7:src/ast/write_read_ast.py:24:            # ic(self.value.eval(env))
-tmp/myqflist.x:8:src/ast/write_read_ast.py:29:    # ic(env.env_name)
-tmp/myqflist.x:9:src/ast/write_read_ast.py:32:    # ic(env)
-tmp/myqflist.x:10:src/ast/write_read_ast.py:55:        ic(self, id,dots)
-tmp/myqflist.x:11:src/ast/write_read_ast.py:75:        # ic("=============h20==================")
-tmp/myqflist.x:12:src/ast/write_read_ast.py:80:        # ic("=============h21==================")
-tmp/myqflist.x:13:src/ast/struct_ast.py:46:            # ic(entry)
-tmp/myqflist.x:14:src/ast/struct_ast.py:76:        # ic("=============h15==================")
-tmp/myqflist.x:15:src/ast/struct_ast.py:77:        # ic("=============h15==================")
-tmp/myqflist.x:16:src/ast/struct_ast.py:78:        # ic("=============h15==================")
-tmp/myqflist.x:17:src/ast/struct_ast.py:79:        # ic(self,dot_expr, fun_args)
-tmp/myqflist.x:18:src/ast/struct_ast.py:80:        # ic("=============h19==================")
-tmp/myqflist.x:19:src/ast/struct_ast.py:81:        # ic(self,dot_expr, fun_args)
-tmp/myqflist.x:20:src/ast/struct_ast.py:84:        # ic("=============h13==================")
-tmp/myqflist.x:21:src/ast/struct_ast.py:91:        ic(i)
-tmp/myqflist.x:22:src/ast/struct_ast.py:123:        ic("=============h3==================")
-tmp/myqflist.x:23:src/ast/struct_ast.py:124:        ic(self.id_struct,self.dots_count,self.id_entry)
-tmp/myqflist.x:24:src/ast/struct_ast.py:128:        ic(x)
-tmp/myqflist.x:25:src/ast/struct_ast.py:133:        ic("=============h17==================")
-tmp/myqflist.x:26:src/ast/struct_ast.py:134:        ic("=============h17==================")
-tmp/myqflist.x:27:src/ast/struct_ast.py:135:        ic("=============h17==================")
-tmp/myqflist.x:28:src/ast/struct_ast.py:142:        # ic(self,dot_expr, fun_args)
-tmp/myqflist.x:29:src/ast/struct_ast.py:143:        # ic("=============h19==================")
-tmp/myqflist.x:30:src/ast/struct_ast.py:144:        # ic(self,dot_expr, fun_args)
-tmp/myqflist.x:31:src/ast/struct_ast.py:149:        # ic("=============h23==================")
-tmp/myqflist.x:32:src/ast/struct_ast.py:152:        #         ic(self.id_struct,self.entry,self.dots_count)
-tmp/myqflist.x:33:src/ast/struct_ast.py:153:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-tmp/myqflist.x:34:src/ast/struct_ast.py:154:        #         # ic(env.parent[self.parentString_as_readExpression.eval(env)[1]])
-tmp/myqflist.x:35:src/ast/struct_ast.py:160:        # ic(self.id_struct)
-tmp/myqflist.x:36:src/ast/struct_ast.py:161:        # ic(env[self.id_struct])
-tmp/myqflist.x:37:src/ast/struct_ast.py:163:        # ic(struct_from_env)
-tmp/myqflist.x:38:src/ast/struct_ast.py:165:            # ic(self.dots_count)
-tmp/myqflist.x:39:src/ast/struct_ast.py:170:            # ic(self.entry)
-tmp/myqflist.x:40:src/ast/struct_ast.py:172:            # ic(value_ret)
-tmp/myqflist.x:41:src/ast/lambda_ast.py:23:                # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
-tmp/myqflist.x:42:src/ast/lambda_ast.py:42:                ic("=============h7==================")
-tmp/myqflist.x:43:src/ast/lambda_ast.py:43:                ic(self.x)
-tmp/myqflist.x:44:src/ast/lambda_ast.py:44:                ic(len(self.x))
-tmp/myqflist.x:45:src/ast/lambda_ast.py:46:                ic(return_ids)
-tmp/myqflist.x:46:src/ast/lambda_ast.py:47:                ic("=============h7e==================")
-src/environment.py:57:    #     # ic(self,key)
-src/environment.py:58:    #     ic("=====get_struct_dict_entry========h20==================")
-src/environment.py:65:    #     # ic(self,key,entry)
-src/environment.py:66:    #     ic("=============h21==set_struct_dict_entry================")
-src/parser/lambda_parser.py:32:    # ic(type(p))
-src/top_imports.py:16:    ic(environment.env_name,environment.env_dict)
-src/top_imports.py:19:    ic(ENV_IMPORTS.env_name,ENV_IMPORTS.env_dict)
-src/top_tests_fun.py:70:    ic(arr_bool_and_msg)
-src/top_tests_fun.py:71:    # ic("=============h12==================")
-src/parser/struct_parser.py:26:        ic(p[0])
-src/parser/struct_parser.py:73:    # ic(p[0])
-src/parser/struct_parser.py:81:    # ic('>>',p[1])
-RUN.py:23:        ic(">>>",error,">>>")
-RUN.py:42:                ic("===========================================")
-RUN.py:43:                ic(">>>global/top env after run:",environment)
-RUN.py:44:                ic("===========================================")
-RUN.py:47:            ic(">>>",error,">>>")
-RUN.py:55:ic(lexer.my_helper)
+src/ast/control_ast.py:10:    def eval(self,env):
+src/ast/control_ast.py:24:    def eval(self,env):
+src/ast/control_ast.py:39:    def eval(self,env):
+src/ast/control_ast.py:56:    def eval(self,env):
+src/ast/types_ast.py:9:    def eval(self,env):
+src/ast/types_ast.py:17:    def eval(self,env):
+src/ast/types_ast.py:24:    def eval(self,env):
+src/ast/types_ast.py:33:    def eval(self,env):
+src/ast/types_ast.py:43:    def eval(self,env):
+src/ast/types_ast.py:62:    def eval(self,env):
+src/ast/binop_ast.py:8:    def eval(self,env):
+src/ast/binop_ast.py:18:    def eval(self,env):
+src/ast/binop_ast.py:28:    def eval(self,env):
+src/ast/binop_ast.py:40:    def eval(self,env):
+src/ast/binop_ast.py:49:    def eval(self,env):
+src/ast/binop_ast.py:58:    def eval(self,env):
+src/ast/binop_ast.py:65:    def eval(self,env):
+src/ast/binop_ast.py:72:    def eval(self,env):
+src/ast/binop_ast.py:79:    def eval(self,env):
+src/ast/binop_ast.py:89:    def eval(self,env):
+src/ast/binop_ast.py:99:    def eval(self,env):
+src/ast/binop_ast.py:109:    def eval(self,env):
+src/ast/binop_ast.py:119:    def eval(self,env):
+src/ast/binop_ast.py:129:    def eval(self,env):
+src/ast/binop_ast.py:139:    def eval(self,env):
+src/ast/binop_ast.py:149:    def eval(self,env):
+src/ast/binop_ast.py:159:    def eval(self,env):
+src/ast/binop_ast.py:170:    def eval(self,env):
+src/ast/binop_ast.py:178:    def eval(self,env):
+src/ast/binop_ast.py:186:    def eval(self,env):
+src/ast/binop_ast.py:195:    def eval(self,env):
+src/ast/local_ast.py:11:    def eval(self,env):
+src/ast/local_ast.py:23:    def eval(self,env):
+src/ast/bool_ast.py.bak:7:    def eval(self,env):
+src/ast/bool_ast.py.bak:14:    def eval(self,env):
+src/ast/bool_ast.py.bak:24:    def eval(self,env):
+src/ast/bool_ast.py.bak:34:    def eval(self,env):
+src/ast/bool_ast.py.bak:44:    def eval(self,env):
+src/ast/bool_ast.py.bak:54:    def eval(self,env):
+src/ast/bool_ast.py.bak:64:    def eval(self,env):
+src/ast/bool_ast.py.bak:74:    def eval(self,env):
+src/ast/bool_ast.py.bak:84:    def eval(self,env):
+src/ast/bool_ast.py.bak:94:    def eval(self,env):
+src/ast/bool_ast.py.bak:105:    def eval(self,env):
+src/ast/bool_ast.py.bak:113:    def eval(self,env):
+src/ast/bool_ast.py.bak:121:    def eval(self,env):
+src/ast/bool_ast.py.bak:130:    def eval(self,env):
+src/ast/write_read_ast.py:13:    # def eval(self,env):
+src/ast/write_read_ast.py:44:    def eval(self,env):
+src/ast/write_read_ast.py:55:    def eval(self,env):
+src/ast/write_read_ast.py:73:    def eval(self,env):
+src/ast/import_ast.py:12:    def eval(self,env):
+src/ast/import_ast.py:22:    def eval(self,env):
+src/Nodes.py.bak:45:    def eval(self,env):
+src/ast/struct_ast.py.bak.latest0:29:    def eval(self,env):
+src/ast/lambda_ast.py:42:    def eval(self,env):
+src/ast/arith_ast.py.bak:7:    def eval(self,env):
+src/ast/arith_ast.py.bak:17:    def eval(self,env):
+src/ast/arith_ast.py.bak:27:    def eval(self,env):
+src/ast/arith_ast.py.bak:38:    def eval(self,env):
+src/ast/arith_ast.py.bak:47:    def eval(self,env):
+src/ast/arith_ast.py.bak:56:    def eval(self,env):
+src/ast/arith_ast.py.bak:63:    def eval(self,env):
+src/ast/struct_ast.py.bak:11:    def eval(self,env):
+src/ast/struct_ast.py.bak:27:    def eval(self,env):
+src/ast/struct_ast.py.bak:40:    def eval(self,env):
+src/ast/struct_ast.py.bak:71:    def eval(self,env):
+src/ast/struct_ast.py.bak:117:#     def eval(self,env):
+tmp/myqflist.x:1:src/ast/control_ast.py:10:    def eval(self,env):
+tmp/myqflist.x:2:src/ast/control_ast.py:24:    def eval(self,env):
+tmp/myqflist.x:3:src/ast/control_ast.py:39:    def eval(self,env):
+tmp/myqflist.x:4:src/ast/control_ast.py:56:    def eval(self,env):
+tmp/myqflist.x:5:src/ast/types_ast.py:9:    def eval(self,env):
+tmp/myqflist.x:6:src/ast/types_ast.py:17:    def eval(self,env):
+tmp/myqflist.x:7:src/ast/types_ast.py:24:    def eval(self,env):
+tmp/myqflist.x:8:src/ast/types_ast.py:33:    def eval(self,env):
+tmp/myqflist.x:9:src/ast/types_ast.py:43:    def eval(self,env):
+tmp/myqflist.x:10:src/ast/types_ast.py:62:    def eval(self,env):
+tmp/myqflist.x:11:src/ast/binop_ast.py:8:    def eval(self,env):
+tmp/myqflist.x:12:src/ast/binop_ast.py:18:    def eval(self,env):
+tmp/myqflist.x:13:src/ast/binop_ast.py:28:    def eval(self,env):
+tmp/myqflist.x:14:src/ast/binop_ast.py:40:    def eval(self,env):
+tmp/myqflist.x:15:src/ast/binop_ast.py:49:    def eval(self,env):
+tmp/myqflist.x:16:src/ast/binop_ast.py:58:    def eval(self,env):
+tmp/myqflist.x:17:src/ast/binop_ast.py:65:    def eval(self,env):
+tmp/myqflist.x:18:src/ast/binop_ast.py:72:    def eval(self,env):
+tmp/myqflist.x:19:src/ast/binop_ast.py:79:    def eval(self,env):
+tmp/myqflist.x:20:src/ast/binop_ast.py:89:    def eval(self,env):
+tmp/myqflist.x:21:src/ast/binop_ast.py:99:    def eval(self,env):
+tmp/myqflist.x:22:src/ast/binop_ast.py:109:    def eval(self,env):
+tmp/myqflist.x:23:src/ast/binop_ast.py:119:    def eval(self,env):
+tmp/myqflist.x:24:src/ast/binop_ast.py:129:    def eval(self,env):
+tmp/myqflist.x:25:src/ast/binop_ast.py:139:    def eval(self,env):
+tmp/myqflist.x:26:src/ast/binop_ast.py:149:    def eval(self,env):
+tmp/myqflist.x:27:src/ast/binop_ast.py:159:    def eval(self,env):
+tmp/myqflist.x:28:src/ast/binop_ast.py:170:    def eval(self,env):
+tmp/myqflist.x:29:src/ast/binop_ast.py:178:    def eval(self,env):
+tmp/myqflist.x:30:src/ast/binop_ast.py:186:    def eval(self,env):
+tmp/myqflist.x:31:src/ast/binop_ast.py:195:    def eval(self,env):
+tmp/myqflist.x:32:src/ast/local_ast.py:11:    def eval(self,env):
+tmp/myqflist.x:33:src/ast/local_ast.py:23:    def eval(self,env):
+tmp/myqflist.x:34:src/ast/bool_ast.py.bak:7:    def eval(self,env):
+tmp/myqflist.x:35:src/ast/bool_ast.py.bak:14:    def eval(self,env):
+tmp/myqflist.x:36:src/ast/bool_ast.py.bak:24:    def eval(self,env):
+tmp/myqflist.x:37:src/ast/bool_ast.py.bak:34:    def eval(self,env):
+tmp/myqflist.x:38:src/ast/bool_ast.py.bak:44:    def eval(self,env):
+tmp/myqflist.x:39:src/ast/bool_ast.py.bak:54:    def eval(self,env):
+tmp/myqflist.x:40:src/ast/bool_ast.py.bak:64:    def eval(self,env):
+tmp/myqflist.x:41:src/ast/bool_ast.py.bak:74:    def eval(self,env):
+tmp/myqflist.x:42:src/ast/bool_ast.py.bak:84:    def eval(self,env):
+tmp/myqflist.x:43:src/ast/bool_ast.py.bak:94:    def eval(self,env):
+tmp/myqflist.x:44:src/ast/bool_ast.py.bak:105:    def eval(self,env):
+tmp/myqflist.x:45:src/ast/bool_ast.py.bak:113:    def eval(self,env):
+tmp/myqflist.x:46:src/ast/bool_ast.py.bak:121:    def eval(self,env):
+tmp/myqflist.x:47:src/ast/bool_ast.py.bak:130:    def eval(self,env):
+tmp/myqflist.x:48:src/ast/write_read_ast.py:13:    # def eval(self,env):
+tmp/myqflist.x:49:src/ast/write_read_ast.py:44:    def eval(self,env):
+tmp/myqflist.x:50:src/ast/write_read_ast.py:55:    def eval(self,env):
+tmp/myqflist.x:51:src/ast/write_read_ast.py:73:    def eval(self,env):
+tmp/myqflist.x:52:src/ast/import_ast.py:12:    def eval(self,env):
+tmp/myqflist.x:53:src/ast/import_ast.py:22:    def eval(self,env):
+tmp/myqflist.x:54:src/Nodes.py.bak:45:    def eval(self,env):
+tmp/myqflist.x:55:src/ast/struct_ast.py.bak.latest0:29:    def eval(self,env):
+tmp/myqflist.x:56:src/ast/lambda_ast.py:42:    def eval(self,env):
+tmp/myqflist.x:57:src/ast/arith_ast.py.bak:7:    def eval(self,env):
+tmp/myqflist.x:58:src/ast/arith_ast.py.bak:17:    def eval(self,env):
+tmp/myqflist.x:59:src/ast/arith_ast.py.bak:27:    def eval(self,env):
+tmp/myqflist.x:60:src/ast/arith_ast.py.bak:38:    def eval(self,env):
+tmp/myqflist.x:61:src/ast/arith_ast.py.bak:47:    def eval(self,env):
+tmp/myqflist.x:62:src/ast/arith_ast.py.bak:56:    def eval(self,env):
+tmp/myqflist.x:63:src/ast/arith_ast.py.bak:63:    def eval(self,env):

@@ -16,12 +16,18 @@ class LambdaArgsExpression(InterpretedExpression):
         self.lambda_args_ids = ids
         self.body_lambda = body_lambda
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
+        ic(env)
+        ic(len(env.struct_dict))
+        ls = len(env.struct_dict)
+        if ls > 0:
+            exit()
+
         lambda_env = Env(env)
         def lmbd(vals):
             for i ,id_entry in enumerate(self.lambda_args_ids):
                 # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
-                WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env)
+                WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env,is_struct)
             return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 
@@ -33,7 +39,7 @@ class CallExpression(InterpretedExpression):
         self.fn=fn
         self.ids_or_values=ids_or_values
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         func = env[self.fn]
         if func is None:
             raise RuntimeError(f"[CallExpression] Function: {self.fn} not found")

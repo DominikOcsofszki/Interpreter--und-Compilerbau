@@ -10,7 +10,11 @@ class WriteIdExpression(InterpretedExpression):
         self.id_string=id_always_as_string
         self.value=value
 
-    def eval(self,env):
+    # def eval(self,env,is_struct=False):
+    def eval(self,env,is_struct=False):
+        # if is_struct:
+            # ic("=============h47==================")
+            # exit()
         find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value
@@ -38,7 +42,7 @@ class ReadIdExpression(InterpretedExpression):
     def __init__(self, id):
         self.id=id
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         return env[self.id], env
 
 
@@ -49,7 +53,7 @@ class ReadParentIdExpression(InterpretedExpression):
         self.id=id
         self.n_parents=dots-1
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         if self.n_parents == 0:
             return env[self.id], env
         else:
@@ -67,7 +71,7 @@ class WriteIdStructExpression(InterpretedExpression):
         self.id_string=id_always_as_string
         self.value=value
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         find_env = findEnvWithIdWrite(self.id_string,env)
         if isinstance(self.value, str) or isinstance(self.value, int):
             find_env[self.id_string] = self.value

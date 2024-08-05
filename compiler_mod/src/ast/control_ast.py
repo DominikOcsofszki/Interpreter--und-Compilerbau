@@ -7,7 +7,7 @@ class IfThenExpression(InterpretedExpression):
         self.e1=e1
         self.e2=e2
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         e1,env = self.e1.eval(env)
         if e1:
             return self.e2.eval(env)
@@ -21,14 +21,14 @@ class IfThenElseExpression(InterpretedExpression):
         self.expr1=expr1
         self.expr2=expr2
 
-    def eval(self,env):
-        comp_eval,env = self.comparator.eval(env)
+    def eval(self,env,is_struct=False):
+        comp_eval,env = self.comparator.eval(env,is_struct)
         if comp_eval:
-            e2,env = self.expr1.eval(env)
+            e2,env = self.expr1.eval(env,is_struct)
             return e2,env
         #TODO: THIis!!!!
         # e3 = self.expr2.eval(env)
-        e3,env = self.expr2.eval(env)
+        e3,env = self.expr2.eval(env,is_struct)
         return e3,env
 
 class WhileExpression(InterpretedExpression):
@@ -36,7 +36,7 @@ class WhileExpression(InterpretedExpression):
         self.comparator=comparator
         self.body=body
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         _,env  = self.comparator.eval(env)
         result = None
         while True :
@@ -53,7 +53,7 @@ class ForDoExpression(InterpretedExpression):
         self.re_assign=re_assign
         self.body=body
 
-    def eval(self,env):
+    def eval(self,env,is_struct=False):
         _,env  = self.init_assign.eval(env)
         result = None
         while True :

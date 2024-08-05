@@ -27,18 +27,29 @@ class Env:
     def deep_copy_struct_dict(self):
         return copy.deepcopy(self.struct_dict)
 
+#
+# # //TODO!!!
+#     def __repr__(self) -> str:
+#         if self.parent:
+#             if self.parent.parent:
+#                 return str(self.env_dict)+"\n" + str(self.parent )
+#             else:
+#                 if SHOW_ENV_IMPORTS:
+#                     return str(self.env_dict)+ "\n\nIMPORTS: " + str(self.parent)
+#                 return str(self.env_dict)
+#
+#         return str(self.env_dict)
 
-# //TODO!!!
     def __repr__(self) -> str:
         if self.parent:
             if self.parent.parent:
-                return str(self.env_dict)+"\n" + str(self.parent )
+                return f"env {self.env_dict}\t\t\tStruct:{self.struct_dict}\n{self.parent}"
             else:
                 if SHOW_ENV_IMPORTS:
-                    return str(self.env_dict)+ "\n\nIMPORTS: " + str(self.parent)
-                return str(self.env_dict)
+                    return f"{self.env_dict}\t\t{self.struct_dict}\n\nIMPORTS: {self.parent}"
+                return f"env {self.env_dict}\t\tStruct{self.struct_dict}"
+        return f"env: {self.env_dict}\tstruct: {self.struct_dict}"
 
-        return str(self.env_dict)
 
 
     def __getitem__(self,key):

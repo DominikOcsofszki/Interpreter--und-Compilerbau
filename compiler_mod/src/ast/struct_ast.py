@@ -56,10 +56,10 @@ def get_struct_x_parent_or_self_struct(id_struct,dots_count,env):
 @dataclass
 class StructExpression(InterpretedExpression):
     entries: List
-    def eval(self,env:Env):
+    def eval(self,env:Env,is_struct=True):
         struct_env = Env(env)
         for entry in self.entries:
-            tmp, struct_env = entry.eval(struct_env)
+            tmp, struct_env = entry.eval(struct_env,is_struct=True)
         struct_env.struct_dict = struct_env.deep_copy__only_env()
         struct_env.struct_dict["struct_parent"] = None 
         struct_env.struct_dict["struct_env"] = struct_env.struct_dict
@@ -72,10 +72,10 @@ class StructExpression(InterpretedExpression):
 class StructExtendExpression(InterpretedExpression):
     parent: InterpretedExpression
     entries: List
-    def eval(self,env:Env):
+    def eval(self,env:Env,is_struct=True):
         struct_env = Env(env)
         for entry in self.entries:
-            tmp, struct_env = entry.eval(struct_env)
+            tmp, struct_env = entry.eval(struct_env,is_struct=True)
         struct_env.struct_dict = struct_env.deep_copy__only_env()
         struct_env.struct_dict["struct_parent"] = env[self.parent]
         struct_env.struct_dict["struct_env"] = struct_env.struct_dict
@@ -91,7 +91,7 @@ class StructVariableFromOutside(InterpretedExpression):
     id_struct:str
     dots_count:int
     id_entry:str
-    def eval(self, env: Env):
+    def eval(self, env: Env, is_struct=True):
         id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(self.id_struct,self.dots_count,env)
         struct_entry = helper_get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
         return struct_entry, env
@@ -102,7 +102,7 @@ class StructCallFunctionFromOutside(InterpretedExpression):
     dots_count:int
     id_entry:str
     args_function:List
-    def eval(self, env: Env):
+    def eval(self, env: Env, is_struct=True):
         id_struct_or_parent_struct_get = get_struct_x_parent_or_self_struct(self.id_struct,self.dots_count,env)
         struct_entry_func = helper_get_item_from_struct(id_struct_or_parent_struct_get,self.id_entry)
         ic(self.args_function)
