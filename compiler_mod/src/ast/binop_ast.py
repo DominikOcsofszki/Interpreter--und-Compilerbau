@@ -6,8 +6,8 @@ class PlusExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 + e2), env2
 
 class MinusExpression(InterpretedExpression):
@@ -16,8 +16,8 @@ class MinusExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 - e2), env2
 
 class TimesExpression(InterpretedExpression):
@@ -26,9 +26,9 @@ class TimesExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
+        e1, env1 = self.e1.eval(env,is_struct)
         e2, env2 = self.e2.eval(env)
-        # e2, env2 = self.e2.eval(env1)
+        # e2, env2 = self.e2.eval(env,is_struct1,is_struct)
         return (e1 * e2), env2
 
 class DivideExpression(InterpretedExpression):
@@ -38,8 +38,8 @@ class DivideExpression(InterpretedExpression):
 
 # TODO!!!!
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 / e2), env2
 
 class ParenExpression(InterpretedExpression):
@@ -47,9 +47,9 @@ class ParenExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
+        e1, env1 = self.e1.eval(env,is_struct)
         return e1, env1
-        # return self.e1.eval(env), env
+        # return self.e1.eval(env,is_struct), env
 
 class FloatExpression(InterpretedExpression):
     def __init__(self, e1):
@@ -77,8 +77,8 @@ class LtExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 < e2, env2
 
 class GtExpression(InterpretedExpression):
@@ -87,8 +87,8 @@ class GtExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 > e2, env2
 
 class LeExpression(InterpretedExpression):
@@ -97,8 +97,8 @@ class LeExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 <= e2, env2
 
 class GeExpression(InterpretedExpression):
@@ -107,8 +107,8 @@ class GeExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 >= e2, env2
 
 class NotEqCompExpression(InterpretedExpression):
@@ -117,8 +117,8 @@ class NotEqCompExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 != e2, env2
 
 class EqCompExpression(InterpretedExpression):
@@ -127,8 +127,8 @@ class EqCompExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return e1 == e2, env2
 # ==================================
 class AndExpression(InterpretedExpression):
@@ -137,8 +137,8 @@ class AndExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 and e2), env2
 
 class OrExpression(InterpretedExpression):
@@ -147,8 +147,8 @@ class OrExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 or e2), env2
 
 class EqExpression(InterpretedExpression):
@@ -157,8 +157,8 @@ class EqExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (e1 is e2), env2
 
 
@@ -168,7 +168,7 @@ class NotBoolExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
+        e1, env1 = self.e1.eval(env,is_struct)
         return not e1, env1
 
 class ParenExpression(InterpretedExpression):
@@ -176,7 +176,7 @@ class ParenExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env,is_struct=False):
-        e1,env1 =self.e1.eval(env)
+        e1,env1 =self.e1.eval(env,is_struct)
         return e1,env1
 
 class NeqExpression(InterpretedExpression):
@@ -184,7 +184,7 @@ class NeqExpression(InterpretedExpression):
         self.e1=e1
 
     def eval(self,env,is_struct=False):
-        e1,env1 = self.e1.eval(env)
+        e1,env1 = self.e1.eval(env,is_struct)
         return not e1, env1
 
 class NandExpression(InterpretedExpression):
@@ -193,8 +193,8 @@ class NandExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1, env1 = self.e1.eval(env)
-        e2, env2 = self.e2.eval(env1)
+        e1, env1 = self.e1.eval(env,is_struct)
+        e2, env2 = self.e2.eval(env1,is_struct)
         return (not (e1 and e2)), env2
 
 

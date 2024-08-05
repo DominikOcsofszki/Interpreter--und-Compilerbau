@@ -31,7 +31,7 @@ class ArrayExpression(InterpretedExpression):
         self.array_list=array_list
 
     def eval(self,env,is_struct=False):
-        array_list =[self.array_list[i].eval(env)[0] for i in range(len(self.array_list))]
+        array_list =[self.array_list[i].eval(env,is_struct)[0] for i in range(len(self.array_list))]
         arr = np.array(array_list)
         return arr, env
         
@@ -41,7 +41,7 @@ class ArrayCallExpression(InterpretedExpression):
         self.i=i
 
     def eval(self,env,is_struct=False):
-        # array_list =[self.array_name[i].eval(env)[0] for i in range(len(self.array_name))]
+        # array_list =[self.array_name[i].eval(env,is_struct)[0] for i in range(len(self.array_name))]
         # arr = np.array(array_list)
         arr= env[self.array_name]
         return arr[self.i], env
@@ -61,8 +61,8 @@ class ListExpression(InterpretedExpression):
 
     def eval(self,env,is_struct=False):
         if self.lst is not None:
-            return (self.lst[0].eval(env)[0],
-                    self.lst[1].eval(env)[0]),env
+            return (self.lst[0].eval(env,is_struct)[0],
+                    self.lst[1].eval(env,is_struct)[0]),env
         return None, env
 
 

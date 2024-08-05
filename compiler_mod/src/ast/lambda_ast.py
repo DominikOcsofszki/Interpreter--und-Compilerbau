@@ -48,15 +48,15 @@ class CallExpression(InterpretedExpression):
             ic(self.fn)
             ic(self.ids_or_values)
             if Test_enum.test.value == self.fn or Test_enum.test_not_eq.value  == self.fn :
-                return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
+                return_ids=[entry.eval(env,is_struct)[0] for entry in self.ids_or_values]
                 return func(return_ids,env), env
-            return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
+            return_ids=[entry.eval(env,is_struct)[0] for entry in self.ids_or_values]
             if len(return_ids) == 0:
                 return func(),env
             return func(return_ids), env
 
         # if not EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-        #     return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
+        #     return_ids=[entry.eval(env,is_struct)[0] for entry in self.ids_or_values]
         #     return func(return_ids), env
 
         # if EVAL_EXPR_BEFORE_SAVE_TO_TMP:

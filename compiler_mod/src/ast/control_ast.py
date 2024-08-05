@@ -8,9 +8,9 @@ class IfThenExpression(InterpretedExpression):
         self.e2=e2
 
     def eval(self,env,is_struct=False):
-        e1,env = self.e1.eval(env)
+        e1,env = self.e1.eval(env,is_struct)
         if e1:
-            return self.e2.eval(env)
+            return self.e2.eval(env,is_struct)
         return None, env
 
 
@@ -37,13 +37,13 @@ class WhileExpression(InterpretedExpression):
         self.body=body
 
     def eval(self,env,is_struct=False):
-        _,env  = self.comparator.eval(env)
+        _,env  = self.comparator.eval(env,is_struct)
         result = None
         while True :
-            condition, env = self.comparator.eval(env)
+            condition, env = self.comparator.eval(env,is_struct)
             if not condition:
                 break
-            result, env = self.body.eval(env)
+            result, env = self.body.eval(env,is_struct)
         return result,env
 
 class ForDoExpression(InterpretedExpression):
@@ -54,14 +54,14 @@ class ForDoExpression(InterpretedExpression):
         self.body=body
 
     def eval(self,env,is_struct=False):
-        _,env  = self.init_assign.eval(env)
+        _,env  = self.init_assign.eval(env,is_struct)
         result = None
         while True :
-            condition, env = self.condition.eval(env)
+            condition, env = self.condition.eval(env,is_struct)
             if not condition:
                 break
-            result, env = self.body.eval(env)
-            _, env = self.re_assign.eval(env)
+            result, env = self.body.eval(env,is_struct)
+            _, env = self.re_assign.eval(env,is_struct)
         return result,env
 
 
@@ -71,12 +71,12 @@ class LoopDoExpression(InterpretedExpression):
         self.count = count
         self.body = body
 
-    def eval(self, env):
+    def eval(self, env,is_struct=False):
         #TODO: Throw Error?!?
         body = None
-        count, env1 = self.count.eval(env)
+        count, env1 = self.count.eval(env,is_struct)
         for _ in range(int(count)):
-            body, env1 = self.body.eval(env1)
+            body, env1 = self.body.eval(env1,is_struct)
         return body, env1
 
 

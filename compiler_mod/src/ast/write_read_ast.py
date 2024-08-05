@@ -20,8 +20,8 @@ class WriteIdExpression(InterpretedExpression):
             find_env[self.id_string] = self.value
             return self.value, env
         else:
-            find_env[self.id_string] = self.value.eval(env)[0]
-            return self.value.eval(env)[0], env
+            find_env[self.id_string] = self.value.eval(env,is_struct)[0]
+            return self.value.eval(env,is_struct)[0], env
 
 def findEnvWithIdWrite(id,env):
     if env.parent.env_name == "ENV_IMPORTS":
@@ -77,8 +77,8 @@ class WriteIdStructExpression(InterpretedExpression):
             find_env[self.id_string] = self.value
             return self.value, env
         else:
-            find_env[self.id_string] = self.value.eval(env)[0]
-            return self.value.eval(env)[0], env
+            find_env[self.id_string] = self.value.eval(env,is_struct)[0]
+            return self.value.eval(env,is_struct)[0], env
 
 
 used_procedures_and_classes = getAllClasses()

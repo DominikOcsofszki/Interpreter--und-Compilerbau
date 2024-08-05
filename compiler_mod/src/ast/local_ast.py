@@ -10,8 +10,8 @@ class LocalNewExpression(InterpretedExpression):
 
     def eval(self,env,is_struct=False):
         env[self.assign_ID] = self.assign_right_expr
-        res, env = self.expression_in.eval(env)
-        res, env = res.eval(env)
+        res, env = self.expression_in.eval(env,is_struct)
+        res, env = res.eval(env,is_struct)
         return res, env
 
 class LocalExpression(InterpretedExpression):
@@ -22,9 +22,9 @@ class LocalExpression(InterpretedExpression):
 
     def eval(self,env,is_struct=False):
         env1 = Env(env)
-        val, env2 = self.value.eval(env1)
+        val, env2 = self.value.eval(env1,is_struct)
         env2[self.var] = val
-        res, local_env = self.body.eval(env2)
+        res, local_env = self.body.eval(env2,is_struct)
         return res, env
 
 used_procedures_and_classes = getAllClasses()
