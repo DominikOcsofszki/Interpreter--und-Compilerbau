@@ -8,7 +8,8 @@ s:=struct {
     .o:=out;
     .f:=\x->x;
     .c:=\->777;
-    .f2:=\x,y->x*y
+    .f2:=\x,y->x*y;
+    .set_x:=\a->.a:=123
 };
 _ENV();
 test(out,-1,"test(out,-1");
@@ -19,6 +20,9 @@ test(s.f(99),99,"test(s.f(99),99");
 test(s.f(100),100,"test(s.f(100),100");
 test(s.f2(1,2),2,"test(s.f2(1,2),2,");
 test(s.f2(5,5),25,"test(s.f2(5,5),25");
+s.set_x(10);
+test(s.a,123,"test(s.a,123");
+
 
 
 print_all_tests()
