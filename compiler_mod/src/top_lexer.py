@@ -11,10 +11,11 @@ from .top_configs import PRINT_ALL_TOEKNS_LITERALS_AT_START
 
 from .lexer.literals_lexer import *
 
-tokens = []
-literals = []
-
+# tokens = ['NEWLINE','SPACE']
+# literals = ' \t'
+# t_SPACE = r'\ '
 # t_ignore  = ' \t\n'
+
 t_ignore  = ' \t'
 def t_error(t):
     print("Illegal character '%s': FIX-IT" % t.value[0])
@@ -22,8 +23,10 @@ def t_error(t):
 
     
     x = len(t.value)
-
-literals=literals_arith +\
+literals = ''
+tokens=[]
+literals= literals +\
+        literals_arith +\
         literals_bool   +\
         literals_var    +\
         literals_sequences +\
@@ -48,11 +51,12 @@ if PRINT_ALL_TOEKNS_LITERALS_AT_START:
 
 
 # Define a rule so we can track line numbers
-def t_newline(t):
+def t_NEWLINE(t):
     r"\n"
     t.lexer.lineno += len(t.value)
     lexer.my_helper['tok']['nr'] = 0
     lexer.my_helper['tok']['line'] = t.lexer.lineno
+    # return t
 
 # def my_print_t(t):
 #     print(f"{t.line},{t.nr} {t.value}:{t.type}")
@@ -83,6 +87,7 @@ def start_lexer():
         exit()
 
     lexer = lex()
+    # exit()
     # lexer = lex(debug=True)
     return lexer
 

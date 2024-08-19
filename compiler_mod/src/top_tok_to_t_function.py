@@ -20,9 +20,9 @@ def t_EQ(t):
 def t_OR(t):
     r'or'
     return tok_add_pos(t)
-def t_ignore(t):
-    r' \t'
-    return tok_add_pos(t)
+# def t_ignore(t):
+#     r' \t'
+#     return tok_add_pos(t)
 def t_AND(t):
     r'and'
     return tok_add_pos(t)

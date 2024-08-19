@@ -23,7 +23,7 @@ def p_expression_dot_outside(p):
     '''expression : ID dots ID'''
     if len(p)==4:
         p[0] = Node(Expr.StructVariableFromOutside,[p[1],p[2],p[3]])
-        ic(p[0])
+        # ic(p[0])
     else:
         raise AssertionError("sth wrong in p_expression_dot_outside",p)
 

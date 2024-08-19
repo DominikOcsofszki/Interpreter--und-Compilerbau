@@ -1,5 +1,5 @@
 
-
+from icecream import ic
 from src.ast.lambda_ast import *
 from ..Nodes import Node,Expr
 
@@ -20,6 +20,12 @@ def p_expression_lambda_args_WORKING(p):
     '''expression :     LAMBDA_START LAMBDA expression
             |           LAMBDA_START expression_list  LAMBDA expression
     '''
+    ic(p.__dict__)
+    # ic(p.lexer.__dict__)
+    ic(p.lexer.lexmatch)
+    ic(p.lexer.lexmatch.span())
+    ic(p.lexer.lexpos)
+    exit()
     if len(p) == 4:
         p[0] = Node(Expr.LambdaArgsExpression,[[], p[3]])
     if len(p) == 5:

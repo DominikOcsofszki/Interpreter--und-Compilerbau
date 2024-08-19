@@ -12,16 +12,19 @@ from ..top_imports import ENV_IMPORTS, Test_enum
 
         
 class LambdaArgsExpression(InterpretedExpression):
-    def __init__(self, ids, body_lambda):
+    def __init__(self, ids, body_lambda,var_info_symbol=None):
         self.lambda_args_ids = ids
         self.body_lambda = body_lambda
+        self.var_info_symbol = var_info_symbol
 
     def eval(self,env):
         lambda_env = Env(env)
+        # ic(lambda_env.level)
         def lmbd(vals):
             for i ,id_entry in enumerate(self.lambda_args_ids):
                 # ic(">>>>>>>>>>>>>>>>>>>>>>>>>>>",id_entry.getWriteID())
-                WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env)
+                # WriteIdExpression(id_entry.getWriteID(),vals[i]).eval(lambda_env)
+                WriteIdExpression(id_entry.getWriteID(),vals[i],self.var_info_symbol).eval(lambda_env)
             return self.body_lambda.eval(lambda_env)[0]
         return lmbd, env
 
@@ -38,9 +41,9 @@ class CallExpression(InterpretedExpression):
         if func is None:
             raise RuntimeError(f"[CallExpression] Function: {self.fn} not found")
         if self.fn in ENV_IMPORTS:
-            ic("=============h10==================")
-            ic(self.fn)
-            ic(self.ids_or_values)
+            # ic("=============h10==================")
+            # ic(self.fn)
+            # ic(self.ids_or_values)
             if Test_enum.test.value == self.fn or Test_enum.test_not_eq.value  == self.fn :
                 return_ids=[entry.eval(env)[0] for entry in self.ids_or_values]
                 return func(return_ids,env), env
@@ -54,7 +57,7 @@ class CallExpression(InterpretedExpression):
         #     return func(return_ids), env
 
         # if EVAL_EXPR_BEFORE_SAVE_TO_TMP:
-        ic("=============h9==================")
+        # ic("=============h9==================")
         return func(self.ids_or_values), env
 
 

@@ -1,9 +1,12 @@
 from icecream import ic
+from ply.lex import LexToken
 from src.top_parser import parser, lexer,LOAD_FILES
 from src.top_imports import setup_env_for_new_file
 from src.top_file_load_check import checkAndOpenFile, test_files
 import CONFIGS
 
+# global ENV_DICTS_ARR
+# ENV_DICTS_ARR=[{}]
 # NEW
 import traceback
 def runREPL():
@@ -52,7 +55,6 @@ def run():
     else:
         runFromFile_code()
 
-ic(lexer.my_helper)
 
 def get_caller_module_dict(levels):
     import sys
@@ -61,7 +63,55 @@ def get_caller_module_dict(levels):
     if f.f_globals != f.f_locals:
         ldict.update(f.f_locals)
     return ldict
-if __name__ == "__main__":
-    run()
-    # runREPL()
 
+def print_lexer():
+    data,file_name = checkAndOpenFile(file_name=LOAD_FILES)
+    lexer.input(data)
+    tok_arr = []
+    tok_arr_all = []
+
+    while True:
+        tok: LexToken = lexer.token()
+        if not tok:
+            break  # No more input
+        tok_arr_all.append(tok)
+        # print(tok)
+        # if tok.value == '}':
+        #     tok_arr.append("\n")
+        # # ic(tok.__dict__)
+        #
+        # tok_arr.append(str(tok.type))
+        #
+        # if tok.value == '{':
+        #     tok_arr.append("\n")
+        # # if tok.value == ',':
+        # #     tok_arr.append(" ")
+        # if tok.value == ';':
+        #     tok_arr.append("\n")
+
+        # print(tok.value)
+    # print(tok_arr)
+    comb = "".join(tok_arr)
+    # print(comb)
+    # filtered_token = [x.type for x in tok_arr_all]
+    # filtered_token = [x.type +" " if x.type != ';' else ';\n' for x in tok_arr_all]
+
+    filtered_token = [
+    ';\n' if x.type == ';' else
+    '\n}' if x.type == '}' else
+    '{\n' if x.type == '{' else
+    str(x.value) + ' '
+    for x in tok_arr_all
+]
+    # filtered_token = [x.type if x.type != 'NEWLINE' else '\n' for x in tok_arr_all]
+    comb_all = "".join(filtered_token)
+    print(comb_all)
+    # with open('output/output_tokenized_file.txt', 'w') as file:
+    #     file.write(comb_all)
+
+
+if __name__ == "__main__":
+    # ic(lexer.my_helper)
+    run()
+    # print_lexer()
+    # runREPL()
